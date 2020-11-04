@@ -11,18 +11,20 @@ import { Container } from '../../Common/Layout'
 const Header = () => {
 
     return (
-        <Style.Wrapper as={Container}>
-            <Style.Logo>
-                <img src={Logo} />
-            </Style.Logo>
-            <Style.NavBar>
-                <li><img src={Alert} /> <span>Alerts</span></li>
-                <li><img src={Contact} /> <span>Alerts</span ></li>
-                <li><img src={Group} /> <span>Alerts</span></li>
-                <li><img src={History} /> <span>Alerts</span></li>
-                <li><img src={Temporary} /> <span>Alerts</span></li>
-                <li><img src={Profil} /></li>
-            </Style.NavBar>
+        <Style.Wrapper>
+            <Style.Container as={Container}>
+                <Style.Logo>
+                    <img src={Logo} />
+                </Style.Logo>
+                <Style.NavBar>
+                    <li><img src={Alert} /> <span>Alerts</span></li>
+                    <li><img src={Contact} /> <span>Contacts</span ></li>
+                    <li><img src={Group} /> <span>History</span></li>
+                    <li><img src={History} /> <span>Team Chat</span></li>
+                    <li><img src={Temporary} /> <span>Group</span></li>
+                    <li><img src={Profil} /></li>
+                </Style.NavBar>
+            </Style.Container>
         </Style.Wrapper>
     );
 }
