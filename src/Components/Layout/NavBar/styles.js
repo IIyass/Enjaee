@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
+
+export const Wrapper = styled.div`
 display:flex;
 flex-direction:row;
 justify-content:space-between;
@@ -8,10 +9,9 @@ background-color:#fff;
 height:80px;
 max-height:80px;
 align-items:center;
-`
-export const Wrapper = styled.div`
 background-color:#fff;
 box-shadow: 0px -4px 8px rgba(151, 151, 151, 0.2);
+padding:0 20px;
 `
 export const NavBar = styled.ul`
 display:flex;

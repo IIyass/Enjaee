@@ -1,9 +1,14 @@
+import Joli from '../Illustration/Joli.png'
+import Martin from '../Illustration/Martin.png'
+import Jhon from '../Illustration/Jhon.png'
+import Jonathan from '../Illustration/Jonathan.png'
+import Henry from '../Illustration/Henry.png'
+import Micky from '../Illustration/Micky.png'
+import Sozoo from '../Illustration/Sozoo.png'
 import TaraAlwyn from '../Illustration/TaraAlwyn.png'
-import JohnWilliam from '../Illustration/JohnWilliam.png'
-import MartinHou from '../Illustration/MartinHou.png'
-import Rectangle from '../Illustration/Rectangle.png'
+import Hasi from '../Illustration/Hasi.png'
 export default [{
-    picture: JohnWilliam,
+    picture: Jhon,
     name: "John William",
     detail: "Love is life & life"
 
@@ -13,39 +18,39 @@ export default [{
     detail: "Work hard..."
 
 }, {
-    picture: Rectangle,
+    picture: Joli,
     name: "Jolie Price",
     detail: "Love is life & life is family"
 
 }, {
-    picture: MartinHou,
+    picture: Jonathan,
     name: "Jonathan Carington",
     detail: "Work hard..."
 
 },
 {
-    picture: MartinHou,
+    picture: Sozoo,
     name: "Sozoo Lee",
     detail: "Friendship is forever"
 
 }, {
-    picture: MartinHou,
+    picture: Martin,
     name: "Martin Hoo",
     detail: "Trust is bigger"
 
 }, {
-    picture: MartinHou,
+    picture: Micky,
     name: "Jonathan Carington",
     detail: "Work hard..."
 
 },
 {
-    picture: MartinHou,
+    picture: Henry,
     name: "Sozoo Lee",
     detail: "Friendship is forever"
 
 }, {
-    picture: MartinHou,
+    picture: Hasi,
     name: "Martin Hoo",
     detail: "Trust is bigger"
 
