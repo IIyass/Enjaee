@@ -6,6 +6,7 @@ import SortInput from '../UI/SortInput'
 import Card from '../Card'
 import Data from '../../Data'
 const Body = () => {
+
     return (
         <Style.Wrapper as={Container}>
             <Style.SearchBar>
@@ -17,6 +18,7 @@ const Body = () => {
                     return <Card name={name} picture={picture} detail={detail} />
                 })}
             </Style.CardLayout>
+
         </Style.Wrapper>
     )
 }

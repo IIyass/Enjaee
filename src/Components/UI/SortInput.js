@@ -1,5 +1,5 @@
 import React from 'react';
-import Select, { components } from 'react-select'
+import Select from 'react-select'
 import { SelectContainer } from './style';
 import Polygon from '../../Illustration/Polygon.svg'
 
@@ -13,24 +13,42 @@ const SortInput = () => {
     const handleSortName = (e) => {
         console.log(e)
     }
-    const DropdownIndicator = (props) => {
-        return (
-            <components.DropdownIndicator {...props}>
-                <i className="fa fa-search" aria-hidden="true" style={{ position: 'initial' }}></i>
-            </components.DropdownIndicator>
-        );
-    };
-
-    // components={{ DropdownIndicator }}
-    // placeholder={placeholderComponent}
+    const customStyles = {
+        control: (base, state) => ({
+            ...base,
+            background: "#023950",
+            // match with the menu
+            borderRadius: state.isFocused ? "3px 3px 0 0" : 3,
+            // Overwrittes the different states of border
+            borderColor: state.isFocused ? "yellow" : "green",
+            // Removes weird border around container
+            boxShadow: state.isFocused ? null : null,
+            "&:hover": {
+                // Overwrittes the different states of border
+                borderColor: state.isFocused ? "red" : "blue"
+            }
+        }),
+        menu: base => ({
+            ...base,
+            // override border radius to match the box
+            borderRadius: 0,
+            // kill the gap
+            marginTop: 0
+        }),
+        menuList: base => ({
+            ...base,
+            // kill the white space on first and last option
+            padding: 0
+        })
+    }
     return (
         <SelectContainer>
             <Select
+                // styles={customStyles}
                 options={options}
                 isMulti={false}
                 onChange={handleSortName}
                 isSearchable={true}
-                components={DropdownIndicator}
                 placeholder="Sort by"
 
             />
