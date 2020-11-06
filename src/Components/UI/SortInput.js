@@ -1,6 +1,7 @@
 import React from 'react';
 import Select, { components } from 'react-select'
-import { SelectContainer } from './style'
+import { SelectContainer } from './style';
+import Polygon from '../../Illustration/Polygon.svg'
 
 const SortInput = () => {
 
@@ -33,6 +34,7 @@ const SortInput = () => {
                 placeholder="Sort by"
 
             />
+            <span><img src={Polygon} /></span>
         </SelectContainer>
 
     )

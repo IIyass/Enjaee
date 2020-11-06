@@ -1,23 +1,29 @@
 import styled from 'styled-components'
 
+
+export const Container = styled.div`
+position:relative;
+span{
+  position:absolute;
+  left:10px;
+  top:12px;
+}
+
+`
+
 export const Input = styled.input.attrs(props => ({
   type: props.type,
 }))`
     width: 150px;
-    height:45px;
+    height:40px;
     font-size: 15px;
     padding: 8px;
     color: #000000;
     border-radius: 5px;
     border:1px solid #47525D;
     background-color:transparent;
-    ::placeholder {
-      color: hsl(0,0%,50%);
-      font-size:14px;
-      font-weight: 400;
-      font-family:Roboto;
-
-    }
+    padding-left:25px;
+   
   `
 
 export const SelectContainer = styled.div`
@@ -30,6 +36,17 @@ color: #f9a826;
 .css-26l3q-menu{
  color:red;
 }
+
+position:relative;
+span{
+  position:absolute;
+  right:21px;
+  top:9px;
+}
+
+svg{
+  display:none;
+}
 >div{
   :focus{
     color: #000000;
@@ -38,9 +55,11 @@ color: #f9a826;
   }
   >div{
     color: #000000;
+    height:40px;
     border-radius: 5px;
     border:1px solid #47525D;
-    background-color:transparent;
+  
+
     :hover{
       color: #000000;
       border-radius: 5px;
@@ -48,6 +67,14 @@ color: #f9a826;
     }
    
   }
+
+  .css-1okebmr-indicatorSeparator{
+     display:none;
+}
+.css-1wa3eu0-placeholder{
+  color: #47525D;
+}
+
 
 }
 `

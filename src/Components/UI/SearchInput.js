@@ -1,16 +1,19 @@
 import React from 'react'
-import { Input } from './style'
+import { Input, Container } from './style'
 import SearchIcon from '../../Illustration/searchicon.svg'
 const SearchInput = () => {
 
 
 
     return (
-        <Input
-            type="search"
-            name="search"
-            placeholder="Search"
-        />
+        <Container>
+            <Input
+                type="search"
+                name="search"
+                placeholder="Search"
+            />
+            <span><img src={SearchIcon} /></span>
+        </Container>
     )
 }
 
