@@ -25,15 +25,14 @@ li{
     display:flex;
     flex-direction:column;
     margin: 0px 10px;
+    cursor:pointer;
     img{
-        width:25px;
-        border:2px solid  #53A8CB;
-        border-radius:50%;
+        width:30px;
         margin:auto;
     }
     :nth-child(2){
        img{ 
-           background-color:#53A8CB;
+           background-color:#ffffff;
     }
 }
     :last-child{
