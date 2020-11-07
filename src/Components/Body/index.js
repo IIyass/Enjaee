@@ -14,8 +14,8 @@ const Body = () => {
                 <SortInput />
             </Style.SearchBar>
             <Style.CardLayout>
-                {Data.map(({ picture, name, detail }) => {
-                    return <Card name={name} picture={picture} detail={detail} />
+                {Data.map(({ picture, name, detail }, index) => {
+                    return <Card index={index} key={index} name={name} picture={picture} detail={detail} />
                 })}
             </Style.CardLayout>
 
