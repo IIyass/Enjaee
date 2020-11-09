@@ -1,16 +1,28 @@
-import React from 'react'
-import Layout from './Components/Layout/'
-import Body from './Components/Body'
+
+import React from 'react';
+import Layout from './Components/Layout'
+import Group from './Components/Group'
+import Contact from './Components/Contact'
+import Alert from './Components/Alert'
+import Chat from './Components/Chat'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
 const App = () => {
   return (
-
-    <Layout >
-      <Body />
-    </Layout>
-
-
+    <BrowserRouter>
+      <Layout>
+        <Switch>
+          <Route path="/history" exact component={History} />
+          <Route path="/chat" exact component={Chat} />
+          <Route path="/contact" exact component={Contact} />
+          <Route path="/alert" exact component={Alert} />
+          <Route path="/groups" exact component={Group} />
+        </Switch>
+      </Layout>
+    </BrowserRouter >
 
   );
 }
 
 export default App;
+

@@ -4,13 +4,14 @@ import ChatIcon from '../../Illustration/Chat.svg'
 import AudioCall from '../../Illustration/AudioCall.svg'
 import More from '../../Illustration/More.svg'
 import Stroke from '../../Illustration/Stroke.svg'
-const Card = ({ picture, name, detail, index }) => {
-    const [openModel, setOpenModel] = useState(20);
-    const [opacity, setOpacity] = useState(true);
+import Success from '../../Illustration/Success.svg'
+const Card = ({ picture, name, detail, index, cardCred }) => {
+    const [openModel, setOpenModel] = useState();
+    const [selectImg, setSelectImg] = useState();
 
     useEffect(() => {
 
-    }, [openModel])
+    }, [openModel, cardCred])
 
     const ModelShow = () => {
         return <Style.ModalContainer>
@@ -22,10 +23,20 @@ const Card = ({ picture, name, detail, index }) => {
         </Style.ModalContainer>
 
     }
-    return (
 
-        <Style.Wrapper index={openModel}>
-            <img src={picture} />
+    const handleSelectedCard = () => {
+        if (cardCred.includes(index)) {
+            return true;
+        }
+    };
+
+    return (
+        <Style.Wrapper selectImg={handleSelectedCard()} index={openModel}>
+            <div id="img">
+                <img className="profil" src={picture} />
+                {handleSelectedCard() && <img className="icon" src={Success} />}
+            </div>
+
             <Style.Description>
                 <Style.PersonalInfo>
                     <h1>{name}</h1>
@@ -39,7 +50,6 @@ const Card = ({ picture, name, detail, index }) => {
                 </Style.IconContainer>
             </Style.Description>
             {index === openModel && ModelShow()}
-
         </Style.Wrapper>
     )
 }

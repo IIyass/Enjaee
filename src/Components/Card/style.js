@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 
 export const Wrapper = styled.div`
-width:30%;
+width:100%;
 position:relative;
 height:245px;
 background-color:#ffffff;
@@ -13,7 +13,21 @@ justify-content:space-between;
 box-shadow: 0px 0px 5px rgba(126, 126, 126, 0.5);
 border-radius: 4px;
 margin:15px 0;
-opacity:${({ index }) => index ? 0.3 : 1}
+
+#img{
+   position:relative;
+   cursor:pointer;
+  .profil{
+    opacity:${({ selectImg }) => selectImg ? 0.3 : 1};
+    width:100%;
+  }
+  .icon{
+    position:absolute;
+    top:40%;
+    left:50%;
+    transform:translate(-50%,0);
+  }
+}
 `
 
 export const Description = styled.div`

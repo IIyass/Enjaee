@@ -1,18 +1,19 @@
 import React from 'react'
 import { Input, Container } from './style'
 import SearchIcon from '../../Illustration/searchicon.svg'
-const SearchInput = () => {
+const SearchInput = ({ placeholder, name, iconSearch, ...props }) => {
 
 
 
     return (
         <Container>
             <Input
-                type="search"
-                name="search"
-                placeholder="Search"
+                type="text"
+                name={name}
+                placeholder={placeholder}
+                {...props}
             />
-            <span><img src={SearchIcon} /></span>
+            {iconSearch ? <span><img src={SearchIcon} /></span> : <span></span>}
         </Container>
     )
 }

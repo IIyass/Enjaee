@@ -5,8 +5,8 @@ export const Container = styled.div`
 position:relative;
 span{
   position:absolute;
-  left:10px;
-  top:12px;
+  left:25px;
+  top:18px;
 }
 
 `
@@ -15,7 +15,7 @@ export const Input = styled.input.attrs(props => ({
   type: props.type,
 }))`
     width: 150px;
-    height:40px;
+    height:30px;
     font-size: 15px;
     padding: 8px;
     color: #000000;
