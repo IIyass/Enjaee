@@ -18,7 +18,7 @@ justify-content:space-between;
 export const CardLayout = styled.div`
 justify-content:space-between;
 display: flex;
-width:98%;
+width:100%;
 flex-wrap:wrap;
 flex-direction:row;
 >div{
