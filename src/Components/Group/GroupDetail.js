@@ -3,7 +3,7 @@ import * as Style from './style'
 import SearchInput from '../UI/SearchInput'
 import Rectangle380 from '../../Illustration/Rectangle380.svg'
 
-const GroupDetail = ({ setGroupName, next, groupName }) => {
+const GroupDetail = ({ setGroupName, next, groupName, contacts }) => {
 
     const [name, setName] = useState('')
     const handleSubmit = (e) => {
@@ -22,6 +22,7 @@ const GroupDetail = ({ setGroupName, next, groupName }) => {
                 <button>Add Member</button>
                 <button>Update</button>
             </Style.ButtonContainer>
+
         </Style.GroupBar>
     )
 }

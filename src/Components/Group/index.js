@@ -8,7 +8,9 @@ import Body from '../Body'
 const Group = () => {
 
     const [step, setStep] = useState(1);
-    const [groupName, setGroupName] = useState('')
+    const [groupName, setGroupName] = useState('');
+    const [contacts, setContacts] = useState([]);
+
     const next = () => {
         // update state.step by adding to previous state
         setStep(step + 1)
@@ -27,7 +29,7 @@ const Group = () => {
                 return (
                     <Style.Wrapper as={Container}>
                         <Style.CardLayout>
-                            <Body next={next} Addgroup={true} setGroupName={setGroupName} />
+                            <Body next={next} Addgroup contacts={contacts} setGroupName={setGroupName} setContacts={setContacts} />
                         </Style.CardLayout>
                     </Style.Wrapper>
                 )
@@ -35,14 +37,13 @@ const Group = () => {
                 return (
                     <Style.Wrapper as={Container}>
                         <Style.CardLayout>
-                            <Body groupDetail groupName={groupName}/>
+                            <Body step={step} groupDetail contacts={contacts} groupName={groupName} />
                         </Style.CardLayout>
                     </Style.Wrapper>)
         }
     }
     return (
         <>
-            {console.log(groupName)}
             {handleSteps()}
         </>
     )
