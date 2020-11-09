@@ -5,6 +5,7 @@ import Group from './Components/Group'
 import Contact from './Components/Contact'
 import Alert from './Components/Alert'
 import Chat from './Components/Chat'
+import History from './Components/History'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const App = () => {

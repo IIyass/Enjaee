@@ -21,11 +21,11 @@ const Header = () => {
                 <img src={Logo} />
             </Style.Logo>
             <Style.NavBar>
-                <li onClick={() => setIconSelected(0)}><Link to="alert"><img src={iconSelected === 0 ? ActiveAlert : Alert} /> <span>Alerts</span></Link></li>
-                <li onClick={() => setIconSelected(1)}><Link to="/contact"><img src={iconSelected === 1 ? ActiveContact : Contact} /> <span>Contacts</span ></Link></li>
-                <li onClick={() => setIconSelected(2)}><Link to="/history"><img src={iconSelected === 2 ? ActiveHistory : History} /> <span>History</span></Link></li>
-                <li onClick={() => setIconSelected(3)}><Link to="/chat"><img src={iconSelected === 3 ? ActiveTemporary : Temporary} /><span>Team Chat</span></Link></li >
-                <li onClick={() => setIconSelected(4)}><Link to="/groups"><img src={iconSelected === 4 ? ActiveGroup : Group} /> <span>Group</span></Link></li >
+                <Link to="alert">  <li onClick={() => setIconSelected(0)}><img src={iconSelected === 0 ? ActiveAlert : Alert} /> <span>Alerts</span></li></Link>
+                <Link to="/contact">    <li onClick={() => setIconSelected(1)}><img src={iconSelected === 1 ? ActiveContact : Contact} /> <span>Contacts</span ></li></Link>
+                <Link to="/history">  <li onClick={() => setIconSelected(2)}><img src={iconSelected === 2 ? ActiveHistory : History} /> <span>History</span></li></Link>
+                <Link to="/chat">    <li onClick={() => setIconSelected(3)}><img src={iconSelected === 3 ? ActiveTemporary : Temporary} /><span>Team Chat</span></li ></Link>
+                <Link to="/groups"> <li onClick={() => setIconSelected(4)}><img src={iconSelected === 4 ? ActiveGroup : Group} /> <span>Group</span></li ></Link>
                 <li ><img src={Profil} /></li>
             </Style.NavBar >
         </Style.Wrapper >

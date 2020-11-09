@@ -5,8 +5,10 @@ import SearchInput from '../UI/SearchInput'
 import SortInput from '../UI/SortInput'
 import Card from '../Card'
 import Data from '../../Data/ContactMockData'
-import Rectangle380 from '../../Illustration/Rectangle380.svg'
-const Body = ({ contact, group }) => {
+import AddGroup from '../Group/Addgroup'
+import GroupDetail from '../Group/GroupDetail'
+
+const Body = ({ contact, Addgroup, groupDetail, next, setGroupName, groupName }) => {
     const [selectedContacts, setSelectedContacts] = useState([])
     const handleTeamSelecting = (index) => {
         if (!selectedContacts.includes(index)) {
@@ -17,26 +19,31 @@ const Body = ({ contact, group }) => {
         }
     }
 
+    const HandleInput = () => {
+        if (contact) {
+            return <Style.SearchBar>
+                <SearchInput placeholder="Search" name="Search" iconSearch={true} />
+                <SortInput />
+            </Style.SearchBar>
+        } else {
+            if (Addgroup) {
+                return <AddGroup setGroupName={setGroupName} next={next} />;
+            } else {
+                if (groupDetail) {
+                    return <GroupDetail groupName={groupName} />
+                }
+            }
+        }
+    }
+
     return (
         <Style.Wrapper as={Container}>
-            {contact ?
-                <Style.SearchBar>
-                    <SearchInput placeholder="Search" name="Search" iconSearch={true} />
-                    <SortInput />
-                </Style.SearchBar> :
-                <Style.GroupBar>
-                    <img src={Rectangle380} />
-                    <SearchInput placeholder="Group name" name="Groups" />
-                    <SearchInput placeholder="Search" name="Search" iconSearch={true} />
-                    <button>Done</button>
-                </Style.GroupBar>
-            }
+            {HandleInput()}
             <Style.CardLayout>
                 {Data.map(({ picture, name, detail }, index) => {
                     return <div key={index} onClick={() => handleTeamSelecting(index)} ><Card cardCred={selectedContacts} index={index} name={name} picture={picture} detail={detail} /></div>
                 })}
             </Style.CardLayout>
-
         </Style.Wrapper >
     )
 }

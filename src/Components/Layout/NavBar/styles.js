@@ -21,11 +21,15 @@ margin:0;
 padding:0;
 align-items:center;
 height:80px;
+a{
+    text-decoration:none;
+}
 li{
     display:flex;
     flex-direction:column;
     margin: 0px 10px;
     cursor:pointer;
+   
     img{
         width:30px;
         margin:auto;
@@ -35,7 +39,7 @@ li{
            background-color:#ffffff;
     }
 }
-    :last-child{
+    :nth-child(6){
         background-color:#53A8CB;
         margin:0;
         padding:12px 20px;
