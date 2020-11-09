@@ -1,9 +1,9 @@
 import React from 'react';
-import Select from 'react-select'
+import Select, { components } from 'react-select'
 import { SelectContainer } from './style';
 import Polygon from '../../Illustration/Polygon.svg'
 
-const SortInput = () => {
+const SortInput = (props) => {
 
     const options = [
         { value: 'abc', label: 'abc' },
@@ -16,17 +16,20 @@ const SortInput = () => {
     const customStyles = {
         control: (base, state) => ({
             ...base,
-            background: "#023950",
+            width: state.selectProps.width,
+            height: state.selectProps.height,
+            background: 'transparent',
             // match with the menu
-            borderRadius: state.isFocused ? "3px 3px 0 0" : 3,
+            borderRadius: state.isFocused ? 5 : 5,
             // Overwrittes the different states of border
-            borderColor: state.isFocused ? "yellow" : "green",
+            borderColor: state.isFocused ? "#47525D" : "#47525D",
+            borderColor: state.isSelected ? "#47525D" : "#47525D",
             // Removes weird border around container
-            boxShadow: state.isFocused ? null : null,
             "&:hover": {
                 // Overwrittes the different states of border
-                borderColor: state.isFocused ? "red" : "blue"
+                borderColor: state.isFocused ? "#47525D" : "#47525D",
             }
+
         }),
         menu: base => ({
             ...base,
@@ -39,20 +42,35 @@ const SortInput = () => {
             ...base,
             // kill the white space on first and last option
             padding: 0
-        })
+        }),
+        indicatorSeparator: (styles) => ({ display: 'none' }),
+        placeholder: () => ({ color: '#47525D', fontWeight: 400, fontSize: '14px' })
     }
+
+
+    const DropdownIndicator = (
+        props: ElementConfig<typeof components.DropdownIndicator>
+    ) => {
+        return (
+            <components.DropdownIndicator {...props}>
+                <img src={Polygon} />
+            </components.DropdownIndicator>
+        );
+    };
+
     return (
         <SelectContainer>
             <Select
-                // styles={customStyles}
+                components={{ DropdownIndicator }}
+                width={props.width}
+                height={props.height}
+                styles={customStyles}
                 options={options}
                 isMulti={false}
                 onChange={handleSortName}
                 isSearchable={true}
                 placeholder="Sort by"
-
             />
-            <span><img src={Polygon} /></span>
         </SelectContainer>
 
     )

@@ -28,7 +28,7 @@ height:100%;
 overflow:auto;
 overflow-style: none;  
 scrollbar-width: none;
-`
+`;
 
 
 
@@ -49,12 +49,9 @@ margin-top:18px;
 input{
     background-color:#fff;
     border:2px solid #53A8CB;
-    margin-left:15px;
-    width:75%;
+    position:relative;
 }
-
-
-`
+`;
 
 export const ButtonContainer = styled.div`
 display:flex;
@@ -73,4 +70,4 @@ button{
     margin-left:20px;
 }
 
-`
+`;

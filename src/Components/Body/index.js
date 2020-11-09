@@ -8,7 +8,7 @@ import AddGroup from '../Group/Addgroup'
 import GroupDetail from '../Group/GroupDetail'
 import CardLayout from './CardLayout'
 
-const Body = ({ contact, Addgroup, groupDetail, next, setGroupName, groupName, contacts, setContacts, step }) => {
+const Body = ({ contact, Addgroup, groupDetail, next, setGroupName, groupName, contacts = [], setContacts, step }) => {
 
     const GroupContact = MockData.filter(({ id }) => {
         return contacts.includes(id)
@@ -20,9 +20,9 @@ const Body = ({ contact, Addgroup, groupDetail, next, setGroupName, groupName, c
             return <>
                 <Style.SearchBar>
                     <SearchInput placeholder="Search" name="Search" iconSearch={true} />
-                    <SortInput />
+                    <SortInput width="150px" height="45px" />
                 </Style.SearchBar>
-                <CardLayout Data={MockData} />
+                <CardLayout Details Data={MockData} />
             </>
         } else {
             if (Addgroup) {

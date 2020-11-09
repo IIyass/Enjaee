@@ -1,12 +1,11 @@
 import styled from 'styled-components'
 
-
 export const Container = styled.div`
 position:relative;
 span{
   position:absolute;
-  left:25px;
-  top:18px;
+  left:10px;
+  top:15px;
 }
 
 `
@@ -14,8 +13,9 @@ span{
 export const Input = styled.input.attrs(props => ({
   type: props.type,
 }))`
-    width: 150px;
-    height:30px;
+    width: 200px;
+    height:28px;
+    position:relative;
     font-size: 15px;
     padding: 8px;
     color: #000000;
@@ -27,31 +27,4 @@ export const Input = styled.input.attrs(props => ({
   `
 
 export const SelectContainer = styled.div`
-width: 150px;
-height:45px;
-padding:0px !important;
-font-size: 15px;
-padding: 8px;
-color: #000000;
-background:#E5E5E5;
-position:relative;
-span{
-  position:absolute;
-  right:21px;
-  top:9px;
-}
-svg{
-  display:none;
-}
-
-  .css-1okebmr-indicatorSeparator{
-     display:none;
-}
-
->div{
-  >div{
-    background:#E5E5E5;
-  }
-}
-}
 `

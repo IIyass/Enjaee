@@ -11,7 +11,6 @@ max-height:80px;
 align-items:center;
 background-color:#fff;
 box-shadow: 0px -4px 8px rgba(151, 151, 151, 0.2);
-padding:0 20px;
 `
 export const NavBar = styled.ul`
 display:flex;
@@ -29,7 +28,6 @@ li{
     flex-direction:column;
     margin: 0px 10px;
     cursor:pointer;
-   
     img{
         width:30px;
         margin:auto;
@@ -59,5 +57,5 @@ li{
 
 `
 export const Logo = styled.div`
-margin:0 10px;
+margin-left:20px;
 `

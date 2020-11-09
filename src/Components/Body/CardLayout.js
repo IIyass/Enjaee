@@ -4,7 +4,7 @@ import Card from '../Card'
 
 
 
-const CardLayout = ({ contacts, setContacts, Data, step, Details }) => {
+const CardLayout = ({ contacts = [], setContacts, Data, step, Details }) => {
 
     const [selectedContacts, setSelectedContacts] = useState([])
 

@@ -39,6 +39,9 @@ li{
     margin:0 5px;
     :first-child{
         flex:0.5;
+        img{
+            margin-left:-20px;
+        }
     }
 }
 }
