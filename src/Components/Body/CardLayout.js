@@ -34,7 +34,7 @@ const CardLayout = ({ contacts = [], setContacts, Data, step, Details }) => {
             {Details ? Data.map(({ picture, name, detail, profile }, index) => {
                 return <Card index={index} Data={Data} locked={profile} name={name} picture={picture} detail={detail} />
             }) : Data.map(({ picture, name, detail, id }, index) => {
-                return <div key={index} onClick={() => handleTeamSelecting(index, id)} ><Card Data={Data} cardCred={selectedContacts} index={index} name={name} picture={picture} detail={detail} /></div>
+                return <Card Data={Data} id={id} handleTeamSelecting={handleTeamSelecting} cardCred={selectedContacts} index={index} name={name} picture={picture} detail={detail} />
             })}
         </Style.CardLayout>
     )

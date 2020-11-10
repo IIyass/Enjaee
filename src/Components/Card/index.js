@@ -5,12 +5,10 @@ import AudioCall from '../../Illustration/AudioCall.svg'
 import More from '../../Illustration/More.svg'
 import Stroke from '../../Illustration/Stroke.svg'
 import Success from '../../Illustration/Success.svg'
-const Card = ({ picture, name, detail, index, locked, cardCred = [] }) => {
+const Card = ({ picture, name, detail, index, id, locked, handleTeamSelecting = () => { }, cardCred = [] }) => {
     const [openModel, setOpenModel] = useState();
-    const [selectImg, setSelectImg] = useState();
 
     useEffect(() => {
-
     }, [openModel, cardCred])
 
     const ModelShow = () => {
@@ -29,14 +27,10 @@ const Card = ({ picture, name, detail, index, locked, cardCred = [] }) => {
             return true;
         }
     };
-
-
-
-
     return (
         <Style.Wrapper selectImg={handleSelectedCard()} index={openModel}>
             <div id="img">
-                <img className="profil" src={picture} />
+                <img onClick={() => handleTeamSelecting(index, id)} className="profil" src={picture} />
                 {handleSelectedCard() && <img className="icon" src={Success} />}
             </div>
             <Style.Description>
