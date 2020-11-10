@@ -15,6 +15,10 @@ const Group = () => {
         // update state.step by adding to previous state
         setStep(step + 1)
     }
+    const back = () => {
+        // update state.step by adding to previous state
+        setStep(step - 1)
+    }
     const handleSteps = () => {
         switch (step) {
             case 1:
@@ -29,7 +33,7 @@ const Group = () => {
                 return (
                     <Style.Wrapper as={Container}>
                         <Style.CardLayout>
-                            <Body next={next} Addgroup contacts={contacts} setGroupName={setGroupName} setContacts={setContacts} />
+                            <Body next={next} groupName={groupName} Addgroup contacts={contacts} setGroupName={setGroupName} setContacts={setContacts} />
                         </Style.CardLayout>
                     </Style.Wrapper>
                 )
@@ -37,7 +41,7 @@ const Group = () => {
                 return (
                     <Style.Wrapper as={Container}>
                         <Style.CardLayout>
-                            <Body step={step} groupDetail contacts={contacts} groupName={groupName} />
+                            <Body step={step} groupDetail back={back} contacts={contacts} groupName={groupName} />
                         </Style.CardLayout>
                     </Style.Wrapper>)
         }

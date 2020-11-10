@@ -29,6 +29,8 @@ height:90%;
 justify-content:space-around;
 ul{
 display:flex;
+font-family:Roboto;
+font-weight:400;
 list-style: none;
 flex-direction:row;
 margin:0;

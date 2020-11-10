@@ -12,6 +12,7 @@ export const SearchBar = styled.div`
 width:100%;
 display:flex;
 margin-top:20px;
+font-family:Roboto;
 justify-content:space-between;
 `
 

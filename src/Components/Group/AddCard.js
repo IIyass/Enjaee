@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Style from './style'
-import picture from '../../Illustration/Sozoo.png'
+import picture from '../../Illustration/groupicon.svg'
 
 const AddCard = ({ next }) => {
     return (

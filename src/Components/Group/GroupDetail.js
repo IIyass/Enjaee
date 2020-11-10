@@ -3,7 +3,7 @@ import * as Style from './style'
 import SearchInput from '../UI/SearchInput'
 import Rectangle380 from '../../Illustration/Rectangle380.svg'
 
-const GroupDetail = ({ setGroupName, next, groupName, contacts }) => {
+const GroupDetail = ({ setGroupName, next, groupName, contacts, back }) => {
 
     const [name, setName] = useState('')
     const handleSubmit = (e) => {
@@ -19,7 +19,7 @@ const GroupDetail = ({ setGroupName, next, groupName, contacts }) => {
             </form>
             <SearchInput placeholder="Search" name="Search" iconSearch={true} />
             <Style.ButtonContainer>
-                <button>Add Member</button>
+                <button onClick={() => back()}> Add Member</button>
                 <button>Update</button>
             </Style.ButtonContainer>
 

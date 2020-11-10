@@ -8,7 +8,7 @@ import AddGroup from '../Group/Addgroup'
 import GroupDetail from '../Group/GroupDetail'
 import CardLayout from './CardLayout'
 
-const Body = ({ contact, Addgroup, groupDetail, next, setGroupName, groupName, contacts = [], setContacts, step }) => {
+const Body = ({ contact, Addgroup, groupDetail, next, setGroupName, groupName, back, contacts = [], setContacts, step }) => {
 
     const GroupContact = MockData.filter(({ id }) => {
         return contacts.includes(id)
@@ -27,13 +27,13 @@ const Body = ({ contact, Addgroup, groupDetail, next, setGroupName, groupName, c
         } else {
             if (Addgroup) {
                 return <>
-                    <AddGroup setGroupName={setGroupName} next={next} />
+                    <AddGroup setGroupName={setGroupName} next={next} groupName={groupName} />
                     <CardLayout step={step} Data={MockData} contacts={contacts} setContacts={setContacts} />
                 </>
             } else {
                 if (groupDetail) {
                     return <>
-                        <GroupDetail contacts={contacts} groupName={groupName} />
+                        <GroupDetail contacts={contacts} back={back} groupName={groupName} />
                         <CardLayout Details step={step} Data={GroupContact} />
                     </>
                 }

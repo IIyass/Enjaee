@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
 display:flex;
 flex-direction:row;
+font-family:Roboto;
 justify-content:space-between;
 background-color:#fff;
 height:80px;
@@ -20,8 +21,12 @@ margin:0;
 padding:0;
 align-items:center;
 height:80px;
+font-family:Roboto;
 a{
     text-decoration:none;
+    color:#47525D;
+    font-family:Roboto;
+    font-weight:400;
 }
 li{
     display:flex;
@@ -46,7 +51,7 @@ li{
     span{
         font-family: Roboto;
         font-style: normal;
-        font-weight: bold;
+        font-weight: 400;
         font-size: 14px;
         line-height: 16px;
         text-align: center;

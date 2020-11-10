@@ -13,6 +13,7 @@ justify-content:space-between;
 box-shadow: 0px 0px 5px rgba(126, 126, 126, 0.5);
 border-radius: 4px;
 margin:15px 0;
+font-family:Roboto;
 
 #img{
    position:relative;
@@ -34,6 +35,7 @@ export const Description = styled.div`
 width:100%;
 display:flex;
 flex-direction:row;
+font-family:Roboto;
 justify-content:space-between;
 
 `
@@ -42,6 +44,9 @@ width:39%;
 display:flex;
 flex-direction:row;
 justify-content:space-between;
+img{
+  cursor:pointer;
+}
 
 `
 export const PersonalInfo = styled.div`
@@ -49,14 +54,16 @@ export const PersonalInfo = styled.div`
 h1 {
     margin:5px 0px;
     font-style: normal;
-    font-weight: bold;
+    font-family:Roboto;
+    font-weight: 700;
     font-size: 16px;
     line-height: 19px;
     letter-spacing: 1.29412px; 
 }
 span{
     font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
+    font-family:Roboto;
     font-size: 14px;
     line-height: 16px;
     color: #737373;

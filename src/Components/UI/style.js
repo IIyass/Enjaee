@@ -15,6 +15,8 @@ export const Input = styled.input.attrs(props => ({
 }))`
     width: 200px;
     height:28px;
+    font-family:Roboto;
+    font-weight:400;
     position:relative;
     font-size: 15px;
     padding: 8px;
