@@ -5,7 +5,7 @@ import AudioCall from '../../Illustration/AudioCall.svg'
 import More from '../../Illustration/More.svg'
 import Stroke from '../../Illustration/Stroke.svg'
 import Success from '../../Illustration/Success.svg'
-const Card = ({ picture, name, detail, index, cardCred = [] }) => {
+const Card = ({ picture, name, detail, index, locked, cardCred = [] }) => {
     const [openModel, setOpenModel] = useState();
     const [selectImg, setSelectImg] = useState();
 
@@ -30,20 +30,22 @@ const Card = ({ picture, name, detail, index, cardCred = [] }) => {
         }
     };
 
+
+
+
     return (
         <Style.Wrapper selectImg={handleSelectedCard()} index={openModel}>
             <div id="img">
                 <img className="profil" src={picture} />
                 {handleSelectedCard() && <img className="icon" src={Success} />}
             </div>
-
             <Style.Description>
                 <Style.PersonalInfo>
                     <h1>{name}</h1>
                     <span>{detail}</span>
                 </Style.PersonalInfo>
                 <Style.IconContainer>
-                    <img src={ChatIcon} onClick={() => setOpenModel(index)} />
+                    <img src={ChatIcon} onClick={() => locked && setOpenModel(index)} />
                     <img src={AudioCall} />
                     <img src={Stroke} />
                     <img src={More} />

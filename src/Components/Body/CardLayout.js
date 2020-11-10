@@ -1,4 +1,4 @@
-import React, { useState, useEffect, usePrevious } from 'react'
+import React, { useState, useEffect } from 'react'
 import * as Style from './style'
 import Card from '../Card'
 
@@ -31,10 +31,10 @@ const CardLayout = ({ contacts = [], setContacts, Data, step, Details }) => {
 
     return (
         <Style.CardLayout>
-            {Details ? Data.map(({ picture, name, detail }, index) => {
-                return <Card index={index} name={name} picture={picture} detail={detail} />
+            {Details ? Data.map(({ picture, name, detail, profile }, index) => {
+                return <Card index={index} Data={Data} locked={profile} name={name} picture={picture} detail={detail} />
             }) : Data.map(({ picture, name, detail, id }, index) => {
-                return <div key={index} onClick={() => handleTeamSelecting(index, id)} ><Card cardCred={selectedContacts} index={index} name={name} picture={picture} detail={detail} /></div>
+                return <div key={index} onClick={() => handleTeamSelecting(index, id)} ><Card Data={Data} cardCred={selectedContacts} index={index} name={name} picture={picture} detail={detail} /></div>
             })}
         </Style.CardLayout>
     )

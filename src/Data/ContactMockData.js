@@ -11,56 +11,65 @@ export default [{
     id: 11,
     picture: Jhon,
     name: "John William",
-    detail: "Love is life & life"
+    detail: "Love is life & life",
+    profile: false,
 
 }, {
     id: 22,
     picture: TaraAlwyn,
     name: "Tara Alwyn",
-    detail: "Work hard..."
+    detail: "Work hard...",
+    profile: true,
 
 }, {
     id: 33,
     picture: Joli,
     name: "Jolie Price",
-    detail: "Love is life & life is family"
+    detail: "Love is life & life is family",
+    profile: true,
 
 }, {
     id: 44,
     picture: Jonathan,
     name: "Jonathan Carington",
-    detail: "Work hard..."
+    detail: "Work hard...",
+    profile: true,
 
 },
 {
     id: 55,
     picture: Sozoo,
     name: "Sozoo Lee",
-    detail: "Friendship is forever"
+    detail: "Friendship is forever",
+    profile: true,
 
 }, {
     id: 66,
     picture: Martin,
     name: "Martin Hoo",
-    detail: "Trust is bigger"
+    detail: "Trust is bigger",
+    profile: true,
 
 }, {
     id: 77,
     picture: Micky,
     name: "Jonathan Carington",
-    detail: "Work hard..."
+    detail: "Work hard...",
+    profile: true,
 
 },
 {
     id: 8,
     picture: Henry,
     name: "Sozoo Lee",
-    detail: "Friendship is forever"
+    detail: "Friendship is forever",
+    profile: true,
 
 }, {
     id: 9,
     picture: Hasi,
     name: "Martin Hoo",
-    detail: "Trust is bigger"
+    detail: "Trust is bigger",
+    profile: true,
 
 }]
