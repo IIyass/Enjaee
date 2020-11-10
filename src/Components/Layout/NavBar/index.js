@@ -18,7 +18,7 @@ const Header = () => {
     return (
         <Style.Wrapper>
             <Style.Logo>
-                <img src={Logo} />
+                <Link to="/"><img src={Logo} /></Link>
             </Style.Logo>
             <Style.NavBar>
                 <Link to="alert">  <li onClick={() => setIconSelected(0)}><img src={iconSelected === 0 ? ActiveAlert : Alert} /> <span>Alerts</span></li></Link>
