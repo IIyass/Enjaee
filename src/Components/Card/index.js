@@ -15,11 +15,10 @@ const Card = ({ picture, name, detail, index, id, locked, handleTeamSelecting = 
         return <Style.ModalContainer>
             <p>Would you like send chat request to Jolie Price.</p>
             <Style.ButtonContainer>
-                <button className="red">No</button>
+                <button className="red" onClick={() => setOpenModel(false)}>No</button>
                 <button className="green">Yes</button>
             </Style.ButtonContainer>
         </Style.ModalContainer>
-
     }
 
     const handleSelectedCard = () => {
@@ -27,6 +26,7 @@ const Card = ({ picture, name, detail, index, id, locked, handleTeamSelecting = 
             return true;
         }
     };
+
     return (
         <Style.Wrapper selectImg={handleSelectedCard()} index={openModel}>
             <div id="img">
