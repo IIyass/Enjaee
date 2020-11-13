@@ -108,7 +108,7 @@ export default [{
     profile: true,
     history: {
         call: "2:10",
-        video: "",
+        video: "3:00",
         message: "5:00"
     }
 

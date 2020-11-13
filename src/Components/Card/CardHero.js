@@ -2,9 +2,8 @@ import React, { useContext } from 'react'
 import * as Style from './style'
 import { Group } from '../../Provider/GroupProvidre'
 import Success from '../../Illustration/Success.svg'
-const CardHero = ({ name, detail, picture, TickedCard, id, index }) => {
+const CardHero = ({ picture, TickedCard, id, index }) => {
     const { selectedContacts, handleTeamSelecting } = useContext(Group);
-
     const handleSelectedCard = () => {
         if (selectedContacts.includes(index)) {
             return true;

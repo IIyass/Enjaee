@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import * as Style from './style'
 import { Container } from '../Common/Body'
 import SearchInput from '../UI/SearchInput'
@@ -10,7 +10,6 @@ import CardLayout from './CardLayout'
 import { Group } from '../../Provider/GroupProvidre'
 const Body = ({ PageType }) => {
     const { GroupContact } = useContext(Group);
-
 
     const HandlePage = () => {
         switch (PageType) {
@@ -38,7 +37,7 @@ const Body = ({ PageType }) => {
             case "GroupDetailPage":
                 return <>
                     <GroupDetail />
-                    <CardLayout CardType="details" Data={GroupContact} />
+                    <CardLayout CardType="group" Data={GroupContact} />
                 </>
             case "TeamChatPage":
                 return <>

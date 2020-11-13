@@ -47,6 +47,9 @@ li{
         margin:0;
         padding:12px 20px;
         height:70%;
+        img{
+            margin-top:10px;
+        }
     }
     span{
         font-family: Roboto;

@@ -6,6 +6,7 @@ import Contact from './Components/Contact'
 import Alert from './Components/Alert'
 import Chat from './Components/Chat'
 import History from './Components/History'
+import Profil from './Components/Profil'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/contact" exact component={Contact} />
           <Route path="/alert" exact component={Alert} />
           <Route path="/groups" exact component={Group} />
+          <Route path="/profil" exact component={Profil} />
         </Switch>
       </Layout>
     </BrowserRouter >

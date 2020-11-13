@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MockData from '../Data/ContactMockData'
 export const Group = React.createContext();
 
@@ -9,10 +9,11 @@ const GroupProvider = (props) => {
     const [groupName, setGroupName] = useState('');
     const [contacts, setContacts] = useState([]);
     const [selectedContacts, setSelectedContacts] = useState([]);
+    const [createdGroup, setCreatedGroup] = useState([])
     const GroupContact = MockData.filter(({ id }) => {
         return contacts.includes(id)
-    }
-    )
+    })
+
 
     const handleTeamSelecting = (index, id) => {
         if (!selectedContacts.includes(index)) {

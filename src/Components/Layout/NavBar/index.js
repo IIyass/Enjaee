@@ -26,7 +26,7 @@ const Header = () => {
                 <Link to="/history">  <li onClick={() => setIconSelected(2)}><img src={iconSelected === 2 ? ActiveHistory : History} /> <span>History</span></li></Link>
                 <Link to="/chat">    <li onClick={() => setIconSelected(3)}><img src={iconSelected === 3 ? ActiveTemporary : Temporary} /><span>Team Chat</span></li ></Link>
                 <Link to="/groups"> <li onClick={() => setIconSelected(4)}><img src={iconSelected === 4 ? ActiveGroup : Group} /> <span>Group</span></li ></Link>
-                <li ><img src={Profil} /></li>
+                <li >  <Link to="/profil"> <img src={Profil} /></Link> </li>
             </Style.NavBar >
         </Style.Wrapper >
     );

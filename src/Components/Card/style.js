@@ -120,14 +120,7 @@ width: 70%;
 height:120px;
 padding:5px 5px;
 z-index: 9999;
-p{
-  font-style: normal;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 18px;
-  text-align: center;
-  color: #000000;
-}
+
 `
 
 export const ButtonContainer = styled.div`

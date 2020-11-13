@@ -41,7 +41,7 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType }) =
                     </Style.Description>
                 </Style.CardContainer>
             case 'group':
-                return <Style.CardContainer >
+                return <Style.CardContainer>
                     <CardHero TickedCard name={name} picture={picture} index={index} id={id} detail={detail} />
                     <Style.Description>
                         <Style.PersonalInfo>
