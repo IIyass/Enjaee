@@ -6,7 +6,7 @@ const Contact = () => {
 
     return (
         <Style.Wrapper as={Container}>
-            <Body contact />
+            <Body PageType="ContactPage" />
         </Style.Wrapper >
     )
 }

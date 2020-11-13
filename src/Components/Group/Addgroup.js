@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import * as Style from './style'
 import SearchInput from '../UI/SearchInput'
 import Rectangle380 from '../../Illustration/Rectangle380.svg'
-
-const AddGroup = ({ setGroupName, groupName, next }) => {
-
+import { Group } from '../../Provider/GroupProvidre'
+const AddGroup = () => {
+    const { groupName, next, setGroupName } = useContext(Group);
     const [name, setName] = useState('')
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -15,7 +15,6 @@ const AddGroup = ({ setGroupName, groupName, next }) => {
         <Style.GroupBar>
             <img src={Rectangle380} />
             <form onSubmit={handleSubmit}>
-                {console.log(groupName)}
                 {groupName ? <SearchInput disabled required placeholder="Group name" value={groupName} name="groupname" /> :
                     <SearchInput required placeholder="Group name" value={name} onChange={(e) => setName(e.target.value)} name="groupname" />}
                 <Style.ButtonContainer>

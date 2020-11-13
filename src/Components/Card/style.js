@@ -15,42 +15,79 @@ border-radius: 4px;
 margin:15px 0;
 font-family:Roboto;
 
-#img{
-   position:relative;
-   cursor:pointer;
-  .profil{
-    opacity:${({ selectImg }) => selectImg ? 0.3 : 1};
-    width:100%;
-  }
-  .icon{
-    position:absolute;
-    top:40%;
-    left:50%;
-    transform:translate(-50%,0);
-  }
 }
-`
+`;
+export const HeroComtainer = styled.div`
+#img{
+  position:relative;
+  cursor:pointer;
+ .profil{
+   opacity:${({ selectImg }) => selectImg ? 0.3 : 1};
+   width:100%;
+ }
+ .icon{
+   position:absolute;
+   top:40%;
+   left:50%;
+   transform:translate(-50%,0);
+ }
+
+`;
 
 export const Description = styled.div`
 width:100%;
 display:flex;
+position:relative;
 flex-direction:row;
 font-family:Roboto;
 justify-content:space-between;
 
-`
+`;
+
+
+export const CardContainer = styled.div`
+width:100%;
+height:100%;
+display:flex;
+flex-direction:column;
+font-family:Roboto;
+justify-content:space-between;
+`;
 export const IconContainer = styled.div`
-width:39%;
+width:50%;
 display:flex;
 flex-direction:row;
 justify-content:space-between;
+align-items:center;
 img{
   cursor:pointer;
+}
+div{
+  margin:0px 5px;
+}
+ul{
+    padding: 0;
+    width:100px;
+    list-style:none;
+    margin: 0;
+    background: #fff;
+    z-index: 1000;
+    position: absolute;
+    top: 100%;
+    li{
+      border-bottom:2px solid #000;
+      padding:15px 20px;
+      text-align:center;
+      font-size:12px;
+      font-weight:400;
+      font-family:Roboto;
+    }
+  
 }
 
 `
 export const PersonalInfo = styled.div`
-
+width:40%;
 h1 {
     margin:5px 0px;
     font-style: normal;

@@ -13,6 +13,11 @@ export default [{
     name: "John William",
     detail: "Love is life & life",
     profile: false,
+    history: {
+        call: "2:10",
+        video: "3:00",
+        message: "5:00"
+    }
 
 }, {
     id: 22,
@@ -20,6 +25,11 @@ export default [{
     name: "Tara Alwyn",
     detail: "Work hard...",
     profile: true,
+    history: {
+        call: "",
+        video: "3:00",
+        message: ""
+    }
 
 }, {
     id: 33,
@@ -27,6 +37,11 @@ export default [{
     name: "Jolie Price",
     detail: "Love is life & life is family",
     profile: true,
+    history: {
+        call: "",
+        video: "3:00",
+        message: "5:00"
+    }
 
 }, {
     id: 44,
@@ -34,6 +49,11 @@ export default [{
     name: "Jonathan Carington",
     detail: "Work hard...",
     profile: true,
+    history: {
+        call: "2:10",
+        video: "3:00",
+        message: ""
+    }
 
 },
 {
@@ -42,6 +62,11 @@ export default [{
     name: "Sozoo Lee",
     detail: "Friendship is forever",
     profile: true,
+    history: {
+        call: "2:10",
+        video: "3:00",
+        message: "5:00"
+    }
 
 }, {
     id: 66,
@@ -56,6 +81,11 @@ export default [{
     name: "Jonathan Carington",
     detail: "Work hard...",
     profile: true,
+    history: {
+        call: "2:10",
+        video: "3:00",
+        message: "5:00"
+    }
 
 },
 {
@@ -64,6 +94,11 @@ export default [{
     name: "Sozoo Lee",
     detail: "Friendship is forever",
     profile: true,
+    history: {
+        call: "",
+        video: "3:00",
+        message: "5:00"
+    }
 
 }, {
     id: 9,
@@ -71,5 +106,10 @@ export default [{
     name: "Martin Hoo",
     detail: "Trust is bigger",
     profile: true,
+    history: {
+        call: "2:10",
+        video: "",
+        message: "5:00"
+    }
 
 }]

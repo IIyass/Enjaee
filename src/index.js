@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import GroupProvider from './Provider/GroupProvidre'
 import './App.css'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <GroupProvider>
+      <App />
+    </GroupProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

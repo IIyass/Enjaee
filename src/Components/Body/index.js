@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import * as Style from './style'
 import { Container } from '../Common/Body'
 import SearchInput from '../UI/SearchInput'
@@ -7,43 +7,56 @@ import MockData from '../../Data/ContactMockData'
 import AddGroup from '../Group/Addgroup'
 import GroupDetail from '../Group/GroupDetail'
 import CardLayout from './CardLayout'
+import { Group } from '../../Provider/GroupProvidre'
+const Body = ({ PageType }) => {
+    const { GroupContact } = useContext(Group);
 
-const Body = ({ contact, Addgroup, groupDetail, next, setGroupName, groupName, back, contacts = [], setContacts, step }) => {
 
-    const GroupContact = MockData.filter(({ id }) => {
-        return contacts.includes(id)
-    }
-    )
-
-    const HandleInput = () => {
-        if (contact) {
-            return <>
-                <Style.SearchBar>
-                    <SearchInput placeholder="Search" name="Search" iconSearch={true} />
-                    <SortInput width="150px" height="45px" />
-                </Style.SearchBar>
-                <CardLayout Details Data={MockData} />
-            </>
-        } else {
-            if (Addgroup) {
+    const HandlePage = () => {
+        switch (PageType) {
+            case "HistoryPage":
                 return <>
-                    <AddGroup setGroupName={setGroupName} next={next} groupName={groupName} />
-                    <CardLayout step={step} Data={MockData} contacts={contacts} setContacts={setContacts} />
+                    <Style.SearchBar>
+                        <SearchInput placeholder="Search" name="Search" iconSearch={true} />
+                        <SortInput width="150px" height="45px" />
+                    </Style.SearchBar>
+                    <CardLayout CardType="history" Data={MockData} />
                 </>
-            } else {
-                if (groupDetail) {
-                    return <>
-                        <GroupDetail contacts={contacts} back={back} groupName={groupName} />
-                        <CardLayout Details step={step} Data={GroupContact} />
-                    </>
-                }
-            }
+            case "ContactPage":
+                return <>
+                    <Style.SearchBar>
+                        <SearchInput placeholder="Search" name="Search" iconSearch={true} />
+                        <SortInput width="150px" height="45px" />
+                    </Style.SearchBar>
+                    <CardLayout CardType="details" Data={MockData} />
+                </>
+            case "AddgroupPage":
+                return <>
+                    <AddGroup />
+                    <CardLayout CardType="group" Data={MockData} />
+                </>
+            case "GroupDetailPage":
+                return <>
+                    <GroupDetail />
+                    <CardLayout CardType="details" Data={GroupContact} />
+                </>
+            case "TeamChatPage":
+                return <>
+                    <Style.SearchBar>
+                        <SearchInput placeholder="Search" name="Search" iconSearch={true} />
+                        <SortInput width="150px" height="45px" />
+                    </Style.SearchBar>
+                    <CardLayout CardType="chat" Data={MockData} />
+                </>
         }
     }
 
+
+
+
     return (
         <Style.Wrapper as={Container}>
-            {HandleInput()}
+            {HandlePage()}
         </Style.Wrapper >
     )
 }

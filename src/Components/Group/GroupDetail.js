@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import * as Style from './style'
 import SearchInput from '../UI/SearchInput'
 import Rectangle380 from '../../Illustration/Rectangle380.svg'
-
-const GroupDetail = ({ setGroupName, next, groupName, contacts, back }) => {
-
+import { Group } from '../../Provider/GroupProvidre'
+const GroupDetail = () => {
+    const { back, groupName, next, setGroupName } = useContext(Group);
     const [name, setName] = useState('')
     const handleSubmit = (e) => {
         e.preventDefault()

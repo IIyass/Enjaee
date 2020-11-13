@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import * as Style from './style'
 import picture from '../../Illustration/groupicon.svg'
-
-const AddCard = ({ next }) => {
+import { Group } from '../../Provider/GroupProvidre'
+const AddCard = () => {
+    const { next } = useContext(Group);
     return (
 
         <Style.AddCardContainer>

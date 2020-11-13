@@ -1,9 +1,13 @@
 import React from 'react'
-
-
+import * as Style from './style'
+import { Container } from '../Common/Body'
+import Body from '../Body'
 const History = () => {
+
     return (
-        <h1>Hello World</h1>
+        <Style.Wrapper as={Container}>
+            <Body PageType="HistoryPage" />
+        </Style.Wrapper >
     )
 }
 

@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import * as Style from './style'
 import ChatIcon from '../../Illustration/Chat.svg'
 import AudioCall from '../../Illustration/AudioCall.svg'
 import More from '../../Illustration/More.svg'
 import Stroke from '../../Illustration/Stroke.svg'
-import Success from '../../Illustration/Success.svg'
-const Card = ({ picture, name, detail, index, id, locked, handleTeamSelecting = () => { }, cardCred = [] }) => {
-    const [openModel, setOpenModel] = useState();
+import CardHero from './CardHero'
 
-    useEffect(() => {
-    }, [openModel, cardCred])
+const Card = ({ picture, name, detail, index, id, locked, history, CardType }) => {
+
+    const [openModel, setOpenModel] = useState();
+    const [toggle, setToggle] = useState(false);
+
 
     const ModelShow = () => {
         return <Style.ModalContainer>
@@ -21,30 +22,79 @@ const Card = ({ picture, name, detail, index, id, locked, handleTeamSelecting = 
         </Style.ModalContainer>
     }
 
-    const handleSelectedCard = () => {
-        if (cardCred.includes(index)) {
-            return true;
+    const renderSingleCard = () => {
+        switch (CardType) {
+            case 'history':
+                return <Style.CardContainer >
+                    <CardHero picture={picture} index={index} id={id} />
+                    <Style.Description>
+                        <Style.PersonalInfo>
+                            <h1>{name}</h1>
+                            <span>{detail}</span>
+                        </Style.PersonalInfo>
+                        <Style.IconContainer>
+                            <div><img src={ChatIcon} onClick={() => locked && setOpenModel(index)} /><span>{history?.message}</span></div>
+                            <div><img src={AudioCall} /><span>{history?.call}</span></div>
+                            <div><img src={Stroke} /><span>{history?.video}</span></div>
+                            <div><img src={More} /> </div>
+                        </Style.IconContainer>
+                    </Style.Description>
+                </Style.CardContainer>
+            case 'group':
+                return <Style.CardContainer >
+                    <CardHero TickedCard name={name} picture={picture} index={index} id={id} detail={detail} />
+                    <Style.Description>
+                        <Style.PersonalInfo>
+                            <h1>{name}</h1>
+                            <span>{detail}</span>
+                        </Style.PersonalInfo>
+                        <Style.IconContainer>
+                            <div> <img src={ChatIcon} onClick={() => locked && setOpenModel(index)} /></div>
+                            <div>  <img src={AudioCall} /></div>
+                            <div> <img src={Stroke} /></div>
+                            <div><img src={More} onClick={(e) => setToggle(!toggle)} />{toggle && <ul><li>Admin</li><li>Delete</li><li>Exit Group</li></ul>} </div>
+                        </Style.IconContainer>
+                    </Style.Description>
+                </Style.CardContainer>
+            case 'chat':
+                return <Style.CardContainer >
+                    <CardHero TickedCard name={name} picture={picture} index={index} id={id} detail={detail} />
+                    <Style.Description>
+                        <Style.PersonalInfo>
+                            <h1>{name}</h1>
+                            <span>{detail}</span>
+                        </Style.PersonalInfo>
+                        <Style.IconContainer>
+                            <div><img src={ChatIcon} onClick={() => locked && setOpenModel(index)} /><span>{history?.message}</span></div>
+                            <div><img src={AudioCall} /><span>{history?.call}</span></div>
+                            <div><img src={Stroke} /><span>{history?.video}</span></div>
+                            <div><img src={More} /> </div>
+                        </Style.IconContainer>
+                    </Style.Description>
+                </Style.CardContainer>
+            default:
+                return <Style.CardContainer>
+                    <CardHero name={name} picture={picture} index={index} id={id} detail={detail} />
+                    <Style.Description>
+                        <Style.PersonalInfo>
+                            <h1>{name}</h1>
+                            <span>{detail}</span>
+                        </Style.PersonalInfo>
+                        <Style.IconContainer>
+                            <img src={ChatIcon} onClick={() => locked && setOpenModel(index)} />
+                            <img src={AudioCall} />
+                            <img src={Stroke} />
+                            <img src={More} />
+                        </Style.IconContainer>
+                    </Style.Description>
+                </Style.CardContainer>
         }
-    };
+    }
+
 
     return (
-        <Style.Wrapper selectImg={handleSelectedCard()} index={openModel}>
-            <div id="img">
-                <img onClick={() => handleTeamSelecting(index, id)} className="profil" src={picture} />
-                {handleSelectedCard() && <img className="icon" src={Success} />}
-            </div>
-            <Style.Description>
-                <Style.PersonalInfo>
-                    <h1>{name}</h1>
-                    <span>{detail}</span>
-                </Style.PersonalInfo>
-                <Style.IconContainer>
-                    <img src={ChatIcon} onClick={() => locked && setOpenModel(index)} />
-                    <img src={AudioCall} />
-                    <img src={Stroke} />
-                    <img src={More} />
-                </Style.IconContainer>
-            </Style.Description>
+        <Style.Wrapper index={openModel}>
+            {renderSingleCard()}
             {index === openModel && ModelShow()}
         </Style.Wrapper>
     )
