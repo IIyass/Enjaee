@@ -63,7 +63,6 @@ const ProfilSelector = (props) => {
             <p id="label">{props.label}</p>
             <Select
                 components={{ DropdownIndicator }}
-                width={props.width}
                 height={props.height}
                 styles={customStyles}
                 options={props.options}

@@ -32,7 +32,9 @@ const Profil = () => {
             </Style.Hero>
             <Style.Setting>
                 <h2>SETTINGS</h2>
-                <ProfilSelector placeholder="gmail" options={options} label="Sync Contact" />
+                <div style={{ width: "360px" }}>
+                    <ProfilSelector placeholder="gmail" options={options} label="Sync Contact" />
+                </div>
                 <h3>Privacy and Security</h3>
                 <Style.Privacy>
                     <ProfilSelector placeholder="everybody" options={options} label="Last Status" />
