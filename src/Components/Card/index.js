@@ -5,6 +5,7 @@ import AudioCall from '../../Illustration/AudioCall.svg'
 import More from '../../Illustration/More.svg'
 import Stroke from '../../Illustration/Stroke.svg'
 import CardHero from './CardHero'
+import ChatCard from './HistoryCard'
 
 const Card = ({ picture, name, detail, index, id, locked, history, CardType }) => {
 
@@ -26,7 +27,7 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType }) =
         switch (CardType) {
             case 'history':
                 return <Style.CardContainer >
-                    <CardHero picture={picture} index={index} id={id} />
+                    <CardHero TickedCard name={name} picture={picture} index={index} id={id} detail={detail} />
                     <Style.Description>
                         <Style.PersonalInfo>
                             <h1>{name}</h1>
@@ -57,21 +58,7 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType }) =
                     </Style.Description>
                 </Style.CardContainer>
             case 'chat':
-                return <Style.CardContainer >
-                    <CardHero TickedCard name={name} picture={picture} index={index} id={id} detail={detail} />
-                    <Style.Description>
-                        <Style.PersonalInfo>
-                            <h1>{name}</h1>
-                            <span>{detail}</span>
-                        </Style.PersonalInfo>
-                        <Style.IconContainer>
-                            <div><img src={ChatIcon} onClick={() => locked && setOpenModel(index)} /><span>{history?.message}</span></div>
-                            <div><img src={AudioCall} /><span>{history?.call}</span></div>
-                            <div><img src={Stroke} /><span>{history?.video}</span></div>
-                            <div><img src={More} /> </div>
-                        </Style.IconContainer>
-                    </Style.Description>
-                </Style.CardContainer>
+                return <ChatCard name={name} history={history} locked={locked} picture={picture} index={index} id={id} detail={detail} setOpenModel={setOpenModel} />
             default:
                 return <Style.CardContainer>
                     <CardHero name={name} picture={picture} index={index} id={id} detail={detail} />

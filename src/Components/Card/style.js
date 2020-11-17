@@ -14,9 +14,15 @@ box-shadow: 0px 0px 5px rgba(126, 126, 126, 0.5);
 border-radius: 4px;
 margin:15px 0;
 font-family:Roboto;
-
 }
 `;
+
+export const CardTemModel = styled.div`
+width:400px;
+height:240px;
+background-color:#fff;
+`;
+
 export const HeroComtainer = styled.div`
 #img{
   position:relative;
@@ -57,7 +63,7 @@ export const IconContainer = styled.div`
 width:50%;
 display:flex;
 flex-direction:row;
-justify-content:space-between;
+justify-content:end;
 align-items:center;
 img{
   cursor:pointer;
@@ -143,4 +149,35 @@ border:none;
 cursor:pointer;
 
 }
+`;
+
+export const CardWrapper = styled.div`
+width:75%;
+height:100%;
+margin:0 auto ;
+text-align:center;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:space-evenly;
+h1{
+font-size:20px;
+font-weight:700;
+font-family:Roboto;
+line-height:1.6;
+color:#000;
+}
+span{
+  font-size:16px;
+  font-weight:400;
+  color:#4A4A4A;
+  font-family:Roboto;
+}
+button{
+  background-color:#53A8CB;
+  border:none;
+  font-family:Roboto;
+  color:#fff;
+}
+
 `

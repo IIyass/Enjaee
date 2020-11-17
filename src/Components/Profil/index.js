@@ -33,22 +33,22 @@ const Profil = () => {
             <Style.Setting>
                 <h2>SETTINGS</h2>
                 <div style={{ width: "360px" }}>
-                    <ProfilSelector placeholder="gmail" options={options} label="Sync Contact" />
+                    <ProfilSelector width="350px" border='none' borderBottom="2px solid #4A4A4A" placeholder="gmail" options={options} label="Sync Contact" />
                 </div>
                 <h3>Privacy and Security</h3>
                 <Style.Privacy>
-                    <ProfilSelector placeholder="everybody" options={options} label="Last Status" />
-                    <ProfilSelector placeholder="Only Friend" options={options} label="Profile Picture" />
-                    <ProfilSelector placeholder="Friends" options={options} label="Online Status" />
-                    <ProfilSelector placeholder="5 Contacts" options={options} label="Block Contacts" />
-                    <ProfilSelector placeholder="Yes" options={options} label="Chat " />
+                    <ProfilSelector width="350px" border='none' borderBottom="2px solid #4A4A4A" placeholder="everybody" options={options} label="Last Status" />
+                    <ProfilSelector width="350px" border='none' borderBottom="2px solid #4A4A4A" placeholder="Only Friend" options={options} label="Profile Picture" />
+                    <ProfilSelector width="350px" border='none' borderBottom="2px solid #4A4A4A" placeholder="Friends" options={options} label="Online Status" />
+                    <ProfilSelector width="350px" border='none' borderBottom="2px solid #4A4A4A" placeholder="5 Contacts" options={options} label="Block Contacts" />
+                    <ProfilSelector width="350px" border='none' borderBottom="2px solid #4A4A4A" placeholder="Yes" options={options} label="Chat " />
                 </Style.Privacy>
                 <h3>Notification</h3>
                 <Style.Notification>
-                    <ProfilSelector placeholder="No" options={options} label="Message Preview" />
-                    <ProfilSelector placeholder="Yes" options={options} label="Sounds" />
-                    <ProfilSelector placeholder="Yes" options={options} label="Light" />
-                    <ProfilSelector placeholder="Yes" options={options} label="Join New User" />
+                    <ProfilSelector width="350px" border='none' borderBottom="2px solid #4A4A4A" placeholder="No" options={options} label="Message Preview" />
+                    <ProfilSelector width="350px" border='none' borderBottom="2px solid #4A4A4A" placeholder="Yes" options={options} label="Sounds" />
+                    <ProfilSelector width="350px" border='none' borderBottom="2px solid #4A4A4A" placeholder="Yes" options={options} label="Light" />
+                    <ProfilSelector width="350px" border='none' borderBottom="2px solid #4A4A4A" placeholder="Yes" options={options} label="Join New User" />
                 </Style.Notification>
                 <ProfilFooter />
             </Style.Setting>

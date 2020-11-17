@@ -13,7 +13,7 @@ const ProfilSelector = (props) => {
     const customStyles = {
         control: (base, state) => ({
             ...base,
-            width: '350px',
+            width: state.selectProps.width,
             height: state.selectProps.height,
             background: 'transparent',
             // match with the menu
@@ -21,8 +21,8 @@ const ProfilSelector = (props) => {
             // Overwrittes the different states of border
             borderColor: state.isFocused ? "#47525D" : "#47525D",
             borderColor: state.isSelected ? "#47525D" : "#47525D",
-            border: 'none',
-            borderBottom: "2px solid #4A4A4A",
+            border: state.selectProps.border,
+            borderBottom: state.selectProps.borderBottom,
             borderRadius: 0,
             // Removes weird border around container
             "&:hover": {
@@ -63,6 +63,9 @@ const ProfilSelector = (props) => {
             <p id="label">{props.label}</p>
             <Select
                 components={{ DropdownIndicator }}
+                border={props.border}
+                borderBottom={props.borderBottom}
+                width={props.width}
                 height={props.height}
                 styles={customStyles}
                 options={props.options}

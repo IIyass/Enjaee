@@ -41,10 +41,6 @@ const Body = ({ PageType }) => {
                 </>
             case "TeamChatPage":
                 return <>
-                    <Style.SearchBar>
-                        <SearchInput placeholder="Search" name="Search" iconSearch={true} />
-                        <SortInput width="150px" height="45px" />
-                    </Style.SearchBar>
                     <CardLayout CardType="chat" Data={MockData} />
                 </>
         }
