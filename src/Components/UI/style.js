@@ -15,9 +15,31 @@ span{
   left:10px;
   top:15px;
 }
+`;
 
-
-`
+export const ChatContainer = styled.div`
+display:flex;
+flex-direction:row;
+position:relative;
+align-items:center;
+width:87%;
+input{
+  width:100%;
+  border: 1px solid #53A8CB;
+  box-sizing: border-box;
+  border-radius: 4px;
+  height:50px;
+}
+ul{
+  position:absolute;
+  right:0;
+  padding:0;
+  margin:0;
+  img{
+    margin-right:15px;
+  }
+}
+`;
 
 export const Input = styled.input.attrs(props => ({
   type: props.type,

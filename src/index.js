@@ -2,13 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import GroupProvider from './Provider/GroupProvidre'
+import ChatProvider from './Provider/ChatProvider'
 import './App.css'
 
 ReactDOM.render(
   <React.StrictMode>
-    <GroupProvider>
-      <App />
-    </GroupProvider>
+    <ChatProvider>
+      <GroupProvider>
+        <App />
+      </GroupProvider>
+    </ChatProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

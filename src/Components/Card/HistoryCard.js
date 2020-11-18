@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import * as Style from './style'
 import ChatIcon from '../../Illustration/Chat.svg'
 import AudioCall from '../../Illustration/AudioCall.svg'
@@ -9,16 +9,16 @@ import Model from '../Model'
 import SortInput from '../UI/ProfilSelector'
 import { FooterButton } from '../UI/FooterButton'
 import PinInput from 'react-pin-input'
+import { Chat } from '../../Provider/ChatProvider'
 
 const TemChatCard = ({ name, locked, picture, history, index, id, detail, setOpenModel }) => {
+
+    const { next, step } = useContext(Chat);
+
     const [open, setOpen] = useState(false);
-    const [step, setStep] = useState(1);
     const [pin, setPin] = useState({
         1: '', 2: "", 3: '', 3: ""
     })
-
-    const next = () => setStep(step + 1)
-
 
     const handleCloseModal = () => {
         setOpen(false)
@@ -108,6 +108,7 @@ const TemChatCard = ({ name, locked, picture, history, index, id, detail, setOpe
                     </Style.IconContainer>
                 </Style.Description>
             </Style.CardContainer>
+
         </>
     )
 }
