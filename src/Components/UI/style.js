@@ -1,5 +1,17 @@
 import styled from 'styled-components'
 
+export const AuthInputContainer = styled.div`
+position:relative;
+display:flex;
+flex-direction:column;
+margin-top:15px;
+
+span{
+  position:absolute;
+  left:10px;
+  top:-2px;
+}`;
+
 export const Container = styled.div`
 position:relative;
 display:flex;
@@ -90,4 +102,55 @@ export const ProfilInput = styled.input.attrs(props => ({
        color:#4A4A4A;
      }
     
-  `
+  `;
+
+export const AuthInput = styled.input.attrs(props => ({
+  type: props.type,
+}))`
+   
+      width: 100%;
+      font-size: 15px;
+      width: -moz-available;
+      width: -webkit-fill-available;
+      color: #fff;
+      background-color:transparent;
+      padding-bottom:20px;
+      padding-left:50px;
+      border:none;
+      border-bottom:2px solid #fff;
+       ::placeholder{
+         color:#fff;
+         font-family:Roboto;
+         font-size:16px;
+         font-weight:400;
+       }
+      
+    `;
+
+export const AuthButton = styled.button`
+display:flex;
+width:125px;
+height:125px;
+background-color:${({ color }) => color};
+margin:0 auto;
+border:${({ borderColor }) => `2px solid ${borderColor}`};
+box-sizing: border-box;
+border-radius: 10px;
+margin-bottom:10px;
+cursor:pointer;
+img{
+  margin: auto;
+  z-index:1000;
+}
+`;
+
+export const AuthButtonContainer = styled.div`
+text-align:center;
+span{
+  color:${({ titleColor }) => titleColor};
+  font-size:40px;
+  font-weight:400;
+  font-family:Roboto;
+}
+
+`
