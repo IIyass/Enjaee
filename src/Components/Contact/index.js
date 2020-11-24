@@ -6,11 +6,10 @@ import Body from '../Body'
 const Contact = () => {
 
     return (
-        <Layout>
-            <Style.Wrapper as={Container}>
-                <Body PageType="ContactPage" />
-            </Style.Wrapper >
-        </Layout>
+
+        <Style.Wrapper as={Container}>
+            <Body PageType="ContactPage" />
+        </Style.Wrapper >
     )
 }
 

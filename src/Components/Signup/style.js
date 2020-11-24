@@ -4,9 +4,7 @@ export const SignupWrapper = styled.div`
 display:flex;
 flex-direction:row;
 justify-content:space-between;
-height:85vh;
-margin-top:80px;
-
+height:100vh;
 `;
 
 export const LeftContainer = styled.div`
@@ -19,6 +17,7 @@ height:100%;
 flex-direction:column;
 justify-content:space-around;
 
+
 `;
 
 export const Formcontainer = styled.div`
@@ -27,10 +26,11 @@ height:100%;
 background-color:#53A8CB;
 h1{
     text-align:center;
-    font-size:100px;
+    font-size:5em;
     font-weight:700;
     color:#fff;
     font-family:Roboto;
+    margin-bottom:10px;
 }
 form{
 

@@ -4,9 +4,7 @@ export const AuthWrapper = styled.div`
 display:flex;
 flex-direction:row;
 justify-content:space-between;
-height:85vh;
-margin-top:80px;
-
+height:100vh;
 `;
 
 export const LeftContainer = styled.div`

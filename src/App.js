@@ -8,24 +8,24 @@ import History from './Components/History'
 import Profil from './Components/Profil'
 import Signup from './Components/Signup'
 import Login from './Components/Login'
-import OTP from './Components/OTP'
-import Share from './Components/Share'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import PublicRoute from './hooks/PublicRoute'
+import PrivateRoute from './hooks/PrivateRoute'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 const App = () => {
+  const token = localStorage.getItem('token');
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/history" exact component={History} />
-        <Route path="/chat" exact component={Chat} />
-        <Route path="/contact" exact component={Contact} />
-        <Route path="/alert" exact component={Alert} />
-        <Route path="/groups" exact component={Group} />
-        <Route path="/profil" exact component={Profil} />
-        <Route path="/signup" exact component={Signup} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/otp" exact component={OTP} />
-        <Route path="/share" exact component={Share} />
+        <Route path="/" exact render={props => token ? <Redirect to='/contact' /> : <Login {...props} />} />
+        <PrivateRoute path="/history" exact component={History} />
+        <PrivateRoute path="/chat" exact component={Chat} />
+        <PrivateRoute path="/contact" exact component={Contact} />
+        <PrivateRoute path="/alert" exact component={Alert} />
+        <PrivateRoute path="/groups" exact component={Group} />
+        <PrivateRoute path="/profil" exact component={Profil} />
+        <Route path="/signup" exact render={props => token ? <Redirect to='/contact' /> : <Signup {...props} />} />
+        <Route path="/login" exact render={props => token ? <Redirect to='/contact' /> : <Login {...props} />} />
       </Switch>
     </BrowserRouter >
 

@@ -1,76 +1,100 @@
-import { firestoreFirebase, firebaseStorage } from './firebaseIndex'
+import { firestoreFirebase, firebaseStorage } from './FirebaseIndex'
 import firebase from 'firebase'
 
-const usersRef = firestoreFirebase.collection("/Users");
-const contentsRef = firestoreFirebase.collection("/Content");
+const usersRef = firestoreFirebase.collection("/users");
 
 export const authMethods = {
 
+    login: async (phoneNumber, password, appVerifier, authStep, setAuthStep, setLoginError) => {
+        const snapshot = await usersRef.get();
+        const AllusersPhoneNumber = snapshot.docs.map(doc => doc.data().mobile);
+        if (AllusersPhoneNumber.includes(phoneNumber)) {
+            const UserPassword = snapshot.docs.filter(doc => doc.data().mobile === phoneNumber);
+            (UserPassword[0].data().password === password ?
+                firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+                    .then(function (confirmationResult) {
+                        setAuthStep(authStep + 1);
+                        // SMS sent. Prompt user to type the code from the message, then sign the
+                        // user in with confirmationResult.confirm(code).
+                        window.confirmationResult = confirmationResult;
+                    }).catch(function (error) {
+                        console.log(error)
 
-
-    saveUser: async (user, additionalData) => {
-        if (!user) return;
-        const userRef = firestoreFirebase.doc(`Users/${user.uid}`);
-        const snapshot = await userRef.get();
-        if (!snapshot.exists) {
-            const { email } = user;
-            try {
-                await userRef.set({
-                    email,
-                    Name: additionalData,
-                    content: [],
-                    tickedContent: [],
-                    avatar: ''
-                });
-            } catch (error) {
-                console.error("Error creating user document", error);
-            }
-        }
-        return authMethods.getUserDocument(user.uid);
-    },
-
-
-
-    // firebase helper methods go here... 
-    signup: (email, password, displayName, setUser, setErrors, setToken, Confirmpassword) => {
-        if (Confirmpassword === password) {
-            firebase.auth().createUserWithEmailAndPassword(email, password).then(async res => {
-                authMethods.saveUser(res.user, displayName);
-                setUser(res.user);
-                const token = await Object.entries(res.user)[5][1].b
-                //set token to localStorage 
-                await localStorage.setItem('token', token)
-                //grab token from local storage and set to state. 
-                setToken(window.localStorage.token)
-
-            })
-                .catch(err => {
-                    //saving error messages here
-                    setErrors(prev => ([...prev, err.message]))
-                })
+                        // Error; SMS not sent
+                        // ...
+                    })
+                : setLoginError(' Password Incorrect'))
         } else {
-            setErrors(prev => ([...prev, 'passord incorrect']))
+            setLoginError('Incorect Phone Number')
         }
 
-
     },
 
-    login: (email, password, setUser, setErrors, setToken) => {
-        //change from create users to...
-        firebase.auth().signInWithEmailAndPassword(email, password)
-            //everything is almost exactly the same as the function above
-            .then(async res => {
-                setUser(res.user);
-                const token = await Object.entries(res.user)[5][1].b
-                //set token to localStorage 
-                await localStorage.setItem('token', token)
-                setToken(window.localStorage.token)
 
-            })
-            .catch(err => {
-                setErrors(prev => ([...prev, err.message]))
-            })
+    handleOTPCheck: async (OTPcode, setUser, setToken, authStep, setAuthStep, otpPassword, loginPassword, signupPassord, setOtpError) => {
+
+        if (signupPassord === otpPassword && signupPassord !== '') {
+            window.confirmationResult.confirm(OTPcode)
+                .then(async (res) => {
+                    const token = await Object.entries(res.user)[5][1].b;
+                    setUser(res.user);
+                    //set token to localStorage 
+                    await localStorage.setItem('token', token)
+                    //grab token from local storage and set to state. 
+                    setToken(window.localStorage.token);
+                    setAuthStep(authStep + 1);
+                })
+                .catch(err => setOtpError(err.message));
+        } else {
+            if (loginPassword === otpPassword && loginPassword !== '') {
+                window.confirmationResult.confirm(OTPcode)
+                    .then(async (res) => {
+                        const token = await Object.entries(res.user)[5][1].b;
+                        setUser(res.user);
+                        //set token to localStorage 
+                        await localStorage.setItem('token', token)
+                        //grab token from local storage and set to state. 
+                        setToken(window.localStorage.token);
+                        setAuthStep(authStep + 1);
+                    })
+                    .catch(err => setOtpError(err.message));
+
+            } else {
+                setOtpError('Password Incorect')
+            }
+
+        }
     },
+
+
+    saveUser: async (data, appVerifier, authStep, setAuthStep, setSignupError) => {
+        const snapshot = await usersRef.get();
+        const Allusers = snapshot.docs.map(doc => doc.data().mobile);
+        if (!Allusers.includes(data.mobile)) {
+            firebase.auth().signInWithPhoneNumber(data.mobile, appVerifier)
+                .then(async (confirmationResult) => {
+                    await usersRef.add({
+                        email: data.email,
+                        name: data.name,
+                        gender: data.gender,
+                        mobile: data.mobile.trim(),
+                        password: data.password
+                    });
+                    setAuthStep(authStep + 1);
+                    // SMS sent. Prompt user to type the code from the message, then sign the
+                    // user in with confirmationResult.confirm(code).
+                    window.confirmationResult = confirmationResult;
+                }).catch(function (error) {
+                    setSignupError(error.message)
+                    // Error; SMS not sent
+                    // ...
+                });
+        } else {
+            setSignupError('Phone Number Already Exist')
+        }
+    },
+
+
 
     signout: (setErrors, setToken) => {
         // signOut is a no argument function

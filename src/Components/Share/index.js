@@ -1,6 +1,6 @@
 import React from 'react'
 import * as Style from './style'
-import { Container } from '../Common/Body'
+import { Container } from '../Common/Layout'
 import logo from '../../Illustration/Poweredbydevshubha.svg'
 import aboutUslogo2 from '../../Illustration/Enjoeelogo.svg'
 import { FooterButton } from '../UI/FooterButton'
@@ -8,7 +8,8 @@ import share from '../../Illustration/handsicon.svg'
 import Union from '../../Illustration/Union.svg'
 import Contact from '../../Illustration/Icon/Regular/Contact.svg'
 import AuthButton from '../UI/AuthButton'
-const OTP = () => {
+import { Link } from 'react-router-dom'
+const Share = () => {
     return (
         <Style.AuthWrapper as={Container}>
             <Style.LeftContainer>
@@ -28,7 +29,7 @@ const OTP = () => {
 
                     <Style.ButtonContainer>
                         <FooterButton>Submit</FooterButton>
-                        <FooterButton id="cancel">Cancel</FooterButton>
+                        <Link id="cancel" to="/contact">Cancel</Link>
                     </Style.ButtonContainer>
                 </div>
             </Style.Formcontainer>
@@ -37,4 +38,4 @@ const OTP = () => {
     )
 }
 
-export default OTP;
+export default Share;
