@@ -11,6 +11,10 @@ margin-bottom:20px;
 overflow:auto;
 overflow-style: none;  
 scrollbar-width: none;
+-ms-overflow-style:none;
+::-webkit-scrollbar {
+    display: none;
+}
 background-color:#fff;
 h1{
     margin:10px 28px;

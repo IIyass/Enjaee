@@ -6,7 +6,11 @@ height:100%;
 overflow:auto;
 overflow-style: none;  
 scrollbar-width: none;
-`
+-ms-overflow-style:none;
+::-webkit-scrollbar {
+    display: none;
+}
+`;
 
 export const SearchBar = styled.div`
 width:100%;
