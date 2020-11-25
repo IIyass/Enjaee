@@ -40,10 +40,10 @@ const OTP = () => {
                     <span>Enter otp as you received on your mobile number.</span>
                 </div>
                 <form onSubmit={handleSubmit}>
-                    <AuthInput icon="mobile" placeholder="Mobile Number" onChange={handleChange} name="mobile" value={otpCode.mobile} />
+                    <AuthInput icon="mobile" placeholder="Code" onChange={handleChange} name="mobile" value={otpCode.mobile} />
                     <AuthInput icon="lock" placeholder="Password" onChange={handleChange} name="password" value={otpCode.password} />
                     <FooterButton>Submit</FooterButton>
-                    {otpError ? <p>{otpError}</p> : null}
+                    {otpError ? <p style={{ textAlign: 'center', color: 'red' }}>{otpError}</p> : null}
                     <Link to="/signup">Resend!</Link>
                 </form>
             </Style.Formcontainer>

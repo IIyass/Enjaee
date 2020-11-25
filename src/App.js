@@ -9,6 +9,8 @@ import Profil from './Components/Profil'
 import Signup from './Components/Signup'
 import Login from './Components/Login'
 import PublicRoute from './hooks/PublicRoute'
+import OTP from '../src/Components/OTP'
+import Share from '../src/Components/Share'
 import PrivateRoute from './hooks/PrivateRoute'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 

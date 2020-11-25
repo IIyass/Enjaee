@@ -4,12 +4,11 @@ export const AuthWrapper = styled.div`
 display:flex;
 flex-direction:row;
 justify-content:space-between;
-height:100vh;
+height:1024px;
 `;
 
 export const LeftContainer = styled.div`
 width:50%;
-height:100vh;
 background-color:#F8F8F8;
 display:flex;
 margin:0 auto;
@@ -47,7 +46,7 @@ form{
     width:70%;
     display:flex;
     flex-direction:column;
-    height:40%;
+    height:50%;
     justify-content:space-evenly;
     margin:0 auto;
     button{

@@ -5,31 +5,35 @@ export const firebaseAuth = React.createContext()
 
 const AuthProvider = (props) => {
 
-    const [loginInput, setloginInput] = useState({ mobile: '', password: '' })
-    const [signUpInput, setsignUpInput] = useState({ email: '', password: '', mobile: '', name: '', gender: '' })
+    const [loginInput, setloginInput] = useState({ password: '' })
+    const [signUpInput, setsignUpInput] = useState({ email: '', password: '', name: '', gender: '' })
     const [user, setUser] = useState('');
     const [authStep, setAuthStep] = useState(1);
     const [otpCode, setOtpCode] = useState({ mobile: '', password: '' });
     const [signupError, setSignupError] = useState('')
     const [loginError, setLoginError] = useState('')
     const [token, setToken] = useState(null);
-    const [otpError, setOtpError] = useState('')
+    const [otpError, setOtpError] = useState('');
+    const [valuePhone, setValuePhone] = useState('');
 
 
     const handleSignup = (SignupData, reCapa) => {
-        authMethods.saveUser(SignupData, reCapa, authStep, setAuthStep, setSignupError)
+        authMethods.saveUser(SignupData, reCapa, authStep, setAuthStep, setSignupError, valuePhone)
     }
 
-    const handleLogin = (phoneNumber, reCapa) => {
-        authMethods.login(phoneNumber, loginInput.password, reCapa, authStep, setAuthStep, setLoginError)
+    const handleLogin = (reCapa) => {
+        authMethods.login(valuePhone, loginInput.password, reCapa, authStep, setAuthStep, setLoginError)
     }
     const handleOTPcode = () => {
         authMethods.handleOTPCheck(otpCode.mobile, setUser, setToken, authStep, setAuthStep, otpCode.password, loginInput.password, signUpInput.password, setOtpError);
     }
 
+    console.log(valuePhone)
     return (
         <firebaseAuth.Provider
             value={{
+                setValuePhone,
+                valuePhone,
                 otpError, setOtpError,
                 loginError,
                 signupError,

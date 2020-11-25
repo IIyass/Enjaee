@@ -4,7 +4,7 @@ export const AuthWrapper = styled.div`
 display:flex;
 flex-direction:row;
 justify-content:space-between;
-height:100vh;
+height:1024px;
 `;
 
 export const LeftContainer = styled.div`
@@ -35,7 +35,7 @@ form{
     width:70%;
     display:flex;
     flex-direction:column;
-    height:40%;
+    height:50%;
     justify-content:space-evenly;
     margin:0 auto;
     button{
@@ -55,6 +55,29 @@ form{
         display:flex;
         justify-content:space-between;
         flex-direction:row;
+    }
+    
+    #recaptcha-container{
+        margin:0 auto;
+    }
+
+    #phone{
+        width: 100%;
+        font-size: 15px;
+        width: -moz-available;
+        width: -webkit-fill-available;
+        color: #fff;
+        background-color:transparent;
+        padding-bottom:10px;
+        padding-left:5px;
+        border:none;
+        border-bottom:2px solid #fff;
+         ::placeholder{
+           color:#fff;
+           font-family:Roboto;
+           font-size:16px;
+           font-weight:400;
+         }
     }
 }
 `;

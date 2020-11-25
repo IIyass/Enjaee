@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from 'react'
 import firebase from 'firebase'
+import 'react-phone-number-input/style.css'
 import * as Style from './style'
+import PhoneInput from 'react-phone-number-input'
 import { Container } from '../Common/Layout'
 import { firebaseAuth } from '../../Provider/authProvider'
 import logo from '../../Illustration/Poweredbydevshubha.svg'
@@ -14,13 +16,15 @@ import AuthButton from '../UI/AuthButton'
 import OTP from '../OTP'
 import Share from '../Share'
 const Signup = () => {
-    const { handleSignup, authStep, setSignupError, signUpInput, setsignUpInput, signupError } = useContext(firebaseAuth);
+    const { handleSignup, authStep, setSignupError, signUpInput, setsignUpInput, signupError, setValuePhone, valuePhone } = useContext(firebaseAuth);
     const appVerifier = window.recaptchaVerifier;
     const handleSubmit = async (e) => {
         e.preventDefault();
         await handleSignup(signUpInput, appVerifier);
 
     }
+
+
     const handleChange = e => {
         const { name, value } = e.target;
         setSignupError('')
@@ -53,12 +57,17 @@ const Signup = () => {
                             <AuthInput required type="text" onChange={handleChange} name="email" value={signUpInput.email} icon="message" placeholder="Email address" />
                             <AuthInput required type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" onChange={handleChange} name="password" value={signUpInput.password} icon="lock" placeholder="Password" />
                             <AuthInput required type="text" onChange={handleChange} name="gender" value={signUpInput.gender} icon="gender" placeholder="Gender" />
-                            <AuthInput required type="text" onChange={handleChange} name="mobile" value={signUpInput.mobile} icon="mobile" placeholder="Mobile Number" />
+                            <PhoneInput
+                                id="phone"
+                                name="mobile"
+                                placeholder="Mobile Number"
+                                value={valuePhone}
+                                onChange={setValuePhone} />
                             <div id="recaptcha-container" />
                             <FooterButton onSubmi={handleSubmit}>Register</FooterButton>
                             <Link to="/login">Login here!</Link>
                         </form>
-                        {signupError ? <p>{signupError}</p> : null}
+                        {signupError ? <p style={{ textAlign: 'center', color: 'red' }}>{signupError}</p> : null}
                     </Style.Formcontainer>
 
                 </Style.SignupWrapper>

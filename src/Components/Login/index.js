@@ -1,5 +1,7 @@
 import React, { useContext, useEffect } from 'react'
+import 'react-phone-number-input/style.css'
 import * as Style from './style'
+import PhoneInput from 'react-phone-number-input'
 import { Container } from '../Common/Layout'
 import logo from '../../Illustration/Poweredbydevshubha.svg'
 import aboutUslogo2 from '../../Illustration/Enjoeelogo.svg'
@@ -15,11 +17,11 @@ import OTP from '../OTP'
 import Share from '../Share'
 const Login = () => {
 
-    const { handleLogin, loginError, loginInput, setloginInput, authStep, setLoginError } = useContext(firebaseAuth);
+    const { handleLogin, loginError, loginInput, setloginInput, authStep, setLoginError, setValuePhone, valuePhone } = useContext(firebaseAuth);
     const appVerifier = window.recaptchaVerifier;
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await handleLogin(loginInput.mobile, appVerifier);
+        await handleLogin(appVerifier);
     }
     const handleChange = e => {
         const { name, value } = e.target
@@ -51,7 +53,13 @@ const Login = () => {
                     <Style.Formcontainer>
                         <h1>LOGIN</h1>
                         <form onSubmit={handleSubmit}>
-                            <AuthInput icon="mobile" type="text" required placeholder="Mobile Number" onChange={handleChange} name="mobile" value={loginInput.mobile} />
+                            <PhoneInput
+                                id="phone"
+                                required
+                                name="mobile"
+                                placeholder="Mobile Number"
+                                value={valuePhone}
+                                onChange={setValuePhone} />
                             <AuthInput icon="lock" type="password" required placeholder="Password" onChange={handleChange} name="password" value={loginInput.password} />
                             <div id="recaptcha-container" />
                             <FooterButton>Login</FooterButton>
@@ -59,10 +67,10 @@ const Login = () => {
                                 <Link to="/signup">Register here!</Link>
                                 <Link id="forgot" to="/forget">Forgot password</Link>
                             </div>
-
+                            {loginError ? <p style={{ textAlign: 'center', color: 'red' }}>{loginError}</p> : null}
                         </form>
                     </Style.Formcontainer>
-                    {loginError ? <p>{loginError}</p> : null}
+
                 </Style.AuthWrapper>;
 
             case 2:

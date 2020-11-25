@@ -67,17 +67,17 @@ export const authMethods = {
     },
 
 
-    saveUser: async (data, appVerifier, authStep, setAuthStep, setSignupError) => {
+    saveUser: async (data, appVerifier, authStep, setAuthStep, setSignupError, valuePhone) => {
         const snapshot = await usersRef.get();
         const Allusers = snapshot.docs.map(doc => doc.data().mobile);
-        if (!Allusers.includes(data.mobile)) {
-            firebase.auth().signInWithPhoneNumber(data.mobile, appVerifier)
+        if (!Allusers.includes(valuePhone)) {
+            firebase.auth().signInWithPhoneNumber(valuePhone, appVerifier)
                 .then(async (confirmationResult) => {
                     await usersRef.add({
                         email: data.email,
                         name: data.name,
                         gender: data.gender,
-                        mobile: data.mobile.trim(),
+                        mobile: valuePhone,
                         password: data.password
                     });
                     setAuthStep(authStep + 1);
