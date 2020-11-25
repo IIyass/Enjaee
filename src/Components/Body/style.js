@@ -17,14 +17,10 @@ justify-content:space-between;
 `
 
 export const CardLayout = styled.div`
-justify-content:space-between;
-display: flex;
-width:100%;
-flex-wrap:wrap;
-flex-direction:row;
->div{
-width:30%;
-}
+display: grid;
+grid-template-columns: 30% 30% 30%;
+grid-template-rows: auto auto auto;
+column-gap:3%;
 `
 
 
