@@ -27,7 +27,7 @@ const OTP = () => {
     }
 
     return (
-        <Style.AuthWrapper as={Container}>
+        <Style.AuthWrapper>
             <Style.LeftContainer>
                 <img src={aboutUslogo2} />
                 <AuthButton color="#53A8CB" title="Personal" borderColor="#53A8CB"> <img src={Contact} /> </AuthButton>

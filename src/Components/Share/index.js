@@ -11,7 +11,7 @@ import AuthButton from '../UI/AuthButton'
 import { Link } from 'react-router-dom'
 const Share = () => {
     return (
-        <Style.AuthWrapper as={Container}>
+        <Style.AuthWrapper >
             <Style.LeftContainer>
                 <img src={aboutUslogo2} />
                 <AuthButton color="#53A8CB" title="Personal" borderColor="#53A8CB"> <img src={Contact} /> </AuthButton>

@@ -43,7 +43,7 @@ const Signup = () => {
     const renderAuth = () => {
         switch (authStep) {
             case 1:
-                return <Style.SignupWrapper as={Container}>
+                return <Style.SignupWrapper>
                     <Style.LeftContainer>
                         <img src={aboutUslogo2} />
                         <AuthButton color="#53A8CB" title="Personal" borderColor="#53A8CB"> <img src={Contact} /> </AuthButton>

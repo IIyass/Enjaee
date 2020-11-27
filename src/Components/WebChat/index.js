@@ -28,10 +28,10 @@ const Video = () => {
                     <img src={Jolie} />
                 </div>
                 <Input required type="text" name="name" icon="blackcontact" placeholder="Full name" />
-                <Input required type="text" name="name" icon="blackcontact" placeholder="Developers" />
-                <ChatButton onClick={() => setChatStep(1)} icon="chat" border="#53A8CB" color="#53A8CB" text="#fff">Chat</ChatButton>
-                <ChatButton onClick={() => setChatStep(2)} icon="audio" border="#000" color="#fff" text="#000" >Audio Call</ChatButton>
-                <ChatButton onClick={() => setChatStep(3)} icon="video" border="#000" color="#fff" text="#000"  >Video Call</ChatButton>
+                <Input required type="text" name="name" icon="success" placeholder="Developers" />
+                <ChatButton onClick={() => setChatStep(1)} icon={chatStep === 1 ? "chatWhite" : "chat"} border={chatStep === 1 ? "#53A8CB" : "#000"} color={chatStep === 1 ? "#53A8CB" : "fff"} text={chatStep === 1 ? "#fff" : "000"}>Chat</ChatButton>
+                <ChatButton onClick={() => setChatStep(2)} icon={chatStep === 2 ? "audioWhite" : "audio"} border={chatStep === 2 ? "#53A8CB" : "#000"} color={chatStep === 2 ? "#53A8CB" : "fff"} text={chatStep === 2 ? "#fff" : "000"} >Audio Call</ChatButton>
+                <ChatButton onClick={() => setChatStep(3)} icon={chatStep === 3 ? "videoWhite" : "video"} border={chatStep === 3 ? "#53A8CB" : "#000"} color={chatStep === 3 ? "#53A8CB" : "fff"} text={chatStep === 3 ? "#fff" : "000"}  >Video Call</ChatButton>
                 <ChatButton icon="clear" border="#000" color="#fff" text="#000" >Clear Chat</ChatButton>
                 <ChatButton icon="block" border="#000" color="#fff" text="#000" >Block</ChatButton>
             </Style.LeftContainer>

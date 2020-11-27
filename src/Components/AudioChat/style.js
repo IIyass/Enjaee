@@ -36,11 +36,11 @@ background:linear-gradient(180deg, #F08835 0%, #FF7271 100%);
         background-color:#fff;
         border-radius:5px;
     }
-    button:nth-of-type(1) {
+    button:nth-of-type(2) {
        border:1px solid red;
        color:red;
      }
-     button:nth-of-type(2) {
+     button:nth-of-type(1) {
         border:1px solid green;
         color:green;
       }

@@ -3,9 +3,10 @@ import * as Style from './style'
 import { ProfilButton } from '../UI/ProfilButton'
 import Jolie from '../../Illustration/Joli.png'
 import receiveaudiocallicon from '../../Illustration/receiveaudiocallicon.svg'
-import BoundingCircle from '../../Illustration/BoundingCircle.svg'
+import volumeicon from '../../Illustration/volumeicon.svg'
+import muteicon from '../../Illustration/muteicon.svg'
 import silenticon from '../../Illustration/silenticon.svg'
-import receiveaudiocallicons from '../../Illustration/receiveaudiocallicon.svg'
+import keypadicon from '../../Illustration/keypadicon.svg'
 const AudioChat = () => {
     const [audioChatStep, setAudioChatStep] = useState(1);
 
@@ -17,7 +18,7 @@ const AudioChat = () => {
         setAudioChatStep(audioChatStep - 1)
     }
 
-    const handleVideoChat = () => {
+    const handleAudioChat = () => {
         switch (audioChatStep) {
             case 1:
                 return <>
@@ -34,11 +35,11 @@ const AudioChat = () => {
                         <span>00:34</span>
                     </div>
                     <div id="chatDetail">
-                        <img src={BoundingCircle} />
                         <img src={silenticon} />
-                        <ProfilButton>End</ProfilButton>
-                        <img src={receiveaudiocallicons} />
-                        <img src={receiveaudiocallicon} />
+                        <img src={muteicon} />
+                        <ProfilButton>End Call</ProfilButton>
+                        <img src={keypadicon} />
+                        <img src={volumeicon} />
                     </div>
                 </>
         }
@@ -47,7 +48,7 @@ const AudioChat = () => {
     return (
         <Style.Wrapper>
             <img id="profil" src={Jolie} />
-            {handleVideoChat()}
+            {handleAudioChat()}
         </Style.Wrapper>
     )
 }

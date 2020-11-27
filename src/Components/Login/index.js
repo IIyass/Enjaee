@@ -43,14 +43,14 @@ const Login = () => {
     const renderAuth = () => {
         switch (authStep) {
             case 1:
-                return <Style.AuthWrapper as={Container}>
-                    <Style.LeftContainer>
+                return <Style.AuthWrapper >
+                    <Style.LeftContainer >
                         <img src={aboutUslogo2} />
                         <AuthButton color="#53A8CB" title="Personal" borderColor="#53A8CB"> <img src={Contact} /> </AuthButton>
                         <AuthButton color="#fff" title="Corporate" borderColor="#47525D"> <img src={Union} /></AuthButton>
                         <img src={logo} />
-                    </Style.LeftContainer>
-                    <Style.Formcontainer>
+                    </Style.LeftContainer >
+                    <Style.Formcontainer >
                         <h1>LOGIN</h1>
                         <form onSubmit={handleSubmit}>
                             <PhoneInput
@@ -71,7 +71,7 @@ const Login = () => {
                         </form>
                     </Style.Formcontainer>
 
-                </Style.AuthWrapper>;
+                </Style.AuthWrapper >;
 
             case 2:
                 return <OTP />;

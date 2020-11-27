@@ -6,6 +6,7 @@ import lock from '../../Illustration/Icon/Web/Action/Lock.svg'
 import mobile from '../../Illustration/Icon/Web/Action/Mobile.svg'
 import blackcontact from '../../Illustration/Icon/Regular/Mobile/blackContact.svg'
 import gender from '../../Illustration/Icon/Web/Action/Gender.svg'
+import Success from '../../Illustration/Success2.svg'
 const AuthInput = ({ placeholder, name, icon, type, ...props }) => {
     const IconHandler = () => {
         switch (icon) {
@@ -21,6 +22,8 @@ const AuthInput = ({ placeholder, name, icon, type, ...props }) => {
                 return <img src={contact} />;
             case 'blackcontact':
                 return <img src={blackcontact} />;
+            case 'success':
+                return <img src={Success} />
         }
     }
     return (

@@ -5,6 +5,10 @@ import chat from '../../Illustration/Icon/Web/Regular/Chat.svg'
 import audio from '../../Illustration/Icon/Web/Regular/AudioCall.svg'
 import block from '../../Illustration/Icon/Web/Action/Block.svg'
 import clear from '../../Illustration/Icon/Web/Action/Clear.svg'
+import audioWhite from '../../Illustration/Icon/Web/Regular/AudioWhite.svg'
+import videoWhite from '../../Illustration/Icon/Web/Regular/VideoWhite.svg'
+import chatWhite from '../../Illustration/Icon/Web/Regular/ChatWhite.svg'
+
 
 const ChatButton = ({ color, icon, border, children, ...props }) => {
     const IconHandler = () => {
@@ -19,6 +23,12 @@ const ChatButton = ({ color, icon, border, children, ...props }) => {
                 return <img className="Icon" src={clear} />;
             case 'video':
                 return <img className="Icon" src={video} />;
+            case 'audioWhite':
+                return <img className="Icon" src={audioWhite} />;
+            case 'videoWhite':
+                return <img className="Icon" src={videoWhite} />;
+            case 'chatWhite':
+                return <img className="Icon" src={chatWhite} />;
 
         }
     }
