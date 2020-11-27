@@ -11,6 +11,7 @@ import Login from './Components/Login'
 import PublicRoute from './hooks/PublicRoute'
 import OTP from '../src/Components/OTP'
 import Share from '../src/Components/Share'
+import Video from '../src/Components/WebChat'
 import PrivateRoute from './hooks/PrivateRoute'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
@@ -21,6 +22,7 @@ const App = () => {
       <Switch>
         <Route path="/" exact render={props => token ? <Redirect to='/contact' /> : <Login {...props} />} />
         <PrivateRoute path="/history" exact component={History} />
+        <PrivateRoute path="/video" exact component={Video} />
         <PrivateRoute path="/chat" exact component={Chat} />
         <PrivateRoute path="/contact" exact component={Contact} />
         <PrivateRoute path="/alert" exact component={Alert} />

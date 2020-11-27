@@ -4,6 +4,7 @@ import contact from '../../Illustration/contact/contact/regular.svg'
 import message from '../../Illustration/Emailoutline.svg'
 import lock from '../../Illustration/Icon/Web/Action/Lock.svg'
 import mobile from '../../Illustration/Icon/Web/Action/Mobile.svg'
+import blackcontact from '../../Illustration/Icon/Regular/Mobile/blackContact.svg'
 import gender from '../../Illustration/Icon/Web/Action/Gender.svg'
 const AuthInput = ({ placeholder, name, icon, type, ...props }) => {
     const IconHandler = () => {
@@ -18,6 +19,8 @@ const AuthInput = ({ placeholder, name, icon, type, ...props }) => {
                 return <img src={gender} />;
             case 'contact':
                 return <img src={contact} />;
+            case 'blackcontact':
+                return <img src={blackcontact} />;
         }
     }
     return (

@@ -144,6 +144,26 @@ img{
 }
 `;
 
+
+export const ChatButton = styled.button`
+display:flex;
+flex-direction:row;
+align-items:center;
+justify-content:start;
+width: 260px;
+height: 50px;
+border-radius:5px;
+background-color:${({ color }) => color};
+border:${({ borderColor }) => `1px solid ${borderColor}`};
+color:${({ textColor }) => textColor};
+.Icon{
+  width:30px;
+  height:30px;
+  margin:0;
+  margin-right:15px;
+}
+`;
+
 export const AuthButtonContainer = styled.div`
 text-align:center;
 span{
@@ -152,5 +172,4 @@ span{
   font-weight:400;
   font-family:Roboto;
 }
-
-`
+`;
