@@ -15,6 +15,8 @@ border-radius: 4px;
 margin:15px 0;
 font-family:Roboto;
 }
+opacity:${({ index }) => index ? '1' : '0.5'};
+
 `;
 
 export const CardTemModel = styled.div`
@@ -126,6 +128,7 @@ background: #FFFFFF;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 border-radius: 4px;
 position:absolute;
+text-align:center;
 top:40%;
 left:50%;
 transform: translate(-50%, -50%);

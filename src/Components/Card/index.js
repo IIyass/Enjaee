@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as Style from './style'
 import ChatIcon from '../../Illustration/Chat.svg'
 import AudioCall from '../../Illustration/AudioCall.svg'
@@ -11,6 +11,7 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType }) =
 
     const [openModel, setOpenModel] = useState();
     const [toggle, setToggle] = useState(false);
+    const [color, setColor] = useState(true)
 
 
     const ModelShow = () => {
@@ -22,6 +23,11 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType }) =
             </Style.ButtonContainer>
         </Style.ModalContainer>
     }
+
+    useEffect(() => {
+        if (toggle) setColor(index === openModel)
+
+    }, [color])
 
     const renderSingleCard = () => {
         switch (CardType) {
@@ -62,7 +68,7 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType }) =
 
             case 'details':
                 return <Style.CardContainer>
-                    < div onClick={() => locked && setOpenModel(index)}>
+                    <div onClick={() => !locked && setOpenModel(index)}>
                         <CardHero name={name} picture={picture} index={index} id={id} detail={detail} />
                     </div>
                     <Style.Description>
@@ -83,7 +89,7 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType }) =
 
 
     return (
-        <Style.Wrapper index={openModel}>
+        <Style.Wrapper index={color}>
             {renderSingleCard()}
             {index === openModel && ModelShow()}
         </Style.Wrapper>
