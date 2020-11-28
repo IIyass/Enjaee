@@ -60,16 +60,23 @@ font-family:Roboto;
 justify-content:space-between;
 `;
 export const IconContainer = styled.div`
-width:50%;
+width:auto;
 display:flex;
 flex-direction:row;
 justify-content:end;
 align-items:center;
 img{
   cursor:pointer;
+  margin: 0 5px;
 }
-div{
-  margin:0px 5px;
+>div{
+  display:flex;
+  flex-direction:column;
+  margin:0 5px;
+  height:100%;
+  justify-content:space-evenly;
+
+  
 }
 ul{
     padding: 0;
@@ -93,7 +100,7 @@ ul{
 
 `
 export const PersonalInfo = styled.div`
-width:40%;
+width:auto;
 h1 {
     margin:5px 0px;
     font-style: normal;
