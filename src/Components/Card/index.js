@@ -7,27 +7,28 @@ import Stroke from '../../Illustration/Stroke.svg'
 import CardHero from './CardHero'
 import ChatCard from './HistoryCard'
 
-const Card = ({ picture, name, detail, index, id, locked, history, CardType }) => {
+const Card = ({ picture, name, detail, index, id, locked, history, CardType, setOpenModel, openModel }) => {
 
-    const [openModel, setOpenModel] = useState();
     const [toggle, setToggle] = useState(false);
-    const [color, setColor] = useState(true)
 
+    const CancelSendRequest = () => {
+        setToggle(false)
+        setOpenModel(undefined)
+    }
 
     const ModelShow = () => {
         return <Style.ModalContainer>
             <p>Would you like send chat request to Jolie Price.</p>
             <Style.ButtonContainer>
-                <button className="red" onClick={() => setOpenModel(false)}>No</button>
+                <button className="red" onClick={() => CancelSendRequest()}>No</button>
                 <button className="green">Yes</button>
             </Style.ButtonContainer>
         </Style.ModalContainer>
     }
 
-    useEffect(() => {
-        if (toggle) setColor(index === openModel)
 
-    }, [color])
+    // setColor(index === openModel)
+
 
     const renderSingleCard = () => {
         switch (CardType) {
@@ -89,7 +90,7 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType }) =
 
 
     return (
-        <Style.Wrapper index={color}>
+        <Style.Wrapper>
             {renderSingleCard()}
             {index === openModel && ModelShow()}
         </Style.Wrapper>

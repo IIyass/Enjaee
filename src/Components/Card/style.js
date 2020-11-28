@@ -15,8 +15,6 @@ border-radius: 4px;
 margin:15px 0;
 font-family:Roboto;
 }
-opacity:${({ index }) => index ? '1' : '0.5'};
-
 `;
 
 export const CardTemModel = styled.div`

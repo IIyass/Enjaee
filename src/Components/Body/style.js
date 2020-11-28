@@ -25,6 +25,11 @@ display: grid;
 grid-template-columns: 30% 30% 30%;
 grid-template-rows: auto auto auto;
 column-gap:3%;
-`
+
+>div:not(:nth-child(${({ index }) => index + 1})){
+    opacity:0.5;
+}
+
+`;
 
 
