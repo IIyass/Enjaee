@@ -27,7 +27,7 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType }) =
         switch (CardType) {
             case 'history':
                 return <Style.CardContainer >
-                    <CardHero TickedCard name={name} picture={picture} index={index} id={id} detail={detail} />
+                    <CardHero name={name} picture={picture} index={index} id={id} detail={detail} />
                     <Style.Description>
                         <Style.PersonalInfo>
                             <h1>{name}</h1>
