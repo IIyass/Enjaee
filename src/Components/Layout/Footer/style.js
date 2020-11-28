@@ -5,15 +5,12 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
 align-items:center;
 display:flex;
-height:80px;
-height:50px;
+height:100px;
 max-height:100px;
 background-color:#fff;
-background-color:#fff;
-flex-direction:column;
+flex-direction:row;
 box-shadow: 0px -4px 8px rgba(151, 151, 151, 0.2);
-padding:20px 0px;
-padding-top:5px;
+
 img{
     width:150px;
     margin-left:-10px;
@@ -24,28 +21,23 @@ img{
 export const Details = styled.div`
 display:flex;
 flex-direction:column;
-width:100%;
-height:90%;
-justify-content:space-around;
+align-items:center;
+height:100%;
+justify-content:space-evenly;
+width:auto;
+margin:0 auto;
 ul{
+margin:0;
+padding:0;
 display:flex;
 font-family:Roboto;
 font-weight:400;
 list-style: none;
 flex-direction:row;
-margin:0;
-margin-top:25px;
-padding:0;
-width:100%;
+
 li{
-    margin:0 5px;
-    :first-child{
-        flex:0.5;
-        img{
-            margin-left:-20px;
-        }
-    }
+    margin:0 10px;
 }
 }
 
-`
+`;

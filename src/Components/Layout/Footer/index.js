@@ -6,17 +6,17 @@ import { Container } from '../../Common/Body'
 const Footer = () => {
     return (
         <Style.Wrapper >
+            <img src={FooterLogo} />
             <Style.Details>
                 <ul>
-                    <li>  <img src={FooterLogo} /></li>
                     <li>About Us</li>
                     <li>Support</li>
                     <li>Api</li>
                     <li>Privacy</li>
                     <li>Terms</li>
                 </ul>
+                <img src={EnjoeeMsg} />
             </Style.Details>
-            <img src={EnjoeeMsg} />
         </Style.Wrapper>
 
 
