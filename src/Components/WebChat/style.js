@@ -71,7 +71,7 @@ button{
 }
 
 button:nth-of-type(3) {
-   margin-bottom:20%;
+   margin-bottom:8%;
 
 }
 
