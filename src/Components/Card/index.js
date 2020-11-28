@@ -34,7 +34,7 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType }) =
                             <span>{detail}</span>
                         </Style.PersonalInfo>
                         <Style.IconContainer>
-                            <div><img src={ChatIcon} onClick={() => locked && setOpenModel(index)} /><span>{history?.message}</span></div>
+                            <div><img src={ChatIcon} /><span>{history?.message}</span></div>
                             <div><img src={AudioCall} /><span>{history?.call}</span></div>
                             <div><img src={Stroke} /><span>{history?.video}</span></div>
                             <div><img src={More} /> </div>
@@ -50,7 +50,7 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType }) =
                             <span>{detail}</span>
                         </Style.PersonalInfo>
                         <Style.IconContainer>
-                            <div> <img src={ChatIcon} onClick={() => locked && setOpenModel(index)} /></div>
+                            <div> <img src={ChatIcon} /></div>
                             <div>  <img src={AudioCall} /></div>
                             <div> <img src={Stroke} /></div>
                             <div><img src={More} onClick={(e) => setToggle(!toggle)} />{toggle && <ul><li>Admin</li><li>Delete</li><li>Exit Group</li></ul>} </div>
@@ -59,16 +59,19 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType }) =
                 </Style.CardContainer>
             case 'chat':
                 return <ChatCard name={name} history={history} locked={locked} picture={picture} index={index} id={id} detail={detail} setOpenModel={setOpenModel} />
-            default:
+
+            case 'details':
                 return <Style.CardContainer>
-                    <CardHero name={name} picture={picture} index={index} id={id} detail={detail} />
+                    < div onClick={() => locked && setOpenModel(index)}>
+                        <CardHero name={name} picture={picture} index={index} id={id} detail={detail} />
+                    </div>
                     <Style.Description>
                         <Style.PersonalInfo>
                             <h1>{name}</h1>
                             <span>{detail}</span>
                         </Style.PersonalInfo>
                         <Style.IconContainer>
-                            <img src={ChatIcon} onClick={() => locked && setOpenModel(index)} />
+                            <img src={ChatIcon} />
                             <img src={AudioCall} />
                             <img src={Stroke} />
                             <img src={More} />

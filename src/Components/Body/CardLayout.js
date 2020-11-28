@@ -20,6 +20,8 @@ const CardLayout = ({ Data, CardType }) => {
                 return profile && <Card CardType={CardType} index={index} Data={Data} locked={profile} name={name} picture={picture} detail={detail} history={history} id={id} />
             case "history":
                 return profile && <Card CardType={CardType} index={index} Data={Data} locked={profile} name={name} picture={picture} detail={detail} history={history} id={id} />
+            case 'details':
+                return <Card CardType={CardType} index={index} Data={Data} locked={profile} name={name} picture={picture} detail={detail} history={history} id={id} />
             default:
                 return <Card CardType={CardType} index={index} Data={Data} locked={profile} name={name} picture={picture} detail={detail} history={history} id={id} />
         }

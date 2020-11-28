@@ -10,6 +10,9 @@ const CardHero = ({ picture, TickedCard, id, index }) => {
         }
     };
 
+
+
+
     return (
         <Style.HeroComtainer selectImg={handleSelectedCard()}>
             <div id="img">
