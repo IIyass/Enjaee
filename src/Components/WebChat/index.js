@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as Style from './style'
 import Jolie from '../../Illustration/Joli.png'
 import Input from '../UI/AuthInput'
@@ -6,8 +6,14 @@ import ChatButton from '../UI/chatButton'
 import ChatScreen from '../ChatScreen';
 import AudioChat from '../AudioChat'
 import VideoChat from '../VideoChat';
-const Video = () => {
+const Video = (props) => {
+
+    const { location } = props
     const [chatStep, setChatStep] = useState(1);
+
+    useEffect(() => {
+        setChatStep(location.state)
+    }, [location.state])
 
     const handleChatStep = () => {
         switch (chatStep) {
