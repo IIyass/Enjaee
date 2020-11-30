@@ -69,6 +69,9 @@ justify-content:end;
 align-items:center;
 img{
   cursor:pointer;
+  margin:0 5%;
+  width:25px;
+  height:25px;
 }
 >div{
   display:flex;
