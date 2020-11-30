@@ -57,7 +57,7 @@ export const GroupBar = styled.div`
 display:flex;
 flex-direction:row;
 position:relative;
-margin-top:18px;
+margin-bottom:20px;
 
 input{
     background-color:#fff;

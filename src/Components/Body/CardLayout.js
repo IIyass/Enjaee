@@ -28,7 +28,7 @@ const CardLayout = ({ Data, CardType }) => {
                 return <Card CardType={CardType} index={index} Data={Data} locked={profile} name={name} picture={picture} detail={detail} history={history} id={id} />
         }
     }
-    console.log(openModel)
+
     return (
         <Style.CardLayout index={openModel}>
             {Data.map(({ picture, name, detail, profile, history, id }, index) => {

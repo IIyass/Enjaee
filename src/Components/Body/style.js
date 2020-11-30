@@ -15,16 +15,17 @@ scrollbar-width: none;
 export const SearchBar = styled.div`
 width:100%;
 display:flex;
-margin-top:20px;
 font-family:Roboto;
+margin-bottom:20px;
 justify-content:space-between;
 `
 
 export const CardLayout = styled.div`
 display: grid;
-grid-template-columns: 30% 30% 30%;
+grid-template-columns:30% 30% 30%;
 grid-template-rows: auto auto auto;
-column-gap:3%;
+column-gap:4%;
+row-gap:3.3%;
 
 >div:not(:nth-child(${({ index }) => index + 1})){
     opacity:0.5;

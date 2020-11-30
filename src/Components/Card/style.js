@@ -3,16 +3,15 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
 width:100%;
+max-width:360px;
+min-width:280px;
+padding:3%;
 position:relative;
-height:245px;
+height:265px;
 background-color:#ffffff;
 display:flex;
-flex-direction:column;
-padding:10px;
-justify-content:space-between;
 box-shadow: 0px 0px 5px rgba(126, 126, 126, 0.5);
 border-radius: 4px;
-margin:15px 0;
 font-family:Roboto;
 }
 `;
@@ -27,9 +26,11 @@ export const HeroComtainer = styled.div`
 #img{
   position:relative;
   cursor:pointer;
+  height:195px;
  .profil{
    opacity:${({ selectImg }) => selectImg ? 0.3 : 1};
    width:100%;
+   height:100%;
  }
  .icon{
    position:absolute;
@@ -47,6 +48,7 @@ position:relative;
 flex-direction:row;
 font-family:Roboto;
 justify-content:space-between;
+margin:auto;
 
 `;
 
@@ -57,7 +59,7 @@ height:100%;
 display:flex;
 flex-direction:column;
 font-family:Roboto;
-justify-content:space-between;
+justify-content:start;
 `;
 export const IconContainer = styled.div`
 width:auto;
@@ -67,12 +69,11 @@ justify-content:end;
 align-items:center;
 img{
   cursor:pointer;
-  margin: 0 5px;
 }
 >div{
   display:flex;
   flex-direction:column;
-  margin:0 5px;
+  margin:0 5%;
   height:100%;
   justify-content:space-evenly;
 
@@ -101,6 +102,8 @@ ul{
 `
 export const PersonalInfo = styled.div`
 width:auto;
+max-width:50%;
+margin-right:2px;
 h1 {
     margin:5px 0px;
     font-style: normal;
@@ -109,6 +112,8 @@ h1 {
     font-size: 16px;
     line-height: 19px;
     letter-spacing: 1.29412px; 
+    line-break:anywhere;
+
 }
 span{
     font-style: normal;

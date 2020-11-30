@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
 display:flex;
 flex-direction:row;
 font-family:Roboto;
+margin-bottom:20px;
 justify-content:space-between;
 background-color:#fff;
 height:80px;
@@ -27,11 +28,11 @@ a{
     color:#47525D;
     font-family:Roboto;
     font-weight:400;
+    width:70px;
 }
 li{
     display:flex;
     flex-direction:column;
-    margin: 0px 10px;
     cursor:pointer;
     img{
         width:30px;
@@ -44,12 +45,14 @@ li{
 }
     :nth-child(6){
         background-color:#53A8CB;
-        margin:0;
-        padding:12px 20px;
-        height:70%;
+        height:100%;
+        a{
+            display:flex;
+            margin:auto;
         img{
-            margin-top:10px;
+            margin:auto;
         }
+    }
     }
     span{
         font-family: Roboto;

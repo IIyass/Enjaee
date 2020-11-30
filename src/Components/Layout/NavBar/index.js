@@ -24,7 +24,7 @@ const Header = () => {
                 <Link to="alert">  <li onClick={() => setIconSelected(0)}><img src={iconSelected === 0 ? ActiveAlert : Alert} /> <span>Alerts</span></li></Link>
                 <Link to="/contact">    <li onClick={() => setIconSelected(1)}><img src={iconSelected === 1 ? ActiveContact : Contact} /> <span>Contacts</span ></li></Link>
                 <Link to="/history">  <li onClick={() => setIconSelected(2)}><img src={iconSelected === 2 ? ActiveHistory : History} /> <span>History</span></li></Link>
-                <Link to="/chat">    <li onClick={() => setIconSelected(3)}><img src={iconSelected === 3 ? ActiveTemporary : Temporary} /><span>Temporary Chat</span></li ></Link>
+                <Link to="/chat">    <li onClick={() => setIconSelected(3)}><img src={iconSelected === 3 ? ActiveTemporary : Temporary} /><span>Tem. Chat</span></li ></Link>
                 <Link to="/groups"> <li onClick={() => setIconSelected(4)}><img src={iconSelected === 4 ? ActiveGroup : Group} /> <span>Group</span></li ></Link>
                 <li >  <Link to="/profil"> <img src={Profil} /></Link> </li>
             </Style.NavBar >

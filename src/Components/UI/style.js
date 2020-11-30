@@ -16,7 +16,6 @@ export const Container = styled.div`
 position:relative;
 display:flex;
 flex-direction:column;
-margin-top:15px;
 #label{
   color:#000000;
   margin:0;
@@ -75,8 +74,6 @@ export const SelectContainer = styled.div`
 position:relative;
 display:flex;
 flex-direction:column;
-margin-top:15px;
-margin-right: 10px;
 #label{
   color:#000000;
   margin:0;
