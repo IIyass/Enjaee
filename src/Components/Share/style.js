@@ -4,23 +4,22 @@ export const AuthWrapper = styled.div`
 display:flex;
 flex-direction:row;
 justify-content:space-between;
-height:1024px;
 `;
 
 export const LeftContainer = styled.div`
 width:50%;
 background-color:#F8F8F8;
 display:flex;
-margin:0 auto;
-height:100%;
-flex-direction:column;
-justify-content:space-around;
+height:100vh;
+img{
+    margin:auto;
+}
 
 `;
 
 export const Formcontainer = styled.div`
 width:50%;
-height:100%;
+height:100vh;
 background-color:#53A8CB;
 display:flex;
 >div{

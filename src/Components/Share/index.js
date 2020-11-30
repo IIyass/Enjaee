@@ -1,6 +1,5 @@
 import React from 'react'
 import * as Style from './style'
-import { Container } from '../Common/Layout'
 import logo from '../../Illustration/Poweredbydevshubha.svg'
 import aboutUslogo2 from '../../Illustration/Enjoeelogo.svg'
 import { FooterButton } from '../UI/FooterButton'

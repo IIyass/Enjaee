@@ -3,7 +3,7 @@ import 'react-phone-number-input/style.css'
 import * as Style from './style'
 import PhoneInput from 'react-phone-number-input'
 import { Container } from '../Common/Layout'
-import logo from '../../Illustration/Poweredbydevshubha.svg'
+import Logo from '../../Illustration/hichatylogo.svg'
 import aboutUslogo2 from '../../Illustration/Enjoeelogo.svg'
 import AuthInput from '../UI/AuthInput'
 import { FooterButton } from '../UI/FooterButton'
@@ -45,10 +45,7 @@ const Login = () => {
             case 1:
                 return <Style.AuthWrapper >
                     <Style.LeftContainer >
-                        <img src={aboutUslogo2} />
-                        <AuthButton color="#53A8CB" title="Personal" borderColor="#53A8CB"> <img src={Contact} /> </AuthButton>
-                        <AuthButton color="#fff" title="Corporate" borderColor="#47525D"> <img src={Union} /></AuthButton>
-                        <img src={logo} />
+                        <img src={Logo} />
                     </Style.LeftContainer >
                     <Style.Formcontainer >
                         <h1>LOGIN</h1>

@@ -6,13 +6,10 @@ import PhoneInput from 'react-phone-number-input'
 import { Container } from '../Common/Layout'
 import { firebaseAuth } from '../../Provider/authProvider'
 import logo from '../../Illustration/Poweredbydevshubha.svg'
-import aboutUslogo2 from '../../Illustration/Enjoeelogo.svg'
+import Logo from '../../Illustration/hichatylogo.svg'
 import AuthInput from '../UI/AuthInput'
 import { FooterButton } from '../UI/FooterButton'
 import { Link } from 'react-router-dom'
-import Union from '../../Illustration/Union.svg'
-import Contact from '../../Illustration/Icon/Regular/Contact.svg'
-import AuthButton from '../UI/AuthButton'
 import OTP from '../OTP'
 import Share from '../Share'
 const Signup = () => {
@@ -45,10 +42,7 @@ const Signup = () => {
             case 1:
                 return <Style.SignupWrapper>
                     <Style.LeftContainer>
-                        <img src={aboutUslogo2} />
-                        <AuthButton color="#53A8CB" title="Personal" borderColor="#53A8CB"> <img src={Contact} /> </AuthButton>
-                        <AuthButton color="#fff" title="Corporate" borderColor="#47525D"> <img src={Union} /></AuthButton>
-                        <img src={logo} />
+                        <img src={Logo} />
                     </Style.LeftContainer>
                     <Style.Formcontainer>
                         <h1>REGISTER</h1>
