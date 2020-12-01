@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import * as Style from './styles'
 import { Link, useLocation } from 'react-router-dom'
-import Logo from '../../../Illustration/Enjoee-logo.svg'
+import Logo from '../../../Illustration/hichatylogo.svg'
 import ActiveAlert from '../../../Illustration/Icon/Active/Alert.svg';
 import ActiveContact from '../../../Illustration/Icon/Active/Contact.svg'
 import ActiveGroup from '../../../Illustration/Icon/Active/Group.svg'

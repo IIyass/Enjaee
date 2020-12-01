@@ -69,4 +69,8 @@ li{
 `
 export const Logo = styled.div`
 margin-left:20px;
-`
+img{
+    width:60px;
+    height:60px;
+}
+`;
