@@ -11,12 +11,16 @@ import Login from './Components/Login'
 import Video from '../src/Components/WebChat'
 import PrivateRoute from './hooks/PrivateRoute'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import OTP from './Components/OTP'
+import Share from './Components/Share'
 
 const App = () => {
   const token = localStorage.getItem('token');
   return (
     <BrowserRouter>
       <Switch>
+        <Route path="/otp" exact component={OTP} />
+        <Route path="/share" exact component={Share} />
         <Route path="/" exact render={props => token ? <Redirect to='/contact' /> : <Login {...props} />} />
         <PrivateRoute path="/history" exact component={History} />
         <PrivateRoute path="/chat" exact component={Chat} />

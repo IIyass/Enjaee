@@ -21,6 +21,14 @@ export const Formcontainer = styled.div`
 width:50%;
 height:100vh;
 background-color:#53A8CB;
+display:flex;
+
+#container{
+    width:100%;
+     margin:auto;
+    height:70%;
+}
+
 h1{
     text-align:center;
     font-size:100px;

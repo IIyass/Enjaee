@@ -22,8 +22,10 @@ width:50%;
 height:100vh;
 background-color:#53A8CB;
 display:flex;
+
+
 >div{
-    margin:100px auto;
+    margin: auto;
     height:50%;
     width:80%;
     display:flex;
@@ -40,6 +42,7 @@ display:flex;
         width:100%;
     }
     #cancel{
+        margin-top:20px;
         background-color:transparent;
         color:#fff;
     }

@@ -3,9 +3,7 @@ import firebase from 'firebase'
 import 'react-phone-number-input/style.css'
 import * as Style from './style'
 import PhoneInput from 'react-phone-number-input'
-import { Container } from '../Common/Layout'
 import { firebaseAuth } from '../../Provider/authProvider'
-import logo from '../../Illustration/Poweredbydevshubha.svg'
 import Logo from '../../Illustration/hichatylogo.svg'
 import AuthInput from '../UI/AuthInput'
 import { FooterButton } from '../UI/FooterButton'
@@ -45,23 +43,25 @@ const Signup = () => {
                         <img src={Logo} />
                     </Style.LeftContainer>
                     <Style.Formcontainer>
-                        <h1>REGISTER</h1>
-                        <form onSubmit={handleSubmit}>
-                            <AuthInput required type="text" onChange={handleChange} name="name" value={signUpInput.name} icon="contact" placeholder="Full name" />
-                            <AuthInput required type="text" onChange={handleChange} name="email" value={signUpInput.email} icon="message" placeholder="Email address" />
-                            <AuthInput required type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" onChange={handleChange} name="password" value={signUpInput.password} icon="lock" placeholder="Password" />
-                            <AuthInput required type="text" onChange={handleChange} name="gender" value={signUpInput.gender} icon="gender" placeholder="Gender" />
-                            <PhoneInput
-                                id="phone"
-                                name="mobile"
-                                placeholder="Mobile Number"
-                                value={valuePhone}
-                                onChange={setValuePhone} />
-                            <div id="recaptcha-container" />
-                            <FooterButton onSubmi={handleSubmit}>Register</FooterButton>
-                            <Link to="/login">Login here!</Link>
-                        </form>
-                        {signupError ? <p style={{ textAlign: 'center', color: 'red' }}>{signupError}</p> : null}
+                        <div id="container">
+                            <h1>REGISTER</h1>
+                            <form onSubmit={handleSubmit}>
+                                <AuthInput required type="text" onChange={handleChange} name="name" value={signUpInput.name} icon="contact" placeholder="Full name" />
+                                <AuthInput required type="text" onChange={handleChange} name="email" value={signUpInput.email} icon="message" placeholder="Email address" />
+                                <AuthInput required type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" onChange={handleChange} name="password" value={signUpInput.password} icon="lock" placeholder="Password" />
+                                <AuthInput required type="text" onChange={handleChange} name="gender" value={signUpInput.gender} icon="gender" placeholder="Gender" />
+                                <PhoneInput
+                                    id="phone"
+                                    name="mobile"
+                                    placeholder="Mobile Number"
+                                    value={valuePhone}
+                                    onChange={setValuePhone} />
+                                <div id="recaptcha-container" />
+                                <FooterButton onSubmi={handleSubmit}>Register</FooterButton>
+                                <Link to="/login">Login here!</Link>
+                            </form>
+                            {signupError ? <p style={{ textAlign: 'center', color: 'red' }}>{signupError}</p> : null}
+                        </div>
                     </Style.Formcontainer>
 
                 </Style.SignupWrapper>

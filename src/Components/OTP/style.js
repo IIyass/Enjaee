@@ -20,6 +20,14 @@ export const Formcontainer = styled.div`
 width:50%;
 height:100vh;
 background-color:#53A8CB;
+display:flex;
+
+#container{
+    margin:auto;
+    width:100%;
+    height:70%;
+}
+
 span{
     font-size:20px;
     font-weight:500;

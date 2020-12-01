@@ -43,24 +43,26 @@ const Login = () => {
                         <img src={Logo} />
                     </Style.LeftContainer >
                     <Style.Formcontainer >
-                        <h1>LOGIN</h1>
-                        <form onSubmit={handleSubmit}>
-                            <PhoneInput
-                                id="phone"
-                                required
-                                name="mobile"
-                                placeholder="Mobile Number"
-                                value={valuePhone}
-                                onChange={setValuePhone} />
-                            <AuthInput icon="lock" type="password" required placeholder="Password" onChange={handleChange} name="password" value={loginInput.password} />
-                            <div id="recaptcha-container" />
-                            <FooterButton>Login</FooterButton>
-                            <div>
-                                <Link to="/signup">Register here!</Link>
-                                <Link id="forgot" to="/forget">Forgot password</Link>
-                            </div>
-                            {loginError ? <p style={{ textAlign: 'center', color: 'red' }}>{loginError}</p> : null}
-                        </form>
+                        <div id="container">
+                            <h1>LOGIN</h1>
+                            <form onSubmit={handleSubmit}>
+                                <PhoneInput
+                                    id="phone"
+                                    required
+                                    name="mobile"
+                                    placeholder="Mobile Number"
+                                    value={valuePhone}
+                                    onChange={setValuePhone} />
+                                <AuthInput icon="lock" type="password" required placeholder="Password" onChange={handleChange} name="password" value={loginInput.password} />
+                                <div id="recaptcha-container" />
+                                <FooterButton>Login</FooterButton>
+                                <div>
+                                    <Link to="/signup">Register here!</Link>
+                                    <Link id="forgot" to="/forget">Forgot password</Link>
+                                </div>
+                                {loginError ? <p style={{ textAlign: 'center', color: 'red' }}>{loginError}</p> : null}
+                            </form>
+                        </div>
                     </Style.Formcontainer>
 
                 </Style.AuthWrapper >;
