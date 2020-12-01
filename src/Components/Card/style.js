@@ -69,14 +69,14 @@ justify-content:end;
 align-items:center;
 img{
   cursor:pointer;
-  margin:0 5%;
+  margin:0 5px;
   width:25px;
   height:25px;
 }
 >div{
   display:flex;
   flex-direction:column;
-  margin:0 5%;
+  margin:0 5px;
   height:100%;
   justify-content:space-evenly;
 
