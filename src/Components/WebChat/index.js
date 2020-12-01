@@ -6,6 +6,7 @@ import ChatButton from '../UI/chatButton'
 import ChatScreen from '../ChatScreen';
 import AudioChat from '../AudioChat'
 import VideoChat from '../VideoChat';
+import { BodyContainer } from '../Common/Body'
 const Video = (props) => {
 
     const { location } = props
@@ -28,7 +29,7 @@ const Video = (props) => {
     }
 
     return (
-        <Style.Wrapper>
+        <Style.Wrapper as={BodyContainer}>
             <Style.LeftContainer>
                 <div id="image">
                     <img src={Jolie} />

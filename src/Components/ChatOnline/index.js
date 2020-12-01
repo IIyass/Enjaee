@@ -1,11 +1,11 @@
 import React from 'react'
 import * as Style from './style';
-import { Container } from '../Common/Body'
+import { BodyContainer } from '../Common/Body'
 import ChatScreen from '../ChatScreen'
 const ChatOnline = () => {
 
     return (
-        <Style.Wrapper as={Container}>
+        <Style.Wrapper as={BodyContainer}>
             <Style.LeftSide>
                 <Style.AvatarCard>
                     <div>
@@ -14,7 +14,9 @@ const ChatOnline = () => {
                     </div>
                 </Style.AvatarCard>
             </Style.LeftSide>
-            <ChatScreen />
+            <Style.RightContainer>
+                <ChatScreen />
+            </Style.RightContainer>
         </Style.Wrapper>
     )
 }

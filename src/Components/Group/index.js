@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import AddCard from './AddCard'
 import * as Style from './style'
-import { Container } from '../Common/Body'
+import { BodyContainer } from '../Common/Body'
 import Body from '../Body'
 import { Group } from '../../Provider/GroupProvidre'
 
@@ -11,7 +11,7 @@ const GroupWrraper = () => {
         switch (step) {
             case 1:
                 return (
-                    <Style.Wrapper as={Container}>
+                    <Style.Wrapper as={BodyContainer}>
                         <Style.CardLayout>
                             <AddCard />
                         </Style.CardLayout>
@@ -19,7 +19,7 @@ const GroupWrraper = () => {
                 )
             case 2:
                 return (
-                    <Style.Wrapper as={Container}>
+                    <Style.Wrapper as={BodyContainer}>
                         <Style.CardLayout>
                             <Body PageType="AddgroupPage" />
                         </Style.CardLayout>
@@ -27,7 +27,7 @@ const GroupWrraper = () => {
                 )
             case 3:
                 return (
-                    <Style.Wrapper as={Container}>
+                    <Style.Wrapper as={BodyContainer}>
                         <Style.CardLayout>
                             <Body PageType="GroupDetailPage" />
                         </Style.CardLayout>

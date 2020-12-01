@@ -3,9 +3,9 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
 display:flex;
 width:100%;
-height:100%:
+height:100%;
 flex-direction:row;
-justify-content:space-evenly;
+justify-content:space-between;
 overflow:auto;
 overflow-style: none;  
 scrollbar-width: none;
@@ -13,13 +13,11 @@ scrollbar-width: none;
 ::-webkit-scrollbar {
     display: none;
 }
-margin-top:20px;
-margin-bottom:20px;
 `;
 
 
 export const LeftContainer = styled.div`
-width:25%;
+width:21.8%;
 background-color:#fff;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 border-radius: 5px;
@@ -78,7 +76,7 @@ button:nth-of-type(3) {
 `;
 
 export const RightContainer = styled.div`
-width:65%;
+width:73.5%;
 height:800px;
 background-color:#fff;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);

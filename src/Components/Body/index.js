@@ -1,6 +1,6 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import * as Style from './style'
-import { Container } from '../Common/Body'
+import { BodyContainer } from '../Common/Body'
 import SearchInput from '../UI/SearchInput'
 import SortInput from '../UI/SortInput'
 import MockData from '../../Data/ContactMockData'
@@ -50,7 +50,7 @@ const Body = ({ PageType }) => {
 
 
     return (
-        <Style.Wrapper as={Container}>
+        <Style.Wrapper as={BodyContainer}>
             {HandlePage()}
         </Style.Wrapper >
     )

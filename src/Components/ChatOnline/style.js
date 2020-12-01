@@ -4,18 +4,35 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
 display:flex;
-justify-content:space-between;
-flex-direction:row;
-height:100%;
-margin:10px 0px;
 width:100%;
+height:100%;
+flex-direction:row;
+justify-content:space-between;
+overflow-style: none;  
+scrollbar-width: none;
+-ms-overflow-style:none;
+::-webkit-scrollbar {
+    display: none;
+}
 `;
 
+export const RightContainer = styled.div`
+width:73.5%;
+height:800px;
+background-color:#fff;
+box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
+border-radius: 10px;
+
+`;
+
+
 export const LeftSide = styled.div`
-width:20%;
+width:21.8%;
+height:800px;
 background-color:#fff;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 border-radius: 5px;
+padding:0px 20px;
 `;
 
 export const AvatarCard = styled.div`

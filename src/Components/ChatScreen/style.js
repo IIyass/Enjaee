@@ -38,7 +38,8 @@ button{
 `;
 
 export const QuoteWrapper = styled.div`
-margin-left:20px;
+margin-left:${({ sender }) => sender ? '0px' : '20px'};
+margin-right:${({ sender }) => sender ? '20px' : '0px'};
 display:flex;
 flex-direction:${({ sender }) => sender ? 'row-reverse' : 'row'};
 width:65%;

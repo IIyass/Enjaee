@@ -10,11 +10,11 @@ max-height:100px;
 background-color:#fff;
 flex-direction:row;
 box-shadow: 0px -4px 8px rgba(151, 151, 151, 0.2);
-
 img{
     width:150px;
     margin-left:-10px;
 }
+margin-top:20px;
 
 `
 

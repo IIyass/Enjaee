@@ -1,7 +1,13 @@
 import styled from "styled-components"
 
-export const Container = styled.div`
-  max-width: 1340px;
+export const BodyContainer = styled.div`
+  max-width: 1200px;
   margin: 0 auto;
-  width: 90%;
-`
+  width: 100%;
+  overflow-style: none;  
+scrollbar-width: none;
+-ms-overflow-style:none;
+::-webkit-scrollbar {
+    display: none;
+}
+`;
