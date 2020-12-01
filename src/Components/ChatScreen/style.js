@@ -42,7 +42,7 @@ margin-left:20px;
 display:flex;
 flex-direction:${({ sender }) => sender ? 'row-reverse' : 'row'};
 width:65%;
-align-self:${({ sender }) => sender ? 'end' : 'start'};
+align-self:${({ sender }) => sender ? 'flex-end' : 'flex-start'};
 
 
 #avatar{
