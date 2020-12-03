@@ -19,6 +19,7 @@ const SortInput = (props) => {
             width: state.selectProps.width,
             height: state.selectProps.height,
             background: 'transparent',
+            paddingLeft: '2px',
             // match with the menu
             borderRadius: state.isFocused ? 5 : 5,
             // Overwrittes the different states of border

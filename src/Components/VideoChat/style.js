@@ -4,7 +4,6 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
 width:100%;
 height:100%;
-border-radius: 5px;
 text-align:center;
 display:flex;
 flex-direction:column;
@@ -17,7 +16,7 @@ scrollbar-width: none;
 ::-webkit-scrollbar {
     display: none;
 }
-background:linear-gradient(180deg, #F08835 0%, #FF7271 100%);
+
 
 >div{
     width:60%;

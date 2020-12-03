@@ -17,22 +17,24 @@ scrollbar-width: none;
 `;
 
 export const RightContainer = styled.div`
-width:73.5%;
-height:800px;
+width:880px;
+padding:20px;
+height:100vh;
+margin:10px 0px;
 background-color:#fff;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 border-radius: 10px;
-
 `;
 
 
 export const LeftSide = styled.div`
-width:21.8%;
-height:800px;
+width:260px;
+padding:20px;
+margin:10px;
 background-color:#fff;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
-border-radius: 5px;
-padding:0px 20px;
+border-radius: 10px;
+height:100vh;
 `;
 
 export const AvatarCard = styled.div`
@@ -41,8 +43,7 @@ border: 2px solid #F8F8F8;
 box-sizing: border-box;
 border-radius: 5px;
 margin:0 auto;
-margin-top:20px;
-height:50%;
+height:250px;
 position:relative;
 >div{
     width:90%;

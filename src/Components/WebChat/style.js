@@ -5,7 +5,6 @@ display:flex;
 width:100%;
 height:100%;
 flex-direction:row;
-justify-content:space-between;
 overflow:auto;
 overflow-style: none;  
 scrollbar-width: none;
@@ -17,15 +16,17 @@ scrollbar-width: none;
 
 
 export const LeftContainer = styled.div`
-width:21.8%;
+width:260px;
+padding:20px;
+margin:10px;
 background-color:#fff;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
-border-radius: 5px;
-height:800px;
-padding:0px 20px;
+border-radius: 10px;
+height:100vh;
+
 img{
-    width:90%;
-    height:90%;
+    width:24px;
+    height:24px;
     margin:auto;
  
 }
@@ -39,7 +40,6 @@ input{
     padding:10px;
     box-sizing:border-box;
     width:85%;
-    margin-bottom:20px;
    
 }
 span{
@@ -51,14 +51,20 @@ span{
 
 #image{
     margin:auto;
-    margin-top:15px;
-    width:100%;
-    height:250px;
+    width:260px;
+    height:260px;
     display:flex;
     border: 2px solid #F8F8F8;
     box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
     box-sizing: border-box;
     border-radius: 5px;
+    img{
+        width:230px;
+        height:230px;
+        margin:auto;
+        border-radius:4px;
+     
+    }
 }
 
 
@@ -66,21 +72,24 @@ button{
     width:100%;
     margin-bottom:20px;
     cursor:pointer;
+    margin-top:15px;
 }
 
 button:nth-of-type(3) {
-   margin-bottom:8%;
+   margin-bottom:40px;
 
 }
 
 `;
 
 export const RightContainer = styled.div`
-width:73.5%;
-height:800px;
+width:880px;
+padding:20px;
+height:100vh;
+margin:10px 0px;
 background-color:#fff;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 border-radius: 10px;
-
+background:${({ backgroundColor }) => backgroundColor ? '#fff' : 'linear-gradient(180deg, #F08835 0%, #FF7271 100%)'};
 `;
 

@@ -16,7 +16,6 @@ scrollbar-width: none;
 ::-webkit-scrollbar {
     display: none;
 }
-background:linear-gradient(180deg, #F08835 0%, #FF7271 100%);
 #profil{
     margin: 0 auto;
     width:408px;

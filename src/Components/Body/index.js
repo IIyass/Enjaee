@@ -17,7 +17,7 @@ const Body = ({ PageType }) => {
                 return <>
                     <Style.SearchBar>
                         <SearchInput placeholder="Search" name="Search" iconSearch={true} />
-                        <SortInput width="150px" height="45px" />
+                        <SortInput width="150px" height="40px" />
                     </Style.SearchBar>
                     <CardLayout CardType="history" Data={MockData} />
                 </>
@@ -25,7 +25,7 @@ const Body = ({ PageType }) => {
                 return <>
                     <Style.SearchBar>
                         <SearchInput placeholder="Search" name="Search" iconSearch={true} />
-                        <SortInput width="150px" height="45px" />
+                        <SortInput width="150px" height="40px" />
                     </Style.SearchBar>
                     <CardLayout CardType="details" Data={MockData} />
                 </>

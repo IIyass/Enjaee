@@ -12,6 +12,7 @@ const Video = (props) => {
     const { location } = props
     const [chatStep, setChatStep] = useState(1);
 
+
     useEffect(() => {
         setChatStep(location.state)
     }, [location.state])
@@ -22,12 +23,13 @@ const Video = (props) => {
                 return <ChatScreen gradientMessage />;
             case 2:
                 return <AudioChat />;
+
             case 3:
                 return <VideoChat />;
-
         }
     }
 
+    console.log(chatStep)
     return (
         <Style.Wrapper as={BodyContainer}>
             <Style.LeftContainer>
@@ -42,7 +44,7 @@ const Video = (props) => {
                 <ChatButton icon="clear" border="#000" color="#fff" text="#000" >Clear Chat</ChatButton>
                 <ChatButton icon="block" border="#000" color="#fff" text="#000" >Block</ChatButton>
             </Style.LeftContainer>
-            <Style.RightContainer>
+            <Style.RightContainer backgroundColor={chatStep === 1} >
                 {handleChatStep()}
             </Style.RightContainer>
         </Style.Wrapper >

@@ -2,12 +2,10 @@ import styled from 'styled-components'
 
 
 export const Wrapper = styled.div`
-width:100%;
-max-width:360px;
-min-width:280px;
-padding:3%;
+width:360px;
+height:245px;
+padding:10.2px;
 position:relative;
-height:265px;
 background-color:#ffffff;
 display:flex;
 box-shadow: 0px 0px 5px rgba(126, 126, 126, 0.5);
@@ -70,8 +68,8 @@ align-items:center;
 img{
   cursor:pointer;
   margin:0 5px;
-  width:25px;
-  height:25px;
+  width:24px;
+  height:24px;
 }
 >div{
   display:flex;
@@ -109,6 +107,7 @@ max-width:50%;
 margin-right:2px;
 h1 {
     margin:5px 0px;
+    margin-bottom:10px;
     font-style: normal;
     font-family:Roboto;
     font-weight: 700;

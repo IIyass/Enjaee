@@ -4,9 +4,6 @@ import styled from 'styled-components'
 export const RightSide = styled.div`
 width:100%;
 height:100%;
-background-color:#fff;
-box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
-border-radius: 5px;
 display:flex;
 flex-direction:column;
 justify-content:space-between;
@@ -23,43 +20,48 @@ flex-direction:column;
 
 export const Footer = styled.div`
 display:flex;
-width:95%;
+width:100%;
 justify-content:space-between;
 margin:0 auto;
-margin-bottom:10px;
 button{
-    width:10%;
+    width:100px;
+    height:50px;
     color:#fff;
     height:50px;
     background-color:#53A8CB;
     border:none;
-    border-radius:5px;
+    border-radius:4px;
+}
+input{
+    width:720px;
 }
 `;
 
 export const QuoteWrapper = styled.div`
-margin-left:${({ sender }) => sender ? '0px' : '20px'};
-margin-right:${({ sender }) => sender ? '20px' : '0px'};
 display:flex;
 flex-direction:${({ sender }) => sender ? 'row-reverse' : 'row'};
-width:65%;
+width:auto;
 align-self:${({ sender }) => sender ? 'flex-end' : 'flex-start'};
-
-
+margin:20px 0px;
 #avatar{
     height:50px;
     width:50px;
     border-radius:5px;
-    margin:0 5px;
+    margin:0 20px;
 }
 
 #asset{
     width:95%;
     height:300px;
+    max-height:500px;
+    max-width:600px;
 }
 #messageWrapper{
     display:flex;
     flex-direction:column;
+    width:auto;
+    height:auto;
+    max-width:600px;
     img{
         height:100%;
         margin-bottom:10px;
@@ -67,9 +69,9 @@ align-self:${({ sender }) => sender ? 'flex-end' : 'flex-start'};
     
 }
 #messageContainer{
-    
     display:flex;
     flex-direction:${({ sender }) => sender ? 'row-reverse' : 'row'};
+    align-items:center;
     img{
         margin-left:10px;
         margin-right:10px;
@@ -79,8 +81,10 @@ align-self:${({ sender }) => sender ? 'flex-end' : 'flex-start'};
 #info{
     display:flex;
     flex-direction:row;
-    justify-content:${({ sender }) => sender ? 'end' : 'start'};
+    justify-content:${({ sender }) => sender ? 'flex-end' : 'flex-start'};
     margin-bottom:10px;
+    width:auto;
+    max-width:600px;
     h1{
         font-family: Roboto;
         font-weight: 700;
@@ -103,12 +107,14 @@ background-color:${({ sender }) => sender ? ' #F8F8F8' : ' #164664'};
 border-radius: ${({ sender }) => sender ? ' 20px 0px 20px 20px' : '0px 20px 20px 20px'};
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 height:auto;
-width:100%;
+width:auto;
+max-width:600px;
 p{
 font-weight:400;
 font-size:20px;
-padding-left:10px;
+margin:20px;
 color:${({ sender }) => sender ? '#4A4A4A' : '#fff'} ;
+line-break:anywhere;
 }
 }
-`
+`;

@@ -8,12 +8,14 @@ margin-top:15px;
 
 span{
   position:absolute;
-  left:10px;
-  top:-2px;
+  left:0px;
+  top:10px;
 }`;
 
 export const Container = styled.div`
 position:relative;
+width:200px;
+height:40px;
 display:flex;
 flex-direction:column;
 #label{
@@ -23,8 +25,8 @@ flex-direction:column;
 }
 span{
   position:absolute;
-  left:10px;
-  top:15px;
+  top:12px;
+  margin-left:10px;
 }
 `;
 
@@ -33,7 +35,7 @@ display:flex;
 flex-direction:row;
 position:relative;
 align-items:center;
-width:87%;
+width:720px;
 input{
   width:100%;
   border: 1px solid #53A8CB;
@@ -43,7 +45,7 @@ input{
 }
 ul{
   position:absolute;
-  right:0;
+  right:0px;
   padding:0;
   margin:0;
   img{
@@ -55,20 +57,21 @@ ul{
 export const Input = styled.input.attrs(props => ({
   type: props.type,
 }))`
-    width: 200px;
-    height:28px;
+    width: 100%;
+    height:100%;
     font-family:Roboto;
     font-weight:400;
     position:relative;
     font-size: 15px;
     padding: 8px;
-    color: #000000;
     border-radius: 5px;
     border:1px solid #47525D;
     background-color:transparent;
     padding-left:25px;
+    color:#53A8CB;
+    box-sizing:border-box;
    
-  `
+  `;
 
 export const SelectContainer = styled.div`
 position:relative;
@@ -80,7 +83,8 @@ flex-direction:column;
   margin-bottom:3px;
 }
 
-`
+
+`;
 
 
 export const ProfilInput = styled.input.attrs(props => ({
@@ -154,10 +158,11 @@ background-color:${({ color }) => color};
 border:${({ borderColor }) => `1px solid ${borderColor}`};
 color:${({ textColor }) => textColor};
 .Icon{
-  width:30px;
-  height:30px;
+  width:24px;
+  height:24px;
   margin:0;
   margin-right:15px;
+  margin-left:15px;
 }
 `;
 

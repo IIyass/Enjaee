@@ -28,15 +28,22 @@ a{
     color:#47525D;
     font-family:Roboto;
     font-weight:400;
-    width:70px;
+    width:auto;
+    height:100%;
+    margin-right:24px;
 }
 li{
     display:flex;
     flex-direction:column;
     cursor:pointer;
+    height:100%;
+    justify-content:space-between;
+    width:auto;
+    align-items:center;
     img{
-        width:30px;
-        margin:auto;
+        width:34px;
+        margin-top:10px;
+        margin-bottom:10px;
     }
     :nth-child(2){
        img{ 
@@ -45,12 +52,15 @@ li{
 }
     :nth-child(6){
         background-color:#53A8CB;
-        height:100%;
+        width:80px;
+        height:80px;
         a{
             display:flex;
             margin:auto;
         img{
             margin:auto;
+            width:34px;
+            height:34px;
         }
     }
     }
@@ -61,7 +71,8 @@ li{
         font-size: 14px;
         line-height: 16px;
         text-align: center;
-        margin-top:10px
+        margin-bottom:10px;
+       
     }
 }
 

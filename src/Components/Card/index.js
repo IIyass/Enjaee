@@ -16,8 +16,6 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType, set
     let historyLocation = useHistory();
 
 
-
-
     const CancelSendRequest = () => {
         setToggle(false)
         setOpenModel(undefined)

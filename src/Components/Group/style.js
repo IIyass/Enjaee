@@ -21,16 +21,17 @@ text-align:center;
 div{
     width:100%;
     background-color:#F8F8F8;
-    height:75%;
+    height:195px;
+    display:flex;
 }
 img{
-    width:50%;
-    height:80%;
+    width:90px;
+    height:90px;
     cursor:pointer;
     margin:auto;
-    margin-top:15px;
+  
 }
-`
+`;
 
 
 export const Wrapper = styled.div`
