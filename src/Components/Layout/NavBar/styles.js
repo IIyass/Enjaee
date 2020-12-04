@@ -37,7 +37,7 @@ li{
     flex-direction:column;
     cursor:pointer;
     height:100%;
-    justify-content:space-between;
+    justify-content:flex-start;
     width:auto;
     align-items:center;
     img{
@@ -53,7 +53,6 @@ li{
     :nth-child(6){
         background-color:#53A8CB;
         width:80px;
-        height:80px;
         a{
             display:flex;
             margin:auto;

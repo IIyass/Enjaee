@@ -106,15 +106,14 @@ width:auto;
 max-width:50%;
 margin-right:2px;
 h1 {
-    margin:5px 0px;
-    margin-bottom:10px;
+   
+    margin-bottom:5px;
     font-style: normal;
     font-family:Roboto;
     font-weight: 700;
     font-size: 16px;
     line-height: 19px;
     letter-spacing: 1.29412px; 
-    line-break:anywhere;
 
 }
 span{
@@ -125,7 +124,7 @@ span{
     line-height: 16px;
     color: #737373;
 }
-`
+`;
 
 
 export const ModalContainer = styled.div`
