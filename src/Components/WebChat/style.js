@@ -19,11 +19,12 @@ export const LeftContainer = styled.div`
 width:260px;
 padding:20px;
 margin:10px;
+margin-left:0px;
 background-color:#fff;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 border-radius: 10px;
 height:100vh;
-
+max-height:766px;
 img{
     width:24px;
     height:24px;
@@ -83,10 +84,11 @@ button:nth-of-type(3) {
 `;
 
 export const RightContainer = styled.div`
-width:880px;
-padding:20px;
+width:890px;
 height:100vh;
+max-height:804px;
 margin:10px 0px;
+margin-left:10px;
 background-color:#fff;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 border-radius: 10px;

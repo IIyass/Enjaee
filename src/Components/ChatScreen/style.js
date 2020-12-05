@@ -6,13 +6,14 @@ width:100%;
 height:100%;
 display:flex;
 flex-direction:column;
-justify-content:space-between;
+justify-content:flex-start;
 `;
 
 export const CrossWrapper = styled.div`
-height:80%;
+height:728px;
 width:100%;
-margin:20px auto;
+margin:0px auto;
+margin-bottom:12px;
 display:flex;
 overflow:auto;
 flex-direction:column;
@@ -20,8 +21,8 @@ flex-direction:column;
 
 export const Footer = styled.div`
 display:flex;
-width:100%;
-justify-content:space-between;
+width:auto;
+justify-content:flex-start;
 margin:0 auto;
 button{
     width:100px;
@@ -31,9 +32,11 @@ button{
     background-color:#53A8CB;
     border:none;
     border-radius:4px;
+    margin-left:20px;
 }
 input{
     width:720px;
+   
 }
 `;
 
@@ -47,7 +50,8 @@ margin:20px 0px;
     height:50px;
     width:50px;
     border-radius:5px;
-    margin:0 20px;
+    margin-right:20px;
+    margin-left:20px;
 }
 
 #asset{

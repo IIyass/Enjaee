@@ -26,10 +26,14 @@ const SortInput = (props) => {
             borderColor: state.isFocused ? "#47525D" : "#47525D",
             borderColor: state.isSelected ? "#47525D" : "#47525D",
             // Removes weird border around container
+            boxShadow: 'none',
+
             "&:hover": {
                 // Overwrittes the different states of border
-                borderColor: state.isFocused ? "#47525D" : "#47525D",
-            }
+                border: state.isFocused ? ' 1px solid #53A8CB' : ' 1px solid  #47525D',
+                outline: state.isFocused ? 'none !important ' : 'auto'
+            },
+
 
         }),
         menu: base => ({
@@ -42,7 +46,8 @@ const SortInput = (props) => {
         menuList: base => ({
             ...base,
             // kill the white space on first and last option
-            padding: 0
+            padding: 0,
+
         }),
         indicatorSeparator: (styles) => ({ display: 'none' }),
         placeholder: () => ({ color: '#47525D', fontWeight: 400, fontSize: '14px' })

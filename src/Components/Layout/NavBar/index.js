@@ -48,7 +48,6 @@ const Header = () => {
                 <Link to="/"><img src={Logo} /></Link>
             </Style.Logo>
             <Style.NavBar>
-                <Link to="alert">  <li ><img src={iconSelected === 0 ? ActiveAlert : Alert} /> <span>Alerts</span></li></Link>
                 <Link to="/contact"><li ><img src={iconSelected === 1 ? ActiveContact : Contact} /> <span>Contacts</span ></li></Link>
                 <Link to="/history"><li ><img src={iconSelected === 2 ? ActiveHistory : History} /> <span>History</span></li></Link>
                 <Link to="/chat"><li ><img src={iconSelected === 3 ? ActiveTemporary : Temporary} /><span>Tem. Chat</span></li ></Link>

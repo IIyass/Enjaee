@@ -16,6 +16,7 @@ scrollbar-width: none;
 ::-webkit-scrollbar {
     display: none;
 }
+border-radius:5px;
 
 
 >div{
@@ -49,11 +50,11 @@ scrollbar-width: none;
 }
 
 #top{
-    width:80%;
+    width:95%;
     position:absolute;
     height:150px;
-    top:15px;
-    left:10%;
+    top:20px;
+    left:20px;
     display:flex;
     justify-content:space-between;
     img{
@@ -106,8 +107,4 @@ margin:0;
     }
 
 }
-
-
-
-
 `;

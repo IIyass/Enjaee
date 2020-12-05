@@ -1,6 +1,6 @@
 import React from 'react';
 import * as Style from './style'
-import Ellipse14 from '../../Illustration/Ellipse14.svg'
+import Ellipse14 from '../../Illustration/Clock.svg'
 import Truch from '../../Illustration/Icon/Web/Action/Group35.svg'
 import chatbubble from '../../Illustration/chatbubble.svg'
 const Quote = ({ sender, img, time, name, text, gradientMessage, avatar }) => {

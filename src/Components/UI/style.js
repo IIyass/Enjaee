@@ -8,8 +8,8 @@ margin-top:15px;
 
 span{
   position:absolute;
-  left:0px;
-  top:10px;
+  left:5px;
+  top:-2px;
 }`;
 
 export const Container = styled.div`
@@ -70,6 +70,11 @@ export const Input = styled.input.attrs(props => ({
     padding-left:25px;
     color:#53A8CB;
     box-sizing:border-box;
+    :focus{
+      outline: none !important;
+      border:1px solid #53A8CB;    
+    }
+   
    
   `;
 
@@ -115,8 +120,8 @@ export const AuthInput = styled.input.attrs(props => ({
       width: -webkit-fill-available;
       color: #fff;
       background-color:transparent;
-      padding-bottom:20px;
-      padding-left:50px;
+      padding-bottom:22px;
+      padding-left:40px;
       border:none;
       border-bottom:2px solid #fff;
        ::placeholder{

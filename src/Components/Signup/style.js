@@ -25,32 +25,47 @@ background-color:#53A8CB;
 display:flex;
 
 #container{
-    margin:auto;
-    width:100%;
-    height:80%;
+    width:auto;
+     margin:auto;
+     height:585px;
+     display:flex;
+     flex-direction:column;
+     justify-content:space-between;
 }
 
 h1{
-    text-align:center;
-    font-size:5em;
+    text-align:left;
+    font-size:34px;
     font-weight:700;
     color:#fff;
     font-family:Roboto;
-    margin-bottom:10px;
+    width:auto;
+    height:40px;
+    margin:0;
 }
+
 form{
 
-    width:70%;
+    width:auto;
     display:flex;
     flex-direction:column;
-    height:75%;
-    justify-content:space-evenly;
+    height:458px;
+    justify-content:space-between;
     margin:0 auto;
     button{
         background-color:#fff;
-        width:100%;
+        width:400px;
+        height:50px;
         border-color:#53A8CB;
         color:#53A8CB;
+        box-sizing: border-box;
+    }
+    input{
+        width:400px;
+        box-sizing: border-box;
+        :focus{
+            outline:none;
+        }
     }
     a{
         text-align:right;

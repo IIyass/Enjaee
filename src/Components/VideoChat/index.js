@@ -5,7 +5,7 @@ import Jolie from '../../Illustration/Joli.png'
 import receivevideocallicon from '../../Illustration/receivevideocallicon.svg'
 import Jhon from '../../Illustration/Martin.png'
 import silenticon from '../../Illustration/silenticon.svg'
-import receiveaudiocallicons from '../../Illustration/receiveaudiocallicon.svg'
+import endreceiveaudiocallicons from '../../Illustration/Bounding_Circle.svg'
 const VideoChat = () => {
     const [videoChatStep, setVideoChatStep] = useState(1);
 
@@ -37,7 +37,7 @@ const VideoChat = () => {
                     <div id="bottom" >
                         <img src={silenticon} />
                         <ProfilButton onClick={() => back()} >End Call</ProfilButton>
-                        <img src={receivevideocallicon} />
+                        <img src={endreceiveaudiocallicons} />
                     </div>
                 </div>
 

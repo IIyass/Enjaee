@@ -46,6 +46,20 @@ const Login = () => {
                         <div id="container">
                             <h1>LOGIN</h1>
                             <form onSubmit={handleSubmit}>
+                                {/* <Style.Choice>
+                                    <div>
+                                        <div id="checkbox">
+                                            <div />
+                                        </div>
+                                        <span>Personal</span>
+                                    </div>
+                                    <div>
+                                        <div id="checkbox">
+                                            <div />
+                                        </div>
+                                        <span>Corporate</span>
+                                    </div>
+                                </Style.Choice> */}
                                 <PhoneInput
                                     id="phone"
                                     required

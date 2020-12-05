@@ -17,6 +17,12 @@ img{
 
 `;
 
+export const Choice = styled.div`
+display:flex;
+flex-direction:row;
+
+`;
+
 export const Formcontainer = styled.div`
 width:50%;
 height:100vh;
@@ -24,31 +30,45 @@ background-color:#53A8CB;
 display:flex;
 
 #container{
-    width:100%;
+     width:auto;
      margin:auto;
-    height:70%;
+     height:370px;
+     display:flex;
+     flex-direction:column;
+     justify-content:space-between;
 }
 
 h1{
-    text-align:center;
-    font-size:100px;
+    text-align:left;
+    font-size:34px;
     font-weight:700;
     color:#fff;
     font-family:Roboto;
+    width:auto;
+    height:40px;
+    margin:0;
 }
 form{
-
-    width:70%;
+    width:auto;
     display:flex;
     flex-direction:column;
-    height:50%;
-    justify-content:space-evenly;
+    height:225px;
+    justify-content:space-between;
     margin:0 auto;
+    input{
+        width:400px;
+        box-sizing: border-box;
+        :focus{
+            outline:none;
+        }
+    }
     button{
         background-color:#fff;
-        width:100%;
+        width:400px;
+        height:50px;
         border-color:#53A8CB;
         color:#53A8CB;
+        box-sizing: border-box;
     }
     a{
         text-align:right;
@@ -61,6 +81,7 @@ form{
         display:flex;
         justify-content:space-between;
         flex-direction:row;
+        width: 400px;
     }
     
     #recaptcha-container{
@@ -68,7 +89,6 @@ form{
     }
 
     #phone{
-        width: 100%;
         font-size: 15px;
         width: -moz-available;
         width: -webkit-fill-available;
