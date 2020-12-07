@@ -161,7 +161,15 @@ background: #38D744;
 border-radius: 4px;
 border:none;
 cursor:pointer;
-
+}
+.otp{
+  width: 255px;
+  margin: 0 auto;
+height: 40px;
+background: #38D744;
+border-radius: 4px;
+border:none;
+cursor:pointer;
 }
 `;
 
@@ -194,4 +202,39 @@ button{
   color:#fff;
 }
 
-`
+`;
+
+export const OTPModalContainer = styled.div`
+background: #FFFFFF;
+padding:10px;
+opacity: 0.9;
+border: 2px solid #47525D;
+box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
+border-radius: 5px;
+position:absolute;
+text-align:center;
+top:60%;
+left:50%;
+transform: translate(-50%, -50%);
+z-index:9999;
+width:355px;
+height:281px;
+display:flex;
+flex-direction:column;
+justify-content:space-around;
+p,span{
+  font-size:15px;
+  color:#000;
+  line-height:17.58px;
+  font-weight:400;
+  margin:0;
+}
+.pincode-input-container{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+`;
