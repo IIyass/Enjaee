@@ -7,6 +7,7 @@ import Pic1 from '../../Illustration/LandingPage/chat.svg'
 import Pic2 from '../../Illustration/LandingPage/groupchat.svg'
 import Pic3 from '../../Illustration/LandingPage/temporarychat.svg'
 import Pic4 from '../../Illustration/LandingPage/videocall.svg'
+import Pic5 from '../../Illustration/LandingPage/audiocall.svg'
 import Logo from '../../Illustration/hichatylogo.svg'
 
 const Landing = () => {
@@ -33,15 +34,15 @@ const Landing = () => {
                     <div id="leftSide">
                         <div>
                             <img src={Pic1} />
-                            <h4>Audio Call</h4>
+                            <h4>Chat</h4>
                         </div>
                         <div>
                             <img src={Pic2} />
-                            <h4>Group A.Call</h4>
+                            <h4>Group Chat</h4>
                         </div>
                         <div>
                             <img src={Pic3} />
-                            <h4>Video Call</h4>
+                            <h4>Temporary Chat</h4>
                         </div>
                     </div>
 
@@ -50,11 +51,11 @@ const Landing = () => {
 
                     <div id="rightSide">
                         <div>
-                            <img src={Pic2} />
+                            <img src={Pic5} />
                             <h4>Audio Call</h4>
                         </div>
                         <div>
-                            <img src={Pic3} />
+                            <img src={Pic2} />
                             <h4>Group A.Call</h4>
                         </div>
                         <div>
