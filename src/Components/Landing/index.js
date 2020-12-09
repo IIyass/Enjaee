@@ -9,8 +9,13 @@ import Pic3 from '../../Illustration/LandingPage/temporarychat.svg'
 import Pic4 from '../../Illustration/LandingPage/videocall.svg'
 import Pic5 from '../../Illustration/LandingPage/audiocall.svg'
 import Logo from '../../Illustration/hichatylogo.svg'
+import { useHistory } from 'react-router-dom';
 
 const Landing = () => {
+    let history = useHistory()
+    const handleSubmit = () => {
+        history.push('/signup')
+    }
     return (
         <Style.Wrapper>
             <h1>Let’s connect with HiChaty Messanger</h1>
@@ -69,7 +74,7 @@ const Landing = () => {
             <p id="footerP">Let’s Join HiChaty Messanger
                fun Chat with Friends and Family</p>
 
-            <button>Register Here!</button>
+            <button onClick={handleSubmit}>Register Here!</button>
         </Style.Wrapper>
     )
 }
