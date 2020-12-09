@@ -2,12 +2,10 @@ import React, { useState, useEffect } from 'react'
 import * as Style from './styles'
 import { Link, useLocation } from 'react-router-dom'
 import Logo from '../../../Illustration/hichatylogo.svg'
-import ActiveAlert from '../../../Illustration/Icon/Active/Alert.svg';
 import ActiveContact from '../../../Illustration/Icon/Active/Contact.svg'
 import ActiveGroup from '../../../Illustration/Icon/Active/Group.svg'
 import ActiveHistory from '../../../Illustration/Icon/Active/History.svg'
 import ActiveTemporary from '../../../Illustration/Icon/Active/Temporary.svg'
-import Alert from '../../../Illustration/Icon/Regular/Alert.svg';
 import Contact from '../../../Illustration/Icon/Regular/Contact.svg'
 import Group from '../../../Illustration/Icon/Regular/Group.svg'
 import History from '../../../Illustration/Icon/Regular/History.svg'
@@ -34,7 +32,6 @@ const Header = () => {
         }
     }
 
-    console.log(location.pathname)
 
 
     useEffect(() => {

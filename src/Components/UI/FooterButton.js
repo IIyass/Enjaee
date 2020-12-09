@@ -12,4 +12,4 @@ export const FooterButton = styled.button`
   height: 44px;
   cursor: pointer;
  
-  `
+  `;

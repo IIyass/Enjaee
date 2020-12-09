@@ -13,7 +13,8 @@ max-height:80px;
 align-items:center;
 background-color:#fff;
 box-shadow: 0px -4px 8px rgba(151, 151, 151, 0.2);
-`
+`;
+
 export const NavBar = styled.ul`
 display:flex;
 list-style: none;
@@ -74,9 +75,8 @@ li{
        
     }
 }
+`;
 
-
-`
 export const Logo = styled.div`
 margin-left:20px;
 img{
