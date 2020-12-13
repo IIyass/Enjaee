@@ -2,7 +2,7 @@ import React from 'react'
 import DeviceButton from '../UI/DeviceButton'
 import * as Style from './styles'
 import ApplePhone from '../../Illustration/LandingPage/ApplePhone.svg'
-import AndroidPhone from '../../Illustration/LandingPage/AndroidPhone.svg'
+import AndroidPhone from '../../Illustration/LandingPage/AndroidDevice.svg'
 
 const Device = ({ text, type }) => {
     return (

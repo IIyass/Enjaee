@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
 text-align:center;
+overflow:hidden;
 h1{
 width: 686px;
 height: 47px;
@@ -23,7 +24,7 @@ margin : 0 auto;
 font-family: Roboto;
 font-style: normal;
 font-weight: 500;
-font-size: 24px;
+font-size: 20px;
 line-height: 28px;
 color:#4A4A4A;
 }
@@ -36,7 +37,7 @@ margin-top:4px;
 font-family: Roboto;
 font-style: normal;
 font-weight: normal;
-font-size: 20px;
+font-size: 16px;
 line-height: 23px;
 color:#4A4A4A;
 }
@@ -55,7 +56,7 @@ margin:0 auto;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 34px;
+font-size: 20px;
 line-height: 40px;
 color: #4A4A4A;
 margin-top:29px;
@@ -77,7 +78,7 @@ margin-bottom:47px;
 font-family: Roboto;
 font-style: normal;
 font-weight: 900;
-font-size: 50px;
+font-size: 24px;
 line-height: 59px;
 text-align: center;
 color: #000000;
@@ -184,13 +185,13 @@ color: #000000;
 }
 
 #footerP{
-width: 325px;
+width: 324px;
 height: 60px;
 margin:0 auto;
 font-family: Roboto;
 font-style: normal;
 font-weight: bold;
-font-size: 21px;
+font-size: 20px;
 line-height: 30px;
 text-align: center;
 letter-spacing: 0.5px;
@@ -246,7 +247,7 @@ img{
         font-family: Roboto;
         font-style: normal;
         font-weight: normal;
-        font-size: 24px;
+        font-size: 20px;
         line-height: 28px;
         text-align: center;
         color:#4A4A4A;

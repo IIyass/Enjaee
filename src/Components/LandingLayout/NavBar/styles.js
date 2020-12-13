@@ -26,7 +26,7 @@ ul{
     margin:0;
     margin-right:51px;
     a{
-        font-size:24px;
+        font-size:16px;
         line-height:32.78px;
         font-weight:600;
         text-decoration:none;
