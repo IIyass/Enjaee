@@ -174,8 +174,8 @@ color: #000000;
    }
 
 .phone{
-    width: 411px;
-    height: 848px;
+    width: 375px;
+    height: 812px;
     position: absolute;
     top: 50%;
     left: 50%;
