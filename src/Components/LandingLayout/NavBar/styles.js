@@ -16,7 +16,7 @@ background-color:#fff;
 box-shadow: 0px -4px 8px rgba(151, 151, 151, 0.2);
 
 ul{
-    width:219px;
+    width:auto;
     height:33px;
     list-style:none;
     display:flex;
@@ -24,14 +24,15 @@ ul{
     justify-content:space-between;
     padding:0;
     margin:0;
-    margin-right:51px;
     a{
         font-size:16px;
         line-height:32.78px;
         font-weight:600;
         text-decoration:none;
         color:#164664;
+        margin:0px 20px;
     }
+   
 
 }
 `;

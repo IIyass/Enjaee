@@ -120,6 +120,10 @@ color: #000000;
         color: #FFFFFF;
     }
 
+    >div{
+        cursor:pointer;
+    }
+
     >div:nth-child(2){
         margin:150px 0;
     }
@@ -151,6 +155,10 @@ color: #000000;
         color: #FFFFFF;
     }
 
+    >div{
+        cursor:pointer;
+    }
+
     >div:nth-child(2){
         margin:150px 0;
     }
@@ -165,7 +173,7 @@ color: #000000;
     width:10px;
    }
 
-#phone{
+.phone{
     width: 411px;
     height: 848px;
     position: absolute;
