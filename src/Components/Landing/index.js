@@ -9,6 +9,7 @@ import Pic3 from '../../Illustration/LandingPage/temporarychat.svg'
 import Pic4 from '../../Illustration/LandingPage/videocall.svg'
 import Pic5 from '../../Illustration/LandingPage/audiocall.svg'
 import Logo from '../../Illustration/hichatylogo.svg'
+import videocall from '../../Illustration/LandingPage/VideoCall.svg'
 import { useHistory } from 'react-router-dom';
 
 const Landing = () => {
@@ -52,7 +53,7 @@ const Landing = () => {
                     </div>
 
                     <div id="bar" />
-                    <img id="phone" src={screenshotforfeature} />
+                    <img id="phone" src={videocall} />
 
                     <div id="rightSide">
                         <div>
@@ -75,6 +76,7 @@ const Landing = () => {
                fun Chat with Friends and Family</p>
 
             <button onClick={handleSubmit}>Register Here!</button>
+
         </Style.Wrapper>
     )
 }
