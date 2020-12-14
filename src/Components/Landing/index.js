@@ -25,12 +25,12 @@ const Landing = () => {
 
     const renderingPicture = () => {
         switch (Pic) {
-            case 0: return <img className="phone" src={videocall} />
-            case 1: return <img className="phone" src={AudioGroup} />;
-            case 2: return <img className="phone" src={ChatScreen} />;
-            case 3: return <img className="phone" src={GroupAudioCall} />;
-            case 4: return <img className="phone" src={GroupChatScreen} />;
-            case 5: return <img className="phone" src={TemChatScreen} />;
+            case 0: return <img className="phone" src={ChatScreen} />
+            case 1: return <img className="phone" src={GroupChatScreen} />;
+            case 2: return <img className="phone" src={TemChatScreen} />;
+            case 3: return <img className="phone" src={AudioGroup} />;
+            case 4: return <img className="phone" src={GroupAudioCall} />;
+            case 5: return <img className="phone" src={videocall} />;
         }
     }
     return (
@@ -54,15 +54,15 @@ const Landing = () => {
             <div style={{ backgroundColor: '#53A8CB' }}>
                 <div id="feature">
                     <div id="leftSide">
-                        <div onClick={() => setPic(1)}>
+                        <div onClick={() => setPic(0)}>
                             <img src={Pic1} />
                             <h4 >Chat</h4>
                         </div>
-                        <div onClick={() => setPic(2)}>
+                        <div onClick={() => setPic(1)}>
                             <img src={Pic2} />
                             <h4 >Group Chat</h4>
                         </div>
-                        <div onClick={() => setPic(3)}>
+                        <div onClick={() => setPic(2)}>
                             <img src={Pic3} />
                             <h4 >Temporary Chat</h4>
                         </div>
