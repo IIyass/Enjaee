@@ -71,15 +71,15 @@ const Landing = () => {
                     <div id="bar" />
                     {renderingPicture()}
                     <div id="rightSide">
-                        <div>
+                        <div onClick={() => setPic(3)}>
                             <img src={Pic5} />
                             <h4>Audio Call</h4>
                         </div>
-                        <div>
+                        <div onClick={() => setPic(4)}>
                             <img src={Pic2} />
                             <h4>Group A.Call</h4>
                         </div>
-                        <div>
+                        <div onClick={() => setPic(5)}>
                             <img src={Pic4} />
                             <h4>Video Call</h4>
                         </div>
