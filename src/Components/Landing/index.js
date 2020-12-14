@@ -13,7 +13,7 @@ import AudioGroup from '../../Illustration/LandingPage/AudioCall.svg'
 import ChatScreen from '../../Illustration/LandingPage/ChatScreen.svg'
 import GroupAudioCall from '../../Illustration/LandingPage/GroupAudioCall.svg'
 import GroupChatScreen from '../../Illustration/LandingPage/GroupChatScreen.svg'
-import TemChatScreen from '../../Illustration/LandingPage/TemChatScreen.svg'
+import TemChatScreen from '../../Illustration/LandingPage/TemporaryChat.svg'
 import { useHistory } from 'react-router-dom';
 
 const Landing = () => {
