@@ -1,10 +1,11 @@
 import React, { useEffect, useContext, useState } from 'react'
 import * as Style from './style'
 import Card from '../Card'
-import { Group } from '../../Provider/GroupProvidre'
+import { Group } from '../../Provider/GroupProvider/GroupProvidre'
 
 
 const CardLayout = ({ Data, CardType }) => {
+
     const { step, setSelectedContacts } = useContext(Group);
     useEffect(() => {
         if (step > 2) {
@@ -18,12 +19,6 @@ const CardLayout = ({ Data, CardType }) => {
         switch (CardType) {
             case "group":
                 return profile && <Card CardType={CardType} index={index} Data={Data} locked={profile} name={name} picture={picture} detail={detail} history={history} id={id} />
-            case "chat":
-                return profile && <Card CardType={CardType} index={index} Data={Data} locked={profile} name={name} picture={picture} detail={detail} history={history} id={id} />
-            case "history":
-                return profile && <Card CardType={CardType} index={index} Data={Data} locked={profile} name={name} picture={picture} detail={detail} history={history} id={id} />
-            case 'details':
-                return <Card openModel={openModel} setOpenModel={setOpenModel} CardType={CardType} index={index} Data={Data} locked={profile} name={name} picture={picture} detail={detail} history={history} id={id} />
             default:
                 return <Card CardType={CardType} index={index} Data={Data} locked={profile} name={name} picture={picture} detail={detail} history={history} id={id} />
         }

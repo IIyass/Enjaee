@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import * as Style from './style'
-import { BodyContainer } from '../Common/Body'
-import Body from '../Body'
-const Contact = () => {
+import Card from './Card'
+
+const DumbContact = ({ ContactData }) => {
+
+    const [openModel, setOpenModel] = useState();
 
     return (
-
-        <Style.Wrapper as={BodyContainer}>
-            <Body PageType="ContactPage" />
-        </Style.Wrapper >
+        <Style.CardLayout index={openModel}>
+            {ContactData.map(({ picture, name, detail, profile, history, id }, index) => {
+                return <Card
+                    openModel={openModel}
+                    setOpenModel={setOpenModel}
+                    index={index}
+                    locked={profile}
+                    name={name}
+                    picture={picture}
+                    detail={detail}
+                    history={history}
+                    id={id} />
+            })
+            }
+        </Style.CardLayout>
     )
+
 }
 
-export default Contact;
+export default DumbContact;

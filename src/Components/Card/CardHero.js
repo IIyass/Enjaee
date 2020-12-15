@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import * as Style from './style'
-import { Group } from '../../Provider/GroupProvidre'
+import { Group } from '../../Provider/GroupProvider/GroupProvidre'
 import Success from '../../Illustration/Success.svg'
 const CardHero = ({ picture, TickedCard, id, index }) => {
     const { selectedContacts, handleTeamSelecting } = useContext(Group);

@@ -2,7 +2,7 @@ import React from 'react'
 import * as Style from './style'
 import FooterLogo from '../../../Illustration/Poweredbydevshubha.svg'
 import EnjoeeMsg from '../../../Illustration/Enjoee-msg.svg'
-import { Container } from '../../Common/Body'
+import { Container } from '../../../Common/Body'
 const Footer = () => {
     return (
         <Style.Wrapper >

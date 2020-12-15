@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import * as Style from './style'
 import SearchInput from '../UI/SearchInput'
 import Rectangle380 from '../../Illustration/Rectangle380.svg'
-import { Group } from '../../Provider/GroupProvidre'
+import { Group } from '../../Provider/GroupProvider/GroupProvidre'
 const AddGroup = () => {
     const { groupName, next, setGroupName } = useContext(Group);
     const [name, setName] = useState('')

@@ -6,7 +6,7 @@ import ChatButton from '../UI/chatButton'
 import ChatScreen from '../ChatScreen';
 import AudioChat from '../AudioChat'
 import VideoChat from '../VideoChat';
-import { BodyContainer } from '../Common/Body'
+import { BodyContainer } from '../../Common/Body'
 const Video = (props) => {
 
     const { location } = props

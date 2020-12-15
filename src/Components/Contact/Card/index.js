@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
-import { useHistory } from "react-router-dom";
 import * as Style from './style'
-import ChatIcon from '../../Illustration/Chat.svg'
-import AudioCall from '../../Illustration/AudioCall.svg'
-import More from '../../Illustration/More.svg'
-import Stroke from '../../Illustration/Stroke.svg'
-import CardHero from './CardHero'
-import ChatCard from './HistoryCard'
-import OTPSucess from '../../Illustration/SuccessOtp.svg'
+import ChatIcon from '../../../Illustration/Chat.svg'
+import AudioCall from '../../../Illustration/AudioCall.svg'
+import More from '../../../Illustration/More.svg'
+import Stroke from '../../../Illustration/Stroke.svg'
+import OTPSucess from '../../../Illustration/SuccessOtp.svg'
 import PinInput from 'react-pin-input'
 
-const Card = ({ picture, name, detail, index, id, locked, history, CardType, setOpenModel, openModel }) => {
+const Card = (props) => {
+
+    const { picture,
+        name,
+        detail,
+        index,
+        id,
+        locked,
+        setOpenModel,
+        openModel } = props;
 
     const [toggle, setToggle] = useState(false);
     const [ModelSteps, setModelSteps] = useState(1);
@@ -18,7 +24,6 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType, set
         1: '', 2: "", 3: '', 3: ""
     })
 
-    let historyLocation = useHistory();
 
 
     const CancelSendRequest = () => {
@@ -103,57 +108,24 @@ const Card = ({ picture, name, detail, index, id, locked, history, CardType, set
     }
 
 
-    const HandleVideo = () => {
-        historyLocation.push({
-            pathname: '/alert',
-            state: 3
-        });
-    }
-
-    const HandleAudio = () => {
-        historyLocation.push({
-            pathname: '/alert',
-            state: 2
-        });
-    }
-
-    const HandleChat = () => {
-        historyLocation.push({
-            pathname: '/alert',
-            state: 1
-        });
-    }
-
-
-
-    const renderSingleCard = () => {
-        switch (CardType) {
-            case 'group':
-                return <Style.CardContainer>
-                    <CardHero TickedCard name={name} picture={picture} index={index} id={id} detail={detail} />
-                    <Style.Description>
-                        <Style.PersonalInfo>
-                            <h1>{name}</h1>
-                            <span>{detail}</span>
-                        </Style.PersonalInfo>
-                        <Style.IconContainer>
-                            <div> <img src={ChatIcon} onClick={() => HandleChat()} /></div>
-                            <div>  <img src={AudioCall} onClick={() => HandleAudio()} /></div>
-                            <div> <img src={Stroke} onClick={() => HandleVideo()} /></div>
-                            <div><img src={More} onClick={(e) => setToggle(!toggle)} />{toggle && <ul><li>Admin</li><li>Delete</li><li>Exit Group</li></ul>} </div>
-                        </Style.IconContainer>
-                    </Style.Description>
-                </Style.CardContainer>
-
-
-
-        }
-    }
-
 
     return (
         <Style.Wrapper>
-            {renderSingleCard()}
+            <Style.CardContainer>
+                <img className="profil" src={picture} />
+                <Style.Description>
+                    <Style.PersonalInfo>
+                        <h1>{name}</h1>
+                        <span>{detail}</span>
+                    </Style.PersonalInfo>
+                    <Style.IconContainer>
+                        <img src={ChatIcon} onClick={() => locked && setOpenModel(index)} />
+                        <img src={AudioCall} onClick={() => locked && setOpenModel(index)} />
+                        <img src={Stroke} onClick={() => locked && setOpenModel(index)} />
+                        <img src={More} />
+                    </Style.IconContainer>
+                </Style.Description>
+            </Style.CardContainer>
             {index === openModel && HandleModelShow()}
         </Style.Wrapper>
     )

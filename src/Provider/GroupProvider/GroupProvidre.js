@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import MockData from '../Data/ContactMockData'
+import MockData from '../../Data/ContactMockData'
 export const Group = React.createContext();
 
 

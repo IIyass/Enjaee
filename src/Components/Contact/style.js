@@ -10,16 +10,18 @@ overflow:auto;
 export const SearchBar = styled.div`
 width:100%;
 display:flex;
-margin-top:20px;
 justify-content:space-between;
-`
+`;
 
 export const CardLayout = styled.div`
-justify-content:space-between;
-display: flex;
-flex-wrap:wrap;
-flex-direction:row;
->div{
-width:30%;
+display: grid;
+grid-template-columns:380px 380px 380px;
+grid-template-rows: auto auto auto;
+column-gap:30px;
+row-gap:30px;
+margin-top:20px;
+
+>div:not(:nth-child(${({ index }) => index + 1})){
+    opacity:0.5;
 }
-`
+`;

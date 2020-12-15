@@ -1,18 +1,18 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import * as Style from './style'
-import ChatIcon from '../../Illustration/Chat.svg'
-import More from '../../Illustration/More.svg'
-import CardHero from './CardHero'
-import Model from '../Model'
-import SortInput from '../UI/ProfilSelector'
-import { FooterButton } from '../UI/FooterButton'
+import ChatIcon from '../../../Illustration/Chat.svg'
+import More from '../../../Illustration/More.svg'
+import Model from '../../Model'
+import SortInput from '../../UI/ProfilSelector'
+import { FooterButton } from '../../UI/FooterButton'
 import PinInput from 'react-pin-input'
-import { Chat } from '../../Provider/ChatProvider/ChatProvider'
 
-const TemChatCard = ({ name, picture, index, id, detail, HandleChat }) => {
 
-    const { next, step } = useContext(Chat);
+const Card = (props) => {
 
+    const { next, step, name, picture, detail } = props;
+    console.log(step)
     const [open, setOpen] = useState(false);
     const [pin, setPin] = useState({
         1: '', 2: "", 3: '', 3: ""
@@ -22,6 +22,16 @@ const TemChatCard = ({ name, picture, index, id, detail, HandleChat }) => {
         setOpen(false)
         document.body.style.overflow = "scroll";
     }
+    let historyLocation = useHistory();
+
+
+    const HandleChat = () => {
+        historyLocation.push({
+            pathname: '/alert',
+            state: 1
+        });
+    }
+
     const Card = () => {
         switch (step) {
             case 1:
@@ -91,24 +101,26 @@ const TemChatCard = ({ name, picture, index, id, detail, HandleChat }) => {
         <>
             <Model onClose={handleCloseModal}
                 open={open} >{Card()}</Model>
-            <Style.CardContainer >
-                <div onClick={() => setOpen(true)}>
-                    <CardHero picture={picture} index={index} id={id} />
-                </div>
-                <Style.Description>
-                    <Style.PersonalInfo>
-                        <h1>{name}</h1>
-                        <span>{detail}</span>
-                    </Style.PersonalInfo>
-                    <Style.IconContainer>
-                        <img src={ChatIcon} onClick={() => HandleChat()} />
-                        <img src={More} />
-                    </Style.IconContainer>
-                </Style.Description>
-            </Style.CardContainer>
+            <Style.Wrapper>
+                <Style.CardContainer >
+                    <div onClick={() => setOpen(true)}>
+                        <img className="profil" src={picture} />
+                    </div>
+                    <Style.Description>
+                        <Style.PersonalInfo>
+                            <h1>{name}</h1>
+                            <span>{detail}</span>
+                        </Style.PersonalInfo>
+                        <Style.IconContainer>
+                            <img src={ChatIcon} onClick={() => HandleChat()} />
+                            <img src={More} />
+                        </Style.IconContainer>
+                    </Style.Description>
+                </Style.CardContainer>
+            </Style.Wrapper>
 
         </>
     )
 }
 
-export default TemChatCard;
+export default Card;

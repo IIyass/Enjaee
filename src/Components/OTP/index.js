@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import * as Style from './style'
-import { firebaseAuth } from '../../Provider/authProvider'
+import { firebaseAuth } from '../../Provider/AuthProvider/authProvider'
 import AuthInput from '../UI/AuthInput'
 import { FooterButton } from '../UI/FooterButton'
 import { Link } from 'react-router-dom'

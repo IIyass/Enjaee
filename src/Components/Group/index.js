@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import AddCard from './AddCard'
 import * as Style from './style'
-import { BodyContainer } from '../Common/Body'
+import { BodyContainer } from '../../Common/Body'
 import Body from '../Body'
-import { Group } from '../../Provider/GroupProvidre'
+import { Group } from '../../Provider/GroupProvider/GroupProvidre'
 
 const GroupWrraper = () => {
     const { step } = useContext(Group);

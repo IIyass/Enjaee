@@ -1,0 +1,2 @@
+export const GO_TO_NEXT_STEP = 'GO_TO_NEXT_STEP';
+export const BACK_TO_PREVIOUS_STEP = 'BACK_TO_PREVIOUS_STEP';

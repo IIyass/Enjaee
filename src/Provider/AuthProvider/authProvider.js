@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { authMethods } from '../firebase/authmethodes'
+import React, { useState } from 'react';
+import { authMethods } from '../../firebaseService/authmethodes'
 
 export const firebaseAuth = React.createContext()
 
@@ -27,8 +27,6 @@ const AuthProvider = (props) => {
     const handleOTPcode = () => {
         authMethods.handleOTPCheck(otpCode.mobile, setUser, setToken, authStep, setAuthStep, otpCode.password, loginInput.password, signUpInput.password, setOtpError);
     }
-
-    console.log(valuePhone)
     return (
         <firebaseAuth.Provider
             value={{

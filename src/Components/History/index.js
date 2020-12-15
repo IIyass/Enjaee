@@ -1,13 +1,21 @@
 import React from 'react'
 import * as Style from './style'
-import { BodyContainer } from '../Common/Body'
-import Body from '../Body'
-const History = () => {
+import Card from './Card'
+const History = ({ HistoryData }) => {
 
     return (
-        <Style.Wrapper as={BodyContainer}>
-            <Body PageType="HistoryPage" />
-        </Style.Wrapper >
+        <Style.CardLayout >
+            {HistoryData.map(({ picture, name, detail, history, id }, index) => {
+                return <Card
+                    index={index}
+                    name={name}
+                    picture={picture}
+                    detail={detail}
+                    history={history}
+                    id={id} />
+            })
+            }
+        </Style.CardLayout>
     )
 }
 

@@ -11,7 +11,6 @@ const ChatScreen = ({ gradientMessage }) => {
     const d = new Date();
     const n = d.getHours();
 
-
     const handleSubmit = (e) => {
         e.preventDefault()
         setTalk([...talk, content]);
@@ -51,7 +50,6 @@ const ChatScreen = ({ gradientMessage }) => {
                         name="Sam Dave"
                         text={text} />
                 })}
-
             </Style.CrossWrapper>
             <Style.Footer>
                 <ChatInput onChange={handleChange} type="text" name="chat" placeholder='Type here…' value={content} />
@@ -61,4 +59,4 @@ const ChatScreen = ({ gradientMessage }) => {
     )
 }
 
-export default ChatScreen
+export default ChatScreen;
