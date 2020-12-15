@@ -13,6 +13,8 @@ display:flex;
 height:100vh;
 img{
     margin:auto;
+    width:285px;
+    height:301.01px;
 }
 
 `;
@@ -26,12 +28,12 @@ display:flex;
 
 >div{
     margin: auto;
-    height:50%;
-    width:80%;
+    height:340px;
+    width:500px;
     display:flex;
     text-align:center;
     flex-direction:column;
-    justify-content:space-evenly;
+    justify-content:space-between;
     span{
         font-size:20px;
         font-weight:500;
@@ -54,12 +56,12 @@ export const ButtonContainer = styled.div`
 
 display:flex;
 flex-direction:column;
-justify-content:space-evenly;
 margin:0 auto;
 
 button{
     background-color:#fff;
     width:100%;
+    height:50px;
     border-color:#53A8CB;
     color:#53A8CB;
 }

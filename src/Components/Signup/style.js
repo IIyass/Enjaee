@@ -13,6 +13,8 @@ background-color:#F8F8F8;
 display:flex;
 img{
     margin:auto;
+    width:285px;
+    height:301.01px;
 }
 
 

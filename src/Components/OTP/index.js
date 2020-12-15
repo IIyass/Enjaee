@@ -28,10 +28,10 @@ const OTP = () => {
             </Style.LeftContainer>
             <Style.Formcontainer>
                 <div id="container">
-                    <div id="header">
-                        <h1>OTP</h1>
-                        <span>Enter otp as you received on your mobile number.</span>
-                    </div>
+
+                    <h1>OTP</h1>
+
+
                     <form onSubmit={handleSubmit}>
                         <AuthInput icon="mobile" placeholder="Code" onChange={handleChange} name="mobile" value={otpCode.mobile} />
                         <AuthInput icon="lock" placeholder="Password" onChange={handleChange} name="password" value={otpCode.password} />

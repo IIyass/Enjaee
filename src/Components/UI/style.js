@@ -74,6 +74,9 @@ export const Input = styled.input.attrs(props => ({
       outline: none !important;
       border:1px solid #53A8CB;    
     }
+    ::placeholder{
+      color:#000;
+    }
    
    
   `;
