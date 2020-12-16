@@ -1,5 +1,5 @@
 import React from 'react';
-import Group from './Components/Group'
+import Group from './Container/ChatGroup'
 import Contact from './Container/Contact'
 import Chat from './Container/TeamChat'
 import History from './Container/History'
