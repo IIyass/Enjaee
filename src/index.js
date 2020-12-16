@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import GroupProvider from './Provider/GroupProvider/GroupProvidre'
-import ChatProvider from './Provider/ChatProvider/ChatProvider'
 import AuthProvider from './Provider/AuthProvider/authProvider'
 import { createStore, compose, applyMiddleware } from "redux";
 import reduxthunk from 'redux-thunk';
@@ -16,14 +14,9 @@ const store = createStore(Reducers, composeEnhancers(applyMiddleware(reduxthunk)
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <ChatProvider>
-        <GroupProvider>
-          <Provider store={store}>
-            <App />
-          </Provider>
-        </GroupProvider>
-
-      </ChatProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
