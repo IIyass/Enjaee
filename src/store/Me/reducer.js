@@ -1,6 +1,7 @@
 const INIT_STATE = {
     Me: [],
-    Loading: true
+    Loading: true,
+    MyNotification: []
 }
 
 export default (state = INIT_STATE, action) => {
@@ -11,6 +12,12 @@ export default (state = INIT_STATE, action) => {
                 ...state,
                 Me: action.payload,
                 Loading: false
+            }
+        case 'CHECK_MY_NOTIFICATION':
+            return {
+                ...state,
+                MyNotification: action.payload
+
             }
         default:
             return state;

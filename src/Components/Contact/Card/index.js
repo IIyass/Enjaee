@@ -1,42 +1,49 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as Style from './style'
 import ChatIcon from '../../../Illustration/Chat.svg'
 import AudioCall from '../../../Illustration/AudioCall.svg'
 import More from '../../../Illustration/More.svg'
 import Stroke from '../../../Illustration/Stroke.svg'
 import OTPSucess from '../../../Illustration/SuccessOtp.svg'
+import Jhon from '../../../Illustration/Henry.png'
 import PinInput from 'react-pin-input'
+
 
 const Card = (props) => {
 
-    const { picture,
+    const { picture = Jhon,
         name,
-        detail,
+        detail = "CEO Web Messanger",
         index,
         id,
+        setReceiveNotifiation,
         locked,
-        setOpenModel,
-        openModel } = props;
+        showNotificationModel,
+        sendNotificationToContact,
+        MyNotification,
+        sentNotificationStep,
+        openNotificationModel,
+        showInvitationModel,
+        CancelSendRequest } = props;
 
-    const [toggle, setToggle] = useState(false);
+
+    useEffect(() => {
+        if (MyNotification.includes(id)) {
+            showInvitationModel(index);
+        }
+    }, [MyNotification.includes(id)])
+
     const [ModelSteps, setModelSteps] = useState(1);
     const [pin, setPin] = useState({
         1: '', 2: "", 3: '', 3: ""
     })
 
-
-
-    const CancelSendRequest = () => {
-        setToggle(false)
-        setOpenModel(undefined)
-    }
-
     const ModelShow = (text) => {
         return <Style.ModalContainer>
             <p>{text}</p>
             <Style.ButtonContainer>
-                <button className="red" onClick={() => CancelSendRequest()}>No</button>
-                <button className="green" onClick={() => setModelSteps(ModelSteps + 1)}>Yes</button>
+                <button className="red" onClick={() => CancelSendRequest(id)}>No</button>
+                <button className="green" onClick={() => sendNotificationToContact(id)}>Yes</button>
             </Style.ButtonContainer>
         </Style.ModalContainer>
     }
@@ -95,11 +102,11 @@ const Card = (props) => {
 
 
     const HandleModelShow = () => {
-        switch (ModelSteps) {
+        switch (sentNotificationStep) {
             case 1:
-                return ModelShow('Would you like send chat request to Jolie Price.');
+                return ModelShow(`Would you like send chat request to ${name}.`);
             case 2:
-                return ModelShow('Jolie Price you received Chat request fron jhon William');
+                return ModelShow(`Jolie Price you received Chat request fron ${name}.`);
             case 3:
                 return OtpModelShow1()
             case 4:
@@ -119,16 +126,16 @@ const Card = (props) => {
                         <span>{detail}</span>
                     </Style.PersonalInfo>
                     <Style.IconContainer>
-                        <img src={ChatIcon} onClick={() => locked && setOpenModel(index)} />
-                        <img src={AudioCall} onClick={() => locked && setOpenModel(index)} />
-                        <img src={Stroke} onClick={() => locked && setOpenModel(index)} />
+                        <img src={ChatIcon} onClick={() => showNotificationModel(index)} />
+                        <img src={AudioCall} onClick={() => showNotificationModel(index)} />
+                        <img src={Stroke} onClick={() => showNotificationModel(index)} />
                         <img src={More} />
                     </Style.IconContainer>
                 </Style.Description>
             </Style.CardContainer>
-            {index === openModel && HandleModelShow()}
+            {index === openNotificationModel && HandleModelShow()}
         </Style.Wrapper>
     )
 }
 
-export default Card;
+export default React.memo(Card);

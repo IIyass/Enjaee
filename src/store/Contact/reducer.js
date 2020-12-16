@@ -1,0 +1,49 @@
+const INIT_STATE = {
+    AllUsers: [],
+    Loading: true,
+    sentNotificationStep: 1,
+    openNotificationModel: undefined,
+}
+
+
+export default (state = INIT_STATE, action) => {
+
+    switch (action.type) {
+        case 'GET_ALL_USERS':
+            return {
+                ...state,
+                AllUsers: action.payload,
+                Loading: false
+            }
+
+        case 'SEND_NOTIFICATION_MODEL':
+            return {
+                ...state,
+                sentNotificationStep: -1,
+                openNotificationModel: undefined
+            }
+
+        case 'SHOW_NOTIFICATION_MODEL':
+            return {
+                ...state,
+                openNotificationModel: action.payload,
+                sentNotificationStep: 1,
+            }
+
+        case 'SHOW_INVITATION_MODEL':
+            return {
+                ...state,
+                sentNotificationStep: 2,
+                openNotificationModel: action.payload
+            }
+        case 'CANCEL_SEND_REQUEST':
+            return {
+                ...state,
+                openNotificationModel: undefined,
+                sentNotificationStep: -1,
+            }
+
+        default:
+            return state;
+    }
+};

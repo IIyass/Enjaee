@@ -1,1 +1,2 @@
-export const GET_MY_DATA = 'GET_MY_DATA'
+export const GET_MY_DATA = 'GET_MY_DATA';
+export const CHECK_MY_NOTIFICATION = 'CHECK_MY_NOTIFICATION'
