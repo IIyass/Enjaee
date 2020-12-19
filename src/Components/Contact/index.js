@@ -14,8 +14,15 @@ const DumbContact = (props) => {
         openNotificationModel,
         showNotificationModel,
         showInvitationModel,
-        CancelSendRequest
-
+        CancelSendRequest,
+        me,
+        AccepteSentRequest,
+        generateSecurityCode,
+        showGeneratingCodeModel,
+        confirmationCode,
+        showConfirmationCode,
+        AcceptedRequest,
+        requestSucceed
     } = props;
 
 
@@ -32,6 +39,14 @@ const DumbContact = (props) => {
                     showInvitationModel={showInvitationModel}
                     setReceiveNotifiation={setReceiveNotifiation}
                     CancelSendRequest={CancelSendRequest}
+                    AcceptedRequest={AcceptedRequest}
+                    showGeneratingCodeModel={showGeneratingCodeModel}
+                    showConfirmationCode={showConfirmationCode}
+                    confirmationCode={confirmationCode}
+                    requestSucceed={requestSucceed}
+                    me={me}
+                    AccepteSentRequest={AccepteSentRequest}
+                    generateSecurityCode={generateSecurityCode}
                     index={index}
                     locked={profile}
                     name={name}

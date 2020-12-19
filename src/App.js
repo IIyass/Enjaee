@@ -16,7 +16,8 @@ import Landing from './Components/Landing';
 const App = () => {
   const token = localStorage.getItem('token');
   return (
-    <BrowserRouter>
+    <>
+
       <Switch>
         <LandingRoute path="/" exact component={Landing} />
         <PrivateRoute path="/history" exact component={History} />
@@ -29,7 +30,7 @@ const App = () => {
         <Route path="/login" exact render={props => token ? <Redirect to='/contact' /> : <Login {...props} />} />
 
       </Switch>
-    </BrowserRouter >
+    </ >
 
   );
 }

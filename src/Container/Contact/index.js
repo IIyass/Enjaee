@@ -10,11 +10,17 @@ import {
     sendNotificationToContact,
     showNotificationModel,
     showInvitationModel,
-    CancelSendRequest
+    CancelSendRequest,
+    AccepteSentRequest,
+    generateSecurityCode,
+    showConfirmationCode,
+    showGeneratingCodeModel,
+    requestSucceed
 } from '../../store/Contact/action'
-import { checkMyNotification } from '../../store/Me/action'
+import { checkMyNotification, fetchMyData, getMyAcceptedRequest, getMyConfirmationRequest } from '../../store/Me/action'
 const Contact = (props) => {
     const { AllUsers,
+        fetchMyData,
         MyNotification,
         fetchAllUsers,
         Loading,
@@ -24,12 +30,26 @@ const Contact = (props) => {
         openNotificationModel,
         showNotificationModel,
         showInvitationModel,
-        CancelSendRequest
+        CancelSendRequest,
+        AccepteSentRequest,
+        generateSecurityCode,
+        getMyAcceptedRequest,
+        AcceptedRequest,
+        showGeneratingCodeModel,
+        confirmationCode,
+        getMyConfirmationRequest,
+        showConfirmationCode,
+        requestSucceed,
+        me
     } = props;
 
     useEffect(() => {
+        getMyAcceptedRequest();
+        getMyConfirmationRequest();
+        fetchMyData();
         fetchAllUsers();
         checkMyNotification();
+
     }, [])
 
     return (
@@ -50,11 +70,17 @@ const Contact = (props) => {
                     openNotificationModel={openNotificationModel}
                     showNotificationModel={showNotificationModel}
                     showInvitationModel={showInvitationModel}
-
                     CancelSendRequest={CancelSendRequest}
+                    AccepteSentRequest={AccepteSentRequest}
+                    generateSecurityCode={generateSecurityCode}
+                    AcceptedRequest={AcceptedRequest}
+                    confirmationCode={confirmationCode}
+                    showConfirmationCode={showConfirmationCode}
+                    showGeneratingCodeModel={showGeneratingCodeModel}
+                    requestSucceed={requestSucceed}
+                    me={me}
                 />
             }
-
         </Style.Wrapper >
     )
 }
@@ -65,6 +91,9 @@ const mapStateToProps = (state) => {
         MyNotification: state.MeReducer.MyNotification,
         sentNotificationStep: state.ContactReducer.sentNotificationStep,
         openNotificationModel: state.ContactReducer.openNotificationModel,
+        me: state.MeReducer.Me,
+        AcceptedRequest: state.MeReducer.AcceptedRequest,
+        confirmationCode: state.MeReducer.confirmationCode
 
     });
 }
@@ -76,7 +105,15 @@ export default connect(mapStateToProps,
         checkMyNotification,
         showNotificationModel,
         showInvitationModel,
-        CancelSendRequest
+        CancelSendRequest,
+        fetchMyData,
+        AccepteSentRequest,
+        generateSecurityCode,
+        getMyAcceptedRequest,
+        showGeneratingCodeModel,
+        showConfirmationCode,
+        getMyConfirmationRequest,
+        requestSucceed
 
     }
 )(Contact);

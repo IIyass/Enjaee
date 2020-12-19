@@ -1,7 +1,9 @@
 const INIT_STATE = {
-    Me: [],
+    Me: {},
     Loading: true,
-    MyNotification: []
+    MyNotification: [],
+    AcceptedRequest: [],
+    confirmationCode: []
 }
 
 export default (state = INIT_STATE, action) => {
@@ -18,6 +20,17 @@ export default (state = INIT_STATE, action) => {
                 ...state,
                 MyNotification: action.payload
 
+            }
+
+        case 'GET_MY_ACCEPTED_REQUEST':
+            return {
+                ...state,
+                AcceptedRequest: action.payload
+            }
+        case 'GET_MY_CONFIRMATION_REQUEST':
+            return {
+                ...state,
+                confirmationCode: action.payload
             }
         default:
             return state;
