@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 display:flex;
@@ -13,7 +13,6 @@ scrollbar-width: none;
     display: none;
 }
 `;
-
 
 export const LeftContainer = styled.div`
 width:260px;
@@ -92,6 +91,5 @@ margin-left:10px;
 background-color:#fff;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 border-radius: 10px;
-background:${({ backgroundColor }) => backgroundColor ? '#fff' : 'linear-gradient(180deg, #F08835 0%, #FF7271 100%)'};
+background:${({ backgroundColor }) => (backgroundColor ? '#fff' : 'linear-gradient(180deg, #F08835 0%, #FF7271 100%)')};
 `;
-

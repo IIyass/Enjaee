@@ -1,6 +1,6 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
-export const FooterButton = styled.button`
+const FooterButton = styled.button`
   background-color: transparent;
   font-family:Roboto;
   font-size:16px;
@@ -12,4 +12,6 @@ export const FooterButton = styled.button`
   height: 44px;
   cursor: pointer;
  
-  `;
+`;
+
+export default FooterButton;

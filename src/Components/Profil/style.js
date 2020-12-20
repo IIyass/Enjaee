@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 height:100%;
@@ -50,7 +49,6 @@ width:75%;
         width:45%;
     }
 }`;
-
 
 export const Setting = styled.div`
 width:95%;
@@ -177,4 +175,4 @@ button{
 #logo2{
     margin-top:50px;
 }
-`
+`;

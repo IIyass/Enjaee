@@ -30,9 +30,6 @@ justify-content:start;
 
 `;
 
-
-
-
 export const Description = styled.div`
 width:100%;
 display:flex;
@@ -85,7 +82,7 @@ ul{
   
 }
 
-`
+`;
 export const PersonalInfo = styled.div`
 width:auto;
 max-width:50%;
@@ -110,9 +107,6 @@ span{
     color: #737373;
 }
 `;
-
-
-
 
 export const ButtonContainer = styled.div`
 display: flex;

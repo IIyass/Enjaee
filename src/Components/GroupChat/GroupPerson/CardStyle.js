@@ -29,7 +29,6 @@ cursor:pointer;
 
 `;
 
-
 export const Description = styled.div`
 width:100%;
 display:flex;
@@ -82,7 +81,7 @@ ul{
   
 }
 
-`
+`;
 export const PersonalInfo = styled.div`
 width:auto;
 max-width:50%;

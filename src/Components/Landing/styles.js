@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 text-align:center;
@@ -228,8 +227,6 @@ button{
 }
 `;
 
-
-
 export const DeviceContainer = styled.div`
 background-color:#fff;
 width: 100%;
@@ -237,7 +234,7 @@ height: 400px;
 display:flex;
 flex-direction:row;
 align-items:center;
-justify-content:${props => props.display ? 'flex-start' : 'flex-end'};
+justify-content:${(props) => (props.display ? 'flex-start' : 'flex-end')};
 margin:5px;
 img{
     width: 117px;
@@ -248,7 +245,7 @@ img{
 #container{
     text-align:center;
     height:230px;
-    margin-right:${props => props.display ? '0' : '104px'};
+    margin-right:${(props) => (props.display ? '0' : '104px')};
     p{
         width: 360px;
         height: 84px;

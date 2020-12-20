@@ -1,5 +1,4 @@
-import styled from "styled-components"
-
+import styled from 'styled-components';
 
 export const ModalBackground = styled.div`
   display: flex;
@@ -12,7 +11,7 @@ export const ModalBackground = styled.div`
   right: 0;
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.2);
-`
+`;
 
 export const Modal = styled.div`
   background: #FFFFFF;
@@ -23,6 +22,4 @@ export const Modal = styled.div`
   padding:0px 10px;
   z-index: 9999;
  
-`
-
-
+`;

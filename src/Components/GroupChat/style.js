@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-
-
+import styled from 'styled-components';
 
 export const AddCardContainer = styled.div`
 width:380px;

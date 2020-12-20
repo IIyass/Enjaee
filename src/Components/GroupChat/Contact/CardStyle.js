@@ -23,7 +23,7 @@ justify-content:start;
 cursor:pointer;
 .profil{
   
-  opacity:${({ selectImg }) => selectImg ? 0.3 : 1};
+  opacity:${({ selectImg }) => (selectImg ? 0.3 : 1)};
   width:100%;
   height:100%;
 }
@@ -35,7 +35,6 @@ cursor:pointer;
 }
 
 `;
-
 
 export const Description = styled.div`
 width:100%;
@@ -89,7 +88,7 @@ ul{
   
 }
 
-`
+`;
 export const PersonalInfo = styled.div`
 width:auto;
 max-width:50%;

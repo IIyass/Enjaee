@@ -5,48 +5,34 @@ import Polygon from '../../Illustration/Polygon.svg'
 
 const ProfilSelector = (props) => {
 
-
-
-    const handleSortName = (e) => {
-        console.log(e)
-    }
+    const handleSortName = e => console.log(e);
     const customStyles = {
         control: (base, state) => ({
             ...base,
             width: state.selectProps.width,
             height: state.selectProps.height,
             background: 'transparent',
-            // match with the menu
-
-            // Overwrittes the different states of border
             borderColor: state.isFocused ? "#47525D" : "#47525D",
             borderColor: state.isSelected ? "#47525D" : "#47525D",
             border: state.selectProps.border,
             borderBottom: state.selectProps.borderBottom,
             borderRadius: 0,
-            // Removes weird border around container
             "&:hover": {
-                // Overwrittes the different states of border
                 borderColor: state.isFocused ? "#47525D" : "#47525D",
             }
-
         }),
         menu: base => ({
             ...base,
-            // override border radius to match the box
             borderRadius: 0,
-            // kill the gap
             marginTop: 0
         }),
         menuList: base => ({
             ...base,
-            // kill the white space on first and last option
             padding: 0
         }),
-        indicatorSeparator: (styles) => ({ display: 'none' }),
+        indicatorSeparator: () => ({ display: 'none' }),
         placeholder: () => ({ color: '#47525D', fontWeight: 400, fontSize: '14px' })
     }
-
 
     const DropdownIndicator = (
         props: ElementConfig<typeof components.DropdownIndicator>
@@ -58,26 +44,22 @@ const ProfilSelector = (props) => {
         );
     };
 
-    return (
-        <SelectContainer>
-            <p id="label">{props.label}</p>
-            <Select
-                components={{ DropdownIndicator }}
-                border={props.border}
-                borderBottom={props.borderBottom}
-                width={props.width}
-                height={props.height}
-                styles={customStyles}
-                options={props.options}
-                isMulti={false}
-                onChange={handleSortName}
-                isSearchable={true}
-                placeholder={props.placeholder}
-            />
-        </SelectContainer>
-
-
-    )
+    return <SelectContainer>
+        <p id="label">{props.label}</p>
+        <Select
+            components={{ DropdownIndicator }}
+            border={props.border}
+            borderBottom={props.borderBottom}
+            width={props.width}
+            height={props.height}
+            styles={customStyles}
+            options={props.options}
+            isMulti={false}
+            onChange={handleSortName}
+            isSearchable={true}
+            placeholder={props.placeholder}
+        />
+    </SelectContainer>;
 }
 
 export default ProfilSelector;

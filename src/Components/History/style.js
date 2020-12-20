@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 height:100%;
@@ -12,7 +11,6 @@ display:flex;
 margin-top:20px;
 justify-content:space-between;
 `;
-
 
 export const CardLayout = styled.div`
 display: grid;

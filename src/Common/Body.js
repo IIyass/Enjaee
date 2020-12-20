@@ -1,6 +1,6 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
-export const BodyContainer = styled.div`
+const BodyContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
@@ -11,3 +11,5 @@ scrollbar-width: none;
     display: none;
 }
 `;
+
+export default BodyContainer;

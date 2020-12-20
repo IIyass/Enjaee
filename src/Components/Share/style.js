@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const AuthWrapper = styled.div`
 display:flex;
@@ -66,4 +66,4 @@ button{
     color:#53A8CB;
 }
 
-`
+`;

@@ -1,6 +1,6 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
-export const ProfilButton = styled.button`
+const ProfilButton = styled.button`
   background-color: transparent;
   color: #000;
   border:1px solid #53A8CB;
@@ -9,4 +9,6 @@ export const ProfilButton = styled.button`
   height: 50px;
   cursor: pointer;
  
-  `
+  `;
+
+export default ProfilButton;

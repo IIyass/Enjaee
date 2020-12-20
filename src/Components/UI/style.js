@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const AuthInputContainer = styled.div`
 position:relative;
@@ -54,7 +54,7 @@ ul{
 }
 `;
 
-export const Input = styled.input.attrs(props => ({
+export const Input = styled.input.attrs((props) => ({
   type: props.type,
 }))`
     width: 100%;
@@ -94,8 +94,7 @@ flex-direction:column;
 
 `;
 
-
-export const ProfilInput = styled.input.attrs(props => ({
+export const ProfilInput = styled.input.attrs((props) => ({
   type: props.type,
 }))`
  
@@ -113,7 +112,7 @@ export const ProfilInput = styled.input.attrs(props => ({
     
   `;
 
-export const AuthInput = styled.input.attrs(props => ({
+export const AuthInput = styled.input.attrs((props) => ({
   type: props.type,
 }))`
    
@@ -152,7 +151,6 @@ img{
   z-index:1000;
 }
 `;
-
 
 export const ChatButton = styled.button`
 display:flex;

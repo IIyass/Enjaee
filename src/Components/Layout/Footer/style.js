@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-
-
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 align-items:center;
@@ -16,7 +14,7 @@ img{
 }
 margin-top:20px;
 
-`
+`;
 
 export const Details = styled.div`
 display:flex;

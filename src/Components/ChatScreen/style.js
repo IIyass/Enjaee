@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components';
 
 export const RightSide = styled.div`
 width:100%;
@@ -42,9 +41,9 @@ input{
 
 export const QuoteWrapper = styled.div`
 display:flex;
-flex-direction:${({ sender }) => sender ? 'row-reverse' : 'row'};
+flex-direction:${({ sender }) => (sender ? 'row-reverse' : 'row')};
 width:auto;
-align-self:${({ sender }) => sender ? 'flex-end' : 'flex-start'};
+align-self:${({ sender }) => (sender ? 'flex-end' : 'flex-start')};
 margin:20px 0px;
 #avatar{
     height:50px;
@@ -74,7 +73,7 @@ margin:20px 0px;
 }
 #messageContainer{
     display:flex;
-    flex-direction:${({ sender }) => sender ? 'row-reverse' : 'row'};
+    flex-direction:${({ sender }) => (sender ? 'row-reverse' : 'row')};
     align-items:center;
     img{
         margin-left:10px;
@@ -85,7 +84,7 @@ margin:20px 0px;
 #info{
     display:flex;
     flex-direction:row;
-    justify-content:${({ sender }) => sender ? 'flex-end' : 'flex-start'};
+    justify-content:${({ sender }) => (sender ? 'flex-end' : 'flex-start')};
     margin-bottom:10px;
     width:auto;
     max-width:600px;
@@ -106,9 +105,9 @@ margin:20px 0px;
 }
 
 #message{
-background:${({ gradientMessage }) => gradientMessage ? 'linear-gradient(180deg, #F08835 0%, #FF7271 100%)' : null};
-background-color:${({ sender }) => sender ? ' #F8F8F8' : ' #164664'};
-border-radius: ${({ sender }) => sender ? ' 20px 0px 20px 20px' : '0px 20px 20px 20px'};
+background:${({ gradientMessage }) => (gradientMessage ? 'linear-gradient(180deg, #F08835 0%, #FF7271 100%)' : null)};
+background-color:${({ sender }) => (sender ? ' #F8F8F8' : ' #164664')};
+border-radius: ${({ sender }) => (sender ? ' 20px 0px 20px 20px' : '0px 20px 20px 20px')};
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 height:auto;
 width:auto;
@@ -117,7 +116,7 @@ p{
 font-weight:400;
 font-size:20px;
 margin:20px;
-color:${({ sender }) => sender ? '#4A4A4A' : '#fff'} ;
+color:${({ sender }) => (sender ? '#4A4A4A' : '#fff')} ;
 line-break:anywhere;
 }
 }

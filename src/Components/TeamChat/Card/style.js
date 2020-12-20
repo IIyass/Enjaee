@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 width:360px;
@@ -30,7 +29,6 @@ justify-content:space-between;
 margin:auto;
 
 `;
-
 
 export const CardContainer = styled.div`
 width:100%;
@@ -84,7 +82,7 @@ ul{
   
 }
 
-`
+`;
 export const PersonalInfo = styled.div`
 width:auto;
 max-width:50%;
@@ -109,7 +107,6 @@ span{
     color: #737373;
 }
 `;
-
 
 export const ButtonContainer = styled.div`
 display: flex;
@@ -171,4 +168,3 @@ button{
 }
 
 `;
-

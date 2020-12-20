@@ -1,7 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
 width:100%;
 height:100%;
 border-radius: 5px;
@@ -79,3 +78,5 @@ color:#fff;
     }
 }
 `;
+
+export default Wrapper;

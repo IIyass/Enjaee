@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-
-
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
 display:flex;
@@ -25,7 +23,6 @@ background-color:#fff;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 border-radius: 10px;
 `;
-
 
 export const LeftSide = styled.div`
 width:260px;

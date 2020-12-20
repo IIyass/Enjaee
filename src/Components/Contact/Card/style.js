@@ -36,8 +36,6 @@ height:240px;
 background-color:#fff;
 `;
 
-
-
 export const Description = styled.div`
 width:100%;
 display:flex;
@@ -90,7 +88,7 @@ ul{
   
 }
 
-`
+`;
 export const PersonalInfo = styled.div`
 width:auto;
 max-width:50%;
@@ -116,7 +114,6 @@ span{
 }
 `;
 
-
 export const ModalContainer = styled.div`
 background: #FFFFFF;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
@@ -131,7 +128,7 @@ height:120px;
 padding:5px 5px;
 z-index: 9999;
 
-`
+`;
 
 export const ButtonContainer = styled.div`
 display: flex;

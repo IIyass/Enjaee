@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const Container = styled.div`
 max-width: 1440px;
@@ -25,7 +25,6 @@ scrollbar-width: none;
     display: none;
 }
 `;
-
 
 export const LandingLayoutWrapper = styled.div`
 height: 100%;

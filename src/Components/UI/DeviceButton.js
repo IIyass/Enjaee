@@ -1,7 +1,8 @@
-import styled from "styled-components"
-import React from 'react'
-import Ios from '../../Illustration/IOSICON.svg'
-import Android from '../../Illustration/LandingPage/GoogleIcon.svg'
+import styled from 'styled-components';
+import React from 'react';
+import Ios from '../../Illustration/IOSICON.svg';
+import Android from '../../Illustration/LandingPage/GoogleIcon.svg';
+
 export const DeviceButton = styled.div`
 position:relative;
 width: 236px;
@@ -61,16 +62,13 @@ span{
 
   `;
 
-const DeviceButtonContainer = ({ type, children }) => {
+const DeviceButtonContainer = ({ type, children }) => (
 
-  return (
+  <DeviceButton>
+    <button id="mark">{children}</button>
+    {type === 'IOS' ? <img id="icon" src={Ios} /> : <img id="icon" src={Android} />}
+  </DeviceButton>
 
-    <DeviceButton >
-      <button id="mark">{children}</button>
-      {type === "IOS" ? <img id="icon" src={Ios} /> : <img id="icon" src={Android} />}
-    </DeviceButton>
+);
 
-  )
-}
-
-export default DeviceButtonContainer
+export default DeviceButtonContainer;
