@@ -5,7 +5,7 @@ const INIT_STATE = {
   openNotificationModel: undefined,
 };
 
-export default (state = INIT_STATE, action) => {
+const ContactReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case 'GET_ALL_USERS':
       return {
@@ -75,3 +75,5 @@ export default (state = INIT_STATE, action) => {
       return state;
   }
 };
+
+export default ContactReducer;

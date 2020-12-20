@@ -109,7 +109,15 @@ export const showGeneratingCodeModel = (index) => async (dispatch, getState) => 
   });
 };
 
-export const requestSucceed = () => async (dispatch) => {
+export const requestSucceed = (id) => async (dispatch) => {
+  const me = await getMeByPhone();
+  await usersRef.doc(me[0].id).update({
+    friends: firebase.firestore.FieldValue.arrayUnion(id),
+    confirmationCode: me[0].confirmationCode.filter(code => code.Id !== id)
+  });
+  await usersRef.doc(id).update({
+    friends: firebase.firestore.FieldValue.arrayUnion(me[0].id),
+  });
   dispatch(push('/alert'));
   dispatch({
     type: REQUEST_SUCCEED,

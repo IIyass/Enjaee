@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PinInput from 'react-pin-input';
+import { useHistory } from 'react-router-dom';
 import * as Style from './style';
 import ChatIcon from '../../../Illustration/Chat.svg';
 import AudioCall from '../../../Illustration/AudioCall.svg';
@@ -11,6 +12,7 @@ import Jhon from '../../../Illustration/Henry.png';
 const Card = (props) => {
   const {
     picture = Jhon,
+    friends,
     name,
     detail = 'CEO Web Messanger',
     index,
@@ -30,34 +32,58 @@ const Card = (props) => {
     confirmationCode,
     showConfirmationCode,
     requestSucceed,
+
   } = props;
 
   const [code, setCode] = useState();
 
-  const checkNotificationType = () => {
-    if (AcceptedRequest.includes(id)) {
-      showGeneratingCodeModel(index);
-    } else if (MyNotification.includes(id)) {
-      showInvitationModel(index);
-    } else if (confirmationCode.filter((e) => {
-      setCode(e.code);
-      return e.Id === id;
-    }).length > 0) {
-      showConfirmationCode(index);
-    }
-  };
+  const checkNotificationType = useCallback(
+    () => {
+      if (AcceptedRequest.includes(id)) {
+        showGeneratingCodeModel(index);
+      } else if (MyNotification.includes(id)) {
+        showInvitationModel(index);
+      } else if (confirmationCode.filter((e) => {
+        setCode(e.code);
+        return e.Id === id;
+      }).length > 0) {
+        showConfirmationCode(index);
+      }
+    },
+    [AcceptedRequest, MyNotification,
+      confirmationCode, id, index,
+      showConfirmationCode, showGeneratingCodeModel,
+      showInvitationModel],
+  );
+
+  const historyLocation = useHistory();
+
+  const HandleVideo = () => historyLocation.push({
+    pathname: '/alert',
+    state: 3,
+  });
+
+  const HandleAudio = () => historyLocation.push({
+    pathname: '/alert',
+    state: 2,
+  });
+
+  const HandleChat = () => historyLocation.push({
+    pathname: '/alert',
+    state: 1,
+  });
 
   useEffect(() => {
     checkNotificationType();
-  }, [MyNotification.includes(id)]);
+  }, [checkNotificationType]);
 
   useEffect(() => {
     checkNotificationType();
-  }, [confirmationCode.includes(id)]);
+  }, [checkNotificationType]);
 
   useEffect(() => {
     checkNotificationType();
-  }, [AcceptedRequest.includes(id)]);
+  }, [checkNotificationType]);
 
   const [pin, setPin] = useState('');
   const [confirmPin, setConfirmPin] = useState('');
@@ -65,7 +91,7 @@ const Card = (props) => {
   const accepteNotificationRequest = () => AccepteSentRequest(index, id);
   const insertCodeForMyRequest = () => {
     if (code === confirmPin[3]) {
-      return requestSucceed();
+      return requestSucceed(id);
     }
   };
 
@@ -163,8 +189,10 @@ const Card = (props) => {
     }
   };
 
+
+
   // To test do this console.log('something') with useMemo and without it.
-  const renderCard = useMemo(() => <Style.CardContainer>
+  const renderCard = () => <Style.CardContainer>
     <img className="profil" src={picture} />
     <Style.Description>
       <Style.PersonalInfo>
@@ -172,13 +200,13 @@ const Card = (props) => {
         <span>{detail}</span>
       </Style.PersonalInfo>
       <Style.IconContainer>
-        <img src={ChatIcon} onClick={() => showNotificationModel(index)} />
-        <img src={AudioCall} onClick={() => showNotificationModel(index)} />
-        <img src={Stroke} onClick={() => showNotificationModel(index)} />
-        <img src={More} />
+        <img alt="chat" src={ChatIcon} onClick={() => friends.includes(me.id) ? HandleChat() : showNotificationModel(index)} />
+        <img alt="audio" src={AudioCall} onClick={() => friends.includes(me.id) ? HandleAudio() : showNotificationModel(index)} />
+        <img alt="stroke" src={Stroke} onClick={() => friends.includes(me.id) ? HandleVideo() : showNotificationModel(index)} />
+        <img alt="more" src={More} />
       </Style.IconContainer>
     </Style.Description>
-  </Style.CardContainer>, [name, picture, detail, index]);
+  </Style.CardContainer>;
 
   return (
     <Style.Wrapper>

@@ -48,21 +48,31 @@ const Contact = (props) => {
   } = props;
 
   useEffect(() => {
-    getMyAcceptedRequest();
-    getMyConfirmationRequest();
-    fetchMyData();
     fetchAllUsers();
+  }, [AllUsers, fetchAllUsers])
+
+  useEffect(() => {
+    fetchMyData();
+  }, [fetchMyData, me]);
+
+  useEffect(() => {
+    getMyAcceptedRequest();
+  }, [getMyAcceptedRequest, AcceptedRequest]);
+
+  useEffect(() => {
+    getMyConfirmationRequest();;
+  }, [getMyConfirmationRequest, confirmationCode]);
+
+  useEffect(() => {
     checkMyNotification();
-  }, []);
+  }, [checkMyNotification, MyNotification]);
 
   return (
     <Style.Wrapper as={BodyContainer}>
-
       <Style.SearchBar>
         <SearchInput placeholder="Search" name="Search" iconSearch />
         <SortInput width="150px" height="40px" />
       </Style.SearchBar>
-
       {Loading
         ? <h1>Loading ....</h1>
         : (
