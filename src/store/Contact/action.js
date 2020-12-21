@@ -12,14 +12,13 @@ import {
   SHOW_CONFIRMATION_CODE_MODEL,
   REQUEST_SUCCEED,
 } from './actionType';
-import { firestoreFirebase, firebaseStorage } from '../../firebaseService/FirebaseIndex';
+import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
 import { parseJwt, getMeByPhone } from '../../helpers';
 import { checkMyNotification } from '../Me/action';
 
 const usersRef = firestoreFirebase.collection('/users');
-const Token = localStorage.getItem('token');
 
-export const fetchAllUsers = () => async (dispatch, getState) => {
+export const fetchAllUsers = () => async (dispatch) => {
   const token = localStorage.getItem('token');
   const res = await usersRef.get();
   const AllUsersDocuments = res.docs.filter((e) => e.data().mobile !== parseJwt(token).firebase.identities.phone[0]);
@@ -118,7 +117,10 @@ export const requestSucceed = (id) => async (dispatch) => {
   await usersRef.doc(id).update({
     friends: firebase.firestore.FieldValue.arrayUnion(me[0].id),
   });
-  dispatch(push('/alert'));
+  dispatch(push({
+    pathname: '/webChat',
+    state: id,
+  }));
   dispatch({
     type: REQUEST_SUCCEED,
   });

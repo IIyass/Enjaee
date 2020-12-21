@@ -27,6 +27,7 @@ const Card = (props) => {
     historyLocation.push({
       pathname: '/alert',
       state: 2,
+
     });
   };
 

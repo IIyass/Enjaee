@@ -8,22 +8,20 @@ const Quote = ({
   sender, img, time, name, text, gradientMessage, avatar,
 }) => (
   <Style.QuoteWrapper gradientMessage={gradientMessage} sender={sender}>
-    <img id="avatar" src={avatar} />
+    <img id="avatar" alt="avatar" src={avatar} />
     <div>
       <div id="info">
         <h1>{name}</h1>
-        {' '}
-        <img src={Ellipse14} />
-        {' '}
+        <img alt="img" src={Ellipse14} />
         <p>{time}</p>
       </div>
       <div id="messageWrapper">
-        {img ? <img id="asset" src={chatbubble} /> : <></>}
+        {img ? <img id="asset" alt="asset" src={chatbubble} /> : <></>}
         <div id="messageContainer">
           <div id="message">
             <p>{text}</p>
           </div>
-          <img src={Truch} />
+          <img alt="Truch" src={Truch} />
         </div>
       </div>
     </div>

@@ -1,11 +1,7 @@
-import firebase from 'firebase';
 import {
   GET_MY_DATA, CHECK_MY_NOTIFICATION, GET_MY_CONFIRMATION_REQUEST, GET_MY_ACCEPTED_REQUEST,
 } from './actionType';
-import { firestoreFirebase, firebaseStorage } from '../../firebaseService/FirebaseIndex';
 import { getMeByPhone } from '../../helpers';
-
-const usersRef = firestoreFirebase.collection('/users');
 
 export const fetchMyData = () => async (dispatch) => {
   const me = await getMeByPhone();

@@ -18,9 +18,9 @@ export const getMeByPhone = async () => {
   return MyDocument;
 };
 
-export const getUserNameById = async (id) => {
+export const getUserById = async (id) => {
   const res = await usersRef.get();
-  let name = res.docs.filter((e) => e.id === id);
-  name = name.map((e) => e.data().name);
-  return name[0];
+  let user = res.docs.filter((e) => e.id === id);
+  user = user.map((e) => e.data());
+  return user
 };

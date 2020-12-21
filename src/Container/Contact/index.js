@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useCallback } from 'react';
+import { connect, useSelector, useDispatch } from 'react-redux';
 import * as Style from './style';
 import BodyContainer from '../../Common/Body';
 import DumbContactComponent from '../../Components/Contact';
@@ -23,49 +23,76 @@ import {
 
 const Contact = (props) => {
   const {
-    AllUsers,
     fetchMyData,
-    MyNotification,
     fetchAllUsers,
-    Loading,
     sendNotificationToContact,
     checkMyNotification,
-    sentNotificationStep,
-    openNotificationModel,
     showNotificationModel,
     showInvitationModel,
     CancelSendRequest,
     AccepteSentRequest,
     generateSecurityCode,
     getMyAcceptedRequest,
-    AcceptedRequest,
     showGeneratingCodeModel,
-    confirmationCode,
     getMyConfirmationRequest,
     showConfirmationCode,
     requestSucceed,
-    me,
   } = props;
 
-  useEffect(() => {
-    fetchAllUsers();
-  }, [AllUsers, fetchAllUsers])
+  const dispatch = useDispatch()
+  const AllUsers = useSelector((state) => state.ContactReducer.AllUsers)
+  const Loading = useSelector((state) => state.ContactReducer.Loading)
+  const MyNotification = useSelector((state) => state.MeReducer.MyNotification)
+  const sentNotificationStep = useSelector((state) => state.ContactReducer.sentNotificationStep)
+  const openNotificationModel = useSelector((state) => state.ContactReducer.openNotificationModel)
+  const me = useSelector((state) => state.MeReducer.Me)
+  const AcceptedRequest = useSelector((state) => state.MeReducer.AcceptedRequest)
+  const confirmationCode = useSelector((state) => state.MeReducer.confirmationCode)
+
+  const fetchAllUsersCall = useCallback(
+    () => dispatch(fetchAllUsers),
+    [dispatch, fetchAllUsers]
+  );
+
+  const fetchMyDataCall = useCallback(
+    () => dispatch(fetchMyData),
+    [dispatch, fetchMyData]
+  );
+
+  const getMyAcceptedRequestCall = useCallback(
+    () => dispatch(getMyAcceptedRequest),
+    [dispatch, getMyAcceptedRequest]
+  );
+
+  const getMyConfirmationRequestCall = useCallback(
+    () => dispatch(getMyConfirmationRequest),
+    [dispatch, getMyConfirmationRequest]
+  );
+
+  const checkMyNotificationCall = useCallback(
+    () => dispatch(checkMyNotification),
+    [checkMyNotification, dispatch]
+  );
 
   useEffect(() => {
-    fetchMyData();
-  }, [fetchMyData, me]);
+    fetchAllUsersCall()
+  }, [fetchAllUsersCall])
 
   useEffect(() => {
-    getMyAcceptedRequest();
-  }, [getMyAcceptedRequest, AcceptedRequest]);
+    fetchMyDataCall();
+  }, [fetchMyDataCall]);
 
   useEffect(() => {
-    getMyConfirmationRequest();;
-  }, [getMyConfirmationRequest, confirmationCode]);
+    getMyAcceptedRequestCall()
+  }, [getMyAcceptedRequestCall]);
 
   useEffect(() => {
-    checkMyNotification();
-  }, [checkMyNotification, MyNotification]);
+    getMyConfirmationRequestCall()
+  }, [getMyConfirmationRequestCall]);
+
+  useEffect(() => {
+    checkMyNotificationCall();
+  }, [checkMyNotificationCall]);
 
   return (
     <Style.Wrapper as={BodyContainer}>
@@ -98,19 +125,9 @@ const Contact = (props) => {
     </Style.Wrapper>
   );
 };
-const mapStateToProps = (state) => ({
-  AllUsers: state.ContactReducer.AllUsers,
-  Loading: state.ContactReducer.Loading,
-  MyNotification: state.MeReducer.MyNotification,
-  sentNotificationStep: state.ContactReducer.sentNotificationStep,
-  openNotificationModel: state.ContactReducer.openNotificationModel,
-  me: state.MeReducer.Me,
-  AcceptedRequest: state.MeReducer.AcceptedRequest,
-  confirmationCode: state.MeReducer.confirmationCode,
 
-});
 
-export default connect(mapStateToProps,
+export default connect(null,
   {
     fetchAllUsers,
     sendNotificationToContact,

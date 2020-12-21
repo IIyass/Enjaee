@@ -23,13 +23,13 @@ const DumbContact = (props) => {
     AcceptedRequest,
     requestSucceed,
   } = props;
+
   return (
     <Style.CardLayout index={undefined}>
       {ContactData.map(({
         picture, name, detail, profile, history, id, friends,
-      }, index) => {
-
-        return < Card
+      }, index) => <Card
+          key={id}
           friends={friends}
           openNotificationModel={openNotificationModel}
           sendNotificationToContact={sendNotificationToContact}
@@ -55,7 +55,7 @@ const DumbContact = (props) => {
           history={history}
           id={id}
         />
-      })}
+      )}
     </Style.CardLayout>
   );
 };

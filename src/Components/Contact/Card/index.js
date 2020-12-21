@@ -32,11 +32,9 @@ const Card = (props) => {
     confirmationCode,
     showConfirmationCode,
     requestSucceed,
-
   } = props;
-
   const [code, setCode] = useState();
-
+  console.log('Card component')
   const checkNotificationType = useCallback(
     () => {
       if (AcceptedRequest.includes(id)) {
@@ -59,18 +57,20 @@ const Card = (props) => {
   const historyLocation = useHistory();
 
   const HandleVideo = () => historyLocation.push({
-    pathname: '/alert',
+    pathname: '/webChat',
     state: 3,
+
   });
 
   const HandleAudio = () => historyLocation.push({
-    pathname: '/alert',
+    pathname: '/webChat',
     state: 2,
   });
 
   const HandleChat = () => historyLocation.push({
-    pathname: '/alert',
+    pathname: '/webChat',
     state: 1,
+    id
   });
 
   useEffect(() => {
@@ -96,7 +96,7 @@ const Card = (props) => {
   };
 
   const OtpModelShow1 = () => <Style.OTPModalContainer>
-    <img src={OTPSucess} />
+    <img alt="success" src={OTPSucess} />
     <span>Request Accepted</span>
     <p>
       Please generate password and share with
@@ -189,11 +189,9 @@ const Card = (props) => {
     }
   };
 
-
-
   // To test do this console.log('something') with useMemo and without it.
   const renderCard = () => <Style.CardContainer>
-    <img className="profil" src={picture} />
+    <img alt="profil" className="profil" src={picture} />
     <Style.Description>
       <Style.PersonalInfo>
         <h1>{name}</h1>
@@ -215,4 +213,4 @@ const Card = (props) => {
     </Style.Wrapper>
   );
 };
-export default Card;
+export default React.memo(Card);

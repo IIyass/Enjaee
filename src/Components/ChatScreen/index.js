@@ -1,60 +1,71 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import * as Style from './style';
 import FooterButton from '../UI/FooterButton';
 import ChatInput from '../UI/ChatInput';
 import Quote from './Words';
 import Jolie from '../../Illustration/Joli.png';
 import Jhon from '../../Illustration/Martin.png';
-
-const ChatScreen = ({ gradientMessage }) => {
+import { getUserById } from '../../helpers'
+const ChatScreen = (props) => {
+  const {
+    gradientMessage,
+    receiver,
+    SendMessage,
+    messages,
+    me
+  } = props;
   const [content, setContent] = useState('');
-  const [talk, setTalk] = useState([]);
-  const d = new Date();
-  const n = d.getHours();
+  const [Receiver, setReceiver] = useState()
+
+  const getReceiver = useCallback(
+    () => {
+      getUserById(receiver).then(res => setReceiver(res))
+    }, [receiver, setReceiver]
+  );
+
+  useEffect(() => {
+    getReceiver()
+  }, [getReceiver])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTalk([...talk, content]);
+    SendMessage(content)
     setContent('');
   };
 
+  console.log(content)
   const handleChange = (e) => {
     setContent(e.target.value);
   };
+
+  const getTime = (x) => {
+    const year = x.toDate().getFullYear();
+    const day = x.toDate().getDay();
+    const hours = x.toDate().getHours();
+    const seconds = x.toDate().getSeconds();
+    const minutes = x.toDate().getMinutes();
+    const months = x.toDate().getMonth();
+    return hours + ':' + minutes + ':' + seconds;
+  }
   return (
     <Style.RightSide>
       <Style.CrossWrapper>
-        <Quote
-          avatar={Jhon}
-          gradientMessage={gradientMessage}
-          time="06:30"
-          name="Sam Dave"
-          text="Hey Tara, How are you? How’s going Summer Vacation?"
-        />
-        <Quote
-          sender
-          avatar={Jolie}
-          time="06:32"
-          name="Tara Alwyn"
-          text="Hey Tara, I am Good, Thank you:) Vacation is good yet…"
-        />
-        <Quote
-          avatar={Jhon}
-          gradientMessage={gradientMessage}
-          time="06:35"
-          img
-          name="Sam Dave"
-          text="Did you see my painting? i am curious to update on FB status."
-        />
-        {talk.map((text) => (
-          <Quote
-            time={n}
+        {messages.map(e => {
+          return e.userId === me.id ? <Quote
             sender
-            avatar={Jhon}
-            name="Sam Dave"
-            text={text}
-          />
-        ))}
+            avatar={Jolie}
+            time={getTime(e.createdAt)}
+            name={me.name}
+            text={e.text}
+          /> :
+            <Quote
+              avatar={Jhon}
+              gradientMessage={gradientMessage}
+              time={getTime(e.createdAt)}
+              name={Receiver.name}
+              text="Text text"
+            />
+        })}
       </Style.CrossWrapper>
       <Style.Footer>
         <ChatInput onChange={handleChange} type="text" name="chat" placeholder="Type here…" value={content} />
