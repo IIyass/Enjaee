@@ -17,6 +17,17 @@ scrollbar-width: none;
 }
 border-radius:5px;
 
+.videoInsert {
+    position: absolute; 
+    right: 0; 
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    width: auto; 
+    height: auto; 
+    background-size: cover;
+    overflow: hidden;
+}
 
 >div{
     width:60%;
