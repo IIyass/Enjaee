@@ -1,6 +1,6 @@
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
 import firebase from 'firebase';
-import { GO_CHAT_ROOM, GO_AUDIO_ROOM, GO_VIDEO_ROOM, GET_MY_MESSAGES } from './actionType'
+import { GO_CHAT_ROOM, GO_AUDIO_ROOM, GO_VIDEO_ROOM } from './actionType'
 import { getMeByPhone } from '../../helpers';
 const messagesRef = firestoreFirebase.collection('/messages');
 
@@ -23,24 +23,15 @@ export const goToVideoRoom = () => async (dispatch) => {
 };
 
 export const SendMessage = (data) => async (dispatch) => {
+    console.log(data)
     const me = await getMeByPhone();
-
     await messagesRef.add({
-        text: 'data',
+        text: data.content,
+        room: data.room,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
         userId: me[0].id
-
     })
     dispatch({
         type: 'SEND_MESSAGE'
-    });
-};
-
-export const getMyMessages = () => async (dispatch) => {
-    const query = await messagesRef.orderBy('createdAt').limit(24).get()
-    const res = await query.docs.map(e => e.data());
-    dispatch({
-        type: GET_MY_MESSAGES,
-        payload: res
     });
 };

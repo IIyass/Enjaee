@@ -22,6 +22,7 @@ const DumbContact = (props) => {
     showConfirmationCode,
     AcceptedRequest,
     requestSucceed,
+    GoToPrivateRoom
   } = props;
 
   return (
@@ -53,6 +54,7 @@ const DumbContact = (props) => {
           picture={picture}
           detail={detail}
           history={history}
+          GoToPrivateRoom={GoToPrivateRoom}
           id={id}
         />
       )}

@@ -1,4 +1,4 @@
-import { firestoreFirebase, firebaseStorage } from '../firebaseService/FirebaseIndex';
+import { firestoreFirebase } from '../firebaseService/FirebaseIndex';
 
 const Token = localStorage.getItem('token');
 const usersRef = firestoreFirebase.collection('/users');
@@ -18,9 +18,9 @@ export const getMeByPhone = async () => {
   return MyDocument;
 };
 
-export const getUserById = async (id) => {
+export const getUserNameById = async (id) => {
   const res = await usersRef.get();
-  let user = res.docs.filter((e) => e.id === id);
-  user = user.map((e) => e.data());
-  return user
+  let name = res.docs.filter((e) => e.id === id);
+  name = name.map((e) => e.data().name);
+  return name[0];
 };

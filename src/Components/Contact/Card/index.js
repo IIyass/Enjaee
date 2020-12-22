@@ -32,9 +32,12 @@ const Card = (props) => {
     confirmationCode,
     showConfirmationCode,
     requestSucceed,
+    GoToPrivateRoom
   } = props;
+
   const [code, setCode] = useState();
   console.log('Card component')
+
   const checkNotificationType = useCallback(
     () => {
       if (AcceptedRequest.includes(id)) {
@@ -65,12 +68,6 @@ const Card = (props) => {
   const HandleAudio = () => historyLocation.push({
     pathname: '/webChat',
     state: 2,
-  });
-
-  const HandleChat = () => historyLocation.push({
-    pathname: '/webChat',
-    state: 1,
-    id
   });
 
   useEffect(() => {
@@ -189,7 +186,6 @@ const Card = (props) => {
     }
   };
 
-  // To test do this console.log('something') with useMemo and without it.
   const renderCard = () => <Style.CardContainer>
     <img alt="profil" className="profil" src={picture} />
     <Style.Description>
@@ -198,7 +194,7 @@ const Card = (props) => {
         <span>{detail}</span>
       </Style.PersonalInfo>
       <Style.IconContainer>
-        <img alt="chat" src={ChatIcon} onClick={() => friends.includes(me.id) ? HandleChat() : showNotificationModel(index)} />
+        <img alt="chat" src={ChatIcon} onClick={() => friends.includes(me.id) ? GoToPrivateRoom(id) : showNotificationModel(index)} />
         <img alt="audio" src={AudioCall} onClick={() => friends.includes(me.id) ? HandleAudio() : showNotificationModel(index)} />
         <img alt="stroke" src={Stroke} onClick={() => friends.includes(me.id) ? HandleVideo() : showNotificationModel(index)} />
         <img alt="more" src={More} />

@@ -1,71 +1,81 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import * as Style from './style';
 import FooterButton from '../UI/FooterButton';
 import ChatInput from '../UI/ChatInput';
 import Quote from './Words';
 import Jolie from '../../Illustration/Joli.png';
 import Jhon from '../../Illustration/Martin.png';
-import { getUserById } from '../../helpers'
+import { getUserNameById } from '../../helpers'
+
 const ChatScreen = (props) => {
   const {
     gradientMessage,
-    receiver,
+    participants,
     SendMessage,
     messages,
+    loading,
     me
   } = props;
-  const [content, setContent] = useState('');
-  const [Receiver, setReceiver] = useState()
 
-  const getReceiver = useCallback(
-    () => {
-      getUserById(receiver).then(res => setReceiver(res))
-    }, [receiver, setReceiver]
+  const [content, setContent] = useState('');
+  const [name, setName] = useState([])
+
+  const dummy = useRef();
+
+  const getMyName = useCallback(
+    (id) => {
+      getUserNameById(id).then(res => setName((name) => [...name, {
+        id,
+        name: res
+      }]))
+
+    }, []
   );
 
   useEffect(() => {
-    getReceiver()
-  }, [getReceiver])
+    dummy.current.scrollIntoView({ behavior: 'smooth' });
+  }, [messages])
+
+
+  useEffect(() => {
+    participants.participants.map(e => getMyName(e))
+  }, [])
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    SendMessage(content)
+    SendMessage({ content, room: participants.id })
     setContent('');
   };
 
-  console.log(content)
   const handleChange = (e) => {
     setContent(e.target.value);
   };
 
-  const getTime = (x) => {
-    const year = x.toDate().getFullYear();
-    const day = x.toDate().getDay();
-    const hours = x.toDate().getHours();
-    const seconds = x.toDate().getSeconds();
-    const minutes = x.toDate().getMinutes();
-    const months = x.toDate().getMonth();
-    return hours + ':' + minutes + ':' + seconds;
-  }
+  const date = new Date();
+
   return (
     <Style.RightSide>
       <Style.CrossWrapper>
-        {messages.map(e => {
+        {!loading ? messages.map((e, index) => {
           return e.userId === me.id ? <Quote
+            key={index}
             sender
             avatar={Jolie}
-            time={getTime(e.createdAt)}
+            time={e.createdAt === null ? date : e.createdAt.toDate()}
             name={me.name}
             text={e.text}
           /> :
             <Quote
+              key={index}
               avatar={Jhon}
               gradientMessage={gradientMessage}
-              time={getTime(e.createdAt)}
-              name={Receiver.name}
-              text="Text text"
+              time={e.createdAt.toDate()}
+              name={name.map(x => e.userId === x.id && x.name)}
+              text={e.text}
             />
-        })}
+        }) : <h1>Loading</h1>}
+        <span ref={dummy}></span>
       </Style.CrossWrapper>
       <Style.Footer>
         <ChatInput onChange={handleChange} type="text" name="chat" placeholder="Type here…" value={content} />
@@ -75,4 +85,4 @@ const ChatScreen = (props) => {
   );
 };
 
-export default ChatScreen;
+export default React.memo(ChatScreen);

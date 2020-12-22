@@ -16,6 +16,7 @@ import {
   showConfirmationCode,
   showGeneratingCodeModel,
   requestSucceed,
+  GoToPrivateRoom
 } from '../../store/Contact/action';
 import {
   checkMyNotification, fetchMyData, getMyAcceptedRequest, getMyConfirmationRequest,
@@ -37,6 +38,7 @@ const Contact = (props) => {
     getMyConfirmationRequest,
     showConfirmationCode,
     requestSucceed,
+    GoToPrivateRoom
   } = props;
 
   const dispatch = useDispatch()
@@ -119,6 +121,7 @@ const Contact = (props) => {
             showConfirmationCode={showConfirmationCode}
             showGeneratingCodeModel={showGeneratingCodeModel}
             requestSucceed={requestSucceed}
+            GoToPrivateRoom={GoToPrivateRoom}
             me={me}
           />
         )}
@@ -143,5 +146,6 @@ export default connect(null,
     showConfirmationCode,
     getMyConfirmationRequest,
     requestSucceed,
+    GoToPrivateRoom
 
   })(Contact);

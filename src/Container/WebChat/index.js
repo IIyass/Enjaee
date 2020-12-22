@@ -8,15 +8,16 @@ import ChatScreen from '../../Components/ChatScreen'
 import AudioChat from '../../Components/AudioChat';
 import VideoChat from '../../Components/VideoChat';
 import BodyContainer from '../../Common/Body';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
 import {
     goToChatRoom,
     goToAudioRoom,
     goToVideoRoom,
-    getMyMessages,
     SendMessage
 } from '../../store/WebChat/action'
 import { fetchMyData } from '../../store/Me/action';
-
+import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
+const messagesRef = firestoreFirebase.collection('/messages');
 const WebChat = (props) => {
 
     const {
@@ -25,7 +26,6 @@ const WebChat = (props) => {
         goToAudioRoom,
         goToChatRoom,
         goToVideoRoom,
-        getMyMessages,
         fetchMyData,
     } = props
 
@@ -36,27 +36,18 @@ const WebChat = (props) => {
         [dispatch, fetchMyData]
     );
 
-    const getMyMessagesCall = useCallback(
-        () => dispatch(getMyMessages),
-        [dispatch, getMyMessages]
-    );
-
-    useEffect(() => {
-        getMyMessagesCall()
-    }, [getMyMessagesCall]);
-
     useEffect(() => {
         fetchMyDataCall()
     }, [fetchMyDataCall]);
 
+    const query = messagesRef
+        .where("room", "==", location.state.id)
+        .orderBy("createdAt")
+        .limitToLast(24)
+
     const chatStep = useSelector((state) => state.WebChatReducer.chatStep)
     const me = useSelector((state) => state.MeReducer.Me)
-    const messages = useSelector((state) => state.WebChatReducer.MyMessages)
-
-    const SendMessageCall = useCallback(
-        () => dispatch(SendMessage),
-        [dispatch, SendMessage]
-    );
+    const [snapshot, loading, error] = useCollectionData(query, { idField: 'id' });
 
     const goToAudioRoomCall = useCallback(
         () => dispatch(goToAudioRoom),
@@ -79,10 +70,11 @@ const WebChat = (props) => {
             case 1:
                 return <ChatScreen
                     gradientMessage
-                    receiver={location.id}
-                    SendMessage={SendMessageCall}
-                    messages={messages}
+                    participants={location.state}
+                    SendMessage={SendMessage}
+                    messages={snapshot}
                     me={me}
+                    loading={loading}
                 />;
             case 2:
                 return <AudioChat />;
@@ -120,6 +112,5 @@ export default connect(null,
         goToVideoRoom,
         fetchMyData,
         SendMessage,
-        getMyMessages
     })(WebChat);
 

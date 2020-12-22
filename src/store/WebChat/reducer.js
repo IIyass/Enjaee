@@ -1,6 +1,7 @@
 const INIT_STATE = {
     chatStep: 1,
-    MyMessages: []
+    MyMessages: {},
+    Loading: true,
 };
 
 const WebChatReducer = (state = INIT_STATE, action) => {
@@ -23,7 +24,8 @@ const WebChatReducer = (state = INIT_STATE, action) => {
         case 'GET_MY_MESSAGES':
             return {
                 ...state,
-                MyMessages: action.payload
+                MyMessages: action.payload,
+                Loading: false
             }
         default:
             return state;

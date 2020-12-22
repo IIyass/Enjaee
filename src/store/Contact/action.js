@@ -17,6 +17,7 @@ import { parseJwt, getMeByPhone } from '../../helpers';
 import { checkMyNotification } from '../Me/action';
 
 const usersRef = firestoreFirebase.collection('/users');
+const roomsRef = firestoreFirebase.collection('/rooms');
 
 export const fetchAllUsers = () => async (dispatch) => {
   const token = localStorage.getItem('token');
@@ -117,11 +118,42 @@ export const requestSucceed = (id) => async (dispatch) => {
   await usersRef.doc(id).update({
     friends: firebase.firestore.FieldValue.arrayUnion(me[0].id),
   });
-  dispatch(push({
-    pathname: '/webChat',
-    state: id,
-  }));
   dispatch({
     type: REQUEST_SUCCEED,
   });
 };
+
+
+export const GoToPrivateRoom = (id) => async (dispatch) => {
+  const me = await getMeByPhone();
+  let room = {};
+  await roomsRef.where('participants', 'array-contains', me[0].id)
+    .get()
+    .then((querySnapshot) => {
+      return querySnapshot.forEach((doc) => {
+        if (doc.data().participants.every(elem => [me[0].id, id].indexOf(elem) > -1)) {
+          room = ({ id: doc.id, ...doc.data() })
+        }
+      });
+    })
+
+  if (Object.entries(room).length === 0) {
+    await roomsRef.add({
+      participants: [me[0].id, id]
+    }).then(doc =>
+      dispatch(push({
+        pathname: '/webChat',
+        state: {
+          id: doc.id,
+          participants: [me[0].id, id]
+        },
+      }))
+    )
+  } else {
+    dispatch(push({
+      pathname: '/webChat',
+      state: room,
+    }));
+  }
+}
+
