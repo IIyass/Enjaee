@@ -2,6 +2,7 @@ const INIT_STATE = {
     chatStep: 1,
     MyMessages: {},
     Loading: true,
+    videoStep: 1
 };
 
 const WebChatReducer = (state = INIT_STATE, action) => {
@@ -26,6 +27,26 @@ const WebChatReducer = (state = INIT_STATE, action) => {
                 ...state,
                 MyMessages: action.payload,
                 Loading: false
+            }
+        case 'VIDEO_CALL_OFFER':
+            return {
+                ...state,
+                videoStep: 2
+            }
+        case 'VIDEO_CALL_CONDIDATE':
+            return {
+                ...state,
+                videoStep: 2
+            }
+        case 'VIDEO_CALL_ANSWER':
+            return {
+                ...state,
+                videoStep: 2
+            }
+        case 'START_CALL':
+            return {
+                ...state,
+                videoStep: 2
             }
         default:
             return state;

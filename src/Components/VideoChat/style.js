@@ -67,7 +67,7 @@ border-radius:5px;
     left:20px;
     display:flex;
     justify-content:space-between;
-    img{
+    .video{
         width:200px;
         height:100%;
         border: 2px solid #FFFFFF;

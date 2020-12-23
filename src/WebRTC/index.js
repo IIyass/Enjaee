@@ -1,11 +1,11 @@
-export const createOffer = async (connection, localStream, userToCall, doOffer, database, username) => {
+import { startCallAction } from '../store/WebChat/action'
+export const createOffer = async (connection, localStream, userToCall, doOffer) => {
     try {
         connection.addStream(localStream)
-
         const offer = await connection.createOffer()
         await connection.setLocalDescription(offer)
+        doOffer(userToCall, offer)
 
-        doOffer(userToCall, offer, database, username)
     } catch (exception) {
         console.error(exception)
     }
@@ -37,13 +37,12 @@ export const initiateConnection = async () => {
     }
 }
 
-export const listenToConnectionEvents = (conn, username, remoteUsername, database, remoteVideoRef, doCandidate) => {
+export const listenToConnectionEvents = (conn, remoteUsername, remoteVideoRef, doCandidate) => {
     conn.onicecandidate = function (event) {
         if (event.candidate) {
-            doCandidate(remoteUsername, event.candidate, database, username)
+            doCandidate(remoteUsername, event.candidate)
         }
     }
-
     // when a remote user adds stream to the peer connection, we display it
     conn.ontrack = function (e) {
         if (remoteVideoRef.srcObject !== e.streams[0]) {
@@ -52,7 +51,7 @@ export const listenToConnectionEvents = (conn, username, remoteUsername, databas
     }
 }
 
-export const sendAnswer = async (conn, localStream, notif, doAnswer, database, username) => {
+export const sendAnswer = async (conn, localStream, notif, doAnswer) => {
     try {
         conn.addStream(localStream)
 
@@ -63,7 +62,7 @@ export const sendAnswer = async (conn, localStream, notif, doAnswer, database, u
         const answer = await conn.createAnswer()
         conn.setLocalDescription(answer)
 
-        doAnswer(notif.from, answer, database, username)
+        doAnswer(notif, answer)
     } catch (exception) {
         console.error(exception)
     }
@@ -71,7 +70,8 @@ export const sendAnswer = async (conn, localStream, notif, doAnswer, database, u
 
 export const startCall = (yourConn, notif) => {
     const answer = JSON.parse(notif.answer)
-    yourConn.setRemoteDescription(answer)
+    yourConn.setRemoteDescription(answer);
+    startCallAction()
 }
 
 export const addCandidate = (yourConn, notif) => {

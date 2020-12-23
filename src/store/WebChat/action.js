@@ -3,8 +3,10 @@ import firebase from 'firebase';
 import { GO_CHAT_ROOM, GO_AUDIO_ROOM, GO_VIDEO_ROOM } from './actionType'
 import { getMeByPhone } from '../../helpers';
 
-const usersRef = firestoreFirebase.collection('/users');
 const messagesRef = firestoreFirebase.collection('/messages');
+const roomsRef = firestoreFirebase.collection('/rooms');
+const usersRef = firestoreFirebase.collection('/users');
+
 
 export const goToChatRoom = () => async (dispatch) => {
     dispatch({
@@ -38,11 +40,11 @@ export const SendMessage = (data) => async (dispatch) => {
 };
 
 
-export const doVideoOffer = (to, offer, database, username) => async (dispatch) => {
+export const doVideoOffer = (to, offer) => async (dispatch) => {
     const me = await getMeByPhone();
-    await usersRef.doc(to).add({
+    await usersRef.doc(to).update({
         type: 'offer',
-        from: me[0].name,
+        from: me[0].id,
         offer: JSON.stringify(offer)
     })
     dispatch({
@@ -51,25 +53,11 @@ export const doVideoOffer = (to, offer, database, username) => async (dispatch) 
 };
 
 
-export const doVideoAnswer = (to, offer, database, username) => async (dispatch) => {
-    const me = await getMeByPhone();
-    await usersRef.doc(to).update({
-        type: 'answer',
-        from: me[0].name,
-        offer: JSON.stringify(offer)
-    })
-    dispatch({
-        type: 'VIDEO_CALL_ANSWER'
-    });
-};
-
-
-
-export const doCandidate = (to, candidate, database, username) => async (dispatch) => {
+export const doCandidate = (to, candidate) => async (dispatch) => {
     const me = await getMeByPhone();
     await usersRef.doc(to).update({
         type: 'candidate',
-        from: me[0].name,
+        from: me[0].id,
         candidate: JSON.stringify(candidate)
     })
     dispatch({
@@ -77,3 +65,23 @@ export const doCandidate = (to, candidate, database, username) => async (dispatc
     });
 
 }
+
+
+export const doVideoAnswer = (to, answer) => async (dispatch) => {
+    const me = await getMeByPhone();
+    await roomsRef.doc(to).update({
+        type: 'answer',
+        from: me[0].name,
+        answer: JSON.stringify(answer)
+    })
+    dispatch({
+        type: 'VIDEO_CALL_ANSWER'
+    });
+};
+
+
+export const startCallAction = () => async (dispatch) => {
+    dispatch({
+        type: 'START_CALL'
+    });
+};
