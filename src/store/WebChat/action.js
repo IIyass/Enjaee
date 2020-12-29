@@ -40,45 +40,66 @@ export const SendMessage = (data) => async (dispatch) => {
 };
 
 
-export const doVideoOffer = (to, offer) => async (dispatch) => {
+export const doVideoOffer = (room, offer) => async (dispatch) => {
     const me = await getMeByPhone();
-    await usersRef.doc(to).update({
+    await roomsRef.doc(room).update({
         type: 'offer',
         from: me[0].id,
         offer: JSON.stringify(offer)
     })
-    dispatch({
-        type: 'VIDEO_CALL_OFFER'
-    });
+    // dispatch({
+    //     type: 'VIDEO_CALL_OFFER'
+    // });
 };
 
 
 export const doCandidate = (to, candidate) => async (dispatch) => {
     const me = await getMeByPhone();
     await usersRef.doc(to).update({
-        type: 'candidate',
-        from: me[0].id,
-        candidate: JSON.stringify(candidate)
+        VideoRoom: {
+            type: 'candidate',
+            from: me[0].id,
+            candidate: JSON.stringify(candidate)
+        }
     })
-    dispatch({
-        type: 'VIDEO_CALL_CONDIDATE'
-    });
+    // dispatch({
+    //     type: 'VIDEO_CALL_CONDIDATE'
+    // });
 
 }
 
 
-export const doVideoAnswer = (to, answer) => async (dispatch) => {
+export const doVideoAnswer = (room, answer) => async (dispatch) => {
     const me = await getMeByPhone();
-    await roomsRef.doc(to).update({
+    await roomsRef.doc(room).update({
         type: 'answer',
-        from: me[0].name,
+        from: me[0].id,
         answer: JSON.stringify(answer)
     })
-    dispatch({
-        type: 'VIDEO_CALL_ANSWER'
-    });
+
 };
 
+export const leaveRoom = (me, remoteUser, room) => async (dispatch) => {
+    await roomsRef.doc(room).update({
+        type: 'leave',
+        answer: '',
+        from: '',
+        offer: '',
+    })
+    await usersRef.doc(me).update({
+        "VideoRoom.type": '',
+        "VideoRoom.from": '',
+        "VideoRoom.candidate": ''
+    })
+    await usersRef.doc(remoteUser[0]).update({
+        'VideoRoom.type': '',
+        'VideoRoom.from': '',
+        'VideoRoom.candidate': ''
+    })
+    dispatch({
+        type: 'LEAVE_CALL'
+    });
+};
 
 export const startCallAction = () => async (dispatch) => {
     dispatch({

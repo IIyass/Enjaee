@@ -117,4 +117,12 @@ margin:0;
     }
 
 }
+
+#AcceptInvitation{
+    display:${props => props.display ? 'none' : 'block'};
+}
+
+#ScreenVideo{
+    display:${props => props.display ? 'block' : 'none'};
+}
 `;

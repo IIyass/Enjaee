@@ -1,4 +1,5 @@
 import { startCallAction } from '../store/WebChat/action'
+import 'webrtc-adapter'
 export const createOffer = async (connection, localStream, userToCall, doOffer) => {
     try {
         connection.addStream(localStream)
@@ -29,40 +30,44 @@ export const initiateConnection = async () => {
             iceServers: [{ urls: 'stun:stun2.1.google.com:19302' }]
         }
 
-        const conn = new RTCPeerConnection(configuration)
+        const peerConnection = new RTCPeerConnection(configuration)
 
-        return conn
+        return peerConnection
     } catch (exception) {
         console.error(exception)
     }
 }
 
-export const listenToConnectionEvents = (conn, remoteUsername, remoteVideoRef, doCandidate) => {
-    conn.onicecandidate = function (event) {
+export const listenToConnectionEvents = async (conn, remoteUsername, remoteVideoRef, doCandidate) => {
+    conn.onicecandidate = async function (event) {
         if (event.candidate) {
-            doCandidate(remoteUsername, event.candidate)
+            await doCandidate(remoteUsername, event.candidate)
         }
     }
     // when a remote user adds stream to the peer connection, we display it
-    conn.ontrack = function (e) {
-        if (remoteVideoRef.srcObject !== e.streams[0]) {
-            remoteVideoRef.srcObject = e.streams[0]
+    conn.ontrack = async function (e) {
+
+        if (remoteVideoRef.current.srcObject !== e.streams[0]) {
+            remoteVideoRef.current.srcObject = e.streams[0]
         }
     }
 }
 
-export const sendAnswer = async (conn, localStream, notif, doAnswer) => {
+export const sendAnswer = async (conn, localStream, roomId, room, doAnswer) => {
     try {
         conn.addStream(localStream)
-
-        const offer = JSON.parse(notif.offer)
-        conn.setRemoteDescription(offer)
+        conn.setRemoteDescription(room.session.offer)
 
         // create an answer to an offer
         const answer = await conn.createAnswer()
         conn.setLocalDescription(answer)
-
-        doAnswer(notif, answer)
+        const roomWithAnswer = {
+            answer: {
+                type: answer.type,
+                sdp: answer.sdp
+            }
+        }
+        doAnswer(roomId, roomWithAnswer)
     } catch (exception) {
         console.error(exception)
     }
