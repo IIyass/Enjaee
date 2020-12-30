@@ -18,6 +18,7 @@ import {
 import { doVideoOffer, doCandidate, doVideoAnswer, startCallAction, leaveRoom } from '../../store/WebChat/action'
 import { fetchMyData } from '../../store/Me/action';
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
+import usePrevious from '../../hooks/usePrevious'
 import 'webrtc-adapter'
 const messagesRef = firestoreFirebase.collection('/messages');
 
@@ -53,6 +54,7 @@ const WebChat = (props) => {
         .where("room", "==", location.state.id)
         .orderBy("createdAt")
         .limitToLast(24)
+
 
     const chatStep = useSelector((state) => state.WebChatReducer.chatStep)
     const videoStep = useSelector((state) => state.WebChatReducer.videoStep)
@@ -94,7 +96,6 @@ const WebChat = (props) => {
                     participants={location.state}
                     videoStep={videoStep}
                     doAnswer={doVideoAnswer}
-                    notif={me}
                     me={me}
                     leaveRoom={leaveRoom}
                     startCallAction={startCallAction}

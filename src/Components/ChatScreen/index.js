@@ -28,7 +28,6 @@ const ChatScreen = (props) => {
         id,
         name: res
       }]))
-
     }, []
   );
 
@@ -40,7 +39,6 @@ const ChatScreen = (props) => {
   useEffect(() => {
     participants.participants.map(e => getMyName(e))
   }, [])
-
 
   const handleSubmit = (e) => {
     e.preventDefault();

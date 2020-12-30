@@ -1,17 +1,3 @@
-import { startCallAction } from '../store/WebChat/action'
-import 'webrtc-adapter'
-export const createOffer = async (connection, localStream, userToCall, doOffer) => {
-    try {
-        connection.addStream(localStream)
-        const offer = await connection.createOffer()
-        await connection.setLocalDescription(offer)
-        doOffer(userToCall, offer)
-
-    } catch (exception) {
-        console.error(exception)
-    }
-}
-
 export const initiateLocalStream = async () => {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({
@@ -22,7 +8,8 @@ export const initiateLocalStream = async () => {
     } catch (exception) {
         console.error(exception)
     }
-}
+};
+
 export const initiateConnection = async () => {
     try {
         // using Google public stun server
@@ -36,7 +23,7 @@ export const initiateConnection = async () => {
     } catch (exception) {
         console.error(exception)
     }
-}
+};
 
 export const listenToConnectionEvents = async (conn, remoteUsername, remoteVideoRef, doCandidate) => {
     conn.onicecandidate = async function (event) {
@@ -51,36 +38,45 @@ export const listenToConnectionEvents = async (conn, remoteUsername, remoteVideo
             remoteVideoRef.current.srcObject = e.streams[0]
         }
     }
-}
+};
 
-export const sendAnswer = async (conn, localStream, roomId, room, doAnswer) => {
-    try {
-        conn.addStream(localStream)
-        conn.setRemoteDescription(room.session.offer)
+export const sendOfferCall = async (localconnection,
+    localstream,
+    room,
+    me,
+    remoteVideoRef,
+    doCandidate,
+    doVideoOffer
+) => {
+    await listenToConnectionEvents(localconnection,
+        room.participants.filter(e => e !== me.id)[0],
+        remoteVideoRef,
+        doCandidate);
+    await localconnection.addStream(localstream)
+    // create an an offer
+    const offer = await localconnection.createOffer();
+    await localconnection.setLocalDescription(offer);
+    doVideoOffer(room.id, offer)
+};
 
-        // create an answer to an offer
-        const answer = await conn.createAnswer()
-        conn.setLocalDescription(answer)
-        const roomWithAnswer = {
-            answer: {
-                type: answer.type,
-                sdp: answer.sdp
-            }
-        }
-        doAnswer(roomId, roomWithAnswer)
-    } catch (exception) {
-        console.error(exception)
-    }
-}
-
-export const startCall = (yourConn, notif) => {
-    const answer = JSON.parse(notif.answer)
-    yourConn.setRemoteDescription(answer);
-    startCallAction()
-}
-
-export const addCandidate = (yourConn, notif) => {
-    // apply the new received candidate to the connection
-    const candidate = JSON.parse(notif.candidate)
-    yourConn.addIceCandidate(new RTCIceCandidate(candidate))
-}
+export const sendAnswerCall = async (localconnection,
+    localstream,
+    room,
+    roomMetaData,
+    me,
+    remoteVideoRef,
+    doCandidate,
+    doAnswer
+) => {
+    await listenToConnectionEvents(localconnection,
+        room.participants.filter(e => e !== me.id)[0],
+        remoteVideoRef,
+        doCandidate);
+    await localconnection.addStream(localstream)
+    const offer = JSON.parse(roomMetaData.offer)
+    await localconnection.setRemoteDescription(offer)
+    // create an answer to an offer
+    const answer = await localconnection.createAnswer()
+    await localconnection.setLocalDescription(answer)
+    await doAnswer(room.id, answer)
+};
