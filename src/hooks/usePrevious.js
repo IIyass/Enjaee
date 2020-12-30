@@ -1,11 +1,13 @@
-
 import { useEffect, useRef } from 'react';
 
 const usePrevious = (value) => {
-    const ref = useRef();
+    const prevCountRef = useRef();
+
     useEffect(() => {
-        ref.current = value;
+        prevCountRef.current = value;
     });
-    return ref.current;
+
+    return prevCountRef.current;
 }
-export default usePrevious
+
+export default usePrevious;

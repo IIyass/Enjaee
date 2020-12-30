@@ -1,5 +1,6 @@
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
 import firebase from 'firebase';
+import { push } from 'connected-react-router';
 import { GO_CHAT_ROOM, GO_AUDIO_ROOM, GO_VIDEO_ROOM } from './actionType'
 import { getMeByPhone } from '../../helpers';
 
@@ -79,7 +80,13 @@ export const doVideoAnswer = (room, answer) => async (dispatch) => {
 
 };
 
-export const leaveRoom = (me, remoteUser, room) => async (dispatch) => {
+export const leaveRoom = (me, remoteUser, room, localconnection, localstream) => async (dispatch) => {
+    // await localconnection.close();
+    // await localconnection.removeStream(localstream);
+    // await navigator.mediaDevices.getUserMedia({
+    //     video: false,
+    //     audio: false
+    // })
     await roomsRef.doc(room).update({
         type: 'leave',
         answer: '',
@@ -99,6 +106,7 @@ export const leaveRoom = (me, remoteUser, room) => async (dispatch) => {
     dispatch({
         type: 'LEAVE_CALL'
     });
+
 };
 
 export const startCallAction = () => async (dispatch) => {
