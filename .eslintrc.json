@@ -1,6 +1,6 @@
 {
     // "extends": "airbnb-base",
-    // "extends": "react-app",
+    "extends": "react-app",
     "plugins": [
         // ...
         "react-hooks",
