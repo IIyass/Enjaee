@@ -74,7 +74,7 @@ border-radius:5px;
         border-radius: 4px;
     }
 >div{
-width: 200px;
+width: 300px;
 height: 80px;
 background: #222425;
 mix-blend-mode: normal;
@@ -105,6 +105,7 @@ margin:0;
     img{
         width:45px;
         height:45px;
+        cursor:pointer;
     }
     button{
         opacity:1;
@@ -117,4 +118,6 @@ margin:0;
     }
 
 }
+
+ 
 `;

@@ -31,7 +31,7 @@ const WebChatReducer = (state = INIT_STATE, action) => {
         case 'VIDEO_CALL_OFFER':
             return {
                 ...state,
-                videoStep: 2
+
             }
         case 'VIDEO_CALL_CONDIDATE':
             return {
@@ -47,6 +47,11 @@ const WebChatReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 videoStep: 2
+            }
+        case 'LEAVE_CALL':
+            return {
+                ...state,
+                videoStep: 1
             }
         default:
             return state;

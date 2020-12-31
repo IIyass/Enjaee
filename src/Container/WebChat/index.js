@@ -1,5 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
-import firebase from 'firebase';
+import React, { useEffect, useCallback } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import * as Style from './style';
 import Jolie from '../../Illustration/Henry.png'
@@ -16,15 +15,11 @@ import {
     goToVideoRoom,
     SendMessage
 } from '../../store/WebChat/action'
-import { doVideoOffer, doCandidate, doVideoAnswer } from '../../store/WebChat/action'
+import { doVideoOffer, doCandidate, doVideoAnswer, startCallAction, leaveRoom } from '../../store/WebChat/action'
 import { fetchMyData } from '../../store/Me/action';
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
-import {
-    listenToConnectionEvents,
-    addCandidate,
-    sendAnswer
-} from '../../WebRTC'
-
+import usePrevious from '../../hooks/usePrevious'
+import 'webrtc-adapter'
 const messagesRef = firestoreFirebase.collection('/messages');
 
 
@@ -39,7 +34,9 @@ const WebChat = (props) => {
         fetchMyData,
         doCandidate,
         doVideoOffer,
-        doVideoAnswer
+        doVideoAnswer,
+        startCallAction,
+        leaveRoom
     } = props
 
     const dispatch = useDispatch();
@@ -57,6 +54,7 @@ const WebChat = (props) => {
         .where("room", "==", location.state.id)
         .orderBy("createdAt")
         .limitToLast(24)
+
 
     const chatStep = useSelector((state) => state.WebChatReducer.chatStep)
     const videoStep = useSelector((state) => state.WebChatReducer.videoStep)
@@ -78,33 +76,6 @@ const WebChat = (props) => {
         [dispatch, goToVideoRoom]
     );
 
-    // const handleUpdate = (notif, username) => {
-
-    //     if (notif) {
-    //         switch (notif.type) {
-    //             case 'offer':
-    //                 // accepte offer , decline offer
-    //                 setConnectedUser(notif.from)
-    //                 listenToConnectionEvents(localconnection, username, notif.from, remoteVideoRef, doCandidate)
-    //                 sendAnswer(localconnection, localstream, notif, doAnswer, username)
-    //                 break;
-
-    //             case 'answer':
-    //                 // start call
-    //                 setConnectedUser(notif.from)
-    //                 startCall(localconnection, notif)
-    //                 break;
-    //             case 'candidate':
-
-    //                 // idk
-    //                 addCandidate(localconnection, notif)
-    //                 break;
-    //             default:
-    //                 break;
-    //         }
-    //     }
-    // }
-
     const handleChatStep = () => {
         switch (chatStep) {
             case 1:
@@ -125,8 +96,9 @@ const WebChat = (props) => {
                     participants={location.state}
                     videoStep={videoStep}
                     doAnswer={doVideoAnswer}
-                    notif={me}
                     me={me}
+                    leaveRoom={leaveRoom}
+                    startCallAction={startCallAction}
                 />;
             default:
                 return <ChatScreen gradientMessage />;
@@ -162,6 +134,8 @@ export default connect(null,
         SendMessage,
         doVideoOffer,
         doCandidate,
-        doVideoAnswer
+        doVideoAnswer,
+        startCallAction,
+        leaveRoom
     })(WebChat);
 
