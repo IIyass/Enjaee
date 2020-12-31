@@ -1,6 +1,5 @@
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
 import firebase from 'firebase';
-import { push } from 'connected-react-router';
 import { GO_CHAT_ROOM, GO_AUDIO_ROOM, GO_VIDEO_ROOM } from './actionType'
 import { getMeByPhone } from '../../helpers';
 
@@ -48,9 +47,7 @@ export const doVideoOffer = (room, offer) => async (dispatch) => {
         from: me[0].id,
         offer: JSON.stringify(offer)
     })
-    // dispatch({
-    //     type: 'VIDEO_CALL_OFFER'
-    // });
+
 };
 
 
@@ -63,9 +60,7 @@ export const doCandidate = (to, candidate) => async (dispatch) => {
             candidate: JSON.stringify(candidate)
         }
     })
-    // dispatch({
-    //     type: 'VIDEO_CALL_CONDIDATE'
-    // });
+
 
 }
 
@@ -81,12 +76,7 @@ export const doVideoAnswer = (room, answer) => async (dispatch) => {
 };
 
 export const leaveRoom = (me, remoteUser, room, localconnection, localstream) => async (dispatch) => {
-    // await localconnection.close();
-    // await localconnection.removeStream(localstream);
-    // await navigator.mediaDevices.getUserMedia({
-    //     video: false,
-    //     audio: false
-    // })
+
     await roomsRef.doc(room).update({
         type: 'leave',
         answer: '',

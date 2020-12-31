@@ -1,24 +1,28 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import * as Style from '../style';
 import Card from './Card';
+import Jhon from '../../../Illustration/Henry.png';
+import useUserData from '../../../hooks/useUserData'
 
 const GroupPerson = (props) => {
-  const { team, getTeamById } = props;
+  const { team } = props;
+  const [userMetaData] = useUserData(team);
 
-  useEffect(() => {
-    getTeamById();
-  });
-  console.log(team);
   return (
     <Style.CardLayout>
-      {team.map(({
-        picture, name, detail, profile, history, id,
+      {userMetaData.map(({
+        name,
+        detail = "CEO Hitachy",
+        profile,
+        history,
+        id,
       }, index) => (
         <Card
+          key={id}
           index={index}
           locked={profile}
           name={name}
-          picture={picture}
+          picture={Jhon}
           detail={detail}
           history={history}
           id={id}
@@ -28,4 +32,4 @@ const GroupPerson = (props) => {
   );
 };
 
-export default GroupPerson;
+export default React.memo(GroupPerson);

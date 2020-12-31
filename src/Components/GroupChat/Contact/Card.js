@@ -55,11 +55,10 @@ const Card = (props) => {
             ? <img onClick={() => selectGroupPerson(id)} className="profil" src={picture} />
             : (
               <>
-                <img onClick={() => removeGroupPerson(id)} className="profil" src={picture} />
-                <img onClick={() => removeGroupPerson(id)} className="icon" src={Success} />
+                <img alt="profil" onClick={() => removeGroupPerson(id)} className="profil" src={picture} />
+                <img alt="icon" onClick={() => removeGroupPerson(id)} className="icon" src={Success} />
               </>
             )}
-
         </div>
         <Style.Description>
           <Style.PersonalInfo>
@@ -68,16 +67,16 @@ const Card = (props) => {
           </Style.PersonalInfo>
           <Style.IconContainer>
             <div>
-              <img src={ChatIcon} onClick={() => HandleChat()} />
+              <img alt="chat" src={ChatIcon} onClick={() => HandleChat()} />
             </div>
             <div>
-              <img src={AudioCall} onClick={() => HandleAudio()} />
+              <img alt="audio" src={AudioCall} onClick={() => HandleAudio()} />
             </div>
             <div>
-              <img src={Stroke} onClick={() => HandleVideo()} />
+              <img alt="stroke" src={Stroke} onClick={() => HandleVideo()} />
             </div>
             <div>
-              <img src={More} onClick={() => setToggle(!toggle)} />
+              <img alt="more" src={More} onClick={() => setToggle(!toggle)} />
               {toggle && (
                 <ul>
                   <li>Admin</li>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const AddCardContainer = styled.div`
-width:380px;
+width:360px;
 position:relative;
 height:245px;
 background-color:#ffffff;
@@ -11,7 +11,6 @@ padding:10px;
 justify-content:space-between;
 box-shadow: 0px 0px 5px rgba(126, 126, 126, 0.5);
 border-radius: 4px;
-margin:15px 0;
 font-size:10px;
 font-family:Roboto;
 font-weight:400;

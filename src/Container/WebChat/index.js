@@ -18,10 +18,9 @@ import {
 import { doVideoOffer, doCandidate, doVideoAnswer, startCallAction, leaveRoom } from '../../store/WebChat/action'
 import { fetchMyData } from '../../store/Me/action';
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
-import usePrevious from '../../hooks/usePrevious'
-import 'webrtc-adapter'
-const messagesRef = firestoreFirebase.collection('/messages');
+import 'webrtc-adapter';
 
+const messagesRef = firestoreFirebase.collection('/messages');
 
 const WebChat = (props) => {
 
@@ -51,7 +50,7 @@ const WebChat = (props) => {
     }, [fetchMyDataCall]);
 
     const query = messagesRef
-        .where("room", "==", location.state.id)
+        .where("room", "==", location.state !== undefined && location.state.id)
         .orderBy("createdAt")
         .limitToLast(24)
 

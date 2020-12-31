@@ -7,27 +7,43 @@ import Rectangle380 from '../../../Illustration/Rectangle380.svg';
 const Step2 = (props) => {
   const {
     contact,
-    addGroupByName,
     selectGroupPerson,
     GroupPerson,
     removeGroupPerson,
-    Group,
+
+    addNewGroup,
+    groupError,
+    showAllGroup,
+    update,
+    updateMember,
+    team,
+    groupId
   } = props;
 
   const [name, setName] = useState('');
   const handleSubmit = (e) => {
     e.preventDefault();
-    addGroupByName(name);
+    addNewGroup(name)
   };
+
+  const GetActualMember = () => {
+    return contact.filter(e => {
+      return !team.members.includes(e.id)
+    })
+  }
+  console.log(groupId)
   return (
     <>
       <GroupBar>
-        <img src={Rectangle380} />
+        <img onClick={() => showAllGroup()} alt="add" src={Rectangle380} />
         <form onSubmit={handleSubmit}>
-          {Group.name ? <SearchInput disabled required placeholder="Group name" value={Group.name} name="groupname" />
+          {team.name ? <SearchInput disabled required placeholder="Group name" value={team.name} name="groupname" />
             : <SearchInput required placeholder="Group name" value={name} onChange={(e) => setName(e.target.value)} name="groupname" />}
+          {groupError}
           <ButtonContainer>
-            <button>Done</button>
+            {update ? <button onClick={() => updateMember(groupId)} >Update Members</button> :
+              <button  >Done</button>
+            }
           </ButtonContainer>
         </form>
         <SearchInput placeholder="Search" name="Search" iconSearch />
@@ -36,7 +52,7 @@ const Step2 = (props) => {
       <DumbMyContact
         selectGroupPerson={selectGroupPerson}
         removeGroupPerson={removeGroupPerson}
-        contact={contact}
+        contact={update ? GetActualMember() : contact}
         GroupPerson={GroupPerson}
       />
     </>

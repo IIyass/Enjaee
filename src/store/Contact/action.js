@@ -37,11 +37,9 @@ export const generateSecurityCode = (code, id) => async (dispatch) => {
     confirmationCode: firebase.firestore.FieldValue.arrayUnion({ code, Id: MyId }),
 
   });
-
   await usersRef.doc(MyId).update({
     acceptedRequest: firebase.firestore.FieldValue.arrayRemove(id),
   });
-
   dispatch({
     type: GENERATE_SECURITY_CODE,
   });
@@ -59,7 +57,7 @@ export const AccepteSentRequest = (index, id) => async (dispatch) => {
   });
 };
 
-export const sendNotificationToContact = (id) => async (dispatch, getState) => {
+export const sendNotificationToContact = (id) => async (dispatch) => {
   const me = await getMeByPhone();
   await usersRef.doc(id).update({
     notification: firebase.firestore.FieldValue.arrayUnion(me[0].id),
@@ -70,7 +68,7 @@ export const sendNotificationToContact = (id) => async (dispatch, getState) => {
   });
 };
 
-export const showNotificationModel = (index) => async (dispatch, getState) => {
+export const showNotificationModel = (index) => async (dispatch) => {
   dispatch({
     type: SHOW_NOTIFICATION_MODEL,
     payload: index,
@@ -84,14 +82,14 @@ export const showConfirmationCode = (index) => async (dispatch) => {
   });
 };
 
-export const showInvitationModel = (index) => async (dispatch, getState) => {
+export const showInvitationModel = (index) => async (dispatch) => {
   dispatch({
     type: SHOW_INVITATION_MODEL,
     payload: index,
   });
 };
 
-export const CancelSendRequest = (id) => async (dispatch, getState) => {
+export const CancelSendRequest = (id) => async (dispatch) => {
   const me = await getMeByPhone();
   await checkMyNotification();
   await usersRef.doc(me[0].id).update({
@@ -102,7 +100,7 @@ export const CancelSendRequest = (id) => async (dispatch, getState) => {
   });
 };
 
-export const showGeneratingCodeModel = (index) => async (dispatch, getState) => {
+export const showGeneratingCodeModel = (index) => async (dispatch) => {
   dispatch({
     type: SHOW_GENERATING_CODE_MODEL,
     payload: index,
@@ -118,11 +116,12 @@ export const requestSucceed = (id) => async (dispatch) => {
   await usersRef.doc(id).update({
     friends: firebase.firestore.FieldValue.arrayUnion(me[0].id),
   });
+
   dispatch({
     type: REQUEST_SUCCEED,
   });
-};
 
+};
 
 export const GoToPrivateRoom = (id) => async (dispatch) => {
   const me = await getMeByPhone();
@@ -139,7 +138,11 @@ export const GoToPrivateRoom = (id) => async (dispatch) => {
 
   if (Object.entries(room).length === 0) {
     await roomsRef.add({
-      participants: [me[0].id, id]
+      participants: [me[0].id, id],
+      answer: "",
+      from: "",
+      offer: "",
+      type: ""
     }).then(doc =>
       dispatch(push({
         pathname: '/webChat',

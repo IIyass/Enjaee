@@ -26,6 +26,10 @@ input{
 form,div{
     margin-left:10px;
 }
+
+img{
+    cursor:pointer;
+}
 `;
 
 export const ButtonContainer = styled.div`

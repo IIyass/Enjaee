@@ -13,6 +13,7 @@ const Card = (props) => {
     detail,
   } = props;
 
+
   const historyLocation = useHistory();
   const [toggle, setToggle] = useState(false);
   const HandleVideo = () => {
@@ -75,4 +76,4 @@ const Card = (props) => {
     </Style.Wrapper>
   );
 };
-export default Card;
+export default React.memo(Card);

@@ -25,6 +25,13 @@ export const getUserNameById = async (id) => {
   return name[0];
 };
 
+export const getUserDataById = async (id) => {
+  const res = await usersRef.get();
+  let data = res.docs.filter((e) => e.id === id);
+  data = data.map((e) => e.data());
+  return data[0];
+};
+
 export const formatTime = (timer) => {
   const getSeconds = `0${(timer % 60)}`.slice(-2)
   const minutes = `${Math.floor(timer / 60)}`

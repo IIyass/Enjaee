@@ -29,34 +29,34 @@ const DumbContact = (props) => {
     <Style.CardLayout index={undefined}>
       {ContactData.map(({
         picture, name, detail, profile, history, id, friends,
-      }, index) => <Card
-          key={id}
-          friends={friends}
-          openNotificationModel={openNotificationModel}
-          sendNotificationToContact={sendNotificationToContact}
-          showNotificationModel={showNotificationModel}
-          MyNotification={MyNotification}
-          sentNotificationStep={sentNotificationStep}
-          showInvitationModel={showInvitationModel}
-          setReceiveNotifiation={setReceiveNotifiation}
-          CancelSendRequest={CancelSendRequest}
-          AcceptedRequest={AcceptedRequest}
-          showGeneratingCodeModel={showGeneratingCodeModel}
-          showConfirmationCode={showConfirmationCode}
-          confirmationCode={confirmationCode}
-          requestSucceed={requestSucceed}
-          me={me}
-          AccepteSentRequest={AccepteSentRequest}
-          generateSecurityCode={generateSecurityCode}
-          index={index}
-          locked={profile}
-          name={name}
-          picture={picture}
-          detail={detail}
-          history={history}
-          GoToPrivateRoom={GoToPrivateRoom}
-          id={id}
-        />
+      }, index) => id !== me.id && <Card
+        key={id}
+        friends={friends}
+        openNotificationModel={openNotificationModel}
+        sendNotificationToContact={sendNotificationToContact}
+        showNotificationModel={showNotificationModel}
+        MyNotification={MyNotification}
+        sentNotificationStep={sentNotificationStep}
+        showInvitationModel={showInvitationModel}
+        setReceiveNotifiation={setReceiveNotifiation}
+        CancelSendRequest={CancelSendRequest}
+        AcceptedRequest={AcceptedRequest}
+        showGeneratingCodeModel={showGeneratingCodeModel}
+        showConfirmationCode={showConfirmationCode}
+        confirmationCode={confirmationCode}
+        requestSucceed={requestSucceed}
+        me={me}
+        AccepteSentRequest={AccepteSentRequest}
+        generateSecurityCode={generateSecurityCode}
+        index={index}
+        locked={profile}
+        name={name}
+        picture={picture}
+        detail={detail}
+        history={history}
+        GoToPrivateRoom={GoToPrivateRoom}
+        id={id}
+      />
       )}
     </Style.CardLayout>
   );
