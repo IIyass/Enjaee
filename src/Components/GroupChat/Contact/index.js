@@ -9,6 +9,7 @@ const Contact = (props) => {
     selectGroupPerson,
     removeGroupPerson,
     GroupPerson,
+    me
   } = props;
 
   const [openModel, setOpenModel] = useState();
@@ -17,21 +18,20 @@ const Contact = (props) => {
     <CardLayout index={openModel}>
       {contact.map(({
         name, detail, id,
-      }, index) => (
-        <Card
-          key={id}
-          openModel={openModel}
-          setOpenModel={setOpenModel}
-          index={index}
-          name={name}
-          picture={Jhon}
-          detail={detail}
-          id={id}
-          selectGroupPerson={selectGroupPerson}
-          removeGroupPerson={removeGroupPerson}
-          GroupPerson={GroupPerson}
-        />
-      ))}
+      }, index) => me.id !== id && <Card
+        key={id}
+        openModel={openModel}
+        setOpenModel={setOpenModel}
+        index={index}
+        name={name}
+        picture={Jhon}
+        detail={detail}
+        id={id}
+        selectGroupPerson={selectGroupPerson}
+        removeGroupPerson={removeGroupPerson}
+        GroupPerson={GroupPerson}
+      />
+      )}
     </CardLayout>
   );
 };

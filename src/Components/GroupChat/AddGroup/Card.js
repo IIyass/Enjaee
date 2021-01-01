@@ -2,18 +2,20 @@ import React from 'react';
 import * as Style from './CardStyle';
 import ChatIcon from '../../../Illustration/Chat.svg';
 
-
 const Card = (props) => {
     const {
+        id,
+        goToGroupDetail,
         picture,
         name,
-        detail = "Working on iOS 13"
+        detail = "Working on iOS 13",
+        goToPrivateRoom
     } = props;
 
     return (
         <Style.Wrapper>
-            <Style.CardContainer  >
-                <div id="img">
+            <Style.CardContainer>
+                <div onClick={() => goToGroupDetail(id)} id="img">
                     <img alt="profil" className="profil" src={picture} />
                 </div>
                 <Style.Description>
@@ -22,7 +24,7 @@ const Card = (props) => {
                         <span>{detail}</span>
                     </Style.PersonalInfo>
                     <Style.IconContainer>
-                        <div>
+                        <div onClick={() => goToPrivateRoom(id)}>
                             <img alt="chat" src={ChatIcon} />
                         </div>
                     </Style.IconContainer>
@@ -31,4 +33,5 @@ const Card = (props) => {
         </Style.Wrapper>
     );
 };
+
 export default Card;

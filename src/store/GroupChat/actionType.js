@@ -10,4 +10,5 @@ export const GROUP_ERROR = 'GROUP_ERROR';
 export const GO_TO_GROUP_DETAIL = 'GO_TO_GROUP_DETAIL';
 export const SHOW_ALL_GROUP = 'SHOW_ALL_GROUP';
 export const ADD_MEMBERS = 'ADD_MEMBERS';
-export const UPDATE_MEMBER = 'UPDATE_MEMBER'
+export const UPDATE_MEMBER = 'UPDATE_MEMBER';
+export const GO_TO_PRIVATE_ROOM = 'GO_TO_PRIVATE_ROOM';

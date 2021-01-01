@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import * as Style from './style';
 import BodyContainer from '../../Common/Body';
@@ -18,8 +18,10 @@ import {
   goToGroupDetail,
   showAllGroup,
   AddMember,
-  updateMember
+  updateMember,
+  goToPrivateRoom
 } from '../../store/GroupChat/action';
+import { fetchMyData } from '../../store/Me/action';
 
 const userRef = firestoreFirebase.collection('/users');
 
@@ -35,7 +37,9 @@ const ChatGroup = (props) => {
     goToGroupDetail,
     showAllGroup,
     AddMember,
-    updateMember
+    updateMember,
+    fetchMyData,
+    goToPrivateRoom,
   } = props;
 
   const dispatch = useDispatch();
@@ -51,6 +55,7 @@ const ChatGroup = (props) => {
   const AllGroups = useSelector((state) => state.GroupChatReducer.allGroups)
   const loadGroup = useSelector((state) => state.GroupChatReducer.loadGroup)
   const groupError = useSelector((state) => state.GroupChatReducer.groupError);
+  const me = useSelector((state) => state.MeReducer.Me);
 
   const [AllUsers, loading, error] = useCollectionData(query2, { idField: 'id' });
 
@@ -62,6 +67,15 @@ const ChatGroup = (props) => {
     dispatch(AddMember)
   }, [AddMember, dispatch])
 
+  const fetchMyDataCall = useCallback(
+    () => dispatch(fetchMyData),
+    [dispatch, fetchMyData]
+  );
+
+  useEffect(() => {
+    fetchMyDataCall();
+  }, [fetchMyDataCall])
+
   const handleSteps = () => {
     switch (step) {
       case 1: return <AddGroup
@@ -70,6 +84,7 @@ const ChatGroup = (props) => {
         AllGroups={AllGroups}
         addGroupAction={addGroupAction}
         goToGroupDetail={goToGroupDetail}
+        goToPrivateRoom={goToPrivateRoom}
       />;
       case 2: return (
         loading ? <h1>Loading ...</h1> :
@@ -85,6 +100,7 @@ const ChatGroup = (props) => {
             updateMember={updateMember}
             team={Team}
             groupId={groupId}
+            me={me}
           />
       );
       case 3: return (
@@ -121,5 +137,7 @@ export default connect(null,
     goToGroupDetail,
     showAllGroup,
     AddMember,
-    updateMember
+    updateMember,
+    fetchMyData,
+    goToPrivateRoom
   })(ChatGroup);

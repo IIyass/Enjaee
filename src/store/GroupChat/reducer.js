@@ -10,7 +10,7 @@ const INIT_STATE = {
   allGroups: [],
   loadGroup: true,
   groupError: '',
-  update: false
+  update: false,
 };
 
 const GroupReducer = (state = INIT_STATE, action) => {
@@ -88,7 +88,10 @@ const GroupReducer = (state = INIT_STATE, action) => {
     case 'GET_GROUP_BY_ID':
       return {
         ...state,
-        Team: action.payload,
+        Team: {
+          members: action.payload.participants,
+          name: action.payload.name
+        },
         loadTeam: false
       };
 

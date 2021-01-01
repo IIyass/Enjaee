@@ -8,7 +8,8 @@ const Step1 = (props) => {
     getAllGroups,
     AllGroups,
     loadGroup,
-    goToGroupDetail
+    goToGroupDetail,
+    goToPrivateRoom
   } = props;
 
   useEffect(() => {
@@ -20,6 +21,7 @@ const Step1 = (props) => {
       AllGroups={AllGroups}
       addGroupAction={addGroupAction}
       goToGroupDetail={goToGroupDetail}
+      goToPrivateRoom={goToPrivateRoom}
     />;
 };
 export default Step1;

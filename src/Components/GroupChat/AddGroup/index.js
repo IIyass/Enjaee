@@ -8,7 +8,8 @@ const AddCard = (props) => {
   const {
     AllGroups,
     goToGroupDetail,
-    addGroupAction
+    addGroupAction,
+    goToPrivateRoom
   } = props;
 
   return (
@@ -22,12 +23,14 @@ const AddCard = (props) => {
       {AllGroups.map(({
         name, id
       }) => (
-        <div onClick={() => goToGroupDetail(id)} key={id}>
-          <Card
-            name={name}
-            picture={jhon}
-          />
-        </div>
+        <Card
+          key={id}
+          name={name}
+          picture={jhon}
+          id={id}
+          goToGroupDetail={goToGroupDetail}
+          goToPrivateRoom={goToPrivateRoom}
+        />
       ))}
     </CardLayout>
   );

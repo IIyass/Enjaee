@@ -14,6 +14,7 @@ import { formatTime } from '../../helpers'
 import firebase from 'firebase';
 import useVideoRoom from '../../hooks/useVideoRoom'
 import useTimer from '../../hooks/useTimer'
+import useUserName from '../../hooks/useUserName'
 
 const roomsRef = firestoreFirebase.collection('/rooms');
 const usersRef = firestoreFirebase.collection('/users');
@@ -36,6 +37,7 @@ const VideoChat = (props) => {
   const [mute, setMute] = useState(false);
   const [displayVideo, setDisplayVideo] = useState(true);
   const [localconnection, localstream, localVideoRef] = useVideoRoom(videoStep);
+  const [userName1] = useUserName(participants.participants.filter(e => e !== me.id)[0])
 
 
   // Listening on Room with id === paricitpant.id
@@ -96,7 +98,7 @@ const VideoChat = (props) => {
   const renderCallComponent = () => {
     return <div>
       {!loading1 && snapshot1[0].type === 'offer' && snapshot1[0].from === me.id ?
-        <ProfilButton>Waiting Other Response </ProfilButton> :
+        <ProfilButton>Waiting {userName1} Response </ProfilButton> :
         <ProfilButton onClick={() => sendOfferCall(localconnection,
           localstream,
           participants,
@@ -104,8 +106,8 @@ const VideoChat = (props) => {
           remoteVideoRef,
           doCandidate,
           doVideoOffer)}>
-          Call OtherName
-            </ProfilButton>
+          Call {userName1}
+        </ProfilButton>
       }
     </div>
   }

@@ -54,7 +54,6 @@ const WebChat = (props) => {
         .orderBy("createdAt")
         .limitToLast(24)
 
-
     const chatStep = useSelector((state) => state.WebChatReducer.chatStep)
     const videoStep = useSelector((state) => state.WebChatReducer.videoStep)
     const me = useSelector((state) => state.MeReducer.Me)

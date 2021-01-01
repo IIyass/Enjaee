@@ -10,7 +10,7 @@ const Step2 = (props) => {
     selectGroupPerson,
     GroupPerson,
     removeGroupPerson,
-
+    me,
     addNewGroup,
     groupError,
     showAllGroup,
@@ -31,7 +31,7 @@ const Step2 = (props) => {
       return !team.members.includes(e.id)
     })
   }
-  console.log(groupId)
+
   return (
     <>
       <GroupBar>
@@ -54,6 +54,7 @@ const Step2 = (props) => {
         removeGroupPerson={removeGroupPerson}
         contact={update ? GetActualMember() : contact}
         GroupPerson={GroupPerson}
+        me={me}
       />
     </>
   );
