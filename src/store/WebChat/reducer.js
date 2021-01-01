@@ -28,30 +28,10 @@ const WebChatReducer = (state = INIT_STATE, action) => {
                 MyMessages: action.payload,
                 Loading: false
             }
-        case 'VIDEO_CALL_OFFER':
-            return {
-                ...state,
-
-            }
-        case 'VIDEO_CALL_CONDIDATE':
-            return {
-                ...state,
-                videoStep: 2
-            }
-        case 'VIDEO_CALL_ANSWER':
-            return {
-                ...state,
-                videoStep: 2
-            }
-        case 'START_CALL':
-            return {
-                ...state,
-                videoStep: 2
-            }
         case 'LEAVE_CALL':
             return {
                 ...state,
-                videoStep: 1
+                chatStep: 1
             }
         default:
             return state;

@@ -15,7 +15,7 @@ import {
     goToVideoRoom,
     SendMessage
 } from '../../store/WebChat/action'
-import { doVideoOffer, doCandidate, doVideoAnswer, startCallAction, leaveRoom } from '../../store/WebChat/action'
+import { doVideoOffer, doCandidate, doVideoAnswer, leaveRoom } from '../../store/WebChat/action'
 import { fetchMyData } from '../../store/Me/action';
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
 import 'webrtc-adapter';
@@ -34,7 +34,7 @@ const WebChat = (props) => {
         doCandidate,
         doVideoOffer,
         doVideoAnswer,
-        startCallAction,
+
         leaveRoom
     } = props
 
@@ -96,7 +96,7 @@ const WebChat = (props) => {
                     doAnswer={doVideoAnswer}
                     me={me}
                     leaveRoom={leaveRoom}
-                    startCallAction={startCallAction}
+
                 />;
             default:
                 return <ChatScreen gradientMessage />;
@@ -133,7 +133,7 @@ export default connect(null,
         doVideoOffer,
         doCandidate,
         doVideoAnswer,
-        startCallAction,
+
         leaveRoom
     })(WebChat);
 

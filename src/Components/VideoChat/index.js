@@ -9,6 +9,7 @@ import ProfilButton from '../UI/ProfilButton';
 import receivevideocallicon from '../../Illustration/receivevideocallicon.svg';
 import silenticon from '../../Illustration/silenticon.svg';
 import endreceiveaudiocallicons from '../../Illustration/volumeicon.svg';
+import jhon from '../../Illustration/Henry.png'
 import 'webrtc-adapter'
 import { formatTime } from '../../helpers'
 import firebase from 'firebase';
@@ -28,7 +29,6 @@ const VideoChat = (props) => {
     videoStep,
     doAnswer,
     me,
-    startCallAction,
     leaveRoom,
   } = props;
 
@@ -39,6 +39,16 @@ const VideoChat = (props) => {
   const [localconnection, localstream, localVideoRef] = useVideoRoom(videoStep);
   const [userName1] = useUserName(participants.participants.filter(e => e !== me.id)[0])
 
+  const [displayVideoScreen, setDisplayVideoScreen] = useState(false);
+
+
+  console.log('localVideoRef', localVideoRef.current !== null &&
+    localVideoRef.current.srcObject !== null &&
+    localVideoRef.current.srcObject.id);
+
+  console.log('remoteVideoRef', localVideoRef.current !== null &&
+    remoteVideoRef.current.srcObject !== null &&
+    remoteVideoRef.current.srcObject.id);
 
   // Listening on Room with id === paricitpant.id
   const RoomQuery = roomsRef
@@ -76,7 +86,7 @@ const VideoChat = (props) => {
       async function addCandidateCall() {
         const candidate = JSON.parse(snapshot2[0].VideoRoom.candidate)
         await localconnection.addIceCandidate(new RTCIceCandidate(candidate))
-        startCallAction();
+        setDisplayVideoScreen(true)
         handleStart();
       }
       addCandidateCall()
@@ -90,9 +100,10 @@ const VideoChat = (props) => {
     ) {
       leaveRoom(me.id,
         participants.participants.filter(e => e !== me.id),
-        participants.id, localconnection, localstream)
-    }
+        participants.id, localconnection, localstream, localVideoRef,
+        displayVideoScreen, setDisplayVideoScreen)
 
+    }
   }, [loading1, snapshot1]);
 
   const renderCallComponent = () => {
@@ -125,17 +136,13 @@ const VideoChat = (props) => {
       )}>Accept</ProfilButton>
       <ProfilButton onClick={() => leaveRoom(me.id,
         participants.participants.filter(e => e !== me.id),
-        participants.id, localconnection, localstream)} >Decline</ProfilButton>
+        participants.id, localconnection, localstream, localVideoRef,
+        displayVideoScreen, setDisplayVideoScreen)} >Decline</ProfilButton>
     </div>
   }
-  const stop = () => {
-    localstream.getVideoTracks()[0].stop();
-    localVideoRef.current.srcObject = null;
-    setDisplayVideo(false);
-  };
 
 
-  const renderTwoVideoScreen = () => <><video
+  const renderTwoVideoScreen = () => <div id="screenShare"><video
     className="videoInsert"
     muted={mute}
     ref={remoteVideoRef}
@@ -153,11 +160,15 @@ const VideoChat = (props) => {
         <img alt="silent" onClick={() => setMute(!mute)} src={endreceiveaudiocallicons} />
       }
       <ProfilButton
-        onClick={() => leaveRoom(me.id,
-          participants.participants.filter(e => e !== me.id),
-          participants.id)} >End Call</ProfilButton>
+        onClick={() => {
+          leaveRoom(me.id,
+            participants.participants.filter(e => e !== me.id),
+            participants.id, localconnection, localstream, localVideoRef,
+            displayVideoScreen, setDisplayVideoScreen);
 
-      {displayVideo ? <img onClick={() => stop('video')}
+        }}>End Call</ProfilButton>
+
+      {displayVideo ? <img onClick={() => console.log('video')}
         alt="MuteVideo"
         src={CallVideo} /> :
         <img
@@ -167,25 +178,33 @@ const VideoChat = (props) => {
       }
 
     </div>
-  </>
+  </div>
+
 
   const handleVideoChat = () => {
     switch (videoStep) {
       case 1:
         return <>
-          <video id="profil" muted ref={localVideoRef} autoPlay playsInline></video>
-          <video ref={remoteVideoRef}
-            style={{ display: 'none' }}
-            autoPlay
-            playsInline>
-          </video>
-          <img alt="img" src={receivevideocallicon} />
-          {
-            loading1 ? <h2>loading1..</h2> :
-              (snapshot1[0].from === '' || snapshot1[0].from === me.id) ?
-                renderCallComponent() :
-                renderAnswerComponent()}
+          <div id="requestStep">
+            <img src={jhon} alt="profil" id="profil" />
+            <video id="profil"
+              style={{ display: 'none' }}
+              muted ref={localVideoRef} autoPlay playsInline></video>
+            <video ref={remoteVideoRef}
+              style={{ display: 'none' }}
+              autoPlay
+              playsInline>
+            </video>
+            <img alt="img" src={receivevideocallicon} />
+            {
+              loading1 ? <h2>loading1..</h2> :
+                (snapshot1[0].from === '' || snapshot1[0].from === me.id) ?
+                  renderCallComponent() :
+                  renderAnswerComponent()}
+          </div>
+          {renderTwoVideoScreen()}
         </>
+
       case 2:
         return renderTwoVideoScreen();
       default: return null;
@@ -193,7 +212,7 @@ const VideoChat = (props) => {
   };
 
   return (
-    <Style.Wrapper>
+    <Style.Wrapper display={displayVideoScreen}>
       {handleVideoChat()}
     </Style.Wrapper>
   );

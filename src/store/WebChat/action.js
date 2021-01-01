@@ -75,32 +75,41 @@ export const doVideoAnswer = (room, answer) => async (dispatch) => {
 
 };
 
-export const leaveRoom = (me, remoteUser, room, localconnection, localstream) => async (dispatch) => {
+export const leaveRoom = (me, remoteUser, room, localconnection, localstream, localVideoRef, displayTwoVideo, setDisplayVideoScreen) => async (dispatch) => {
 
-    await roomsRef.doc(room).update({
-        type: 'leave',
-        answer: '',
-        from: '',
-        offer: '',
-    })
-    await usersRef.doc(me).update({
-        "VideoRoom.type": '',
-        "VideoRoom.from": '',
-        "VideoRoom.candidate": ''
-    })
-    await usersRef.doc(remoteUser[0]).update({
-        'VideoRoom.type': '',
-        'VideoRoom.from': '',
-        'VideoRoom.candidate': ''
-    })
-    dispatch({
-        type: 'LEAVE_CALL'
-    });
+    if (displayTwoVideo) {
+        const tracks = localVideoRef.current.srcObject.getTracks();
+        tracks.forEach(track => {
+            track.stop();
+        });
 
-};
+        if (localstream) {
+            localstream.getTracks().forEach(track => track.stop());
+        }
 
-export const startCallAction = () => async (dispatch) => {
-    dispatch({
-        type: 'START_CALL'
-    });
+        if (localconnection) {
+            localconnection.close();
+        }
+        setDisplayVideoScreen(false)
+
+        await roomsRef.doc(room).update({
+            type: 'leave',
+            answer: '',
+            from: '',
+            offer: '',
+        })
+        await usersRef.doc(me).update({
+            "VideoRoom.type": '',
+            "VideoRoom.from": '',
+            "VideoRoom.candidate": ''
+        })
+        await usersRef.doc(remoteUser[0]).update({
+            'VideoRoom.type': '',
+            'VideoRoom.from': '',
+            'VideoRoom.candidate': ''
+        })
+        dispatch({
+            type: 'LEAVE_CALL'
+        });
+    }
 };

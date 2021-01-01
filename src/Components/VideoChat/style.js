@@ -17,47 +17,21 @@ scrollbar-width: none;
 }
 border-radius:5px;
 
-.videoInsert {
-    position: absolute; 
-    right: 0; 
-    bottom: 0;
-    min-width: 100%; 
-    min-height: 100%;
-    width: auto; 
-    height: auto; 
-    background-size: cover;
-    overflow: hidden;
-}
 
->div{
-    width:60%;
-    margin:0 auto;
-    display:flex;
-    flex-direction:row;
-    justify-content:space-evenly;
-    button{
-        width:200px;
-        height:50px;
-        background-color:#fff;
-        border-radius:5px;
+#screenShare{
+    display:${({ display }) => display ? 'block' : 'none'};
+
+    .videoInsert {
+        position: absolute; 
+        right: 0; 
+        bottom: 0;
+        min-width: 100%; 
+        min-height: 100%;
+        width: auto; 
+        height: auto; 
+        background-size: cover;
+        overflow: hidden;
     }
-    button:nth-of-type(2) {
-       border:1px solid red;
-       color:red;
-     }
-     button:nth-of-type(1) {
-        border:1px solid green;
-        color:green;
-      }
-}
-
-
-#profil{
-    margin: 0 auto;
-    width:408px;
-    height:308px;
-    border-radius: 10px;
-}
 
 #top{
     width:95%;
@@ -65,7 +39,7 @@ border-radius:5px;
     height:150px;
     top:20px;
     left:20px;
-    display:flex;
+    display:${({ display }) => display ? 'flex' : 'none'};
     justify-content:space-between;
     .video{
         width:200px;
@@ -94,10 +68,9 @@ margin:0;
 #bottom{
     width:100%;
     height:150px;
-    display:flex;
+    display:${({ display }) => display ? 'flex' : 'none'};
     position:absolute;
     bottom:0;
-    display:flex;
     background-color: rgba(34,36,37,0.5);
     mix-blend-mode: normal;
     justify-content:center;
@@ -116,8 +89,46 @@ margin:0;
         opacity:1;
         border-radius: 126.126px;
     }
-
+}
+    
 }
 
- 
+
+
+ #requestStep{
+    display:${({ display }) => display ? 'none' : 'flex'};
+    width:60%;
+    height:100%;
+    margin:0 auto;
+    flex-direction:column;
+    justify-content:space-evenly;
+     
+    #profil{
+        margin: 0 auto;
+        width:408px;
+        height:308px;
+        border-radius: 10px;
+    }
+    
+        button{
+            width:200px;
+            height:50px;
+            background-color:#fff;
+            border-radius:5px;
+        }
+        button:nth-of-type(2) {
+           border:1px solid red;
+           color:red;
+         }
+         button:nth-of-type(1) {
+            border:1px solid green;
+            color:green;
+          }
+    }
+}
+
+
+
+    
 `;
+
