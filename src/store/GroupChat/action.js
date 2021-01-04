@@ -61,11 +61,16 @@ export const updateMember = (id) => async (dispatch, getState) => {
 
   await roomsRef.doc(id).update({
     participants: [...ExistingMembers, ...NewMembers],
+  }).then(async doc => {
+    await NewMembers.every(async e => await userRef.doc(e).update({
+      groups: firebase.firestore.FieldValue.arrayUnion(`/rooms/${id}`)
+    }))
+    dispatch(push({
+      pathname: `/groups/${id}`
+    }));
   })
 
-  dispatch(push({
-    pathname: `/groups/${id}`
-  }));
+
 };
 
 export const AddMember = (id) => async (dispatch) => {
