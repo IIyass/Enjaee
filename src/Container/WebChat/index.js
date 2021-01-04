@@ -13,7 +13,8 @@ import {
     goToChatRoom,
     goToAudioRoom,
     goToVideoRoom,
-    SendMessage
+    SendMessage,
+    GetRoomMetaData
 } from '../../store/WebChat/action'
 import { doVideoOffer, doCandidate, doVideoAnswer, leaveRoom } from '../../store/WebChat/action'
 import { fetchMyData } from '../../store/Me/action';
@@ -25,7 +26,6 @@ const messagesRef = firestoreFirebase.collection('/messages');
 const WebChat = (props) => {
 
     const {
-        location,
         SendMessage,
         goToAudioRoom,
         goToChatRoom,
@@ -34,8 +34,8 @@ const WebChat = (props) => {
         doCandidate,
         doVideoOffer,
         doVideoAnswer,
-
-        leaveRoom
+        leaveRoom,
+        GetRoomMetaData
     } = props
 
     const dispatch = useDispatch();
@@ -46,17 +46,24 @@ const WebChat = (props) => {
     );
 
     useEffect(() => {
+        GetRoomMetaData(props.match.params.id)
+    }, [GetRoomMetaData, props.match.params.id])
+
+    useEffect(() => {
         fetchMyDataCall()
     }, [fetchMyDataCall]);
 
-    const query = messagesRef
-        .where("room", "==", location.state !== undefined && location.state.id)
-        .orderBy("createdAt")
-        .limitToLast(24)
-
+    const roomLoading = useSelector((state) => state.WebChatReducer.roomLoading)
+    const roomMetadata = useSelector((state) => state.WebChatReducer.room)
     const chatStep = useSelector((state) => state.WebChatReducer.chatStep)
     const videoStep = useSelector((state) => state.WebChatReducer.videoStep)
     const me = useSelector((state) => state.MeReducer.Me)
+
+    const query = messagesRef
+        .where("room", "==", Object.keys(roomMetadata).length >= 1 && roomMetadata.id)
+        .orderBy("createdAt")
+        .limitToLast(24)
+
     const [snapshot, loading, error] = useCollectionData(query, { idField: 'id' });
 
     const goToAudioRoomCall = useCallback(
@@ -77,27 +84,30 @@ const WebChat = (props) => {
     const handleChatStep = () => {
         switch (chatStep) {
             case 1:
-                return <ChatScreen
-                    gradientMessage
-                    participants={location.state}
-                    SendMessage={SendMessage}
-                    messages={snapshot}
-                    me={me}
-                    loading={loading}
-                />;
+                return roomLoading ? <h1>Loading ...</h1> :
+                    <ChatScreen
+                        gradientMessage
+                        roomMetadata={roomMetadata}
+                        SendMessage={SendMessage}
+                        messages={snapshot}
+                        me={me}
+                        loading={loading}
+                    />;
             case 2:
-                return <AudioChat />;
+                return roomLoading ? <h1>Loading ...</h1> :
+                    <AudioChat />;
             case 3:
-                return <VideoChat
-                    doVideoOffer={doVideoOffer}
-                    doCandidate={doCandidate}
-                    participants={location.state}
-                    videoStep={videoStep}
-                    doAnswer={doVideoAnswer}
-                    me={me}
-                    leaveRoom={leaveRoom}
+                return roomLoading ? <h1>Loading ...</h1> :
+                    <VideoChat
+                        doVideoOffer={doVideoOffer}
+                        doCandidate={doCandidate}
+                        roomMetadata={roomMetadata}
+                        videoStep={videoStep}
+                        doAnswer={doVideoAnswer}
+                        me={me}
+                        leaveRoom={leaveRoom}
 
-                />;
+                    />;
             default:
                 return <ChatScreen gradientMessage />;
         }
@@ -133,7 +143,7 @@ export default connect(null,
         doVideoOffer,
         doCandidate,
         doVideoAnswer,
-
+        GetRoomMetaData,
         leaveRoom
     })(WebChat);
 

@@ -25,7 +25,7 @@ const VideoChat = (props) => {
   const {
     doVideoOffer,
     doCandidate,
-    participants,
+    roomMetadata,
     videoStep,
     doAnswer,
     me,
@@ -37,7 +37,7 @@ const VideoChat = (props) => {
   const [mute, setMute] = useState(false);
   const [displayVideo, setDisplayVideo] = useState(true);
   const [localconnection, localstream, localVideoRef] = useVideoRoom(videoStep);
-  const [userName1] = useUserName(participants.participants.filter(e => e !== me.id)[0])
+  const [userName1] = useUserName(roomMetadata.participants.filter(e => e !== me.id)[0])
 
   const [displayVideoScreen, setDisplayVideoScreen] = useState(false);
 
@@ -52,14 +52,14 @@ const VideoChat = (props) => {
 
   // Listening on Room with id === paricitpant.id
   const RoomQuery = roomsRef
-    .where(firebase.firestore.FieldPath.documentId(), "==", participants.id);
+    .where(firebase.firestore.FieldPath.documentId(), "==", roomMetadata.id);
   const [snapshot1, loading1, error1] = useCollectionData(RoomQuery, { idField: 'id' });
 
   // Listening on updating my candidate field.
   const UserQuery = usersRef
     .where(firebase.firestore.FieldPath.documentId(),
       "==",
-      participants.participants.filter(e => e === me.id)[0]);
+      roomMetadata.participants.filter(e => e === me.id)[0]);
   const [snapshot2, loading2, error2] = useCollectionData(UserQuery, { idField: 'id' });
 
   // Caller Receive Answer.
@@ -99,8 +99,8 @@ const VideoChat = (props) => {
       snapshot1[0].type === 'leave'
     ) {
       leaveRoom(me.id,
-        participants.participants.filter(e => e !== me.id),
-        participants.id, localconnection, localstream, localVideoRef,
+        roomMetadata.participants.filter(e => e !== me.id),
+        roomMetadata.id, localconnection, localstream, localVideoRef,
         displayVideoScreen, setDisplayVideoScreen)
 
     }
@@ -112,7 +112,7 @@ const VideoChat = (props) => {
         <ProfilButton>Waiting {userName1} Response </ProfilButton> :
         <ProfilButton onClick={() => sendOfferCall(localconnection,
           localstream,
-          participants,
+          roomMetadata,
           me,
           remoteVideoRef,
           doCandidate,
@@ -127,7 +127,7 @@ const VideoChat = (props) => {
     return <div>
       <ProfilButton onClick={() => sendAnswerCall(localconnection,
         localstream,
-        participants,
+        roomMetadata,
         snapshot1[0],
         me,
         remoteVideoRef,
@@ -135,8 +135,8 @@ const VideoChat = (props) => {
         doAnswer
       )}>Accept</ProfilButton>
       <ProfilButton onClick={() => leaveRoom(me.id,
-        participants.participants.filter(e => e !== me.id),
-        participants.id, localconnection, localstream, localVideoRef,
+        roomMetadata.participants.filter(e => e !== me.id),
+        roomMetadata.id, localconnection, localstream, localVideoRef,
         displayVideoScreen, setDisplayVideoScreen)} >Decline</ProfilButton>
     </div>
   }
@@ -162,8 +162,8 @@ const VideoChat = (props) => {
       <ProfilButton
         onClick={() => {
           leaveRoom(me.id,
-            participants.participants.filter(e => e !== me.id),
-            participants.id, localconnection, localstream, localVideoRef,
+            roomMetadata.participants.filter(e => e !== me.id),
+            roomMetadata.id, localconnection, localstream, localVideoRef,
             displayVideoScreen, setDisplayVideoScreen);
 
         }}>End Call</ProfilButton>

@@ -1,6 +1,6 @@
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
 import firebase from 'firebase';
-import { GO_CHAT_ROOM, GO_AUDIO_ROOM, GO_VIDEO_ROOM } from './actionType'
+import { GO_CHAT_ROOM, GO_AUDIO_ROOM, GO_VIDEO_ROOM,  ROOM_DATA } from './actionType'
 import { getMeByPhone } from '../../helpers';
 
 const messagesRef = firestoreFirebase.collection('/messages');
@@ -25,6 +25,29 @@ export const goToVideoRoom = () => async (dispatch) => {
         type: GO_VIDEO_ROOM
     });
 };
+
+
+
+export const GetRoomMetaData = (id) => async (dispatch) => {
+
+    let room = {};
+    await roomsRef
+      .where(firebase.firestore.FieldPath.documentId(),
+        "==",
+        id)
+      .get()
+      .then((querySnapshot) => {
+        return querySnapshot.forEach((doc) => {
+          room = ({ id: doc.id, ...doc.data() })
+        });
+      })
+  
+    dispatch({
+      type: ROOM_DATA,
+      payload: room
+    });
+  }
+  
 
 export const SendMessage = (data) => async (dispatch) => {
     const me = await getMeByPhone();
@@ -60,8 +83,6 @@ export const doCandidate = (to, candidate) => async (dispatch) => {
             candidate: JSON.stringify(candidate)
         }
     })
-
-
 }
 
 

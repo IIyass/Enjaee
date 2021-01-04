@@ -3,6 +3,7 @@ const INIT_STATE = {
   Loading: true,
   sentNotificationStep: 1,
   openNotificationModel: undefined,
+
 };
 
 const ContactReducer = (state = INIT_STATE, action) => {
@@ -70,6 +71,7 @@ const ContactReducer = (state = INIT_STATE, action) => {
         openNotificationModel: undefined,
         sentNotificationStep: -1,
       };
+
 
     default:
       return state;

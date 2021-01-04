@@ -11,6 +11,7 @@ import {
   SHOW_GENERATING_CODE_MODEL,
   SHOW_CONFIRMATION_CODE_MODEL,
   REQUEST_SUCCEED,
+
 } from './actionType';
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
 import { parseJwt, getMeByPhone } from '../../helpers';
@@ -145,18 +146,14 @@ export const GoToPrivateRoom = (id) => async (dispatch) => {
       type: ""
     }).then(doc =>
       dispatch(push({
-        pathname: '/webChat',
-        state: {
-          id: doc.id,
-          participants: [me[0].id, id]
-        },
+        pathname: `/webChat/${doc.id}`,
       }))
     )
   } else {
     dispatch(push({
-      pathname: '/webChat',
-      state: room,
+      pathname: `/webChat/${room.id}`
     }));
   }
-}
+};
+
 

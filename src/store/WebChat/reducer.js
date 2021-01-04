@@ -2,7 +2,9 @@ const INIT_STATE = {
     chatStep: 1,
     MyMessages: {},
     Loading: true,
-    videoStep: 1
+    videoStep: 1,
+    room: {},
+    roomLoading: true
 };
 
 const WebChatReducer = (state = INIT_STATE, action) => {
@@ -33,6 +35,13 @@ const WebChatReducer = (state = INIT_STATE, action) => {
                 ...state,
                 chatStep: 1
             }
+        case 'ROOM_DATA':
+            return {
+                ...state,
+                room: action.payload,
+                roomLoading: false
+            };
+
         default:
             return state;
     }

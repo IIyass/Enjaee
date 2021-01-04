@@ -10,7 +10,7 @@ import { getUserNameById } from '../../helpers'
 const ChatScreen = (props) => {
   const {
     gradientMessage,
-    participants,
+    roomMetadata,
     SendMessage,
     messages,
     loading,
@@ -37,12 +37,12 @@ const ChatScreen = (props) => {
 
 
   useEffect(() => {
-    participants.participants.map(e => getMyName(e))
+    roomMetadata.participants.map(e => getMyName(e))
   }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    SendMessage({ content, room: participants.id })
+    SendMessage({ content, room: roomMetadata.id })
     setContent('');
   };
 

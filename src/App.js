@@ -21,7 +21,7 @@ const App = () => {
         <PrivateRoute path="/history" exact component={History} />
         <PrivateRoute path="/chat" exact component={Chat} />
         <PrivateRoute path="/contact" exact component={Contact} />
-        <PrivateRoute path="/webChat" exact component={WebChat} />
+        <PrivateRoute path="/webChat/:id" exact component={WebChat} />
         <PrivateRoute path="/groups" exact component={Group} />
         <PrivateRoute path="/profil" exact component={Profil} />
         <Route path="/signup" exact render={(props) => (token ? <Redirect to="/contact" /> : <Signup {...props} />)} />
