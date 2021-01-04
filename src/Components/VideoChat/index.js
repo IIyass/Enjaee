@@ -36,19 +36,10 @@ const VideoChat = (props) => {
   const { timer, handleStart, handleReset } = useTimer();
   const [mute, setMute] = useState(false);
   const [displayVideo, setDisplayVideo] = useState(true);
-  const [localconnection, localstream, localVideoRef] = useVideoRoom(videoStep);
+  const [localconnection, localstream, localVideoRef] = useVideoRoom(videoStep, true);
   const [userName1] = useUserName(roomMetadata.participants.filter(e => e !== me.id)[0])
 
   const [displayVideoScreen, setDisplayVideoScreen] = useState(false);
-
-
-  console.log('localVideoRef', localVideoRef.current !== null &&
-    localVideoRef.current.srcObject !== null &&
-    localVideoRef.current.srcObject.id);
-
-  console.log('remoteVideoRef', localVideoRef.current !== null &&
-    remoteVideoRef.current.srcObject !== null &&
-    remoteVideoRef.current.srcObject.id);
 
   // Listening on Room with id === paricitpant.id
   const RoomQuery = roomsRef
@@ -176,39 +167,34 @@ const VideoChat = (props) => {
           src={MuteVideo}
         />
       }
-
     </div>
   </div>
 
 
   const handleVideoChat = () => {
-    switch (videoStep) {
-      case 1:
-        return <>
-          <div id="requestStep">
-            <img src={jhon} alt="profil" id="profil" />
-            <video id="profil"
-              style={{ display: 'none' }}
-              muted ref={localVideoRef} autoPlay playsInline></video>
-            <video ref={remoteVideoRef}
-              style={{ display: 'none' }}
-              autoPlay
-              playsInline>
-            </video>
-            <img alt="img" src={receivevideocallicon} />
-            {
-              loading1 ? <h2>loading1..</h2> :
-                (snapshot1[0].from === '' || snapshot1[0].from === me.id) ?
-                  renderCallComponent() :
-                  renderAnswerComponent()}
-          </div>
-          {renderTwoVideoScreen()}
-        </>
 
-      case 2:
-        return renderTwoVideoScreen();
-      default: return null;
-    }
+    return <>
+      <div id="requestStep">
+        <img src={jhon} alt="profil" id="profil" />
+        <video id="profil"
+          style={{ display: 'none' }}
+          muted ref={localVideoRef} autoPlay playsInline></video>
+        <video ref={remoteVideoRef}
+          style={{ display: 'none' }}
+          autoPlay
+          playsInline>
+        </video>
+        <img alt="img" src={receivevideocallicon} />
+        {
+          loading1 ? <h2>loading1..</h2> :
+            (snapshot1[0].from === '' || snapshot1[0].from === me.id) ?
+              renderCallComponent() :
+              renderAnswerComponent()}
+      </div>
+      {renderTwoVideoScreen()}
+    </>
+
+
   };
 
   return (

@@ -4,14 +4,14 @@ import {
     initiateLocalStream,
 } from '../WebRTC'
 
-const useVideoRoom = (videoStep) => {
+const useVideoRoom = (videoStep, video) => {
     const [localconnection, setLocalConnection] = useState();
     const [localstream, setLocalStrean] = useState();
     let localVideoRef = useRef(null);
 
     useEffect(() => {
         async function LocalStream() {
-            const localStream = await initiateLocalStream();
+            const localStream = await initiateLocalStream(video);
             localVideoRef.current.srcObject = localStream;
             setLocalStrean(localStream)
         }

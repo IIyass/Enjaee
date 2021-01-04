@@ -95,7 +95,16 @@ const WebChat = (props) => {
                     />;
             case 2:
                 return roomLoading ? <h1>Loading ...</h1> :
-                    <AudioChat />;
+                    <AudioChat
+                        doVideoOffer={doVideoOffer}
+                        doCandidate={doCandidate}
+                        roomMetadata={roomMetadata}
+                        videoStep={videoStep}
+                        doAnswer={doVideoAnswer}
+                        me={me}
+                        leaveRoom={leaveRoom}
+
+                    />;
             case 3:
                 return roomLoading ? <h1>Loading ...</h1> :
                     <VideoChat

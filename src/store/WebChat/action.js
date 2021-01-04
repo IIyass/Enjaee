@@ -1,6 +1,6 @@
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
 import firebase from 'firebase';
-import { GO_CHAT_ROOM, GO_AUDIO_ROOM, GO_VIDEO_ROOM,  ROOM_DATA } from './actionType'
+import { GO_CHAT_ROOM, GO_AUDIO_ROOM, GO_VIDEO_ROOM, ROOM_DATA } from './actionType'
 import { getMeByPhone } from '../../helpers';
 
 const messagesRef = firestoreFirebase.collection('/messages');
@@ -32,22 +32,22 @@ export const GetRoomMetaData = (id) => async (dispatch) => {
 
     let room = {};
     await roomsRef
-      .where(firebase.firestore.FieldPath.documentId(),
-        "==",
-        id)
-      .get()
-      .then((querySnapshot) => {
-        return querySnapshot.forEach((doc) => {
-          room = ({ id: doc.id, ...doc.data() })
-        });
-      })
-  
+        .where(firebase.firestore.FieldPath.documentId(),
+            "==",
+            id)
+        .get()
+        .then((querySnapshot) => {
+            return querySnapshot.forEach((doc) => {
+                room = ({ id: doc.id, ...doc.data() })
+            });
+        })
+
     dispatch({
-      type: ROOM_DATA,
-      payload: room
+        type: ROOM_DATA,
+        payload: room
     });
-  }
-  
+}
+
 
 export const SendMessage = (data) => async (dispatch) => {
     const me = await getMeByPhone();
@@ -63,6 +63,7 @@ export const SendMessage = (data) => async (dispatch) => {
 };
 
 
+
 export const doVideoOffer = (room, offer) => async (dispatch) => {
     const me = await getMeByPhone();
     await roomsRef.doc(room).update({
@@ -70,9 +71,7 @@ export const doVideoOffer = (room, offer) => async (dispatch) => {
         from: me[0].id,
         offer: JSON.stringify(offer)
     })
-
 };
-
 
 export const doCandidate = (to, candidate) => async (dispatch) => {
     const me = await getMeByPhone();

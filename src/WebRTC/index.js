@@ -1,7 +1,7 @@
-export const initiateLocalStream = async () => {
+export const initiateLocalStream = async (video) => {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({
-            video: true,
+            video: video,
             audio: true
         })
         return stream
@@ -39,6 +39,7 @@ export const listenToConnectionEvents = async (conn, remoteUsername, remoteVideo
         }
     }
 };
+
 
 export const sendOfferCall = async (localconnection,
     localstream,
