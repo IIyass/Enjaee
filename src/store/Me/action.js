@@ -5,6 +5,7 @@ import { getMeByPhone } from '../../helpers';
 
 export const fetchMyData = () => async (dispatch) => {
   const me = await getMeByPhone();
+
   dispatch({
     type: GET_MY_DATA,
     payload: me[0],

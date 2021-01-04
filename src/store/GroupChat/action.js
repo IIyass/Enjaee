@@ -18,7 +18,7 @@ import {
 } from './actionType';
 import { getMeByPhone } from '../../helpers'
 
-const groupRef = firestoreFirebase.collection('/groups');
+
 const userRef = firestoreFirebase.collection('/users');
 const roomsRef = firestoreFirebase.collection('/rooms');
 
@@ -31,7 +31,7 @@ export const showAllGroup = () => async (dispatch) => {
 
 export const goToPrivateRoom = (id) => async (dispatch) => {
   let room = {};
- 
+
   await roomsRef
     .where(firebase.firestore.FieldPath.documentId(), "==", id)
     .get()
@@ -40,8 +40,7 @@ export const goToPrivateRoom = (id) => async (dispatch) => {
     })
 
   dispatch(push({
-    pathname: '/webChat',
-    state: room,
+    pathname: `/webChat/${room.id}`,
   }));
 }
 
@@ -49,45 +48,46 @@ export const updateMember = (id) => async (dispatch, getState) => {
   const members = getState().GroupChatReducer.GroupPerson;
   let ExistingMembers = [];
 
-  await groupRef
+  await roomsRef
     .where(firebase.firestore.FieldPath.documentId(), '==', id)
     .get()
     .then((querySnapshot) => {
       return querySnapshot.forEach((doc) => {
-        ExistingMembers = [...doc.data().members]
+        ExistingMembers = [...doc.data().participants]
       });
     })
 
   const NewMembers = members.filter(e => !ExistingMembers.includes(e))
 
-  await groupRef.doc(id).update({
-    members: [...ExistingMembers, ...NewMembers],
+  await roomsRef.doc(id).update({
+    participants: [...ExistingMembers, ...NewMembers],
   })
 
-  dispatch({
-    type: UPDATE_MEMBER,
-    payload: id
-  })
+  dispatch(push({
+    pathname: `/groups/${id}`
+  }));
 };
 
-export const AddMember = () => async (dispatch) => {
-  dispatch({
-    type: ADD_MEMBERS,
-  });
+export const AddMember = (id) => async (dispatch) => {
+
+  dispatch(push({
+    pathname: `/update/group/${id}`
+  }));
+
 };
 
 export const addGroupAction = () => async (dispatch) => {
-  dispatch({
-    type: ADD_GROUP_ACTION,
-  });
+  dispatch(push({
+    pathname: `/groups/contact`
+  }));
 };
 
 export const goToGroupDetail = (id) => async (dispatch) => {
 
-  dispatch({
-    type: GO_TO_GROUP_DETAIL,
-    payload: id
-  });
+  dispatch(push({
+    pathname: `/groups/${id}`
+  }));
+
 };
 
 export const getGroupById = (id) => async (dispatch) => {
@@ -147,10 +147,9 @@ export const addNewGroup = (name) => async (dispatch, getState) => {
             await members.every(async e => await userRef.doc(e).update({
               groups: firebase.firestore.FieldValue.arrayUnion(`/rooms/${doc.id}`)
             }))
-            dispatch({
-              type: ADD_GROUP_BY_NAME,
-              payload: doc.id
-            });
+            dispatch(push({
+              pathname: `/groups/${doc.id}`
+            }));
           })
       }
     }
