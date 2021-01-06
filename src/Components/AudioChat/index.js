@@ -3,8 +3,6 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import * as Style from './style';
 import { sendOfferCall, sendAnswerCall, } from '../../WebRTC'
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
-import MuteVideo from '../../Illustration/muteicon@3x.svg';
-import CallVideo from '../../Illustration/receivevideocallicon.svg';
 import ProfilButton from '../UI/ProfilButton';
 import receiveaudiocallicon from '../../Illustration/receiveaudiocallicon.svg';
 import silenticon from '../../Illustration/silenticon.svg';
@@ -35,11 +33,10 @@ const AudioChat = (props) => {
     leaveRoom,
   } = props;
 
-  const remoteVideoRef = useRef(null);
+  const remoteAudioRef = useRef(null);
   const { timer, handleStart, handleReset } = useTimer();
   const [mute, setMute] = useState(false);
-  const [displayVideo, setDisplayVideo] = useState(true);
-  const [localconnection, localstream, localVideoRef] = useVideoRoom(videoStep, false);
+  const [localconnection, localstream, localAudioRef] = useVideoRoom(videoStep, false);
   const [userName1] = useUserName(roomMetadata.participants.filter(e => e !== me.id)[0])
 
   const [displayVideoScreen, setDisplayVideoScreen] = useState(false);
@@ -94,7 +91,7 @@ const AudioChat = (props) => {
     ) {
       leaveRoom(me.id,
         roomMetadata.participants.filter(e => e !== me.id),
-        roomMetadata.id, localconnection, localstream, localVideoRef,
+        roomMetadata.id, localconnection, localstream, localAudioRef,
         displayVideoScreen, setDisplayVideoScreen)
 
     }
@@ -108,7 +105,7 @@ const AudioChat = (props) => {
           localstream,
           roomMetadata,
           me,
-          remoteVideoRef,
+          remoteAudioRef,
           doCandidate,
           doVideoOffer)}>
           Call {userName1}
@@ -124,13 +121,13 @@ const AudioChat = (props) => {
         roomMetadata,
         snapshot1[0],
         me,
-        remoteVideoRef,
+        remoteAudioRef,
         doCandidate,
         doAnswer
       )}>Accept</ProfilButton>
       <ProfilButton onClick={() => leaveRoom(me.id,
         roomMetadata.participants.filter(e => e !== me.id),
-        roomMetadata.id, localconnection, localstream, localVideoRef,
+        roomMetadata.id, localconnection, localstream, localAudioRef,
         displayVideoScreen, setDisplayVideoScreen)} >Decline</ProfilButton>
     </div>
   }
@@ -139,10 +136,13 @@ const AudioChat = (props) => {
   const renderTwoVideoScreen = () => <div id="screenShare"><audio
     className="videoInsert"
     muted={mute}
-    ref={remoteVideoRef}
+    ref={remoteAudioRef}
     autoPlay
     playsInline>
   </audio>
+    <audio
+      className="video" muted ref={localAudioRef} autoPlay playsInline>
+    </audio>
     <img src={jhon} alt="profil" id="profil" />
     <h1>{userName1}</h1>
     <h2>{formatTime(timer)}</h2>
@@ -155,7 +155,7 @@ const AudioChat = (props) => {
         onClick={() => {
           leaveRoom(me.id,
             roomMetadata.participants.filter(e => e !== me.id),
-            roomMetadata.id, localconnection, localstream, localVideoRef,
+            roomMetadata.id, localconnection, localstream, localAudioRef,
             displayVideoScreen, setDisplayVideoScreen);
 
         }}>End Call</ProfilButton>
@@ -172,8 +172,8 @@ const AudioChat = (props) => {
         <img src={jhon} alt="profil" id="profil" />
         <audio id="profil"
           style={{ display: 'none' }}
-          muted ref={localVideoRef} autoPlay playsInline></audio>
-        <audio ref={remoteVideoRef}
+          muted ref={localAudioRef} autoPlay playsInline></audio>
+        <audio ref={remoteAudioRef}
           style={{ display: 'none' }}
           autoPlay
           playsInline>

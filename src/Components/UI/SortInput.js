@@ -5,14 +5,7 @@ import Polygon from '../../Illustration/Polygon.svg'
 
 const SortInput = (props) => {
 
-    const options = [
-        { value: 'abc', label: 'abc' },
-        { value: 'def', label: 'def' }
-    ]
 
-    const handleSortName = (e) => {
-        console.log(e)
-    }
     const customStyles = {
         control: (base, state) => ({
             ...base,
@@ -47,6 +40,7 @@ const SortInput = (props) => {
             ...base,
             // kill the white space on first and last option
             padding: 0,
+            textAlign: "left"
 
         }),
         indicatorSeparator: (styles) => ({ display: 'none' }),
@@ -71,11 +65,13 @@ const SortInput = (props) => {
                 width={props.width}
                 height={props.height}
                 styles={customStyles}
-                options={options}
+                options={props.options}
                 isMulti={false}
-                onChange={handleSortName}
+                onChange={props.onChange}
+                value={props.value}
                 isSearchable={true}
                 placeholder="Sort by"
+                {...props}
             />
         </SelectContainer>
 

@@ -18,10 +18,8 @@ import {
 } from './actionType';
 import { getMeByPhone } from '../../helpers'
 
-
 const userRef = firestoreFirebase.collection('/users');
 const roomsRef = firestoreFirebase.collection('/rooms');
-
 
 export const showAllGroup = () => async (dispatch) => {
   dispatch({

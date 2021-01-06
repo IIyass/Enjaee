@@ -15,6 +15,7 @@ export const getMeByPhone = async () => {
   const res = await usersRef.get();
   let MyDocument = res.docs.filter((e) => e.data().mobile === parseJwt(Token).firebase.identities.phone[0]);
   MyDocument = MyDocument.map((e) => ({ id: e.id, ...e.data() }));
+
   return MyDocument;
 };
 
@@ -22,6 +23,7 @@ export const getUserNameById = async (id) => {
   const res = await usersRef.get();
   let name = res.docs.filter((e) => e.id === id);
   name = name.map((e) => e.data().name);
+
   return name[0];
 };
 
@@ -37,5 +39,5 @@ export const formatTime = (timer) => {
   const minutes = `${Math.floor(timer / 60)}`
   const getMinutes = `0${minutes % 60}`.slice(-2)
   const getHours = `0${Math.floor(timer / 3600)}`.slice(-2)
-  return `${getHours} : ${getMinutes} : ${getSeconds}`
+  return ` ${getMinutes} : ${getSeconds}`
 }

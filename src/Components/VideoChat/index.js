@@ -53,6 +53,7 @@ const VideoChat = (props) => {
       roomMetadata.participants.filter(e => e === me.id)[0]);
   const [snapshot2, loading2, error2] = useCollectionData(UserQuery, { idField: 'id' });
 
+  console.log(timer)
   // Caller Receive Answer.
   useEffect(() => {
     if (!loading1 && snapshot1[0].type === 'answer' && snapshot1[0].from !== me.id) {
@@ -62,7 +63,6 @@ const VideoChat = (props) => {
       }
       StartingCall()
     }
-    return handleReset();
   }, [loading1, snapshot1])
 
   // Setting candidate Data after filling remoteDescription value.
@@ -77,13 +77,12 @@ const VideoChat = (props) => {
       async function addCandidateCall() {
         const candidate = JSON.parse(snapshot2[0].VideoRoom.candidate)
         await localconnection.addIceCandidate(new RTCIceCandidate(candidate))
-        setDisplayVideoScreen(true)
+        setDisplayVideoScreen(true);
         handleStart();
       }
       addCandidateCall()
     }
-    return handleReset();
-  }, [loading1, loading2, snapshot1, snapshot2, videoStep]);
+  }, [loading1, loading2, snapshot1, snapshot2]);
 
   useEffect(() => {
     if (!loading1 &&
@@ -92,9 +91,9 @@ const VideoChat = (props) => {
       leaveRoom(me.id,
         roomMetadata.participants.filter(e => e !== me.id),
         roomMetadata.id, localconnection, localstream, localVideoRef,
-        displayVideoScreen, setDisplayVideoScreen)
-
+        displayVideoScreen, setDisplayVideoScreen, handleReset)
     }
+
   }, [loading1, snapshot1]);
 
   const renderCallComponent = () => {
@@ -128,7 +127,7 @@ const VideoChat = (props) => {
       <ProfilButton onClick={() => leaveRoom(me.id,
         roomMetadata.participants.filter(e => e !== me.id),
         roomMetadata.id, localconnection, localstream, localVideoRef,
-        displayVideoScreen, setDisplayVideoScreen)} >Decline</ProfilButton>
+        displayVideoScreen, setDisplayVideoScreen, handleReset)} >Decline</ProfilButton>
     </div>
   }
 
@@ -155,7 +154,7 @@ const VideoChat = (props) => {
           leaveRoom(me.id,
             roomMetadata.participants.filter(e => e !== me.id),
             roomMetadata.id, localconnection, localstream, localVideoRef,
-            displayVideoScreen, setDisplayVideoScreen);
+            displayVideoScreen, setDisplayVideoScreen, handleReset);
 
         }}>End Call</ProfilButton>
 

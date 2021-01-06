@@ -151,5 +151,4 @@ export default connect(null,
     getMyConfirmationRequest,
     requestSucceed,
     GoToPrivateRoom
-
   })(Contact);

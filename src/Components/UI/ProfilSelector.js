@@ -5,7 +5,7 @@ import Polygon from '../../Illustration/Polygon.svg'
 
 const ProfilSelector = (props) => {
 
-    const handleSortName = e => console.log(e);
+
     const customStyles = {
         control: (base, state) => ({
             ...base,
@@ -55,9 +55,11 @@ const ProfilSelector = (props) => {
             styles={customStyles}
             options={props.options}
             isMulti={false}
-            onChange={handleSortName}
+            value={props.value}
+            onChange={props.onChange}
             isSearchable={true}
             placeholder={props.placeholder}
+            {...props}
         />
     </SelectContainer>;
 }

@@ -1,0 +1,50 @@
+[
+    {
+        "label": "30min",
+        "value": "30min"
+    },
+    {
+        "label": "1h",
+        "value": "1h"
+    },
+    {
+        "label": "1h:30min",
+        "value": "1h:30min"
+    },
+    {
+        "label": "2h",
+        "value": "2h"
+    },
+    {
+        "label": "2h:30min",
+        "value": "2h:30min"
+    },
+    {
+        "label": "3h",
+        "value": "3h"
+    },
+    {
+        "label": "3h:30min",
+        "value": "3h:30min"
+    },
+    {
+        "label": "4h",
+        "value": "4h"
+    },
+    {
+        "label": "4h:30min",
+        "value": "4h:30min"
+    },
+    {
+        "label": "5h",
+        "value": "5h"
+    },
+    {
+        "label": "5h:30min",
+        "value": "5h:30min"
+    },
+    {
+        "label": "6h",
+        "value": "6h"
+    }
+]
