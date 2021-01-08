@@ -5,15 +5,21 @@ import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import * as Style from './style';
 import BodyContainer from '../../Common/Body';
-import { next, back, NextCode, ConfirmationModel } from '../../store/TeamChat/action';
+import {
+  next, back, NextCode,
+  ConfirmationModel, AddContactToTeamChat,
+  goToFirstStep
+} from '../../store/TeamChat/action';
 import DumbTeamChatComponent from '../../Components/TeamChat';
 import { fetchMyData } from '../../store/Me/action';
 
 const userRef = firestoreFirebase.collection('/users');
 
 const TeamChat = (props) => {
-  const { step, fetchMyData, next, back, ConfirmationModel, NextCode } = props;
-  const dispatch = useDispatch()
+  const { step, fetchMyData, AddContactToTeamChat,
+    next, back, ConfirmationModel, NextCode,
+    goToFirstStep } = props;
+  const dispatch = useDispatch();
 
   const fetchMyDataCall = useCallback(
     () => dispatch(fetchMyData),
@@ -24,7 +30,7 @@ const TeamChat = (props) => {
     fetchMyDataCall();
   }, [fetchMyDataCall]);
 
-  const me = useSelector((state) => state.MeReducer.Me)
+  const me = useSelector((state) => state.MeReducer.Me);
 
   const query2 = userRef
   const [AllUsers, loading2, error2] = useCollectionData(query2, { idField: 'id' });
@@ -45,8 +51,13 @@ const TeamChat = (props) => {
           next={next}
           back={back}
           NextCode={NextCode}
-          MyTeamChat={loading1 ? [] : MyData[0].teamChat}
+          MyTeamChatNotification={MyData === undefined ? [] :
+            MyData[0].teamChatNotification}
+          teamChatContact={MyData === undefined ? [] :
+            MyData[0].teamChatContact}
           ConfirmationModel={ConfirmationModel}
+          AddContactToTeamChat={AddContactToTeamChat}
+          goToFirstStep={goToFirstStep}
           me={me}
         />
       </Style.Wrapper>
@@ -62,5 +73,7 @@ export default connect(mapStateToProps,
     back,
     NextCode,
     ConfirmationModel,
-    fetchMyData
+    fetchMyData,
+    AddContactToTeamChat,
+    goToFirstStep
   })(TeamChat);

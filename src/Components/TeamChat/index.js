@@ -2,14 +2,16 @@ import React from 'react';
 import CardLayout from './style';
 import Card from './Card';
 
-const DumbTeamChatComponent = ({ TeamData, MyTeamChat,
-  NextCode, step, next, me, ConfirmationModel }) => (
+const DumbTeamChatComponent = ({ TeamData, MyTeamChatNotification,
+  NextCode, step, next, me, ConfirmationModel,
+  goToFirstStep, AddContactToTeamChat, teamChatContact }) => (
 
   <CardLayout>
     {TeamData.map(({
       picture, name, detail, profile, history, id,
     }, index) => (
       <Card
+        key={id}
         step={step}
         next={next}
         index={index}
@@ -19,9 +21,12 @@ const DumbTeamChatComponent = ({ TeamData, MyTeamChat,
         detail={detail}
         history={history}
         NextCode={NextCode}
+        goToFirstStep={goToFirstStep}
         me={me}
         ConfirmationModel={ConfirmationModel}
-        MyTeamChat={MyTeamChat}
+        MyTeamChatNotification={MyTeamChatNotification}
+        AddContactToTeamChat={AddContactToTeamChat}
+        teamChatContact={teamChatContact}
         id={id}
       />
     ))}

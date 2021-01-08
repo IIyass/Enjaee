@@ -27,7 +27,6 @@ flex-direction:row;
 font-family:Roboto;
 justify-content:space-between;
 margin:auto;
-
 `;
 
 export const CardContainer = styled.div`
@@ -41,6 +40,7 @@ justify-content:start;
   cursor:pointer;
 }
 `;
+
 export const IconContainer = styled.div`
 width:auto;
 display:flex;
@@ -59,8 +59,6 @@ img{
   margin:0 5px;
   height:100%;
   justify-content:space-evenly;
-
-  
 }
 ul{
     padding: 0;
@@ -80,6 +78,19 @@ ul{
       font-family:Roboto;
     }
   
+}
+
+#time{
+  width: 93px;
+  height: 40px;
+  padding: 10.5px 20px;
+  background: #F8F8F8;
+  border: 1px solid #53A8CB;
+  box-sizing: border-box;
+  border-radius: 4px;
+  font-family:Roboto;
+  font-weight:400;
+  font-size:16px;
 }
 
 `;

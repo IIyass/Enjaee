@@ -31,6 +31,17 @@ const TeamReducer = (state = INIT_STATE, action) => {
         ...state,
         step: 3,
       };
+
+    case 'GO_TO_FIRST_STEP':
+      return {
+        ...state,
+        step: 1,
+      };
+    case 'FINISH_STEP':
+      return {
+        ...state,
+        step: undefined,
+      };
     default:
       return state;
   }
