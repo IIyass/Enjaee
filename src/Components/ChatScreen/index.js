@@ -30,7 +30,7 @@ const ChatScreen = (props) => {
       }]))
     }, []
   );
-
+  // root app adding teamchat route..
   useEffect(() => {
     dummy.current.scrollIntoView({ behavior: 'smooth' });
   }, [messages])

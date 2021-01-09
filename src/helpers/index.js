@@ -38,6 +38,21 @@ export const formatTime = (timer) => {
   const getSeconds = `0${(timer % 60)}`.slice(-2)
   const minutes = `${Math.floor(timer / 60)}`
   const getMinutes = `0${minutes % 60}`.slice(-2)
-  const getHours = `0${Math.floor(timer / 3600)}`.slice(-2)
   return ` ${getMinutes} : ${getSeconds}`
+}
+
+export const formatTimeCounteDown = (timer) => {
+  const minutes = `${Math.floor(timer / 60)}`
+  const getMinutes = `0${minutes % 60}`.slice(-2)
+  const getHours = `0${Math.floor(timer / 3600)}`.slice(-2)
+  return ` ${getHours}h:${getMinutes}min`
+}
+
+export const ReversTimeToSec = (timer) => {
+  const NewFormat = timer.split(":")
+  const hours = parseInt(NewFormat[0].trim()) * 3600;
+  const minutes = parseInt(NewFormat[1].trim()) * 60;
+  let newTimer = hours + minutes
+  return newTimer;
+
 }

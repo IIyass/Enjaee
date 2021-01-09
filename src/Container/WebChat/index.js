@@ -103,7 +103,6 @@ const WebChat = (props) => {
                         doAnswer={doVideoAnswer}
                         me={me}
                         leaveRoom={leaveRoom}
-
                     />;
             case 3:
                 return roomLoading ? <h1>Loading ...</h1> :
@@ -115,7 +114,6 @@ const WebChat = (props) => {
                         doAnswer={doVideoAnswer}
                         me={me}
                         leaveRoom={leaveRoom}
-
                     />;
             default:
                 return <ChatScreen gradientMessage />;

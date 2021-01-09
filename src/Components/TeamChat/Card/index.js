@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from 'react';
 import PinInput from 'react-pin-input';
 import * as Style from './style';
 import ChatIcon from '../../../Illustration/Chat.svg';
@@ -15,7 +14,7 @@ const TeamChatCard = (props) => {
   const {
     next, NextCode, AddContactToTeamChat,
     MyTeamChatNotification, ConfirmationModel,
-    step, id, me, goToFirstStep, name, teamChatContact, detail = "CEO Hitachy",
+    step, id, me, OpenModeL, open, CloseModal, goToFirstStep, name, GoToPrivateRoom, teamChatContact, detail = "CEO Hitachy",
   } = props;
   const [contactId, setContactId] = useState('')
   const [userName1] = useUserName(id)
@@ -24,7 +23,6 @@ const TeamChatCard = (props) => {
   const [receiveName] = useUserName(contactId)
   const [code, setCode] = useState('')
   const [time, setTime] = useState('')
-  const [open, setOpen] = useState(false);
   const [pin, setPin] = useState({
     1: '', 2: '', 3: '', 4: '',
   });
@@ -32,18 +30,8 @@ const TeamChatCard = (props) => {
     1: '', 2: '', 3: '', 4: '',
   });
 
-  const handleCloseModal = () => {
-    setOpen(false);
-    document.body.style.overflow = 'scroll';
-  };
-  const historyLocation = useHistory();
 
-  const HandleChat = () => {
-    historyLocation.push({
-      pathname: '/alert',
-      state: 1,
-    });
-  };
+
   // Teamchat
   const handleChange = (selectedTime) => {
     setTime(selectedTime)
@@ -138,33 +126,50 @@ const TeamChatCard = (props) => {
           setCode(contact.codeConfirmation)
           setDuration(contact.duration)
           ConfirmationModel()
-          setOpen(true);
+          OpenModeL()
         } else {
           goToFirstStep()
-          setOpen(true)
+          OpenModeL()
         }
       }))
     } else {
-      teamChatContact.every(contact => {
-        if (contact.contactId !== id) {
-          goToFirstStep()
-          setOpen(true)
-        }
-      })
+      if (teamChatContact.length > 0) {
+        teamChatContact.every(contact => {
+          if (contact.contactId !== id) {
+            goToFirstStep()
+            OpenModeL()
+          }
+        })
+      } else {
+        goToFirstStep()
+        OpenModeL()
+      }
     }
   };
 
-
   const handleLeftDuration = () => {
-    return teamChatContact.map(contact => {
-      return contact.contactId === id && <div id="time">{contact.duration} Left</div>
-    })
+
+    if (teamChatContact.length > 0) {
+      return teamChatContact.map(contact => {
+        if (contact.contactId === id) {
+          return <>
+            <div id="time">{contact.duration} Left</div>
+            <img alt="chat" src={ChatIcon} onClick={() => GoToPrivateRoom(id)} />
+          </>
+        } else {
+          return <img alt="chat" src={ChatIcon} onClick={() => handleDurationModal()} />
+        }
+      })
+    } else {
+      return <img alt="chat" src={ChatIcon} onClick={() => handleDurationModal()} />
+
+    }
   }
 
   return (
     <>
       <Model
-        onClose={handleCloseModal}
+        onClose={CloseModal}
         open={open}
       >
         {Card()}
@@ -181,7 +186,6 @@ const TeamChatCard = (props) => {
             </Style.PersonalInfo>
             <Style.IconContainer>
               {handleLeftDuration()}
-              <img alt="chat" src={ChatIcon} onClick={() => HandleChat()} />
               <img alt="more" src={More} />
             </Style.IconContainer>
           </Style.Description>

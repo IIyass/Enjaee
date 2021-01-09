@@ -1,6 +1,7 @@
 const INIT_STATE = {
   step: 1,
-  DataStepOne: {}
+  DataStepOne: {},
+  open: false
 };
 
 const TeamReducer = (state = INIT_STATE, action) => {
@@ -18,7 +19,8 @@ const TeamReducer = (state = INIT_STATE, action) => {
     case 'GO_TO_LAST_STEP':
       return {
         ...state,
-        step: -1
+        step: -1,
+        open: false
       };
     case 'GO_TO_SECOND_STEP':
       return {
@@ -31,7 +33,6 @@ const TeamReducer = (state = INIT_STATE, action) => {
         ...state,
         step: 3,
       };
-
     case 'GO_TO_FIRST_STEP':
       return {
         ...state,
@@ -41,6 +42,17 @@ const TeamReducer = (state = INIT_STATE, action) => {
       return {
         ...state,
         step: undefined,
+        open: false
+      };
+    case 'OPEN_MODEL':
+      return {
+        ...state,
+        open: true
+      };
+    case 'CLOSE_MODEL':
+      return {
+        ...state,
+        open: false
       };
     default:
       return state;

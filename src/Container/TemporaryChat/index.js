@@ -6,18 +6,22 @@ import { connect, useSelector, useDispatch } from 'react-redux';
 import * as Style from './style';
 import BodyContainer from '../../Common/Body';
 import {
-  next, back, NextCode,
-  ConfirmationModel, AddContactToTeamChat,
-  goToFirstStep
+  next, OpenModeL, NextCode,
+  ConfirmationModel,
+  AddContactToTeamChat,
+  goToFirstStep,
+  GoToPrivateRoom,
+  CloseModal
 } from '../../store/TeamChat/action';
 import DumbTeamChatComponent from '../../Components/TeamChat';
 import { fetchMyData } from '../../store/Me/action';
+
 
 const userRef = firestoreFirebase.collection('/users');
 
 const TeamChat = (props) => {
   const { step, fetchMyData, AddContactToTeamChat,
-    next, back, ConfirmationModel, NextCode,
+    next, OpenModeL, CloseModal, ConfirmationModel, NextCode, GoToPrivateRoom,
     goToFirstStep } = props;
   const dispatch = useDispatch();
 
@@ -31,6 +35,7 @@ const TeamChat = (props) => {
   }, [fetchMyDataCall]);
 
   const me = useSelector((state) => state.MeReducer.Me);
+  const open = useSelector((state) => state.TeamChatReducer.open);
 
   const query2 = userRef
   const [AllUsers, loading2, error2] = useCollectionData(query2, { idField: 'id' });
@@ -49,7 +54,7 @@ const TeamChat = (props) => {
           TeamData={AllUsers}
           step={step}
           next={next}
-          back={back}
+          OpenModeL={OpenModeL}
           NextCode={NextCode}
           MyTeamChatNotification={MyData === undefined ? [] :
             MyData[0].teamChatNotification}
@@ -58,7 +63,10 @@ const TeamChat = (props) => {
           ConfirmationModel={ConfirmationModel}
           AddContactToTeamChat={AddContactToTeamChat}
           goToFirstStep={goToFirstStep}
+          GoToPrivateRoom={GoToPrivateRoom}
+          CloseModal={CloseModal}
           me={me}
+          open={open}
         />
       </Style.Wrapper>
   );
@@ -70,10 +78,12 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps,
   {
     next,
-    back,
+    OpenModeL,
     NextCode,
     ConfirmationModel,
     fetchMyData,
     AddContactToTeamChat,
-    goToFirstStep
+    goToFirstStep,
+    GoToPrivateRoom,
+    CloseModal
   })(TeamChat);

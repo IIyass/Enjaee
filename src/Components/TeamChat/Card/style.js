@@ -83,7 +83,6 @@ ul{
 #time{
   width: 93px;
   height: 40px;
-  padding: 10.5px 20px;
   background: #F8F8F8;
   border: 1px solid #53A8CB;
   box-sizing: border-box;
@@ -91,6 +90,7 @@ ul{
   font-family:Roboto;
   font-weight:400;
   font-size:16px;
+  text-align:center;
 }
 
 `;
