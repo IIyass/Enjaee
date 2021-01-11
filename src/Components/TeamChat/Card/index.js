@@ -6,7 +6,7 @@ import More from '../../../Illustration/More.svg';
 import Model from '../../Model';
 import SortInput from '../../UI/ProfilSelector';
 import FooterButton from '../../UI/FooterButton';
-import picture from '../../../Illustration/Henry.png';
+import Picture from '../../../Illustration/Henry.png';
 import Time from '../Time.json';
 import useUserName from '../../../hooks/useUserName';
 
@@ -14,7 +14,7 @@ const TeamChatCard = (props) => {
   const {
     next, NextCode, AddContactToTeamChat,
     MyTeamChatNotification, ConfirmationModel,
-    step, id, me, OpenModeL, open, CloseModal, goToFirstStep, name, GoToPrivateRoom, teamChatContact, detail = "CEO Hitachy",
+    step, id, me, picture, goToFirstStep, name, PictureView, GoToPrivateRoom, teamChatContact, detail,
   } = props;
   const [contactId, setContactId] = useState('')
   const [userName1] = useUserName(id)
@@ -23,6 +23,7 @@ const TeamChatCard = (props) => {
   const [receiveName] = useUserName(contactId)
   const [code, setCode] = useState('')
   const [time, setTime] = useState('')
+  const [open, setOpen] = useState(false);
   const [pin, setPin] = useState({
     1: '', 2: '', 3: '', 4: '',
   });
@@ -30,7 +31,10 @@ const TeamChatCard = (props) => {
     1: '', 2: '', 3: '', 4: '',
   });
 
-
+  const handleCloseModal = () => {
+    setOpen(false);
+    document.body.style.overflow = 'scroll';
+  };
 
   // Teamchat
   const handleChange = (selectedTime) => {
@@ -78,7 +82,7 @@ const TeamChatCard = (props) => {
                 autoSelect
                 regexCriteria={/^[ A-Za-z0-9_@./#&+-]*$/}
               />
-              <FooterButton onClick={() => NextCode(id, pin[3])}>Send</FooterButton>
+              <FooterButton onClick={() => NextCode(id, pin[3], setOpen)}>Send</FooterButton>
             </Style.CardWrapper>
           </Style.CardTemModel>
         );
@@ -106,7 +110,7 @@ const TeamChatCard = (props) => {
               />
               <FooterButton onClick={() => {
                 if (ConfirmationPin[3] === code) {
-                  AddContactToTeamChat(contactId, duration, ConfirmationPin[3])
+                  AddContactToTeamChat(contactId, duration, ConfirmationPin[3], setOpen)
                 } else {
                   alert('incorrect code')
                 }
@@ -126,10 +130,10 @@ const TeamChatCard = (props) => {
           setCode(contact.codeConfirmation)
           setDuration(contact.duration)
           ConfirmationModel()
-          OpenModeL()
+          setOpen(true);
         } else {
           goToFirstStep()
-          OpenModeL()
+          setOpen(true)
         }
       }))
     } else {
@@ -137,12 +141,12 @@ const TeamChatCard = (props) => {
         teamChatContact.every(contact => {
           if (contact.contactId !== id) {
             goToFirstStep()
-            OpenModeL()
+            setOpen(true)
           }
         })
       } else {
         goToFirstStep()
-        OpenModeL()
+        setOpen(true)
       }
     }
   };
@@ -169,7 +173,7 @@ const TeamChatCard = (props) => {
   return (
     <>
       <Model
-        onClose={CloseModal}
+        onClose={handleCloseModal}
         open={open}
       >
         {Card()}
@@ -177,7 +181,8 @@ const TeamChatCard = (props) => {
       <Style.Wrapper>
         <Style.CardContainer>
           <div onClick={() => handleDurationModal()}>
-            <img alt="profil" className="profil" src={picture} />
+            {PictureView ? picture ? <img alt="profil" className="profil" src={picture} /> :
+              <img alt="profil" className="profil" src={Picture} /> : null}
           </div>
           <Style.Description>
             <Style.PersonalInfo>

@@ -10,6 +10,7 @@ import {
   AddMember,
   showAllGroup,
 } from '../../../store/GroupChat/action';
+import { fetchMyData } from '../../../store/Me/action';
 
 const GroupDetail = (props) => {
   const {
@@ -17,6 +18,7 @@ const GroupDetail = (props) => {
     getGroupById,
     loadGroupMember,
     showAllGroup,
+    fetchMyData
   } = props;
 
   const handleSubmit = (e) => {
@@ -24,7 +26,16 @@ const GroupDetail = (props) => {
   };
 
   const dispatch = useDispatch();
-  const GroupMember = useSelector((state) => state.GroupChatReducer.groupMember)
+  const GroupMember = useSelector((state) => state.GroupChatReducer.groupMember);
+  const me = useSelector((state) => state.MeReducer.Me);
+
+  const fetchMyDataCall = useCallback(
+    () => dispatch(fetchMyData),
+    [dispatch, fetchMyData]
+  );
+  useEffect(() => {
+    fetchMyDataCall();
+  }, [fetchMyDataCall])
 
   useEffect(() => {
     getGroupById(props.match.params.id)
@@ -44,7 +55,7 @@ const GroupDetail = (props) => {
           <button>Update</button>
         </ButtonContainer>
       </GroupBar>
-      <DumbGroupPerson team={GroupMember.members} />
+      <DumbGroupPerson me={me} team={GroupMember.members} />
     </Wrapper>
 
   );
@@ -54,6 +65,7 @@ export default connect(null,
   {
     getGroupById,
     showAllGroup,
+    fetchMyData,
     AddMember,
 
   })(GroupDetail);

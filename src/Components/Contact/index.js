@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as Style from './style';
 import Card from './Card';
+import Jhon from '../../Illustration/Henry.png';
 
 const DumbContact = (props) => {
   const [, setReceiveNotifiation] = useState(false);
@@ -28,35 +29,41 @@ const DumbContact = (props) => {
   return (
     <Style.CardLayout index={undefined}>
       {ContactData.map(({
-        picture, name, detail, profile, history, id, friends,
-      }, index) => id !== me.id && <Card
-        key={id}
-        friends={friends}
-        openNotificationModel={openNotificationModel}
-        sendNotificationToContact={sendNotificationToContact}
-        showNotificationModel={showNotificationModel}
-        MyNotification={MyNotification}
-        sentNotificationStep={sentNotificationStep}
-        showInvitationModel={showInvitationModel}
-        setReceiveNotifiation={setReceiveNotifiation}
-        CancelSendRequest={CancelSendRequest}
-        AcceptedRequest={AcceptedRequest}
-        showGeneratingCodeModel={showGeneratingCodeModel}
-        showConfirmationCode={showConfirmationCode}
-        confirmationCode={confirmationCode}
-        requestSucceed={requestSucceed}
-        me={me}
-        AccepteSentRequest={AccepteSentRequest}
-        generateSecurityCode={generateSecurityCode}
-        index={index}
-        locked={profile}
-        name={name}
-        picture={picture}
-        detail={detail}
-        history={history}
-        GoToPrivateRoom={GoToPrivateRoom}
-        id={id}
-      />
+        avatar, name, profilView, status,
+        privateChat,
+        PictureView, profile, history, id, friends,
+      }, index) => id !== me.id &&
+      profilView &&
+        <Card
+          key={id}
+          PrivateChat={privateChat}
+          PictureView={PictureView}
+          friends={friends}
+          openNotificationModel={openNotificationModel}
+          sendNotificationToContact={sendNotificationToContact}
+          showNotificationModel={showNotificationModel}
+          MyNotification={MyNotification}
+          sentNotificationStep={sentNotificationStep}
+          showInvitationModel={showInvitationModel}
+          setReceiveNotifiation={setReceiveNotifiation}
+          CancelSendRequest={CancelSendRequest}
+          AcceptedRequest={AcceptedRequest}
+          showGeneratingCodeModel={showGeneratingCodeModel}
+          showConfirmationCode={showConfirmationCode}
+          confirmationCode={confirmationCode}
+          requestSucceed={requestSucceed}
+          me={me}
+          AccepteSentRequest={AccepteSentRequest}
+          generateSecurityCode={generateSecurityCode}
+          index={index}
+          locked={profile}
+          name={name}
+          picture={avatar ? avatar : Jhon}
+          status={status}
+          history={history}
+          GoToPrivateRoom={GoToPrivateRoom}
+          id={id}
+        />
       )}
     </Style.CardLayout>
   );

@@ -79,15 +79,15 @@ const Contact = (props) => {
               onChange={(e) => setName(e.target.value)} name="groupname" />
             {groupError}
             <ButtonContainer>
-              {props.match.params.id === undefined ? <button >Done</button> :
-                <button onClick={() => updateMember(props.match.params.id)}>
+              {props.match.params.id === undefined ? <button style={{ zIndex: 9999 }}
+                onClick={() => addNewGroup()} >Done</button> :
+                <button style={{ zIndex: 9999 }} onClick={() => updateMember(props.match.params.id)}>
                   Update Member
                   </button>}
             </ButtonContainer>
           </form>
-          <SearchInput placeholder="Search" name="Search" iconSearch />
+          <SearchInput style={{ width: "70px" }} disabled value={GroupPerson.length} />
         </GroupBar>
-
         <DumbMyContact
           selectGroupPerson={selectGroupPerson}
           removeGroupPerson={removeGroupPerson}
@@ -96,7 +96,7 @@ const Contact = (props) => {
           GroupPerson={GroupPerson}
           me={me}
         />
-      </Wrapper>
+      </Wrapper >
   );
 };
 

@@ -27,13 +27,33 @@ export const Hero = styled.div`
 justify-content:space-evenly;
 display:flex;
 flex-direction:row;
-
+position:relative;
+height:250px;
+#file{
+    width:220px;
+    height:220px;
+    position:absolute;
+    left:20px;
+    z-index:9999;
+    cursor:pointer;
+    opacity:0;
+}
 img{
+    left:20px;
+    width:220px;
+    height:220px;
+    position:absolute;
     border-radius:50%;
+}
+
+h1{
+    width:220px;
+    left: 0;
+    position: absolute;
+    top: 30%;
 }
 `;
 export const ButtonContainer = styled.div`
-margin-top:20px;
 width:45%;
 display:flex;
 flex-direction:row;
@@ -41,6 +61,13 @@ justify-content:space-between;
 `;
 export const InputInfo = styled.div`
 width:75%;
+height:225px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+position:absolute;
+right:20px;
+
 #ProfilInfo{
     display:flex;
     flex-direction:row;
@@ -69,15 +96,19 @@ h3{
 `;
 export const Privacy = styled.div`
 width:100%;
-display:flex;
-flex-direction:row;
-flex-wrap:wrap;
+display: grid;
+grid-template-columns:356px 356px 356px;
+grid-template-rows: auto auto auto;
+column-gap:20px;
+row-gap:30px;
 `;
 export const Notification = styled.div`
 width:100%;
-display:flex;
-flex-direction:row;
-flex-wrap:wrap;
+display: grid;
+grid-template-columns:356px 356px 356px;
+grid-template-rows: auto auto auto;
+column-gap:20px;
+row-gap:30px;
 `;
 export const FooterProfil = styled.div`
 width:100%;

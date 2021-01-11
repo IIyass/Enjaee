@@ -17,20 +17,25 @@ const Contact = (props) => {
   return (
     <CardLayout index={openModel}>
       {contact.map(({
-        name, detail, id,
-      }, index) => me.id !== id && <Card
-        key={id}
-        openModel={openModel}
-        setOpenModel={setOpenModel}
-        index={index}
-        name={name}
-        picture={Jhon}
-        detail={detail}
-        id={id}
-        selectGroupPerson={selectGroupPerson}
-        removeGroupPerson={removeGroupPerson}
-        GroupPerson={GroupPerson}
-      />
+        name, status, profilView,
+        PictureView, avatar, id,
+      }, index) => me.id !== id &&
+      profilView &&
+        <Card
+          key={id}
+          openModel={openModel}
+          setOpenModel={setOpenModel}
+          index={index}
+          name={name}
+          picture={avatar ? avatar : Jhon}
+          detail={status}
+          id={id}
+          me={me}
+          PictureView={PictureView}
+          selectGroupPerson={selectGroupPerson}
+          removeGroupPerson={removeGroupPerson}
+          GroupPerson={GroupPerson}
+        />
       )}
     </CardLayout>
   );

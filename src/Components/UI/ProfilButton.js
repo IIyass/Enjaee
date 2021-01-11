@@ -8,7 +8,6 @@ const ProfilButton = styled.button`
   width: 180px;
   height: 50px;
   cursor: pointer;
- 
   `;
 
 export default ProfilButton;

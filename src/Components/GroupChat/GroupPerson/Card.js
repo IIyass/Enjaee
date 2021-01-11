@@ -5,12 +5,14 @@ import ChatIcon from '../../../Illustration/Chat.svg';
 import AudioCall from '../../../Illustration/AudioCall.svg';
 import More from '../../../Illustration/More.svg';
 import Stroke from '../../../Illustration/Stroke.svg';
-
+import Joli from '../../../Illustration/Joli.png';
 const Card = (props) => {
   const {
     picture,
     name,
     detail,
+    PictureView,
+    friends, me
   } = props;
 
 
@@ -40,7 +42,9 @@ const Card = (props) => {
   return (
     <Style.Wrapper>
       <Style.CardContainer>
-        <img className="profil" src={picture} />
+        {PictureView === "everybody" ? <img alt="profil" className="profil" src={picture} /> :
+          friends.includes(me.id) ? <img alt="profil" className="profil" src={Joli} /> : null
+        }
         <Style.Description>
           <Style.PersonalInfo>
             <h1>{name}</h1>

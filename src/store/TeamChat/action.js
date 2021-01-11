@@ -23,7 +23,7 @@ export const next = (id, time) => async (dispatch) => {
   });
 }
 
-export const NextCode = (id, code) => async (dispatch, getState) => {
+export const NextCode = (id, code, setOpen) => async (dispatch, getState) => {
   const DataStepOne = getState().TeamChatReducer.DataStepOne;
   const me = await getMeByPhone();
   let teamChatNotification = [];
@@ -48,13 +48,14 @@ export const NextCode = (id, code) => async (dispatch, getState) => {
         })
     })
     .then(() => {
+      setOpen(false)
       dispatch({
         type: GO_TO_LAST_STEP,
       });
     })
 }
 
-export const AddContactToTeamChat = (contactId, duration, codeConfirmation) => async (dispatch) => {
+export const AddContactToTeamChat = (contactId, duration, codeConfirmation, setOpen) => async (dispatch) => {
   const me = await getMeByPhone();
 
   await userRef
@@ -84,6 +85,7 @@ export const AddContactToTeamChat = (contactId, duration, codeConfirmation) => a
               })
             })
         }).then(() => {
+          setOpen(false)
           dispatch({
             type: FINISH_STEP,
           });
@@ -93,29 +95,22 @@ export const AddContactToTeamChat = (contactId, duration, codeConfirmation) => a
 }
 
 export const ConfirmationModel = () => async (dispatch) => {
+
   dispatch({
     type: CONFIRMATION_STEP,
   });
+
+
 }
 
 export const goToFirstStep = () => async (dispatch) => {
   dispatch({
     type: GO_TO_FIRST_STEP,
   });
+
 };
 
-export const OpenModeL = () => async (dispatch) => {
-  dispatch({
-    type: OPEN_MODEL,
-  });
-};
 
-export const CloseModal = () => async (dispatch) => {
-  document.body.style.overflow = 'scroll';
-  dispatch({
-    type: CLOSE_MODEL,
-  });
-}
 
 export const ChangeChatDuration = (newDuration, contactId) => async () => {
   const me = await getMeByPhone();

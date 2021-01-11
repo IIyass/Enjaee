@@ -25,9 +25,8 @@ justify-content:start;
   position:relative;
   cursor:pointer;
   height:195px;
-  width:100%;
-  height:100%;
-
+  width:360px;
+  height:195px;
 `;
 
 export const CardTemModel = styled.div`

@@ -10,7 +10,6 @@ import {
   goToPrivateRoom
 } from '../../../store/GroupChat/action';
 
-
 const AddGroup = (props) => {
 
   const {
@@ -33,8 +32,6 @@ const AddGroup = (props) => {
   useEffect(() => {
     getAllGroupsCall()
   }, [getAllGroups, getAllGroupsCall])
-
-
 
   return loadGroups ? <h1>Loading ...</h1> :
     <Style.Wrapper as={BodyContainer}>

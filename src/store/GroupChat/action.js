@@ -36,9 +36,8 @@ export const goToPrivateRoom = (id) => async (dispatch) => {
     .then((querySnapshot) => {
       return querySnapshot.forEach((doc) => room = ({ id: doc.id, ...doc.data() }));
     })
-
   dispatch(push({
-    pathname: `/webChat/${room.id}`,
+    pathname: `/webChat/group/${room.id}`
   }));
 }
 
@@ -167,20 +166,27 @@ export const getAllGroups = () => async (dispatch) => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        doc.data().groups.every(async e => {
-          await firestoreFirebase.doc(e).get().then(function (doc) {
-            if (doc.exists) {
-              const id = doc.id;
-              data = [...data, { id, ...doc.data() }];
-            }
-          })
-            .then(() => {
-              dispatch({
-                type: GET_ALL_GROUPS,
-                payload: data,
-              })
+
+        doc.data().groups.length > 0 ?
+          doc.data().groups.every(async e => {
+            await firestoreFirebase.doc(e).get().then(function (doc) {
+              if (doc.exists) {
+                const id = doc.id;
+                data = [...data, { id, ...doc.data() }];
+              }
             })
-        })
+              .then(() => {
+                dispatch({
+                  type: GET_ALL_GROUPS,
+                  payload: data,
+                })
+              })
+          })
+          :
+          dispatch({
+            type: GET_ALL_GROUPS,
+            payload: data,
+          })
       })
     })
 

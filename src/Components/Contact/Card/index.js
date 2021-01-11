@@ -1,20 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PinInput from 'react-pin-input';
-import { useHistory } from 'react-router-dom';
 import * as Style from './style';
 import ChatIcon from '../../../Illustration/Chat.svg';
 import AudioCall from '../../../Illustration/AudioCall.svg';
 import More from '../../../Illustration/More.svg';
 import Stroke from '../../../Illustration/Stroke.svg';
 import OTPSucess from '../../../Illustration/SuccessOtp.svg';
-import Jhon from '../../../Illustration/Henry.png';
+import Joli from '../../../Illustration/Joli.png';
 
 const Card = (props) => {
   const {
-    picture = Jhon,
+    picture,
     friends,
     name,
-    detail = 'CEO Web Messanger',
+    status,
     index,
     id,
     showGeneratingCodeModel,
@@ -32,11 +31,12 @@ const Card = (props) => {
     confirmationCode,
     showConfirmationCode,
     requestSucceed,
-    GoToPrivateRoom
+    GoToPrivateRoom,
+    PrivateChat,
+    PictureView
   } = props;
 
   const [code, setCode] = useState();
-  console.log('Card component')
 
   const checkNotificationType = useCallback(
     () => {
@@ -56,19 +56,6 @@ const Card = (props) => {
       showConfirmationCode, showGeneratingCodeModel,
       showInvitationModel],
   );
-
-  const historyLocation = useHistory();
-
-  const HandleVideo = () => historyLocation.push({
-    pathname: '/webChat',
-    state: 3,
-
-  });
-
-  const HandleAudio = () => historyLocation.push({
-    pathname: '/webChat',
-    state: 2,
-  });
 
   useEffect(() => {
     checkNotificationType();
@@ -187,16 +174,24 @@ const Card = (props) => {
   };
 
   const renderCard = () => <Style.CardContainer>
-    <img alt="profil" className="profil" src={picture} />
+    {PictureView === "everybody" ? <img alt="profil" className="profil" src={picture} /> :
+      friends.includes(me.id) ? <img alt="profil" className="profil" src={Joli} /> : null
+    }
     <Style.Description>
       <Style.PersonalInfo>
         <h1>{name}</h1>
-        <span>{detail}</span>
+        <span>{status}</span>
       </Style.PersonalInfo>
       <Style.IconContainer>
-        <img alt="chat" src={ChatIcon} onClick={() => friends.includes(me.id) ? GoToPrivateRoom(id) : showNotificationModel(index)} />
-        <img alt="audio" src={AudioCall} onClick={() => friends.includes(me.id) ? HandleAudio() : showNotificationModel(index)} />
-        <img alt="stroke" src={Stroke} onClick={() => friends.includes(me.id) ? HandleVideo() : showNotificationModel(index)} />
+        <img alt="chat" src={ChatIcon}
+          onClick={() => !PrivateChat ? GoToPrivateRoom(id) :
+            showNotificationModel(index)} />
+        <img alt="audio" src={AudioCall}
+          onClick={() => !PrivateChat ? GoToPrivateRoom(id) :
+            showNotificationModel(index)} />
+        <img alt="stroke" src={Stroke}
+          onClick={() => !PrivateChat ? GoToPrivateRoom(id) :
+            showNotificationModel(index)} />
         <img alt="more" src={More} />
       </Style.IconContainer>
     </Style.Description>

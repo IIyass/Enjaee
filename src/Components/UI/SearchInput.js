@@ -12,7 +12,7 @@ const SearchInput = ({
       placeholder={placeholder}
       {...props}
     />
-    {iconSearch ? <span><img src={SearchIcon} /></span> : <span />}
+    {iconSearch ? <span><img alt="Search" src={SearchIcon} /></span> : <span />}
   </Container>
 );
 

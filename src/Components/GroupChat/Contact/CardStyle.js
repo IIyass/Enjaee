@@ -26,6 +26,8 @@ cursor:pointer;
   opacity:${({ selectImg }) => (selectImg ? 0.3 : 1)};
   width:100%;
   height:100%;
+  width:360px;
+  height:195px;
 }
 .icon{
   position:absolute;

@@ -4,7 +4,7 @@ import Group from './Container/ChatGroup/AllGroups';
 import Contact from './Container/Contact';
 import Chat from './Container/TemporaryChat';
 import History from './Container/History';
-import Profil from './Components/Profil';
+import Profil from './Container/Profil';
 import Signup from './Components/Signup';
 import Login from './Components/Login';
 import WebChat from './Container/WebChat'
@@ -14,6 +14,7 @@ import Landing from './Components/Landing';
 import GroupsDetail from './Container/ChatGroup/GroupsDetails';
 import GroupContact from './Container/ChatGroup/Contact';
 import TemporaryChat from './Container/TemporaryChatScreen';
+import GroupChatScreen from './Container/ChatGroup/ChatScreen';
 
 const App = () => {
   const token = localStorage.getItem('token');
@@ -30,6 +31,7 @@ const App = () => {
         <PrivateRoute path="/update/group/:id" exact component={GroupContact} />
         <PrivateRoute path="/groups/:id" exact component={GroupsDetail} />
         <PrivateRoute path="/webChat/team/:id" exact component={TemporaryChat} />
+        <PrivateRoute path="/webChat/group/:id" exact component={GroupChatScreen} />
         <PrivateRoute path="/profil" exact component={Profil} />
         <Route path="/signup" exact render={(props) => (token ? <Redirect to="/contact" /> : <Signup {...props} />)} />
         <Route path="/login" exact render={(props) => (token ? <Redirect to="/contact" /> : <Login {...props} />)} />

@@ -14,12 +14,18 @@ span{
 
 export const Container = styled.div`
 position:relative;
-width:200px;
+width:100%;
 height:40px;
 display:flex;
 flex-direction:column;
 #label{
-  color:#000000;
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 25px;
+  letter-spacing: 1.29412px;
+  color: #000000;
   margin:0;
   margin-bottom:3px;
 }
@@ -57,7 +63,7 @@ ul{
 export const Input = styled.input.attrs((props) => ({
   type: props.type,
 }))`
-    width: 100%;
+    width: 200px;
     height:100%;
     font-family:Roboto;
     font-weight:400;
@@ -86,7 +92,15 @@ position:relative;
 display:flex;
 flex-direction:column;
 #label{
-  color:#000000;
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 22px;
+  line-height: 25px;
+  letter-spacing: 1.29412px;
+  color: #000000;
+  margin:0;
+  margin-bottom:3px;
   margin:0;
   margin-bottom:3px;
 }
@@ -99,14 +113,20 @@ export const ProfilInput = styled.input.attrs((props) => ({
 }))`
  
     width: 100%;
-    font-size: 15px;
     width: -moz-available;
+    font-family: Helvetica;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 25px;
+    letter-spacing: 1.29412px;
+    color:#4A4A4A;
     width: -webkit-fill-available;
     padding: 8px;
-    color: #f9a826;
      border:none;
      border-bottom:2px solid #4A4A4A;
      ::placeholder{
+     
        color:#4A4A4A;
      }
     

@@ -71,6 +71,10 @@ export const authMethods = {
             gender: data.gender,
             mobile: valuePhone,
             password: data.password,
+            PictureView: true,
+            profilView: true,
+            privateChat: true,
+            status: "Life is Good"
           });
           setAuthStep(authStep + 1);
           // SMS sent. Prompt user to type the code from the message, then sign the

@@ -8,7 +8,7 @@ const AboutUs = ({ setOpen }) => (
   <>
     <Style.AboutContainer>
       <h1>About Us</h1>
-      <img id="logo1" src={aboutUslogo1} />
+      <img alt="logo" id="logo1" src={aboutUslogo1} />
       <p>
         Enjoee Messanger
         <br />
@@ -16,7 +16,7 @@ const AboutUs = ({ setOpen }) => (
         Version 1.0
       </p>
       <p>@ 2017 EnjoeeLab</p>
-      <img id="logo2" src={aboutUslogo2} />
+      <img alt="logo" id="logo2" src={aboutUslogo2} />
       <ProfilButton onClick={() => setOpen(false)}>Close</ProfilButton>
     </Style.AboutContainer>
   </>

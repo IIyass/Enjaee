@@ -38,6 +38,8 @@ font-family:Roboto;
 justify-content:start;
 .profil{
   cursor:pointer;
+  width:360px;
+  height:195px;
 }
 `;
 

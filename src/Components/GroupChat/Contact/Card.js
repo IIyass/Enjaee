@@ -6,6 +6,7 @@ import AudioCall from '../../../Illustration/AudioCall.svg';
 import More from '../../../Illustration/More.svg';
 import Stroke from '../../../Illustration/Stroke.svg';
 import Success from '../../../Illustration/Success.svg';
+import Joli from '../../../Illustration/Joli.png';
 
 const Card = (props) => {
   const {
@@ -16,6 +17,9 @@ const Card = (props) => {
     selectGroupPerson,
     removeGroupPerson,
     GroupPerson,
+    friends,
+    PictureView,
+    me
   } = props;
 
   const historyLocation = useHistory();
@@ -52,10 +56,14 @@ const Card = (props) => {
       <Style.CardContainer selectImg={handleSelectedCard()}>
         <div id="img">
           {!handleSelectedCard()
-            ? <img onClick={() => selectGroupPerson(id)} className="profil" src={picture} />
+            ? PictureView === "everybody" ? <img alt="profil" onClick={() => selectGroupPerson(id)} className="profil" src={picture} /> :
+              friends.includes(me.id) ? <img alt="profil" onClick={() => selectGroupPerson(id)} className="profil" src={Joli} /> : null
+
             : (
               <>
-                <img alt="profil" onClick={() => removeGroupPerson(id)} className="profil" src={picture} />
+                {
+                  PictureView === "everybody" ? <img alt="profil" onClick={() => removeGroupPerson(id)} className="profil" src={picture} /> :
+                    friends.includes(me.id) ? <img alt="profil" onClick={() => removeGroupPerson(id)} className="profil" src={Joli} /> : null}
                 <img alt="icon" onClick={() => removeGroupPerson(id)} className="icon" src={Success} />
               </>
             )}

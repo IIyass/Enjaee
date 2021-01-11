@@ -4,26 +4,28 @@ import Card from './Card';
 
 const DumbTeamChatComponent = ({ TeamData, MyTeamChatNotification,
   NextCode, step, next, me, ConfirmationModel,
-  goToFirstStep, GoToPrivateRoom, CloseModal, open, AddContactToTeamChat, OpenModeL, teamChatContact }) => (
+  goToFirstStep, GoToPrivateRoom, CloseModal, open, AddContactToTeamChat, teamChatContact }) => (
 
   <CardLayout>
     {TeamData.map(({
-      picture, name, detail, profile, history, id,
+      avatar, name, profilView, status,
+      PictureView, profile, history, id,
     }, index) => (
-      me.id !== id && <Card
+      me.id !== id && profilView &&
+      <Card
+        PictureView={PictureView}
         key={id}
         step={step}
         next={next}
         index={index}
         locked={profile}
         name={name}
-        picture={picture}
-        detail={detail}
+        picture={avatar}
+        detail={status}
         history={history}
         NextCode={NextCode}
         goToFirstStep={goToFirstStep}
         me={me}
-        OpenModeL={OpenModeL}
         CloseModal={CloseModal}
         ConfirmationModel={ConfirmationModel}
         MyTeamChatNotification={MyTeamChatNotification}

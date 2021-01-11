@@ -3,15 +3,17 @@ import firebase from 'firebase';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
 import { connect, useSelector, useDispatch } from 'react-redux';
+import SearchInput from '../../Components/UI/SearchInput';
+import SortInput from '../../Components/UI/SortInput';
 import * as Style from './style';
 import BodyContainer from '../../Common/Body';
 import {
-  next, OpenModeL, NextCode,
+  next, NextCode,
   ConfirmationModel,
   AddContactToTeamChat,
   goToFirstStep,
   GoToPrivateRoom,
-  CloseModal
+
 } from '../../store/TeamChat/action';
 import DumbTeamChatComponent from '../../Components/TeamChat';
 import { fetchMyData } from '../../store/Me/action';
@@ -21,7 +23,7 @@ const userRef = firestoreFirebase.collection('/users');
 
 const TeamChat = (props) => {
   const { step, fetchMyData, AddContactToTeamChat,
-    next, OpenModeL, CloseModal, ConfirmationModel, NextCode, GoToPrivateRoom,
+    next, ConfirmationModel, NextCode, GoToPrivateRoom,
     goToFirstStep } = props;
   const dispatch = useDispatch();
 
@@ -30,12 +32,25 @@ const TeamChat = (props) => {
     [dispatch, fetchMyData]
   );
 
+  const goToFirstStepCall = useCallback(
+    () => dispatch(goToFirstStep),
+    [dispatch, goToFirstStep]
+  );
+
+  const ConfirmationModelCall = useCallback(
+    () => dispatch(ConfirmationModel),
+    [ConfirmationModel, dispatch]
+  );
+
+
+
+
   useEffect(() => {
     fetchMyDataCall();
   }, [fetchMyDataCall]);
 
   const me = useSelector((state) => state.MeReducer.Me);
-  const open = useSelector((state) => state.TeamChatReducer.open);
+
 
   const query2 = userRef
   const [AllUsers, loading2, error2] = useCollectionData(query2, { idField: 'id' });
@@ -47,28 +62,31 @@ const TeamChat = (props) => {
 
   const [MyData, loading1, error1] = useCollectionData(query, { idField: 'id' });
 
-  return (
-    loading2 ? <h1>Loading ...</h1> :
-      <Style.Wrapper as={BodyContainer}>
+  return (<Style.Wrapper as={BodyContainer}>
+    <Style.SearchBar>
+      <SearchInput placeholder="Search" name="Search" iconSearch />
+      <SortInput width="150px" height="40px" />
+    </Style.SearchBar>
+    {loading2 ? <h1>Loading ...</h1> :
+      loading1 ? <h1>Loading ...</h1> :
+
         <DumbTeamChatComponent
           TeamData={AllUsers}
           step={step}
           next={next}
-          OpenModeL={OpenModeL}
           NextCode={NextCode}
           MyTeamChatNotification={MyData === undefined ? [] :
             MyData[0].teamChatNotification}
           teamChatContact={MyData === undefined ? [] :
             MyData[0].teamChatContact}
-          ConfirmationModel={ConfirmationModel}
+          ConfirmationModel={ConfirmationModelCall}
           AddContactToTeamChat={AddContactToTeamChat}
-          goToFirstStep={goToFirstStep}
+          goToFirstStep={goToFirstStepCall}
           GoToPrivateRoom={GoToPrivateRoom}
-          CloseModal={CloseModal}
           me={me}
-          open={open}
-        />
-      </Style.Wrapper>
+        />}
+
+  </Style.Wrapper>
   );
 };
 const mapStateToProps = (state) => ({
@@ -78,12 +96,11 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps,
   {
     next,
-    OpenModeL,
     NextCode,
     ConfirmationModel,
     fetchMyData,
     AddContactToTeamChat,
     goToFirstStep,
     GoToPrivateRoom,
-    CloseModal
+
   })(TeamChat);

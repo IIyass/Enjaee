@@ -10,11 +10,10 @@ import Contact from '../../../Illustration/Icon/Regular/Contact.svg';
 import Group from '../../../Illustration/Icon/Regular/Group.svg';
 import History from '../../../Illustration/Icon/Regular/History.svg';
 import Temporary from '../../../Illustration/Icon/Regular/Temporary.svg';
-import Profil from '../../../Illustration/profil.svg';
 
-const Header = () => {
+const Header = (props) => {
   const [iconSelected, setIconSelected] = useState(0);
-
+  const { me } = props;
   const location = useLocation();
 
   const renderStyleNav = () => {
@@ -74,7 +73,7 @@ const Header = () => {
           {' '}
           <Link to="/profil">
             {' '}
-            <img src={Profil} />
+            {me.avatar ? <img alt="profil" src={me.avatar} /> : <img alt="profil" src={Logo} />}
           </Link>
           {' '}
         </li>

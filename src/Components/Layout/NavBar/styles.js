@@ -44,6 +44,7 @@ li{
         width:34px;
         margin-top:10px;
         margin-bottom:10px;
+        border-radius:50%;
     }
     :nth-child(2){
        img{ 

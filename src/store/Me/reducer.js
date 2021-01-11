@@ -4,9 +4,11 @@ const INIT_STATE = {
   MyNotification: [],
   AcceptedRequest: [],
   confirmationCode: [],
+  avatarLoading: false,
+  avatarFaild: ""
 };
 
-export default (state = INIT_STATE, action) => {
+const MeReducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case 'GET_MY_DATA':
       return {
@@ -31,7 +33,26 @@ export default (state = INIT_STATE, action) => {
         ...state,
         confirmationCode: action.payload,
       };
+    case 'UPLOADING_IMAGE':
+      return {
+        ...state,
+        avatarLoading: false,
+      };
+    case 'UPLOADING_IMAGE_FAILD':
+      return {
+        ...state,
+        avatarLoading: false,
+        avatarFaild: action.payload
+      };
+    case 'START_UPLODING':
+      return {
+        ...state,
+        avatarLoading: true,
+
+      };
     default:
       return state;
   }
 };
+
+export default MeReducer;

@@ -5,26 +5,34 @@ import Jhon from '../../../Illustration/Henry.png';
 import useUserData from '../../../hooks/useUserData'
 
 const GroupPerson = (props) => {
-  const { team } = props;
+  const { team, me } = props;
   const [userMetaData] = useUserData(team);
-
   return (
     <Style.CardLayout>
       {userMetaData.map(({
         name,
-        detail = "CEO Hitachy",
+        status,
         profile,
         history,
         id,
+        profilView,
+        avatar,
+        PictureView,
+        friends
       }, index) => (
+        me.id !== id &&
+        profilView &&
         <Card
           key={id}
           index={index}
           locked={profile}
           name={name}
-          picture={Jhon}
-          detail={detail}
+          picture={avatar ? avatar : Jhon}
+          detail={status}
           history={history}
+          PictureView={PictureView}
+          friends={friends}
+          me={me}
           id={id}
         />
       ))}

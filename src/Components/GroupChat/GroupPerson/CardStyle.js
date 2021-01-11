@@ -22,8 +22,8 @@ font-family:Roboto;
 justify-content:start;
 cursor:pointer;
 .profil{
-  width:100%;
-  height:100%;
+  width:360px;
+  height:195px;
 }
 
 
