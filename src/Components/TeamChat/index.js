@@ -11,7 +11,7 @@ const DumbTeamChatComponent = ({ TeamData, MyTeamChatNotification,
       avatar, name, profilView, status,
       PictureView, profile, history, id,
     }, index) => (
-      me.id !== id && profilView &&
+      me.id !== id && profilView && !(me.blockedUsers.includes(id)) &&
       <Card
         PictureView={PictureView}
         key={id}

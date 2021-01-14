@@ -4,7 +4,7 @@ import * as Style from './style';
 import Jolie from '../../Illustration/Henry.png';
 import Input from '../../Components/UI/AuthInput';
 import BodyContainer from '../../Common/Body';
-import { SendMessage, GetRoomMetaData } from '../../store/WebChat/action'
+import { SendMessage, GetRoomMetaData, readMessage } from '../../store/WebChat/action'
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import 'webrtc-adapter';
 import ChatScreen from '../../Components/ChatScreen';
@@ -17,7 +17,8 @@ import { fetchMyData } from '../../store/Me/action';
 const messagesRef = firestoreFirebase.collection('/messages');
 
 const ChatOnline = (props) => {
-  const { SendMessage, fetchMyData, GetRoomMetaData, ChangeChatDuration } = props;
+  const { SendMessage, fetchMyData,
+    readMessage, GetRoomMetaData, ChangeChatDuration } = props;
   const { timer, handleStart } = useTimer();
   const roomLoading = useSelector((state) => state.WebChatReducer.roomLoading)
   const roomMetadata = useSelector((state) => state.WebChatReducer.room)
@@ -83,6 +84,7 @@ const ChatOnline = (props) => {
             SendMessage={SendMessage}
             messages={snapshot}
             me={me}
+            readMessage={readMessage}
             loading={loading}
           />}
       </Style.RightContainer>
@@ -96,6 +98,6 @@ export default connect(null,
     SendMessage,
     ChangeChatDuration,
     fetchMyData,
-
+    readMessage
   })(ChatOnline);
 

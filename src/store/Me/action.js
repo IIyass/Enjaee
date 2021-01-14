@@ -1,7 +1,8 @@
 import { firestoreFirebase, firebaseStorage } from '../../firebaseService/FirebaseIndex';
+import firebase from 'firebase';
 import {
   GET_MY_DATA, CHECK_MY_NOTIFICATION, UPLOADING_IMAGE_FAILD,
-  UPLOADING_IMAGE,
+  UPLOADING_IMAGE, USER_DATA,
   GET_MY_CONFIRMATION_REQUEST, GET_MY_ACCEPTED_REQUEST,
 } from './actionType';
 import { getMeByPhone } from '../../helpers';
@@ -15,6 +16,24 @@ export const fetchMyData = () => async (dispatch) => {
     type: GET_MY_DATA,
     payload: me[0],
   });
+};
+
+export const fetchClientData = (id) => async (dispatch) => {
+
+  let user = {};
+  await usersRef
+    .where(firebase.firestore.FieldPath.documentId(), "==", id)
+    .get()
+    .then((querySnapshot) => {
+      return querySnapshot.forEach((doc) => user = ({ id: doc.id, ...doc.data() }));
+    })
+    .then(() => {
+      dispatch({
+        type: USER_DATA,
+        payload: user
+      })
+    }
+    )
 };
 
 export const saveAvatar = (image) => async (dispatch) => {
@@ -49,9 +68,7 @@ export const saveAvatar = (image) => async (dispatch) => {
     })
 };
 
-
-
-export const checkMyNotification = () => async (dispatch, getState) => {
+export const checkMyNotification = () => async (dispatch) => {
   const me = await getMeByPhone();
   dispatch({
     type: CHECK_MY_NOTIFICATION,
@@ -83,7 +100,7 @@ export const editProfil = (
   profilView,
   privateChat,
   onlineStatus
-) => async (dispatch) => {
+) => async () => {
 
   const me = await getMeByPhone();
   await usersRef.doc(me[0].id).update({
@@ -97,6 +114,20 @@ export const editProfil = (
   }).then(() => {
     alert("Profil updated")
   })
+};
 
+export const blockContact = (id) => async () => {
+  const me = await getMeByPhone();
+  const MyId = me[0].id;
+  await usersRef.doc(MyId).update({
+    blockedUsers: firebase.firestore.FieldValue.arrayUnion(id)
+  });
+};
 
+export const unBlockContact = (id) => async () => {
+  const me = await getMeByPhone();
+  const MyId = me[0].id;
+  await usersRef.doc(MyId).update({
+    blockedUsers: firebase.firestore.FieldValue.arrayRemove(id)
+  });
 };

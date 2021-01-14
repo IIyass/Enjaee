@@ -66,17 +66,31 @@ ul{
     width:100px;
     list-style:none;
     margin: 0;
-    background: #fff;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(148, 148, 148, 0.25);
+    border-radius: 4px;
     z-index: 1000;
     position: absolute;
     top: 100%;
     li{
       border-bottom:2px solid #000;
-      padding:15px 20px;
+      display:flex;
+      flex-direction:row;
+      padding:15px 5px;
+      align-items:center;
+      justify-content:center;
       text-align:center;
       font-size:12px;
       font-weight:400;
       font-family:Roboto;
+      color: #FB5051;
+      :first-child{
+        color: #53A8CB;
+      }
+      img{
+        width:20px;
+        height:20px;
+      }
     }
   
 }

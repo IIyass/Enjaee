@@ -45,6 +45,8 @@ flex-direction:${({ sender }) => (sender ? 'row-reverse' : 'row')};
 width:auto;
 align-self:${({ sender }) => (sender ? 'flex-end' : 'flex-start')};
 margin:20px 0px;
+ 
+
 #avatar{
     height:50px;
     width:50px;
@@ -112,6 +114,7 @@ box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 height:auto;
 width:auto;
 max-width:600px;
+opacity:${({ read }) => read ? 1 : 0.5};
 p{
 font-weight:400;
 font-size:20px;

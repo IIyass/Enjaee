@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PinInput from 'react-pin-input';
+import { useHistory, useHistrory } from 'react-router-dom';
 import * as Style from './style';
 import ChatIcon from '../../../Illustration/Chat.svg';
 import AudioCall from '../../../Illustration/AudioCall.svg';
@@ -37,6 +38,14 @@ const Card = (props) => {
   } = props;
 
   const [code, setCode] = useState();
+
+  let history = useHistory();
+
+  const goToProfil = (id) => {
+    history.push({
+      pathname: `/userProfil/${id}`
+    })
+  }
 
   const checkNotificationType = useCallback(
     () => {
@@ -174,8 +183,8 @@ const Card = (props) => {
   };
 
   const renderCard = () => <Style.CardContainer>
-    {PictureView === "everybody" ? <img alt="profil" className="profil" src={picture} /> :
-      friends.includes(me.id) ? <img alt="profil" className="profil" src={Joli} /> : null
+    {PictureView === "everybody" ? <img alt="profil" onClick={() => goToProfil(id)} className="profil" src={picture} /> :
+      friends.includes(me.id) ? <img alt="profil" onClick={() => goToProfil(id)} className="profil" src={Joli} /> : null
     }
     <Style.Description>
       <Style.PersonalInfo>

@@ -66,8 +66,6 @@ export const updateMember = (id) => async (dispatch, getState) => {
       pathname: `/groups/${id}`
     }));
   })
-
-
 };
 
 export const AddMember = (id) => async (dispatch) => {
@@ -75,7 +73,6 @@ export const AddMember = (id) => async (dispatch) => {
   dispatch(push({
     pathname: `/update/group/${id}`
   }));
-
 };
 
 export const addGroupAction = () => async (dispatch) => {
@@ -189,9 +186,7 @@ export const getAllGroups = () => async (dispatch) => {
           })
       })
     })
-
 };
-
 
 export const selectGroupPerson = (PersonId) => async (dispatch) => {
   dispatch({
@@ -215,3 +210,24 @@ export const backToContact = () => async (dispatch) => {
   });
 };
 
+export const exitGroup = (groupId) => async (dispatch) => {
+  const me = await getMeByPhone();
+  await userRef
+    .doc(me[0].id)
+    .update({
+      groups: firebase.firestore.FieldValue.arrayRemove(`/rooms/${groupId}`)
+    })
+    .then(async () => {
+      await roomsRef
+        .doc(groupId)
+        .update({
+          participants: firebase.firestore.FieldValue.arrayRemove(me[0].id)
+        })
+        .then(() => {
+          dispatch(push({
+            pathname: `/groups`
+          }));
+        })
+    })
+
+};

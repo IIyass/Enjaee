@@ -5,7 +5,9 @@ const INIT_STATE = {
   AcceptedRequest: [],
   confirmationCode: [],
   avatarLoading: false,
-  avatarFaild: ""
+  avatarFaild: "",
+  userProfil: {},
+  loadingUser: true
 };
 
 const MeReducer = (state = INIT_STATE, action) => {
@@ -50,6 +52,13 @@ const MeReducer = (state = INIT_STATE, action) => {
         avatarLoading: true,
 
       };
+    case 'USER_DATA':
+      return {
+        ...state,
+        userProfil: action.payload,
+        loadingUser: false
+      };
+
     default:
       return state;
   }

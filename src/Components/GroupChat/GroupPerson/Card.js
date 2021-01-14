@@ -1,43 +1,26 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import * as Style from './CardStyle';
 import ChatIcon from '../../../Illustration/Chat.svg';
 import AudioCall from '../../../Illustration/AudioCall.svg';
 import More from '../../../Illustration/More.svg';
 import Stroke from '../../../Illustration/Stroke.svg';
 import Joli from '../../../Illustration/Joli.png';
+import Delete from '../../../Illustration/DeleteIcon.svg';
+import ExitGroup from '../../../Illustration/ExitGroup.svg';
 const Card = (props) => {
   const {
     picture,
     name,
     detail,
     PictureView,
-    friends, me
+    friends,
+    me,
+    id,
+    groupMetaData,
+    exitGroup
   } = props;
 
-
-  const historyLocation = useHistory();
   const [toggle, setToggle] = useState(false);
-  const HandleVideo = () => {
-    historyLocation.push({
-      pathname: '/alert',
-      state: 3,
-    });
-  };
-
-  const HandleAudio = () => {
-    historyLocation.push({
-      pathname: '/alert',
-      state: 2,
-    });
-  };
-
-  const HandleChat = () => {
-    historyLocation.push({
-      pathname: '/alert',
-      state: 1,
-    });
-  };
 
   return (
     <Style.Wrapper>
@@ -52,24 +35,21 @@ const Card = (props) => {
           </Style.PersonalInfo>
           <Style.IconContainer>
             <div>
-              {' '}
-              <img src={ChatIcon} onClick={() => HandleChat()} />
+              <img alt="chat" src={ChatIcon} />
             </div>
             <div>
-              {' '}
-              <img src={AudioCall} onClick={() => HandleAudio()} />
+              <img alt="audio" src={AudioCall} />
             </div>
             <div>
-              {' '}
-              <img src={Stroke} onClick={() => HandleVideo()} />
+              <img alt="stroke" src={Stroke} />
             </div>
             <div>
-              <img src={More} onClick={() => setToggle(!toggle)} />
+              <img alt="more" src={More} onClick={() => setToggle(!toggle)} />
               {toggle && (
                 <ul>
                   <li>Admin</li>
-                  <li>Delete</li>
-                  <li>Exit Group</li>
+                  {groupMetaData.admin === me.id && <li><img alt="delete" src={Delete} /> <span>Delete</span>  </li>}
+                  {me.id === id && <li onClick={() => exitGroup(groupMetaData.id)}><img alt="delete" src={ExitGroup} /> <span>Exit Group</span>  </li>}
                 </ul>
               )}
 

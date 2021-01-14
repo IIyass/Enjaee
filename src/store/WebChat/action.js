@@ -55,14 +55,38 @@ export const SendMessage = (data) => async (dispatch) => {
         text: data.content,
         room: data.room,
         createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        userId: me[0].id
+        userId: me[0].id,
+        read: false
     })
     dispatch({
         type: 'SEND_MESSAGE'
     });
 };
 
+export const readMessage = (roomData) => async (dispatch) => {
+    const me = await getMeByPhone();
+    let unReadMessages = [];
+    await messagesRef
+        .where("room", "==", roomData.id)
+        .orderBy("createdAt")
+        .limitToLast(24)
+        .get()
+        .then((querySnapshot) => {
+            return querySnapshot.forEach((doc) => {
+                if (doc.data().userId !== me[0].id && doc.data().read === false) {
+                    unReadMessages = [...unReadMessages, doc.id]
+                }
+            });
+        }).then(() => {
+            unReadMessages.every(async message => {
+                await messagesRef.doc(message)
+                    .update(({
+                        read: true,
+                    }))
+            })
+        })
 
+};
 
 export const doVideoOffer = (room, offer) => async (dispatch) => {
     const me = await getMeByPhone();

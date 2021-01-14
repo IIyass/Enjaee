@@ -4,7 +4,6 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import SearchInput from '../../Components/UI/SearchInput';
-import SortInput from '../../Components/UI/SortInput';
 import * as Style from './style';
 import BodyContainer from '../../Common/Body';
 import {
@@ -17,7 +16,6 @@ import {
 } from '../../store/TeamChat/action';
 import DumbTeamChatComponent from '../../Components/TeamChat';
 import { fetchMyData } from '../../store/Me/action';
-
 
 const userRef = firestoreFirebase.collection('/users');
 
@@ -42,9 +40,6 @@ const TeamChat = (props) => {
     [ConfirmationModel, dispatch]
   );
 
-
-
-
   useEffect(() => {
     fetchMyDataCall();
   }, [fetchMyDataCall]);
@@ -65,7 +60,6 @@ const TeamChat = (props) => {
   return (<Style.Wrapper as={BodyContainer}>
     <Style.SearchBar>
       <SearchInput placeholder="Search" name="Search" iconSearch />
-      <SortInput width="150px" height="40px" />
     </Style.SearchBar>
     {loading2 ? <h1>Loading ...</h1> :
       loading1 ? <h1>Loading ...</h1> :

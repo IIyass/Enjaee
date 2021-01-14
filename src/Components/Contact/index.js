@@ -34,6 +34,7 @@ const DumbContact = (props) => {
         PictureView, profile, history, id, friends,
       }, index) => id !== me.id &&
       profilView &&
+      !(me.blockedUsers.includes(id)) &&
         <Card
           key={id}
           PrivateChat={privateChat}

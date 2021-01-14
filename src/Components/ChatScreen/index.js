@@ -14,6 +14,7 @@ const ChatScreen = (props) => {
     SendMessage,
     messages,
     loading,
+    readMessage,
     me
   } = props;
 
@@ -21,6 +22,11 @@ const ChatScreen = (props) => {
   const [name, setName] = useState([])
 
   const dummy = useRef();
+
+  const onFocus = () => {
+    readMessage(roomMetadata)
+  };
+  const onBlur = () => { };
 
   const getMyName = useCallback(
     (id) => {
@@ -59,6 +65,7 @@ const ChatScreen = (props) => {
           return e.userId === me.id ? <Quote
             key={index}
             sender
+            read={e.read}
             avatar={Jolie}
             time={e.createdAt === null ? date : e.createdAt.toDate()}
             name={me.name}
@@ -66,6 +73,7 @@ const ChatScreen = (props) => {
           /> :
             <Quote
               key={index}
+              read
               avatar={Jhon}
               gradientMessage={gradientMessage}
               time={e.createdAt.toDate()}
@@ -76,7 +84,13 @@ const ChatScreen = (props) => {
         <span ref={dummy}></span>
       </Style.CrossWrapper>
       <Style.Footer>
-        <ChatInput onChange={handleChange} type="text" name="chat" placeholder="Type here…" value={content} />
+        <ChatInput onChange={handleChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          type="text"
+          name="chat"
+          placeholder="Type here…"
+          value={content} />
         <FooterButton onClick={handleSubmit}>Send</FooterButton>
       </Style.Footer>
     </Style.RightSide>

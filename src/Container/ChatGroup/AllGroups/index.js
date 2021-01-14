@@ -19,9 +19,7 @@ const AddGroup = (props) => {
     goToPrivateRoom
   } = props;
 
-
   const dispatch = useDispatch();
-
   const AllGroups = useSelector((state) => state.GroupChatReducer.allGroups)
   const loadGroups = useSelector((state) => state.GroupChatReducer.loadGroups)
 

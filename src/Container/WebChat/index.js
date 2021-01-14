@@ -14,7 +14,8 @@ import {
     goToAudioRoom,
     goToVideoRoom,
     SendMessage,
-    GetRoomMetaData
+    GetRoomMetaData,
+    readMessage
 } from '../../store/WebChat/action'
 import { doVideoOffer, doCandidate, doVideoAnswer, leaveRoom } from '../../store/WebChat/action'
 import { fetchMyData } from '../../store/Me/action';
@@ -35,7 +36,8 @@ const WebChat = (props) => {
         doVideoOffer,
         doVideoAnswer,
         leaveRoom,
-        GetRoomMetaData
+        GetRoomMetaData,
+        readMessage
     } = props
 
     const dispatch = useDispatch();
@@ -90,6 +92,7 @@ const WebChat = (props) => {
                         roomMetadata={roomMetadata}
                         SendMessage={SendMessage}
                         messages={snapshot}
+                        readMessage={readMessage}
                         me={me}
                         loading={loading}
                     />;
@@ -143,6 +146,7 @@ const WebChat = (props) => {
 export default connect(null,
     {
         goToAudioRoom,
+        readMessage,
         goToChatRoom,
         goToVideoRoom,
         fetchMyData,

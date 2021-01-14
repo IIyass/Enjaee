@@ -20,7 +20,7 @@ const Contact = (props) => {
         name, status, profilView,
         PictureView, avatar, id,
       }, index) => me.id !== id &&
-      profilView &&
+      profilView && !(me.blockedUsers.includes(id)) &&
         <Card
           key={id}
           openModel={openModel}

@@ -1,10 +1,7 @@
 const INIT_STATE = {
   step: 1,
   GroupPerson: [],
-  groupMember: {
-    members: [],
-    name: ""
-  },
+  groupMember: {},
   groupId: "",
   loadGroupMember: true,
   allGroups: [],
@@ -59,10 +56,7 @@ const GroupReducer = (state = INIT_STATE, action) => {
     case 'GET_GROUP_BY_ID':
       return {
         ...state,
-        groupMember: {
-          members: action.payload.participants,
-          name: action.payload.name
-        },
+        groupMember: action.payload,
         loadGroupMember: false,
         groupError: '',
       };

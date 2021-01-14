@@ -5,10 +5,10 @@ import Truch from '../../Illustration/Icon/Web/Action/Group35.svg';
 import chatbubble from '../../Illustration/chatbubble.svg';
 import Moment from 'react-moment';
 const Quote = ({
-  sender, img, time, name, text, gradientMessage, avatar,
+  sender, img, time, name, text, gradientMessage, avatar, read
 }) => {
 
-  return <Style.QuoteWrapper gradientMessage={gradientMessage} sender={sender}>
+  return <Style.QuoteWrapper gradientMessage={gradientMessage} read={read} sender={sender}>
     <img id="avatar" alt="avatar" src={avatar} />
     <div>
       <div id="info">
