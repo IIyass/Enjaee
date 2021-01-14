@@ -4,6 +4,7 @@ import { GO_CHAT_ROOM, GO_AUDIO_ROOM, GO_VIDEO_ROOM, ROOM_DATA } from './actionT
 import { getMeByPhone } from '../../helpers';
 
 const messagesRef = firestoreFirebase.collection('/messages');
+const ClearedMessagesRef = firestoreFirebase.collection('/clearedMessages');
 const roomsRef = firestoreFirebase.collection('/rooms');
 const usersRef = firestoreFirebase.collection('/users');
 
@@ -48,26 +49,56 @@ export const GetRoomMetaData = (id) => async (dispatch) => {
     });
 }
 
+export const clearMessages = (roomData) => async (dispatch) => {
+
+    await messagesRef
+        .doc(roomData.id)
+        .get()
+        .then((querySnapshot) => {
+            const entries = Object.entries(querySnapshot.data())
+            entries.forEach(async message => {
+                await ClearedMessagesRef.doc(roomData.id).set({
+                    [message[0]]: {
+                        text: message[1].text,
+                        room: message[1].room,
+                        createdAt: message[1].createdAt,
+                        userId: message[1].userId,
+                        read: message[1].read
+                    }
+                }, { merge: true })
+            })
+        }).then(async () => {
+            await messagesRef
+                .doc(roomData.id)
+                .delete()
+        })
+};
 
 export const SendMessage = (data) => async (dispatch) => {
     const me = await getMeByPhone();
-    await messagesRef.add({
-        text: data.content,
-        room: data.room,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-        userId: me[0].id,
-        read: false
+    const newId = messagesRef.doc();
+    await messagesRef.doc(data.room).set({
+        [newId.id]: {
+            text: data.content,
+            room: data.room,
+            createdAt: firebase.firestore.Timestamp.now(),
+            userId: me[0].id,
+            read: false
+        }
+    }, { merge: true }).then(async (doc) => {
+        dispatch({
+            type: 'SEND_MESSAGE'
+        });
     })
-    dispatch({
-        type: 'SEND_MESSAGE'
-    });
+
 };
 
 export const readMessage = (roomData) => async (dispatch) => {
     const me = await getMeByPhone();
     let unReadMessages = [];
     await messagesRef
-        .where("room", "==", roomData.id)
+        .where(firebase.firestore.FieldPath.documentId()
+            , "==", roomData.id)
         .orderBy("createdAt")
         .limitToLast(24)
         .get()
@@ -85,7 +116,6 @@ export const readMessage = (roomData) => async (dispatch) => {
                     }))
             })
         })
-
 };
 
 export const doVideoOffer = (room, offer) => async (dispatch) => {
@@ -107,7 +137,6 @@ export const doCandidate = (to, candidate) => async (dispatch) => {
         }
     })
 }
-
 
 export const doVideoAnswer = (room, answer) => async (dispatch) => {
     const me = await getMeByPhone();

@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
+import firebase from 'firebase';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import * as Style from './style';
 import Jolie from '../../Illustration/Henry.png'
@@ -15,7 +16,8 @@ import {
     goToVideoRoom,
     SendMessage,
     GetRoomMetaData,
-    readMessage
+    readMessage,
+    clearMessages
 } from '../../store/WebChat/action'
 import { doVideoOffer, doCandidate, doVideoAnswer, leaveRoom } from '../../store/WebChat/action'
 import { fetchMyData } from '../../store/Me/action';
@@ -37,6 +39,7 @@ const WebChat = (props) => {
         doVideoAnswer,
         leaveRoom,
         GetRoomMetaData,
+        clearMessages,
         readMessage
     } = props
 
@@ -62,11 +65,19 @@ const WebChat = (props) => {
     const me = useSelector((state) => state.MeReducer.Me)
 
     const query = messagesRef
-        .where("room", "==", Object.keys(roomMetadata).length >= 1 && roomMetadata.id)
-        .orderBy("createdAt")
-        .limitToLast(24)
+        .where(firebase.firestore.FieldPath.documentId(),
+            "==", props.match.params.id)
 
     const [snapshot, loading, error] = useCollectionData(query, { idField: 'id' });
+    const entries = !loading && snapshot[0] !== undefined ? Object.entries(snapshot[0]) : [];
+
+    const Filtermessages = !loading && entries.filter(message => {
+        return typeof message[1] === 'object'
+    })
+
+    const messages = !loading && Filtermessages.map(message => {
+        return { id: message[0], ...message[1] }
+    })
 
     const goToAudioRoomCall = useCallback(
         () => dispatch(goToAudioRoom),
@@ -87,18 +98,19 @@ const WebChat = (props) => {
         switch (chatStep) {
             case 1:
                 return roomLoading ? <h1>Loading ...</h1> :
-                    <ChatScreen
-                        gradientMessage
-                        roomMetadata={roomMetadata}
-                        SendMessage={SendMessage}
-                        messages={snapshot}
-                        readMessage={readMessage}
-                        me={me}
-                        loading={loading}
-                    />;
+                    loading ? <h1>Loading ...</h1> :
+                        <ChatScreen
+                            gradientMessage
+                            roomMetadata={roomMetadata}
+                            SendMessage={SendMessage}
+                            messages={messages}
+                            readMessage={readMessage}
+                            me={me}
+                            loading={loading}
+                        />;
             case 2:
                 return roomLoading ? <h1>Loading ...</h1> :
-                    <AudioChat
+                    loading ? <h1>Loading ...</h1> : <AudioChat
                         doVideoOffer={doVideoOffer}
                         doCandidate={doCandidate}
                         roomMetadata={roomMetadata}
@@ -109,7 +121,7 @@ const WebChat = (props) => {
                     />;
             case 3:
                 return roomLoading ? <h1>Loading ...</h1> :
-                    <VideoChat
+                    loading ? <h1>Loading ...</h1> : <VideoChat
                         doVideoOffer={doVideoOffer}
                         doCandidate={doCandidate}
                         roomMetadata={roomMetadata}
@@ -133,7 +145,7 @@ const WebChat = (props) => {
                 <ChatButton onClick={() => goToChatRoomCall()} icon={chatStep === 1 ? 'chatWhite' : 'chat'} border={chatStep === 1 ? '#53A8CB' : '#000'} color={chatStep === 1 ? '#53A8CB' : 'fff'} text={chatStep === 1 ? '#fff' : '000'}>Chat</ChatButton>
                 <ChatButton onClick={() => goToAudioRoomCall()} icon={chatStep === 2 ? 'audioWhite' : 'audio'} border={chatStep === 2 ? '#53A8CB' : '#000'} color={chatStep === 2 ? '#53A8CB' : 'fff'} text={chatStep === 2 ? '#fff' : '000'}>Audio Call</ChatButton>
                 <ChatButton onClick={() => goToVideoRoomCall()} icon={chatStep === 3 ? 'videoWhite' : 'video'} border={chatStep === 3 ? '#53A8CB' : '#000'} color={chatStep === 3 ? '#53A8CB' : 'fff'} text={chatStep === 3 ? '#fff' : '000'}>Video Call</ChatButton>
-                <ChatButton icon="clear" border="#000" color="#fff" text="#000">Clear Chat</ChatButton>
+                <ChatButton onClick={() => clearMessages(roomMetadata)} icon="clear" border="#000" color="#fff" text="#000">Clear Chat</ChatButton>
                 <ChatButton icon="block" border="#000" color="#fff" text="#000">Block</ChatButton>
             </Style.LeftContainer>
             <Style.RightContainer backgroundColor={chatStep === 1}>
@@ -155,6 +167,7 @@ export default connect(null,
         doCandidate,
         doVideoAnswer,
         GetRoomMetaData,
-        leaveRoom
+        leaveRoom,
+        clearMessages
     })(WebChat);
 

@@ -19,6 +19,7 @@ import { checkMyNotification } from '../Me/action';
 
 const usersRef = firestoreFirebase.collection('/users');
 const roomsRef = firestoreFirebase.collection('/rooms');
+const messageRef = firestoreFirebase.collection('/rooms');
 
 export const fetchAllUsers = () => async (dispatch) => {
   const token = localStorage.getItem('token');
@@ -144,11 +145,14 @@ export const GoToPrivateRoom = (id) => async (dispatch) => {
       from: "",
       offer: "",
       type: ""
-    }).then(doc =>
-      dispatch(push({
-        pathname: `/webChat/${doc.id}`,
-      }))
-    )
+    })
+      .then(async doc => {
+
+        dispatch(push({
+          pathname: `/webChat/${doc.id}`,
+        }))
+      }
+      )
   } else {
     dispatch(push({
       pathname: `/webChat/${room.id}`

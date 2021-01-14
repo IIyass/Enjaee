@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import * as Style from './style';
+import firebase from 'firebase';
 import FooterButton from '../UI/FooterButton';
 import ChatInput from '../UI/ChatInput';
 import Quote from './Words';
@@ -48,7 +49,11 @@ const ChatScreen = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    SendMessage({ content, room: roomMetadata.id })
+    SendMessage({
+      content,
+      room: roomMetadata.id,
+
+    })
     setContent('');
   };
 
@@ -61,25 +66,26 @@ const ChatScreen = (props) => {
   return (
     <Style.RightSide>
       <Style.CrossWrapper>
-        {!loading ? messages.map((e, index) => {
-          return e.userId === me.id ? <Quote
-            key={index}
+        {!loading ? messages.map((metaData) => {
+          return metaData.userId === me.id ? <Quote
+            key={metaData.id}
             sender
-            read={e.read}
+            read={metaData.read}
             avatar={Jolie}
-            time={e.createdAt === null ? date : e.createdAt.toDate()}
+            time={metaData.createdAt === null ? date : metaData.createdAt.toDate()}
             name={me.name}
-            text={e.text}
+            text={metaData.text}
           /> :
             <Quote
-              key={index}
+              key={metaData.id}
               read
               avatar={Jhon}
               gradientMessage={gradientMessage}
-              time={e.createdAt.toDate()}
-              name={name.map(x => e.userId === x.id && x.name)}
-              text={e.text}
+              time={metaData.createdAt !== undefined && metaData.createdAt.toDate()}
+              name={name.map(x => metaData.userId === x.id && x.name)}
+              text={metaData.text}
             />
+
         }) : <h1>Loading</h1>}
         <span ref={dummy}></span>
       </Style.CrossWrapper>
