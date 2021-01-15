@@ -79,6 +79,8 @@ const WebChat = (props) => {
         return { id: message[0], ...message[1] }
     })
 
+    const Sortedmessages = !loading && messages.sort((a, b) => a.createdAt - b.createdAt)
+
     const goToAudioRoomCall = useCallback(
         () => dispatch(goToAudioRoom),
         [dispatch, goToAudioRoom]
@@ -103,7 +105,7 @@ const WebChat = (props) => {
                             gradientMessage
                             roomMetadata={roomMetadata}
                             SendMessage={SendMessage}
-                            messages={messages}
+                            messages={Sortedmessages}
                             readMessage={readMessage}
                             me={me}
                             loading={loading}

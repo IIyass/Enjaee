@@ -52,20 +52,22 @@ export const updateMember = (id) => async (dispatch, getState) => {
       return querySnapshot.forEach((doc) => {
         ExistingMembers = [...doc.data().participants]
       });
+    }).then(async () => {
+
+      const NewMembers = members.filter(e => !ExistingMembers.includes(e))
+
+      await roomsRef.doc(id).update({
+        participants: [...ExistingMembers, ...NewMembers],
+      }).then(async doc => {
+        await NewMembers.every(async e => await userRef.doc(e).update({
+          groups: firebase.firestore.FieldValue.arrayUnion(`/rooms/${id}`)
+        }))
+        dispatch(push({
+          pathname: `/groups/${id}`
+        }));
+      })
     })
 
-  const NewMembers = members.filter(e => !ExistingMembers.includes(e))
-
-  await roomsRef.doc(id).update({
-    participants: [...ExistingMembers, ...NewMembers],
-  }).then(async doc => {
-    await NewMembers.every(async e => await userRef.doc(e).update({
-      groups: firebase.firestore.FieldValue.arrayUnion(`/rooms/${id}`)
-    }))
-    dispatch(push({
-      pathname: `/groups/${id}`
-    }));
-  })
 };
 
 export const AddMember = (id) => async (dispatch) => {
@@ -91,7 +93,6 @@ export const goToGroupDetail = (id) => async (dispatch) => {
 
 export const getGroupById = (id) => async (dispatch) => {
   let groupMetadata = {}
-
   await roomsRef
     .where(firebase.firestore.FieldPath.documentId(), '==', id)
     .get()
@@ -140,7 +141,8 @@ export const addNewGroup = (name) => async (dispatch, getState) => {
 
         await roomsRef.add({
           participants: members,
-          name: name
+          name: name,
+          admin: [me[0].id]
         })
           .then(async doc => {
             await members.every(async e => await userRef.doc(e).update({
@@ -231,3 +233,34 @@ export const exitGroup = (groupId) => async (dispatch) => {
     })
 
 };
+
+export const addAdminToGroup = (groupId, contactId) => async (dispatch) => {
+
+  await roomsRef
+    .doc(groupId)
+    .update({
+      admin: firebase.firestore.FieldValue.arrayUnion(contactId)
+    })
+    .then(() => {
+      dispatch(push({
+        pathname: `/groups/${groupId}`
+      }));
+    })
+};
+
+export const deleteMemberFromGroup = (groupId, contactId) => async (dispatch) => {
+  console.log(groupId, contactId)
+  await userRef
+    .doc(contactId)
+    .update({
+      groups: firebase.firestore.FieldValue.arrayRemove(`/rooms/${groupId}`)
+    })
+    .then(async () => {
+      await roomsRef
+        .doc(groupId)
+        .update({
+          participants: firebase.firestore.FieldValue.arrayRemove(contactId)
+        })
+
+    })
+}

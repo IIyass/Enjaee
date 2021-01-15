@@ -1,25 +1,34 @@
 import React, { useEffect, useCallback } from 'react';
 import BodyContainer from '../../../Common/Body';
+import firebase from 'firebase';
 import { GroupBar, Wrapper, ButtonContainer } from '../style';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import SearchInput from '../../../Components/UI/SearchInput';
 import Rectangle380 from '../../../Illustration/Rectangle380.svg';
 import DumbGroupPerson from '../../../Components/GroupChat/GroupPerson';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import { firestoreFirebase } from '../../../firebaseService/FirebaseIndex'
 import {
-  getGroupById,
+
   AddMember,
   showAllGroup,
-  exitGroup
+  exitGroup,
+  addAdminToGroup,
+  deleteMemberFromGroup
 } from '../../../store/GroupChat/action';
 import { fetchMyData } from '../../../store/Me/action';
+
+const roomRef = firestoreFirebase.collection('/rooms');
 
 const GroupDetail = (props) => {
   const {
     AddMember,
-    getGroupById,
+
     showAllGroup,
     fetchMyData,
-    exitGroup
+    exitGroup,
+    addAdminToGroup,
+    deleteMemberFromGroup
   } = props;
 
   const handleSubmit = (e) => {
@@ -27,9 +36,15 @@ const GroupDetail = (props) => {
   };
 
   const dispatch = useDispatch();
-  const GroupMember = useSelector((state) => state.GroupChatReducer.groupMember);
-  const loadGroupMember = useSelector((state) => state.GroupChatReducer.loadGroupMember);
   const me = useSelector((state) => state.MeReducer.Me);
+
+  const query = roomRef
+    .where(firebase.firestore.FieldPath.documentId(),
+      "==",
+      props.match.params.id);
+
+  const [GroupMember, loading, error2] = useCollectionData(query, { idField: 'id' });
+
 
   const fetchMyDataCall = useCallback(
     () => dispatch(fetchMyData),
@@ -40,29 +55,30 @@ const GroupDetail = (props) => {
     fetchMyDataCall();
   }, [fetchMyDataCall])
 
-  useEffect(() => {
-    getGroupById(props.match.params.id)
-  }, [getGroupById, props.match.params.id])
 
   return (
-    loadGroupMember ? <h1>Loading  ....</h1> : <Wrapper as={BodyContainer}>
+    loading ? <h1>Loading  ....</h1> : <Wrapper as={BodyContainer}>
       <GroupBar>
         <img onClick={() => showAllGroup()} alt="search" src={Rectangle380} />
         <form onSubmit={handleSubmit}>
-          <SearchInput disabled value={GroupMember.name} name="groupname" />
+          <SearchInput disabled value={GroupMember[0].name} name="groupname" />
         </form>
         <SearchInput placeholder="Search" name="Search" iconSearch />
         <ButtonContainer>
 
-          <button onClick={() => AddMember(props.match.params.id)}> Add Member</button>
+          {GroupMember[0].admin.includes(me.id) ?
+            <button onClick={() => AddMember(props.match.params.id)}> Add Member</button> :
+            null}
           <button>Update</button>
         </ButtonContainer>
       </GroupBar>
       <DumbGroupPerson
         exitGroup={exitGroup}
-        groupMetaData={GroupMember}
+        groupMetaData={GroupMember[0]}
+        deleteMemberFromGroup={deleteMemberFromGroup}
         me={me}
-        team={GroupMember.participants} />
+        addAdminToGroup={addAdminToGroup}
+        team={GroupMember[0].participants} />
     </Wrapper>
 
   );
@@ -70,10 +86,10 @@ const GroupDetail = (props) => {
 
 export default connect(null,
   {
-    getGroupById,
     showAllGroup,
     fetchMyData,
     AddMember,
-    exitGroup
-
+    exitGroup,
+    addAdminToGroup,
+    deleteMemberFromGroup
   })(GroupDetail);

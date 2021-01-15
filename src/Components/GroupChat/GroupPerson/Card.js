@@ -7,6 +7,8 @@ import Stroke from '../../../Illustration/Stroke.svg';
 import Joli from '../../../Illustration/Joli.png';
 import Delete from '../../../Illustration/DeleteIcon.svg';
 import ExitGroup from '../../../Illustration/ExitGroup.svg';
+import Add from '../../../Illustration/Add.svg';
+
 const Card = (props) => {
   const {
     picture,
@@ -17,7 +19,9 @@ const Card = (props) => {
     me,
     id,
     groupMetaData,
-    exitGroup
+    exitGroup,
+    addAdminToGroup,
+    deleteMemberFromGroup
   } = props;
 
   const [toggle, setToggle] = useState(false);
@@ -47,9 +51,17 @@ const Card = (props) => {
               <img alt="more" src={More} onClick={() => setToggle(!toggle)} />
               {toggle && (
                 <ul>
-                  <li>Admin</li>
-                  {groupMetaData.admin === me.id && <li><img alt="delete" src={Delete} /> <span>Delete</span>  </li>}
-                  {me.id === id && <li onClick={() => exitGroup(groupMetaData.id)}><img alt="delete" src={ExitGroup} /> <span>Exit Group</span>  </li>}
+                  {groupMetaData.admin.includes(id) ? <li>Admin</li> :
+                    <li id="addAdmin" onClick={() => addAdminToGroup(groupMetaData.id, id)}><img src={Add} alt="add" />Admin</li>}
+
+                  {groupMetaData.admin.includes(me.id) &&
+                    id !== me.id &&
+                    < li onClick={() => deleteMemberFromGroup(groupMetaData.id, id)}><img alt="delete"
+                      src={Delete} />
+                      <span>Delete</span>  </li>}
+
+                  {me.id === id && <li onClick={() => exitGroup(groupMetaData.id)}><img alt="delete" src={ExitGroup} />
+                    <span>Exit Group</span>  </li>}
                 </ul>
               )}
 
@@ -57,7 +69,7 @@ const Card = (props) => {
           </Style.IconContainer>
         </Style.Description>
       </Style.CardContainer>
-    </Style.Wrapper>
+    </Style.Wrapper >
   );
 };
 export default React.memo(Card);

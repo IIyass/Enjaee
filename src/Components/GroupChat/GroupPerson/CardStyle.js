@@ -92,7 +92,9 @@ ul{
         height:20px;
       }
     }
-  
+    #addAdmin{
+      color:#000;
+    }
 }
 
 `;

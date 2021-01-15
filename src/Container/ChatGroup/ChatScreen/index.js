@@ -10,7 +10,6 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import 'webrtc-adapter';
 import ChatScreen from '../../../Components/ChatScreen';
 import { firestoreFirebase } from '../../../firebaseService/FirebaseIndex';
-
 import { ChangeChatDuration } from '../../../store/TeamChat/action';
 import { fetchMyData } from '../../../store/Me/action';
 
@@ -22,8 +21,6 @@ const ChatOnline = (props) => {
   const roomLoading = useSelector((state) => state.WebChatReducer.roomLoading)
   const roomMetadata = useSelector((state) => state.WebChatReducer.room)
   const me = useSelector((state) => state.MeReducer.Me)
-
-
 
   const dispatch = useDispatch();
 
@@ -61,7 +58,7 @@ const ChatOnline = (props) => {
         <div id="button">
           <ChatButton icon="clear" border="#000" color="#fff" text="#000">Clear Chat</ChatButton>
           <ChatButton icon="block" border="#000" color="#fff" text="#000">Block</ChatButton>
-          <ChatButton icon="clear" border="#000" color="#fff" text="#000">Clear Chat</ChatButton>
+
         </div>
       </Style.LeftContainer>
       <Style.RightContainer backgroundColor={true}>

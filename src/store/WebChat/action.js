@@ -75,6 +75,7 @@ export const clearMessages = (roomData) => async (dispatch) => {
 };
 
 export const SendMessage = (data) => async (dispatch) => {
+
     const me = await getMeByPhone();
     const newId = messagesRef.doc();
     await messagesRef.doc(data.room).set({
@@ -94,26 +95,46 @@ export const SendMessage = (data) => async (dispatch) => {
 };
 
 export const readMessage = (roomData) => async (dispatch) => {
+
     const me = await getMeByPhone();
     let unReadMessages = [];
     await messagesRef
         .where(firebase.firestore.FieldPath.documentId()
             , "==", roomData.id)
-        .orderBy("createdAt")
-        .limitToLast(24)
         .get()
         .then((querySnapshot) => {
+
             return querySnapshot.forEach((doc) => {
-                if (doc.data().userId !== me[0].id && doc.data().read === false) {
-                    unReadMessages = [...unReadMessages, doc.id]
-                }
+                const entries = Object.entries(doc.data())
+                unReadMessages = entries.filter((e) => {
+                    return e[1].userId !== me[0].id && e[1].read === false
+                })
+                unReadMessages = unReadMessages.map(e => e[0])
             });
-        }).then(() => {
+        })
+        .then(() => {
+            let messages = [];
             unReadMessages.every(async message => {
-                await messagesRef.doc(message)
-                    .update(({
-                        read: true,
-                    }))
+                await messagesRef.doc(roomData.id)
+                    .get()
+                    .then((querySnapshot) => {
+                        messages = { id: message, ...querySnapshot.data()[message] };
+                    })
+                    .then(async () => {
+
+                        if (messages.id === message) {
+                            await messagesRef.doc(roomData.id)
+                                .update({
+                                    [message]: {
+                                        createdAt: messages.createdAt,
+                                        read: true,
+                                        room: messages.room,
+                                        text: messages.text,
+                                        userId: messages.userId
+                                    }
+                                })
+                        }
+                    })
             })
         })
 };
