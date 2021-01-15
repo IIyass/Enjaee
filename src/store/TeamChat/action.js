@@ -110,8 +110,6 @@ export const goToFirstStep = () => async (dispatch) => {
 
 };
 
-
-
 export const ChangeChatDuration = (newDuration, contactId) => async () => {
   const me = await getMeByPhone();
   let teamChatContactForMe = [];
@@ -137,22 +135,34 @@ export const ChangeChatDuration = (newDuration, contactId) => async () => {
 
 };
 
-
 export const GoToPrivateRoom = (id) => async (dispatch) => {
+
   const me = await getMeByPhone();
   let room = {};
   await roomsRef.where('participants', 'array-contains', me[0].id)
     .get()
     .then((querySnapshot) => {
       return querySnapshot.forEach((doc) => {
-        if (doc.data().participants.every(elem => [me[0].id, id].indexOf(elem) > -1)) {
+        if (doc.data().participants.every(elem => [me[0].id, id].indexOf(elem) > -1) && doc.data().temporary === true) {
           room = ({ id: doc.id, ...doc.data() })
         }
       });
     })
 
-  dispatch(push({
-    pathname: `/webChat/team/${room.id}`
-  }));
-
+  if (Object.entries(room).length === 0) {
+    await roomsRef.add({
+      participants: [me[0].id, id],
+      temporary: true
+    })
+      .then(async doc => {
+        dispatch(push({
+          pathname: `/webChat/team/${doc.id}`,
+        }))
+      }
+      )
+  } else {
+    dispatch(push({
+      pathname: `/webChat/team/${room.id}`
+    }));
+  }
 };

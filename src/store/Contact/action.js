@@ -19,7 +19,6 @@ import { checkMyNotification } from '../Me/action';
 
 const usersRef = firestoreFirebase.collection('/users');
 const roomsRef = firestoreFirebase.collection('/rooms');
-const messageRef = firestoreFirebase.collection('/rooms');
 
 export const fetchAllUsers = () => async (dispatch) => {
   const token = localStorage.getItem('token');
@@ -132,7 +131,7 @@ export const GoToPrivateRoom = (id) => async (dispatch) => {
     .get()
     .then((querySnapshot) => {
       return querySnapshot.forEach((doc) => {
-        if (doc.data().participants.every(elem => [me[0].id, id].indexOf(elem) > -1)) {
+        if (doc.data().participants.every(elem => [me[0].id, id].indexOf(elem) > -1) && doc.data().temporary === false) {
           room = ({ id: doc.id, ...doc.data() })
         }
       });
@@ -141,6 +140,7 @@ export const GoToPrivateRoom = (id) => async (dispatch) => {
   if (Object.entries(room).length === 0) {
     await roomsRef.add({
       participants: [me[0].id, id],
+      temporary: false,
       answer: "",
       from: "",
       offer: "",

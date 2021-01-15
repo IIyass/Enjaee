@@ -35,8 +35,12 @@ const ChatButton = ({
   return (
 
     <Style.ChatButton textColor={props.text} color={color} borderColor={border} {...props}>
-      {IconHandler()}
-      {children}
+      <button {...props}>
+        {IconHandler()}
+        {children}
+      </button>
+
+
     </Style.ChatButton>
 
   );

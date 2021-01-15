@@ -49,7 +49,7 @@ export const GetRoomMetaData = (id) => async (dispatch) => {
     });
 }
 
-export const clearMessages = (roomData) => async (dispatch) => {
+export const clearMessages = (roomData) => async () => {
 
     await messagesRef
         .doc(roomData.id)

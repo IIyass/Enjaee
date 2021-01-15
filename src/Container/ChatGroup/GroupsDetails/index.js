@@ -69,7 +69,6 @@ const GroupDetail = (props) => {
           {GroupMember[0].admin.includes(me.id) ?
             <button onClick={() => AddMember(props.match.params.id)}> Add Member</button> :
             null}
-          <button>Update</button>
         </ButtonContainer>
       </GroupBar>
       <DumbGroupPerson

@@ -164,7 +164,7 @@ margin:0 auto;
 border:${({ borderColor }) => `2px solid ${borderColor}`};
 box-sizing: border-box;
 border-radius: 10px;
-margin-bottom:10px;
+margin-bottom:10 clearMessages(roomMetadata)px;
 cursor:pointer;
 img{
   margin: auto;
@@ -172,7 +172,9 @@ img{
 }
 `;
 
-export const ChatButton = styled.button`
+export const ChatButton = styled.div`
+button{
+
 display:flex;
 flex-direction:row;
 align-items:center;
@@ -189,6 +191,7 @@ color:${({ textColor }) => textColor};
   margin:0;
   margin-right:15px;
   margin-left:15px;
+}
 }
 `;
 

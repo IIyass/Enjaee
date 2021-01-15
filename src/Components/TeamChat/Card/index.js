@@ -111,6 +111,7 @@ const TeamChatCard = (props) => {
               <FooterButton onClick={() => {
                 if (ConfirmationPin[3] === code) {
                   AddContactToTeamChat(contactId, duration, ConfirmationPin[3], setOpen)
+                  GoToPrivateRoom(id)
                 } else {
                   alert('incorrect code')
                 }

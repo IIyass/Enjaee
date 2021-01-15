@@ -12,7 +12,6 @@ import {
   AddContactToTeamChat,
   goToFirstStep,
   GoToPrivateRoom,
-
 } from '../../store/TeamChat/action';
 import DumbTeamChatComponent from '../../Components/TeamChat';
 import { fetchMyData } from '../../store/Me/action';

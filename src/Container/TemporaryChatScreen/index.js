@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
+import firebase from 'firebase';
 import * as Style from './style';
 import Jolie from '../../Illustration/Henry.png';
 import Input from '../../Components/UI/AuthInput';
@@ -38,11 +39,23 @@ const ChatOnline = (props) => {
   }, [fetchMyDataCall]);
 
   const query = messagesRef
-    .where("room", "==", Object.keys(roomMetadata).length >= 1 && roomMetadata.id)
-    .orderBy("createdAt")
-    .limitToLast(24);
+    .where(firebase.firestore.FieldPath.documentId(),
+      "==", props.match.params.id)
 
   const [snapshot, loading, error] = useCollectionData(query, { idField: 'id' });
+
+  const entries = !loading && snapshot[0] !== undefined ? Object.entries(snapshot[0]) : [];
+
+  const Filtermessages = !loading && entries.filter(message => {
+    return typeof message[1] === 'object'
+  })
+
+  const messages = !loading && Filtermessages.map(message => {
+    return { id: message[0], ...message[1] }
+  })
+
+  const Sortedmessages = !loading && messages.sort((a, b) => a.createdAt - b.createdAt)
+
 
   useEffect(() => {
     GetRoomMetaData(props.match.params.id)
@@ -82,7 +95,7 @@ const ChatOnline = (props) => {
           <ChatScreen
             roomMetadata={roomMetadata}
             SendMessage={SendMessage}
-            messages={snapshot}
+            messages={Sortedmessages}
             me={me}
             readMessage={readMessage}
             loading={loading}

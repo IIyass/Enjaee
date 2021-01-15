@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import * as Style from './style';
-import firebase from 'firebase';
 import FooterButton from '../UI/FooterButton';
 import ChatInput from '../UI/ChatInput';
 import Quote from './Words';

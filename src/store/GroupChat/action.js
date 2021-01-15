@@ -249,7 +249,7 @@ export const addAdminToGroup = (groupId, contactId) => async (dispatch) => {
 };
 
 export const deleteMemberFromGroup = (groupId, contactId) => async (dispatch) => {
-  console.log(groupId, contactId)
+
   await userRef
     .doc(contactId)
     .update({
@@ -263,4 +263,18 @@ export const deleteMemberFromGroup = (groupId, contactId) => async (dispatch) =>
         })
 
     })
-}
+};
+
+export const blockGroup = (id) => async (dispatch) => {
+  const me = await getMeByPhone();
+  const MyId = me[0].id;
+  await userRef.doc(MyId).update({
+    blockedGroups: firebase.firestore.FieldValue.arrayUnion(`/rooms/${id}`),
+    groups: firebase.firestore.FieldValue.arrayRemove(`/rooms/${id}`),
+  })
+    .then(() => {
+      dispatch(push({
+        pathname: `/groups`
+      }));
+    })
+};
