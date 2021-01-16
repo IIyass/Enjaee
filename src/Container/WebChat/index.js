@@ -1,5 +1,6 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import firebase from 'firebase';
+import { useList } from "react-firebase-hooks/database";
 import { connect, useSelector, useDispatch } from 'react-redux';
 import * as Style from './style';
 import Jolie from '../../Illustration/Henry.png'
@@ -21,7 +22,8 @@ import {
 } from '../../store/WebChat/action'
 import { doVideoOffer, doCandidate, doVideoAnswer, leaveRoom } from '../../store/WebChat/action'
 import { fetchMyData } from '../../store/Me/action';
-import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
+import useUserName from '../../hooks/useUserName';
+import { firestoreFirebase, firebaseDatabase } from '../../firebaseService/FirebaseIndex';
 import 'webrtc-adapter';
 
 const messagesRef = firestoreFirebase.collection('/messages');
@@ -63,6 +65,10 @@ const WebChat = (props) => {
     const chatStep = useSelector((state) => state.WebChatReducer.chatStep)
     const videoStep = useSelector((state) => state.WebChatReducer.videoStep)
     const me = useSelector((state) => state.MeReducer.Me)
+    const CallingUser = !roomLoading && roomMetadata.participants.filter(e => e !== me.id)[0];
+    const [connected, setConnectStatus] = useState(false);
+    const [snapshots, loading2, error2] = useList(firebaseDatabase.ref(`/online`));
+    const [userName] = useUserName(CallingUser)
 
     const query = messagesRef
         .where(firebase.firestore.FieldPath.documentId(),
@@ -95,6 +101,16 @@ const WebChat = (props) => {
         () => dispatch(goToVideoRoom),
         [dispatch, goToVideoRoom]
     );
+
+
+    useEffect(() => {
+        if (!loading2) {
+            setConnectStatus(false)
+            snapshots.forEach((childSnapshot) => {
+                childSnapshot.key === CallingUser && setConnectStatus(childSnapshot.val())
+            })
+        }
+    }, [CallingUser, loading2, snapshots])
 
     const handleChatStep = () => {
         switch (chatStep) {
@@ -137,23 +153,34 @@ const WebChat = (props) => {
         }
     }
     return (
-        <Style.Wrapper as={BodyContainer}>
-            <Style.LeftContainer>
-                <div id="image">
-                    <img alt="profil" src={Jolie} />
-                </div>
-                <Input type="text" name="name" disabled value={me.name} icon="blackcontact" placeholder="Full name" />
-                <Input type="text" disabled value='Developer' name="function" icon="success" placeholder="Developers" />
-                <ChatButton onClick={() => goToChatRoomCall()} icon={chatStep === 1 ? 'chatWhite' : 'chat'} border={chatStep === 1 ? '#53A8CB' : '#000'} color={chatStep === 1 ? '#53A8CB' : 'fff'} text={chatStep === 1 ? '#fff' : '000'}>Chat</ChatButton>
-                <ChatButton onClick={() => goToAudioRoomCall()} icon={chatStep === 2 ? 'audioWhite' : 'audio'} border={chatStep === 2 ? '#53A8CB' : '#000'} color={chatStep === 2 ? '#53A8CB' : 'fff'} text={chatStep === 2 ? '#fff' : '000'}>Audio Call</ChatButton>
-                <ChatButton onClick={() => goToVideoRoomCall()} icon={chatStep === 3 ? 'videoWhite' : 'video'} border={chatStep === 3 ? '#53A8CB' : '#000'} color={chatStep === 3 ? '#53A8CB' : 'fff'} text={chatStep === 3 ? '#fff' : '000'}>Video Call</ChatButton>
-                <ChatButton onClick={() => clearMessages(roomMetadata)} icon="clear" border="#000" color="#fff" text="#000">Clear Chat</ChatButton>
-                <ChatButton icon="block" border="#000" color="#fff" text="#000">Block</ChatButton>
-            </Style.LeftContainer>
-            <Style.RightContainer backgroundColor={chatStep === 1}>
-                {handleChatStep()}
-            </Style.RightContainer>
-        </Style.Wrapper>
+        loading2 ? <h1>Loading ...</h1> :
+            <Style.Wrapper as={BodyContainer}>
+                <Style.LeftContainer>
+                    <div id="image">
+                        <img alt="profil" src={Jolie} />
+                    </div>
+                    <div id="spanConnected">
+                        <Input
+                            type="text"
+                            name="name"
+                            disabled
+                            value={userName}
+                            icon="blackcontact"
+                            placeholder="Full name"
+                        />
+                        <Style.Connected connected={connected} />
+                    </div>
+                    <Input type="text" disabled value='Developer' name="function" icon="success" placeholder="Developers" />
+                    <ChatButton onClick={() => goToChatRoomCall()} icon={chatStep === 1 ? 'chatWhite' : 'chat'} border={chatStep === 1 ? '#53A8CB' : '#000'} color={chatStep === 1 ? '#53A8CB' : 'fff'} text={chatStep === 1 ? '#fff' : '000'}>Chat</ChatButton>
+                    <ChatButton onClick={() => goToAudioRoomCall()} icon={chatStep === 2 ? 'audioWhite' : 'audio'} border={chatStep === 2 ? '#53A8CB' : '#000'} color={chatStep === 2 ? '#53A8CB' : 'fff'} text={chatStep === 2 ? '#fff' : '000'}>Audio Call</ChatButton>
+                    <ChatButton onClick={() => goToVideoRoomCall()} icon={chatStep === 3 ? 'videoWhite' : 'video'} border={chatStep === 3 ? '#53A8CB' : '#000'} color={chatStep === 3 ? '#53A8CB' : 'fff'} text={chatStep === 3 ? '#fff' : '000'}>Video Call</ChatButton>
+                    <ChatButton onClick={() => clearMessages(roomMetadata)} icon="clear" border="#000" color="#fff" text="#000">Clear Chat</ChatButton>
+                    <ChatButton icon="block" border="#000" color="#fff" text="#000">Block</ChatButton>
+                </Style.LeftContainer>
+                <Style.RightContainer backgroundColor={chatStep === 1}>
+                    {handleChatStep()}
+                </Style.RightContainer>
+            </Style.Wrapper>
     );
 };
 

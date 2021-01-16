@@ -75,7 +75,22 @@ export const authMethods = {
             profilView: true,
             privateChat: true,
             status: "Life is Good",
-            friends: []
+            friends: [],
+            blockedUsers: [],
+            teamChatContact: [],
+            teamChatNotification: [],
+            VideoRoom: {
+              type: "",
+              from: "",
+              candidate: ""
+            },
+            acceptedRequest: [],
+            avatar: '',
+            blockedGroups: [],
+            confirmationCode: [],
+            groups: [],
+            notification: [],
+            onlineStatus: 'everybody'
           });
           setAuthStep(authStep + 1);
           // SMS sent. Prompt user to type the code from the message, then sign the

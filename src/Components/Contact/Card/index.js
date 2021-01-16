@@ -12,7 +12,6 @@ import Stroke from '../../../Illustration/Stroke.svg';
 import OTPSucess from '../../../Illustration/SuccessOtp.svg';
 import Joli from '../../../Illustration/Joli.png';
 
-var tutorcialsRef = firebase.database().ref("/tutorials");
 
 const Card = (props) => {
   const {
@@ -207,9 +206,7 @@ const Card = (props) => {
           <h1>{name}</h1>
           <span>{status}</span>
         </div>
-        {connected ?
-          <div id="connected" /> :
-          <div id="disconnected" />}
+        <Style.Connected connected={connected} />
       </Style.PersonalInfo>
 
 

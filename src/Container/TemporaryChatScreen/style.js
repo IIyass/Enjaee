@@ -14,7 +14,13 @@ scrollbar-width: none;
 }
 `;
 
-
+export const Connected = styled.div`
+  width: 12px;
+  height: 12px;
+  background:${({ connected }) => connected ? ' #38D744' : ' rgb(229, 229, 229)'} ;
+  border-radius: 50%;
+  margin-left:-15px;
+`;
 
 export const LeftContainer = styled.div`
 width:260px;
@@ -80,6 +86,13 @@ button{
 button:nth-of-type(3) {
    margin-bottom:40px;
 
+}
+
+
+#spanConnected{
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;  
 }
 
 `;

@@ -80,6 +80,12 @@ button:nth-of-type(3) {
 
 }
 
+#spanConnected{
+    display: flex;
+    align-items: center;
+    flex-direction: row;  
+}
+
 `;
 
 export const RightContainer = styled.div`
@@ -92,4 +98,12 @@ background-color:#fff;
 box-shadow: 0px 0px 4px rgba(209, 222, 242, 0.5);
 border-radius: 10px;
 background:${({ backgroundColor }) => (backgroundColor ? '#fff' : 'linear-gradient(180deg, #F08835 0%, #FF7271 100%)')};
+`;
+
+export const Connected = styled.div`
+  width: 12px;
+  height: 12px;
+  background:${({ connected }) => connected ? ' #38D744' : ' rgb(229, 229, 229)'} ;
+  border-radius: 50%;
+  margin-left:-15px;
 `;

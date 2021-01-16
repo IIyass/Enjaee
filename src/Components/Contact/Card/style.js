@@ -121,20 +121,14 @@ span{
     color: #737373;
 }
 }
-
-#connected{
-  width: 12px;
-  height: 12px;
-  background: #38D744;
-  border-radius: 50%;
  
-}
-#disconnected{
+`;
+
+export const Connected = styled.div`
   width: 12px;
   height: 12px;
-  background: rgb(229, 229, 229);
+  background:${({ connected }) => connected ? ' #38D744' : ' rgb(229, 229, 229)'} ;
   border-radius: 50%;
-}
 `;
 
 export const ModalContainer = styled.div`

@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { connect, useSelector, useDispatch } from 'react-redux';
 import firebase from 'firebase';
+import { useList } from "react-firebase-hooks/database";
 import * as Style from './style';
 import Jolie from '../../Illustration/Henry.png';
 import Input from '../../Components/UI/AuthInput';
@@ -9,11 +10,13 @@ import { SendMessage, GetRoomMetaData, readMessage } from '../../store/WebChat/a
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import 'webrtc-adapter';
 import ChatScreen from '../../Components/ChatScreen';
-import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
+import { firestoreFirebase, firebaseDatabase } from '../../firebaseService/FirebaseIndex';
 import useTimer from '../../hooks/useTimer'
 import { ChangeChatDuration } from '../../store/TeamChat/action';
 import useTimerCountDown from '../../hooks/useTimerCountDown';
 import { fetchMyData } from '../../store/Me/action';
+import useUserName from '../../hooks/useUserName';
+import usePrevious from '../../hooks/usePrevious';
 
 const messagesRef = firestoreFirebase.collection('/messages');
 
@@ -26,7 +29,11 @@ const ChatOnline = (props) => {
   const me = useSelector((state) => state.MeReducer.Me)
   const [fixedDuration, setfixedDuration] = useState("0h:00min");
   const [leftTime] = useTimerCountDown(timer, fixedDuration);
-
+  const CallingUser = !roomLoading && roomMetadata.participants.filter(e => e !== me.id)[0];
+  const [connected, setConnectStatus] = useState(false);
+  const [snapshots, loading2, error2] = useList(firebaseDatabase.ref(`/online`));
+  const [userName] = useUserName(CallingUser)
+  const PreviousConnected = usePrevious(connected);
   const dispatch = useDispatch();
 
   const fetchMyDataCall = useCallback(
@@ -37,6 +44,15 @@ const ChatOnline = (props) => {
   useEffect(() => {
     fetchMyDataCall()
   }, [fetchMyDataCall]);
+
+  useEffect(() => {
+    if (!loading2) {
+      setConnectStatus(false)
+      snapshots.forEach((childSnapshot) => {
+        childSnapshot.key === CallingUser && setConnectStatus(childSnapshot.val())
+      })
+    }
+  }, [CallingUser, loading2, snapshots])
 
   const query = messagesRef
     .where(firebase.firestore.FieldPath.documentId(),
@@ -61,47 +77,61 @@ const ChatOnline = (props) => {
     GetRoomMetaData(props.match.params.id)
   }, [GetRoomMetaData, props.match.params.id])
 
+  console.log(connected, leftTime)
 
   useEffect(() => {
 
-    if (!roomLoading) {
-      handleStart();
-      me.teamChatContact && me.teamChatContact.every((contact => {
-        if (contact.contactId === roomMetadata.participants.filter(e => e !== me.id)[0]) {
-          setfixedDuration(contact.duration)
-        }
-      }))
+    if (connected) {
+      if (!roomLoading) {
+        handleStart();
+        me.teamChatContact && me.teamChatContact.every((contact => {
+          if (contact.contactId === roomMetadata.participants.filter(e => e !== me.id)[0]) {
+            setfixedDuration(contact.duration)
+          }
+        }))
+      }
     }
     function EndChat() {
-      if (!roomLoading) {
+      if (!roomLoading && (connected || PreviousConnected)) {
         ChangeChatDuration(leftTime, roomMetadata.participants.filter(e => e !== me.id)[0], fixedDuration)
       }
     }
     return () => EndChat()
-  }, [timer, roomLoading, me]);
+  }, [timer, connected, roomLoading, me]);
 
   return (
-    <Style.Wrapper as={BodyContainer}>
-      <Style.LeftContainer>
-        <div id="image">
-          <img alt="profil" src={Jolie} />
-        </div>
-        <Input type="text" name="name" disabled value={me.name} icon="blackcontact" placeholder="Full name" />
-        <Input type="text" disabled value='Developer' name="function" icon="success" placeholder="Developers" />
+    loading2 ? <h1>Loading </h1> :
+      <Style.Wrapper as={BodyContainer}>
+        <Style.LeftContainer>
+          <div id="image">
+            <img alt="profil" src={Jolie} />
+          </div>
+          <div id="spanConnected">
+            <Input
+              type="text"
+              name="name"
+              disabled
+              value={userName}
+              icon="blackcontact"
+              placeholder="Full name"
+            />
+            <Style.Connected connected={connected} />
+          </div>
+          <Input type="text" disabled value='Developer' name="function" icon="success" placeholder="Developers" />
 
-      </Style.LeftContainer>
-      <Style.RightContainer backgroundColor={true}>
-        {roomLoading ? <h1>Loading ..</h1> :
-          <ChatScreen
-            roomMetadata={roomMetadata}
-            SendMessage={SendMessage}
-            messages={Sortedmessages}
-            me={me}
-            readMessage={readMessage}
-            loading={loading}
-          />}
-      </Style.RightContainer>
-    </Style.Wrapper>
+        </Style.LeftContainer>
+        <Style.RightContainer backgroundColor={true}>
+          {roomLoading ? <h1>Loading ..</h1> :
+            <ChatScreen
+              roomMetadata={roomMetadata}
+              SendMessage={SendMessage}
+              messages={Sortedmessages}
+              me={me}
+              readMessage={readMessage}
+              loading={loading}
+            />}
+        </Style.RightContainer>
+      </Style.Wrapper>
   );
 };
 
