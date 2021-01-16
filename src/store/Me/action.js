@@ -131,3 +131,19 @@ export const unBlockContact = (id) => async () => {
     blockedUsers: firebase.firestore.FieldValue.arrayRemove(id)
   });
 };
+
+export const ImConnected = async () => {
+  const me = await getMeByPhone();
+  const MyId = me[0].id;
+  await usersRef.doc(MyId).update({
+    connected: true,
+  });
+};
+
+export const ImDisConnected = async () => {
+  const me = await getMeByPhone();
+  const MyId = me[0].id;
+  await usersRef.doc(MyId).update({
+    connected: false,
+  });
+};

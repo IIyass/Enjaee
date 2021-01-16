@@ -21,8 +21,10 @@ firebase.auth();
 
 const firebaseStorage = firebase.storage();
 const firestoreFirebase = firebase.firestore();
+const firebaseDatabase = firebase.database();
 
 export {
   firebaseStorage,
   firestoreFirebase,
+  firebaseDatabase
 };

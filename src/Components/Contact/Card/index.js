@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PinInput from 'react-pin-input';
-import { useHistory, useHistrory } from 'react-router-dom';
+import firebase from 'firebase';
+import { useList } from "react-firebase-hooks/database";
+import { useHistory } from 'react-router-dom';
+import { firebaseDatabase } from '../../../firebaseService/FirebaseIndex';
 import * as Style from './style';
 import ChatIcon from '../../../Illustration/Chat.svg';
 import AudioCall from '../../../Illustration/AudioCall.svg';
@@ -8,6 +11,8 @@ import More from '../../../Illustration/More.svg';
 import Stroke from '../../../Illustration/Stroke.svg';
 import OTPSucess from '../../../Illustration/SuccessOtp.svg';
 import Joli from '../../../Illustration/Joli.png';
+
+var tutorcialsRef = firebase.database().ref("/tutorials");
 
 const Card = (props) => {
   const {
@@ -38,7 +43,8 @@ const Card = (props) => {
   } = props;
 
   const [code, setCode] = useState();
-
+  const [connected, setConnectStatus] = useState(false);
+  const [snapshots, loading, error] = useList(firebaseDatabase.ref(`/online`));
   let history = useHistory();
 
   const goToProfil = (id) => {
@@ -77,6 +83,15 @@ const Card = (props) => {
   useEffect(() => {
     checkNotificationType();
   }, [checkNotificationType]);
+
+  useEffect(() => {
+    if (!loading) {
+      setConnectStatus(false)
+      snapshots.forEach((childSnapshot) => {
+        childSnapshot.key === id && setConnectStatus(childSnapshot.val())
+      })
+    }
+  }, [loading, snapshots])
 
   const [pin, setPin] = useState('');
   const [confirmPin, setConfirmPin] = useState('');
@@ -188,9 +203,16 @@ const Card = (props) => {
     }
     <Style.Description>
       <Style.PersonalInfo>
-        <h1>{name}</h1>
-        <span>{status}</span>
+        <div>
+          <h1>{name}</h1>
+          <span>{status}</span>
+        </div>
+        {connected ?
+          <div id="connected" /> :
+          <div id="disconnected" />}
       </Style.PersonalInfo>
+
+
       <Style.IconContainer>
         <img alt="chat" src={ChatIcon}
           onClick={() => !PrivateChat ? GoToPrivateRoom(id) :

@@ -43,6 +43,8 @@ flex-direction:row;
 font-family:Roboto;
 justify-content:space-between;
 margin:auto;
+align-items:center;
+ 
 
 `;
 
@@ -89,9 +91,16 @@ ul{
 
 `;
 export const PersonalInfo = styled.div`
-width:auto;
+width:50%;
 max-width:50%;
 margin-right:2px;
+display:flex;
+flex-direction:row;
+align-items:baseline;
+width:50%;
+>div{
+max-width:100%;
+margin-right:3px;
 h1 {
    
     margin-bottom:5px;
@@ -110,6 +119,21 @@ span{
     font-size: 14px;
     line-height: 16px;
     color: #737373;
+}
+}
+
+#connected{
+  width: 12px;
+  height: 12px;
+  background: #38D744;
+  border-radius: 50%;
+ 
+}
+#disconnected{
+  width: 12px;
+  height: 12px;
+  background: rgb(229, 229, 229);
+  border-radius: 50%;
 }
 `;
 
