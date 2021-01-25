@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import PinInput from 'react-pin-input';
-import firebase from 'firebase';
 import { useList } from "react-firebase-hooks/database";
 import { useHistory } from 'react-router-dom';
 import { firebaseDatabase } from '../../../firebaseService/FirebaseIndex';

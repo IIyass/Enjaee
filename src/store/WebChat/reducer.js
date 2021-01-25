@@ -30,11 +30,7 @@ const WebChatReducer = (state = INIT_STATE, action) => {
                 MyMessages: action.payload,
                 Loading: false
             }
-        case 'LEAVE_CALL':
-            return {
-                ...state,
-                chatStep: 1
-            }
+
         case 'ROOM_DATA':
             return {
                 ...state,

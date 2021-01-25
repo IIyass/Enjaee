@@ -7,7 +7,7 @@ const messagesRef = firestoreFirebase.collection('/messages');
 const ClearedMessagesRef = firestoreFirebase.collection('/clearedMessages');
 const roomsRef = firestoreFirebase.collection('/rooms');
 const usersRef = firestoreFirebase.collection('/users');
-
+const historyRef = firestoreFirebase.collection('/history');
 
 export const goToChatRoom = () => async (dispatch) => {
     dispatch({
@@ -169,8 +169,22 @@ export const doVideoAnswer = (room, answer) => async (dispatch) => {
 
 };
 
+export const addHistory = async (room, type, history) => {
+    const me = await getMeByPhone();
+    await historyRef.doc(room.id).set({
+        room: room.id,
+        [type]: history
+    }, { merge: true })
+        .then(async () => {
+            await usersRef.doc(me[0].id).update({
+                history: firebase.firestore.FieldValue.arrayUnion(`/histroy/${room.id}`),
+            })
+        })
+}
+
 export const leaveRoom = (me, remoteUser, room, localconnection, localstream,
-    localVideoRef, displayTwoVideo, setDisplayVideoScreen, handleReset) => async (dispatch) => {
+    localVideoRef, displayTwoVideo,
+    setDisplayVideoScreen, handleReset, timer, type, roomMetadata) => async (dispatch) => {
 
         if (displayTwoVideo) {
             const tracks = localVideoRef.current.srcObject.getTracks();
@@ -205,8 +219,8 @@ export const leaveRoom = (me, remoteUser, room, localconnection, localstream,
                 'VideoRoom.from': '',
                 'VideoRoom.candidate': ''
             })
-            dispatch({
-                type: 'LEAVE_CALL'
-            });
+            addHistory(roomMetadata, type, timer)
+
         }
     };
+

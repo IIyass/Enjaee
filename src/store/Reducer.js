@@ -5,6 +5,7 @@ import GroupChatReducer from './GroupChat/reducer';
 import ContactReducer from './Contact/reducer';
 import MeReducer from './Me/reducer';
 import WebChatReducer from './WebChat/reducer'
+import HistoryReducer from './History/reducers';
 
 const createRootReducer = (history) => combineReducers({
   router: connectRouter(history),
@@ -12,6 +13,7 @@ const createRootReducer = (history) => combineReducers({
   GroupChatReducer,
   ContactReducer,
   MeReducer,
-  WebChatReducer
+  WebChatReducer,
+  HistoryReducer
 });
 export default createRootReducer;

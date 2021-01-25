@@ -18,7 +18,8 @@ import {
     SendMessage,
     GetRoomMetaData,
     readMessage,
-    clearMessages
+    clearMessages,
+    addHistory
 } from '../../store/WebChat/action'
 import { doVideoOffer, doCandidate, doVideoAnswer, leaveRoom } from '../../store/WebChat/action'
 import { fetchMyData } from '../../store/Me/action';
@@ -42,7 +43,8 @@ const WebChat = (props) => {
         leaveRoom,
         GetRoomMetaData,
         clearMessages,
-        readMessage
+        readMessage,
+
     } = props
 
     const dispatch = useDispatch();
@@ -125,6 +127,7 @@ const WebChat = (props) => {
                             readMessage={readMessage}
                             me={me}
                             loading={loading}
+                            addHistory={addHistory}
                         />;
             case 2:
                 return roomLoading ? <h1>Loading ...</h1> :
@@ -136,6 +139,7 @@ const WebChat = (props) => {
                         doAnswer={doVideoAnswer}
                         me={me}
                         leaveRoom={leaveRoom}
+                        addHistory={addHistory}
                     />;
             case 3:
                 return roomLoading ? <h1>Loading ...</h1> :
@@ -147,6 +151,7 @@ const WebChat = (props) => {
                         doAnswer={doVideoAnswer}
                         me={me}
                         leaveRoom={leaveRoom}
+                        addHistory={addHistory}
                     />;
             default:
                 return <ChatScreen gradientMessage />;
@@ -197,6 +202,7 @@ export default connect(null,
         doVideoAnswer,
         GetRoomMetaData,
         leaveRoom,
-        clearMessages
+        clearMessages,
+
     })(WebChat);
 

@@ -77,8 +77,6 @@ const ChatOnline = (props) => {
     GetRoomMetaData(props.match.params.id)
   }, [GetRoomMetaData, props.match.params.id])
 
-  console.log(connected, leftTime)
-
   useEffect(() => {
 
     if (connected) {

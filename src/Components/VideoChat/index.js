@@ -30,6 +30,7 @@ const VideoChat = (props) => {
     doAnswer,
     me,
     leaveRoom,
+
   } = props;
 
   const remoteVideoRef = useRef(null);
@@ -53,7 +54,7 @@ const VideoChat = (props) => {
       roomMetadata.participants.filter(e => e === me.id)[0]);
   const [snapshot2, loading2, error2] = useCollectionData(UserQuery, { idField: 'id' });
 
-  console.log(timer)
+
   // Caller Receive Answer.
   useEffect(() => {
     if (!loading1 && snapshot1[0].type === 'answer' && snapshot1[0].from !== me.id) {
@@ -91,7 +92,7 @@ const VideoChat = (props) => {
       leaveRoom(me.id,
         roomMetadata.participants.filter(e => e !== me.id),
         roomMetadata.id, localconnection, localstream, localVideoRef,
-        displayVideoScreen, setDisplayVideoScreen, handleReset)
+        displayVideoScreen, setDisplayVideoScreen, handleReset, timer, 'video', roomMetadata)
     }
 
   }, [loading1, snapshot1]);
@@ -127,7 +128,7 @@ const VideoChat = (props) => {
       <ProfilButton onClick={() => leaveRoom(me.id,
         roomMetadata.participants.filter(e => e !== me.id),
         roomMetadata.id, localconnection, localstream, localVideoRef,
-        displayVideoScreen, setDisplayVideoScreen, handleReset)} >Decline</ProfilButton>
+        displayVideoScreen, setDisplayVideoScreen, handleReset, timer, 'video', roomMetadata)} >Decline</ProfilButton>
     </div>
   }
 
@@ -154,7 +155,7 @@ const VideoChat = (props) => {
           leaveRoom(me.id,
             roomMetadata.participants.filter(e => e !== me.id),
             roomMetadata.id, localconnection, localstream, localVideoRef,
-            displayVideoScreen, setDisplayVideoScreen, handleReset);
+            displayVideoScreen, setDisplayVideoScreen, handleReset, timer, 'video', roomMetadata);
 
         }}>End Call</ProfilButton>
 

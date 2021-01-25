@@ -25,10 +25,10 @@ justify-content:start;
   position:relative;
   cursor:pointer;
   height:195px;
-  width:100%;
-  height:100%;
-
+  width:360px;
+  height:195px;
 `;
+
 
 export const Description = styled.div`
 width:100%;
@@ -59,6 +59,7 @@ img{
   margin:0 5px;
   height:100%;
   justify-content:space-evenly;
+  align-items:center;
 
   
 }
@@ -167,4 +168,34 @@ button{
   color:#fff;
 }
 
+`;
+
+export const MoreContainer = styled.ul`
+ margin:0;
+ padding:0;
+ list-style:none;
+ display:flex;
+ flex-direction:column;
+ width: 120px !important;
+ height: 130px  !important; 
+ justify-content:space-evenly;
+ cursor:pointer;
+li{
+  display:flex;
+  padding:0  !important;
+  align-items:center;
+  padding-left:13px;
+  flex-directiom:row;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #FB5051;
+  border:none  !important;
+  :last-child{
+   color: #53A8CB;
+  }
+ }
+ 
 `;

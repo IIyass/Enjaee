@@ -92,7 +92,7 @@ const AudioChat = (props) => {
       leaveRoom(me.id,
         roomMetadata.participants.filter(e => e !== me.id),
         roomMetadata.id, localconnection, localstream, localAudioRef,
-        displayVideoScreen, setDisplayVideoScreen)
+        displayVideoScreen, setDisplayVideoScreen, handleReset, timer, 'audio', roomMetadata)
 
     }
   }, [loading1, snapshot1]);
@@ -128,7 +128,8 @@ const AudioChat = (props) => {
       <ProfilButton onClick={() => leaveRoom(me.id,
         roomMetadata.participants.filter(e => e !== me.id),
         roomMetadata.id, localconnection, localstream, localAudioRef,
-        displayVideoScreen, setDisplayVideoScreen)} >Decline</ProfilButton>
+        displayVideoScreen, setDisplayVideoScreen, handleReset, timer, 'audio', roomMetadata)}
+      >Decline</ProfilButton>
     </div>
   }
 
@@ -156,7 +157,7 @@ const AudioChat = (props) => {
           leaveRoom(me.id,
             roomMetadata.participants.filter(e => e !== me.id),
             roomMetadata.id, localconnection, localstream, localAudioRef,
-            displayVideoScreen, setDisplayVideoScreen);
+            displayVideoScreen, setDisplayVideoScreen, handleReset, timer, 'audio', roomMetadata)
 
         }}>End Call</ProfilButton>
       <img src={keypadicon} alt="keypadicon" />

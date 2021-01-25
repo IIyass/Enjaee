@@ -1,4 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
+import { firebaseDatabase } from '../../firebaseService/FirebaseIndex';
+import { useList } from "react-firebase-hooks/database";
 import * as Style from './style';
 import FooterButton from '../UI/FooterButton';
 import ChatInput from '../UI/ChatInput';
@@ -6,6 +8,8 @@ import Quote from './Words';
 import Jolie from '../../Illustration/Joli.png';
 import Jhon from '../../Illustration/Martin.png';
 import { getUserNameById } from '../../helpers'
+import useTimer from '../../hooks/useTimer';
+import usePrevious from '../../hooks/usePrevious';
 
 const ChatScreen = (props) => {
   const {
@@ -15,11 +19,39 @@ const ChatScreen = (props) => {
     messages,
     loading,
     readMessage,
+    addHistory,
     me
   } = props;
 
   const [content, setContent] = useState('');
-  const [name, setName] = useState([])
+  const [name, setName] = useState([]);
+  const { timer, handleStart } = useTimer();
+  const [connected, setConnectStatus] = useState(false);
+  const [snapshots, loading2, error2] = useList(firebaseDatabase.ref(`/online`));
+  const PreviousConnected = usePrevious(connected);
+
+  useEffect(() => {
+    if (!loading2) {
+      const TargetUer = roomMetadata.participants.filter(e => e !== me.id)[0];
+      setConnectStatus(false)
+      snapshots.forEach((childSnapshot) => setConnectStatus(childSnapshot.key === TargetUer)
+      )
+    }
+  }, [loading2, snapshots])
+
+  useEffect(() => {
+
+    if (connected) {
+      handleStart();
+    }
+
+    function EndChat() {
+      if (connected || PreviousConnected) {
+        addHistory(roomMetadata, 'chat', timer)
+      }
+    }
+    return () => EndChat()
+  }, [timer, connected, me]);
 
   const dummy = useRef();
 
