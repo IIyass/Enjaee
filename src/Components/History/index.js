@@ -2,21 +2,22 @@ import React from 'react';
 import * as Style from './style';
 import Card from './Card';
 
-const History = ({ HistoryData, goToPrivateRoom }) => {
-
-  return < Style.CardLayout >
+const History = ({ HistoryData,blockContact, goToPrivateRoom ,me}) => {
+    return < Style.CardLayout >
     {
       HistoryData.map(({
         userData, audio,
         video, chat, room, userId
       }) => (
-        < Card
+        !(me.blockedUsers.includes(userId)) &&   < Card
           index={userId}
           userData={userData}
           audio={audio}
           video={video}
           chat={chat}
           roomId={room}
+          userId={userId}
+          blockContact={blockContact}
           goToPrivateRoom={goToPrivateRoom}
         />
       ))

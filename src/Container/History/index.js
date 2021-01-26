@@ -1,32 +1,42 @@
-import React, { useEffect, useCallback } from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
-import * as Style from './style';
-import BodyContainer from '../../Common/Body';
-import DumbHistoryComponent from '../../Components/History';
-import SearchInput from '../../Components/UI/SearchInput';
-import SortInput from '../../Components/UI/SortInput';
-import { getMyHistory, goToPrivateRoom } from '../../store/History/action';
+import React, { useEffect, useCallback } from "react";
+import { connect, useSelector, useDispatch } from "react-redux";
+import * as Style from "./style";
+import BodyContainer from "../../Common/Body";
+import DumbHistoryComponent from "../../Components/History";
+import SearchInput from "../../Components/UI/SearchInput";
+import SortInput from "../../Components/UI/SortInput";
+import {
+  getMyHistory,
+  goToPrivateRoom,
+  blockContact,
+} from "../../store/History/action";
+import { fetchMyData } from "../../store/Me/action";
 
 const History = (props) => {
-  const { getMyHistory, goToPrivateRoom } = props;
+  const { getMyHistory, goToPrivateRoom, blockContact } = props;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const Loading = useSelector((state) => state.HistoryReducer.Loading);
-  const MyHistory = useSelector((state) => state.HistoryReducer.MyHistory)
+  const MyHistory = useSelector((state) => state.HistoryReducer.MyHistory);
+  const me = useSelector((state) => state.MeReducer.Me);
 
-
-  const getMyHistoryCall = useCallback(
-    () => dispatch(getMyHistory),
-    [dispatch, getMyHistory]
-  );
+  const getMyHistoryCall = useCallback(() => dispatch(getMyHistory), [
+    dispatch,
+    getMyHistory,
+  ]);
+  const fetchMyDataCall = useCallback(() => dispatch(fetchMyData), [dispatch]);
 
   useEffect(() => {
-    getMyHistoryCall()
-  }, [getMyHistoryCall])
+    fetchMyDataCall();
+  }, [fetchMyDataCall]);
 
-  console.log(MyHistory)
-
-  return Loading ? <h1>Loading ...</h1> :
+  useEffect(() => {
+    getMyHistoryCall();
+  }, [getMyHistoryCall]);
+console.log(me)
+  return Loading ? (
+    <h1>Loading ...</h1>
+  ) : (
     <Style.Wrapper as={BodyContainer}>
       <Style.SearchBar>
         <SearchInput placeholder="Search" name="Search" iconSearch />
@@ -36,12 +46,15 @@ const History = (props) => {
       <DumbHistoryComponent
         HistoryData={MyHistory}
         goToPrivateRoom={goToPrivateRoom}
+        blockContact={blockContact}
+        me={me}
       />
     </Style.Wrapper>
+  );
 };
 
-export default connect(null,
-  {
-    getMyHistory,
-    goToPrivateRoom
-  })(History);
+export default connect(null, {
+  getMyHistory,
+  goToPrivateRoom,
+  blockContact,
+})(History);
