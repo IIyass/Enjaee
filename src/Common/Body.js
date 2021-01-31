@@ -5,9 +5,10 @@ const BodyContainer = styled.div`
   margin: 0 auto;
   width: 100%;
   overflow-style: none;  
-scrollbar-width: none;
--ms-overflow-style:none;
-::-webkit-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style:none;
+  
+   ::-webkit-scrollbar {
     display: none;
 }
 `;

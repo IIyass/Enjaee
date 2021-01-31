@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import * as Style from "./style";
 import ChatIcon from "../../../Illustration/Chat.svg";
 import AudioCall from "../../../Illustration/AudioCall.svg";
@@ -24,10 +25,12 @@ const Card = (props) => {
     roomId,
     userId,
     blockContact,
+    ClearHistory,
+    DeleteHistory,
   } = props;
 
   const [toggle, setToggle] = useState(false);
-
+  const history = useHistory();
   return (
     <Style.Wrapper>
       <Style.CardContainer>
@@ -73,13 +76,14 @@ const Card = (props) => {
                   <li onClick={() => blockContact(userId)}>
                     <img alt="block" src={blockicon} /> Block
                   </li>
-                  <li>
+                  <li onClick={() => ClearHistory(roomId)}>
                     <img alt="clear" src={clearicon} /> Clear
                   </li>
-                  <li>
-                    <img alt="delete" src={deleteicon} /> Delete
+                  <li onClick={() => DeleteHistory(roomId)}>
+                    <img alt="delete" src={deleteicon} />
+                    Delete
                   </li>
-                  <li>
+                  <li onClick={() => history.push(`/historyCalls/${roomId}/${userId}`)}>
                     <img alt="history" src={historyicon} /> Call History
                   </li>
                 </Style.MoreContainer>

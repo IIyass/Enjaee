@@ -2,10 +2,13 @@ import { firestoreFirebase } from "../../firebaseService/FirebaseIndex";
 import firebase from "firebase";
 import { getMeByPhone, getUserDataById } from "../../helpers";
 import { push } from "connected-react-router";
-import { GET_MY_HISTORY } from "./actionType";
-import {fetchMyData} from '../Me/action'
+import { GET_MY_HISTORY, GET_MY_HISTORY_CALLS } from "./actionType";
+import { fetchMyData } from "../Me/action";
 const usersRef = firestoreFirebase.collection("/users");
 const roomRef = firestoreFirebase.collection("/rooms");
+
+const messagesRef = firestoreFirebase.collection("/messages");
+const ClearedMessagesRef = firestoreFirebase.collection("/clearedMessages");
 
 export const getMyHistory = () => async (dispatch) => {
   const me = await getMeByPhone();
@@ -21,8 +24,8 @@ export const getMyHistory = () => async (dispatch) => {
     })
     .then(() => {
       if (history.length > 0) {
-        history.every((e) => {
-          return firestoreFirebase
+        history.every(async (e) => {
+          await firestoreFirebase
             .doc(e)
             .get()
             .then(async (querySnapshot) => {
@@ -84,8 +87,59 @@ export const blockContact = (id) => async (dispatch) => {
   dispatch(fetchMyData());
 };
 
-export const ClearHistory = () => async (dispatch) => {};
+export const ClearHistory = (roomId) => async (dispatch) => {
+  await messagesRef
+    .doc(roomId)
+    .get()
+    .then((querySnapshot) => {
+      const entries = Object.entries(querySnapshot.data());
+      entries.forEach(async (message) => {
+        await ClearedMessagesRef.doc(roomId).set(
+          {
+            [message[0]]: {
+              text: message[1].text,
+              room: message[1].room,
+              createdAt: message[1].createdAt,
+              userId: message[1].userId,
+              read: message[1].read,
+            },
+          },
+          { merge: true }
+        );
+      });
+    })
+    .then(async () => {
+      await messagesRef.doc(roomId).delete();
+    });
+};
 
-export const DeleteHistory = () => async (dispatch) => {};
+export const DeleteHistory = (id) => async (dispatch) => {
+  const me = await getMeByPhone();
 
-export const CallHistory = () => async (dispatch) => {};
+  await usersRef
+    .doc(me[0].id)
+    .update({
+      history: firebase.firestore.FieldValue.arrayRemove(`/history/${id}`),
+    })
+    .then(() => {
+      dispatch({
+        type: GET_MY_HISTORY,
+        payload: [],
+      });
+    });
+};
+
+export const CallHistory = (roomId) => async (dispatch) => {
+  const me = await getMeByPhone();
+  const MyId = me[0].id;
+
+  await firestoreFirebase
+    .doc(`/history/${roomId}`)
+    .get()
+    .then(async (querySnapshot) => {
+      dispatch({
+        type: GET_MY_HISTORY_CALLS,
+        payload: querySnapshot.data()[MyId],
+      });
+    });
+};

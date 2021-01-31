@@ -16,12 +16,14 @@ import GroupContact from './Container/ChatGroup/Contact';
 import TemporaryChat from './Container/TemporaryChatScreen';
 import GroupChatScreen from './Container/ChatGroup/ChatScreen';
 import UserProfil from './Container/UsersProfil';
+import HistoryDetail from './Container/HistoryInfo';
 
 const App = () => {
   const token = localStorage.getItem('token');
   return (
     <Switch>
       <LandingRoute path="/" exact component={Landing} />
+      <PrivateRoute path="/historyCalls/:roomId/:userId" exact component={HistoryDetail} />
       <PrivateRoute path="/history" exact component={History} />
       <PrivateRoute path="/chat" exact component={Chat} />
       <PrivateRoute path="/contact" exact component={Contact} />

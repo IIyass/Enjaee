@@ -2,7 +2,7 @@ import React from 'react';
 import * as Style from './style';
 import Card from './Card';
 
-const History = ({ HistoryData,blockContact, goToPrivateRoom ,me}) => {
+const History = ({ HistoryData,blockContact,ClearHistory, DeleteHistory,goToPrivateRoom ,me}) => {
     return < Style.CardLayout >
     {
       HistoryData.map(({
@@ -19,6 +19,8 @@ const History = ({ HistoryData,blockContact, goToPrivateRoom ,me}) => {
           userId={userId}
           blockContact={blockContact}
           goToPrivateRoom={goToPrivateRoom}
+          ClearHistory={ClearHistory}
+          DeleteHistory={DeleteHistory}
         />
       ))
     }

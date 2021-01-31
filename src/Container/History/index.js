@@ -9,11 +9,13 @@ import {
   getMyHistory,
   goToPrivateRoom,
   blockContact,
+  ClearHistory,
+  DeleteHistory
 } from "../../store/History/action";
 import { fetchMyData } from "../../store/Me/action";
 
 const History = (props) => {
-  const { getMyHistory, goToPrivateRoom, blockContact } = props;
+  const { getMyHistory,DeleteHistory, goToPrivateRoom, blockContact,ClearHistory } = props;
 
   const dispatch = useDispatch();
   const Loading = useSelector((state) => state.HistoryReducer.Loading);
@@ -33,8 +35,8 @@ const History = (props) => {
   useEffect(() => {
     getMyHistoryCall();
   }, [getMyHistoryCall]);
-console.log(me)
-  return Loading ? (
+
+   return Loading ? (
     <h1>Loading ...</h1>
   ) : (
     <Style.Wrapper as={BodyContainer}>
@@ -48,6 +50,8 @@ console.log(me)
         goToPrivateRoom={goToPrivateRoom}
         blockContact={blockContact}
         me={me}
+        ClearHistory={ClearHistory}
+        DeleteHistory={DeleteHistory}
       />
     </Style.Wrapper>
   );
@@ -57,4 +61,6 @@ export default connect(null, {
   getMyHistory,
   goToPrivateRoom,
   blockContact,
+  ClearHistory,
+  DeleteHistory
 })(History);
