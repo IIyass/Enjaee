@@ -24,6 +24,7 @@ import {
 import { doVideoOffer, doCandidate, doVideoAnswer, leaveRoom } from '../../store/WebChat/action'
 import { fetchMyData } from '../../store/Me/action';
 import useUserName from '../../hooks/useUserName';
+import usePrevious from '../../hooks/usePrevious'
 import { firestoreFirebase, firebaseDatabase } from '../../firebaseService/FirebaseIndex';
 import 'webrtc-adapter';
 
@@ -71,7 +72,7 @@ const WebChat = (props) => {
     const [connected, setConnectStatus] = useState(false);
     const [snapshots, loading2, error2] = useList(firebaseDatabase.ref(`/online`));
     const [userName] = useUserName(CallingUser)
-
+    
     const query = messagesRef
         .where(firebase.firestore.FieldPath.documentId(),
             "==", props.match.params.id)
@@ -88,7 +89,7 @@ const WebChat = (props) => {
     })
 
     const Sortedmessages = !loading && messages.sort((a, b) => a.createdAt - b.createdAt)
-
+    const messagesChange = usePrevious(Sortedmessages)
     const goToAudioRoomCall = useCallback(
         () => dispatch(goToAudioRoom),
         [dispatch, goToAudioRoom]
@@ -104,6 +105,11 @@ const WebChat = (props) => {
         [dispatch, goToVideoRoom]
     );
 
+    useEffect(()=>{
+        if(messagesChange !==Sortedmessages){
+            console.log('changed')
+        }
+    },[Sortedmessages, messagesChange])
 
     useEffect(() => {
         if (!loading2) {

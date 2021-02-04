@@ -141,10 +141,19 @@ export const GoToPrivateRoom = (id) => async (dispatch) => {
     await roomsRef.add({
       participants: [me[0].id, id],
       temporary: false,
-      answer: "",
-      from: "",
-      offer: "",
-      type: ""
+      audio:{
+        answer: "",
+        from: "",
+        offer: "",
+        type: ""
+      },
+      video:{
+        answer: "",
+        from: "",
+        offer: "",
+        type: ""
+      }
+      
     })
       .then(async doc => {
 

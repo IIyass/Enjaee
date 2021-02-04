@@ -57,9 +57,9 @@ const VideoChat = (props) => {
 
   // Caller Receive Answer.
   useEffect(() => {
-    if (!loading1 && snapshot1[0].type === 'answer' && snapshot1[0].from !== me.id) {
+    if (!loading1 && snapshot1[0].video.type === 'answer' && snapshot1[0].video.from !== me.id) {
       async function StartingCall() {
-        const answer = JSON.parse(snapshot1[0].answer)
+        const answer = JSON.parse(snapshot1[0].video.answer)
         await localconnection.setRemoteDescription(answer);
       }
       StartingCall()
@@ -70,13 +70,13 @@ const VideoChat = (props) => {
   useEffect(() => {
     if (!loading2 &&
       !loading1 &&
-      snapshot1[0].type === 'answer' &&
-      snapshot2[0].VideoRoom.type === 'candidate' &&
+      snapshot1[0].video.type === 'answer' &&
+      snapshot2[0].video.type === 'candidate' &&
       localconnection.remoteDescription !== null
     ) {
       // apply the new received candidate to the connection
       async function addCandidateCall() {
-        const candidate = JSON.parse(snapshot2[0].VideoRoom.candidate)
+        const candidate = JSON.parse(snapshot2[0].video.candidate)
         await localconnection.addIceCandidate(new RTCIceCandidate(candidate))
         setDisplayVideoScreen(true);
         handleStart();
@@ -87,7 +87,7 @@ const VideoChat = (props) => {
 
   useEffect(() => {
     if (!loading1 &&
-      snapshot1[0].type === 'leave'
+      snapshot1[0].video.type === 'leave'
     ) {
       leaveRoom(me.id,
         roomMetadata.participants.filter(e => e !== me.id),
@@ -99,7 +99,7 @@ const VideoChat = (props) => {
 
   const renderCallComponent = () => {
     return <div>
-      {!loading1 && snapshot1[0].type === 'offer' && snapshot1[0].from === me.id ?
+      {!loading1 && snapshot1[0].video.type === 'offer' && snapshot1[0].video.from === me.id ?
         <ProfilButton>Waiting {userName1} Response </ProfilButton> :
         <ProfilButton onClick={() => sendOfferCall(localconnection,
           localstream,
@@ -107,7 +107,7 @@ const VideoChat = (props) => {
           me,
           remoteVideoRef,
           doCandidate,
-          doVideoOffer,3)}>
+          doVideoOffer,3,'video')}>
           Call {userName1}
         </ProfilButton>
       }
@@ -123,7 +123,8 @@ const VideoChat = (props) => {
         me,
         remoteVideoRef,
         doCandidate,
-        doAnswer
+        doAnswer,
+        'video'
       )}>Accept</ProfilButton>
       <ProfilButton onClick={() => leaveRoom(me.id,
         roomMetadata.participants.filter(e => e !== me.id),
@@ -187,7 +188,7 @@ const VideoChat = (props) => {
         <img alt="img" src={receivevideocallicon} />
         {
           loading1 ? <h2>loading1..</h2> :
-            (snapshot1[0].from === '' || snapshot1[0].from === me.id) ?
+            (snapshot1[0].video.from === '' || snapshot1[0].video.from === me.id) ?
               renderCallComponent() :
               renderAnswerComponent()}
       </div>

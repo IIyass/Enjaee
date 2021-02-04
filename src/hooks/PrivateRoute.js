@@ -57,14 +57,14 @@ const PrivateRoute = ({ component: Component, ...props }) => {
   }, [fetchMyDataCall]);
   useEffect(() => {
     if (!loading && snapshot !== undefined) {
-      const RoomsCall = snapshot.filter(({ type }) => type === "offer");
+      const RoomsCall = snapshot.filter(
+        ({ audio, video }) => audio.type === "offer" || video.type === "offer"
+      );
       if (RoomsCall.length > 0) {
         ShowNotificationModal(RoomsCall);
       }
     }
   });
-
-  
 
   useEffect(() => {
     // Assuming user is logged in
@@ -90,12 +90,16 @@ const PrivateRoute = ({ component: Component, ...props }) => {
         <div id="button">
           <Button
             onClick={() =>
-              handleOpenNotification(NotificationRoom, NotificationStep)
+              handleOpenNotification(
+                NotificationRoom,
+                NotificationStep
+              )
             }
           >
             Accept
           </Button>
-          <Button onClick={() => handleCloseNotification(NotificationRoom)}>
+          <Button onClick={() => handleCloseNotification(NotificationRoom,
+                NotificationStep === 2 ? "audio" : "video")}>
             Cancel
           </Button>
         </div>

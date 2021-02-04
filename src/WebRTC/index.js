@@ -25,10 +25,10 @@ export const initiateConnection = async () => {
     }
 };
 
-export const listenToConnectionEvents = async (conn, remoteUsername, remoteVideoRef, doCandidate) => {
+export const listenToConnectionEvents = async (conn, remoteUsername, remoteVideoRef, doCandidate,type) => {
     conn.onicecandidate = async function (event) {
         if (event.candidate) {
-            await doCandidate(remoteUsername, event.candidate)
+            await doCandidate(remoteUsername, event.candidate,type)
         }
     }
     // when a remote user adds stream to the peer connection, we display it
@@ -48,17 +48,18 @@ export const sendOfferCall = async (localconnection,
     remoteVideoRef,
     doCandidate,
     doVideoOffer,
-    step
+    step,
+    type
 ) => {
     await listenToConnectionEvents(localconnection,
         room.participants.filter(e => e !== me.id)[0],
         remoteVideoRef,
-        doCandidate);
+        doCandidate,type);
     await localconnection.addStream(localstream)
     // create an an offer
     const offer = await localconnection.createOffer();
     await localconnection.setLocalDescription(offer);
-    doVideoOffer(room.id, offer,step)
+    doVideoOffer(room.id, offer,type,step)
 };
 
 export const sendAnswerCall = async (localconnection,
@@ -68,17 +69,18 @@ export const sendAnswerCall = async (localconnection,
     me,
     remoteVideoRef,
     doCandidate,
-    doAnswer
+    doAnswer,
+    type
 ) => {
     await listenToConnectionEvents(localconnection,
         room.participants.filter(e => e !== me.id)[0],
         remoteVideoRef,
-        doCandidate);
+        doCandidate,type);
     await localconnection.addStream(localstream)
-    const offer = JSON.parse(roomMetaData.offer)
+    const offer = JSON.parse(roomMetaData[type].offer)
     await localconnection.setRemoteDescription(offer)
     // create an answer to an offer
     const answer = await localconnection.createAnswer()
     await localconnection.setLocalDescription(answer)
-    await doAnswer(room.id, answer)
+    await doAnswer(room.id, answer,type)
 };

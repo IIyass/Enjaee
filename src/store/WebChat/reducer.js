@@ -58,9 +58,9 @@ const WebChatReducer = (state = INIT_STATE, action) => {
         return {
           ...state,
           open: true,
-          Caller:action.payload.from,
+          Caller:action.payload.data.from,
           NotificationRoom:action.payload.id,
-          NotificationStep:action.payload.step,
+          NotificationStep:action.payload.data.step,
         };
     default:
       return state;

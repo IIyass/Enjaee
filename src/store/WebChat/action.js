@@ -141,20 +141,22 @@ export const readMessage = (roomData) => async (dispatch) => {
     });
 };
 
-export const doVideoOffer = (room, offer,step) => async (dispatch) => {
+export const doVideoOffer = (room, offer, type, step) => async (dispatch) => {
   const me = await getMeByPhone();
   await roomsRef.doc(room).update({
-    type: "offer",
-    from: me[0].id,
-    offer: JSON.stringify(offer),
-    step:step
+    [type]: {
+      type: "offer",
+      from: me[0].id,
+      offer: JSON.stringify(offer),
+      step: step,
+    },
   });
 };
 
-export const doCandidate = (to, candidate) => async (dispatch) => {
+export const doCandidate = (to, candidate, type) => async (dispatch) => {
   const me = await getMeByPhone();
   await usersRef.doc(to).update({
-    VideoRoom: {
+    [type]: {
       type: "candidate",
       from: me[0].id,
       candidate: JSON.stringify(candidate),
@@ -162,12 +164,11 @@ export const doCandidate = (to, candidate) => async (dispatch) => {
   });
 };
 
-export const doVideoAnswer = (room, answer) => async (dispatch) => {
+export const doVideoAnswer = (room, answer, type) => async (dispatch) => {
+  console.log(type);
   const me = await getMeByPhone();
   await roomsRef.doc(room).update({
-    type: "answer",
-    from: me[0].id,
-    answer: JSON.stringify(answer),
+    [type]: { type: "answer", from: me[0].id, answer: JSON.stringify(answer) },
   });
 };
 
@@ -216,7 +217,7 @@ export const leaveRoom = (
   type,
   roomMetadata
 ) => async (dispatch) => {
-   if (displayTwoVideo) {
+  if (displayTwoVideo) {
     const tracks = localVideoRef.current.srcObject.getTracks();
     tracks.forEach((track) => {
       track.stop();
@@ -234,65 +235,73 @@ export const leaveRoom = (
     handleReset();
 
     await roomsRef.doc(room).update({
-      type: "leave",
-      answer: "",
-      from: "",
-      offer: "",
-      step:''
+      [type]: { type: "leave", answer: "", from: "", offer: "", step: "" },
+      open: false,
     });
-    await usersRef.doc(me).update({
-      "VideoRoom.type": "",
-      "VideoRoom.from": "",
-      "VideoRoom.candidate": "",
-    });
-    await usersRef.doc(remoteUser[0]).update({
-      "VideoRoom.type": "",
-      "VideoRoom.from": "",
-      "VideoRoom.candidate": "",
-    });
+    if (type === "video") {
+      await usersRef.doc(me).update({
+        "video.type": "",
+        "video.from": "",
+        "video.candidate": "",
+      });
+      await usersRef.doc(remoteUser[0]).update({
+        "video.type": "",
+        "video.from": "",
+        "video.candidate": "",
+      });
+    } else {
+      await usersRef.doc(me).update({
+        "audio.type": "",
+        "audio.from": "",
+        "audio.candidate": "",
+      });
+      await usersRef.doc(remoteUser[0]).update({
+        "audio.type": "",
+        "audio.from": "",
+        "audio.candidate": "",
+      });
+    }
     addHistory(roomMetadata, type, timer);
   }
 };
 
 export const handleOpenNotification = (roomId, step) => async (dispatch) => {
   await roomsRef
-  .doc(roomId)
-  .update({
-    type: "accepte",
-  }).then(()=>{
-    dispatch({
-      type: "MODAL_NOTIFICATION",
-      payload: step,
+    .doc(roomId)
+    .update({
+      open: true,
+    })
+    .then(() => {
+      dispatch({
+        type: "MODAL_NOTIFICATION",
+        payload: step,
+      });
+      dispatch(
+        push({
+          pathname: `/webChat/${roomId}`,
+        })
+      );
     });
-    dispatch(
-      push({
-        pathname: `/webChat/${roomId}`,
-      })
-    );
-  })
-  
 };
 
-export const handleCloseNotification = (roomId) => async (dispatch) => {
+export const handleCloseNotification = (roomId, type) => async (dispatch) => {
   const me = await getMeByPhone();
 
   await roomsRef
     .doc(roomId)
     .update({
-      type: "leave",
-      answer: "",
-      from: "",
-      offer: "",
-      step:''
+      [type]: { type: "leave", answer: "", from: "", offer: "", step: "" },
+      open: false,
     })
-    .then(()=>{
-      usersRef
-      .doc(me[0].id)
-      .update({
-        "VideoRoom.type": "",
-        "VideoRoom.from": "",
-        "VideoRoom.candidate": "",
-      })
+    .then(() => {
+      usersRef.doc(me[0].id).update({
+        "video.type": "",
+        "video.from": "",
+        "video.candidate": "",
+        "audio.type": "",
+        "audio.from": "",
+        "audio.candidate": "",
+      });
     })
     .then(() => {
       dispatch({
@@ -303,11 +312,33 @@ export const handleCloseNotification = (roomId) => async (dispatch) => {
 
 export const ShowNotificationModal = (Rooms) => async (dispatch) => {
   const me = await getMeByPhone();
-  if(me[0].id !== Rooms[0].from ){
+  if (
+    Rooms[0].audio.from !== "" &&
+    Rooms[0].audio.from !== me[0].id &&
+    !Rooms[0].open
+  ) {
     dispatch({
       type: "SHOW_NOTIFICATION",
-      payload: Rooms[0],
+      payload: {
+        id: Rooms[0].id,
+        step: 2,
+        data: Rooms[0].audio,
+      },
     });
+  } else {
+    if (
+      Rooms[0].video.from !== "" &&
+      Rooms[0].video.from !== me[0].id &&
+      !Rooms[0].open
+    ) {
+      dispatch({
+        type: "SHOW_NOTIFICATION",
+        payload: {
+          id: Rooms[0].id,
+          step: 3,
+          data: Rooms[0].video,
+        },
+      });
+    }
   }
- 
 };
