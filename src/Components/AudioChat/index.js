@@ -107,7 +107,7 @@ const AudioChat = (props) => {
           me,
           remoteAudioRef,
           doCandidate,
-          doVideoOffer)}>
+          doVideoOffer,2)}>
           Call {userName1}
         </ProfilButton>
       }
@@ -128,7 +128,7 @@ const AudioChat = (props) => {
       <ProfilButton onClick={() => leaveRoom(me.id,
         roomMetadata.participants.filter(e => e !== me.id),
         roomMetadata.id, localconnection, localstream, localAudioRef,
-        displayVideoScreen, setDisplayVideoScreen, handleReset, timer, 'audio', roomMetadata)}
+        true, setDisplayVideoScreen, handleReset, timer, 'audio', roomMetadata)}
       >Decline</ProfilButton>
     </div>
   }

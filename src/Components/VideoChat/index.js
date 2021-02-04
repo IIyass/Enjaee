@@ -107,7 +107,7 @@ const VideoChat = (props) => {
           me,
           remoteVideoRef,
           doCandidate,
-          doVideoOffer)}>
+          doVideoOffer,3)}>
           Call {userName1}
         </ProfilButton>
       }
@@ -128,7 +128,7 @@ const VideoChat = (props) => {
       <ProfilButton onClick={() => leaveRoom(me.id,
         roomMetadata.participants.filter(e => e !== me.id),
         roomMetadata.id, localconnection, localstream, localVideoRef,
-        displayVideoScreen, setDisplayVideoScreen, handleReset, timer, 'video', roomMetadata)} >Decline</ProfilButton>
+        true, setDisplayVideoScreen, handleReset, timer, 'video', roomMetadata)} >Decline</ProfilButton>
     </div>
   }
 

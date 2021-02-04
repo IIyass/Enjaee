@@ -1,5 +1,6 @@
 import { firestoreFirebase } from "../../firebaseService/FirebaseIndex";
 import firebase from "firebase";
+import { push } from "connected-react-router";
 import {
   GO_CHAT_ROOM,
   GO_AUDIO_ROOM,
@@ -140,12 +141,13 @@ export const readMessage = (roomData) => async (dispatch) => {
     });
 };
 
-export const doVideoOffer = (room, offer) => async (dispatch) => {
+export const doVideoOffer = (room, offer,step) => async (dispatch) => {
   const me = await getMeByPhone();
   await roomsRef.doc(room).update({
     type: "offer",
     from: me[0].id,
     offer: JSON.stringify(offer),
+    step:step
   });
 };
 
@@ -214,7 +216,7 @@ export const leaveRoom = (
   type,
   roomMetadata
 ) => async (dispatch) => {
-  if (displayTwoVideo) {
+   if (displayTwoVideo) {
     const tracks = localVideoRef.current.srcObject.getTracks();
     tracks.forEach((track) => {
       track.stop();
@@ -236,6 +238,7 @@ export const leaveRoom = (
       answer: "",
       from: "",
       offer: "",
+      step:''
     });
     await usersRef.doc(me).update({
       "VideoRoom.type": "",
@@ -249,4 +252,62 @@ export const leaveRoom = (
     });
     addHistory(roomMetadata, type, timer);
   }
+};
+
+export const handleOpenNotification = (roomId, step) => async (dispatch) => {
+  await roomsRef
+  .doc(roomId)
+  .update({
+    type: "accepte",
+  }).then(()=>{
+    dispatch({
+      type: "MODAL_NOTIFICATION",
+      payload: step,
+    });
+    dispatch(
+      push({
+        pathname: `/webChat/${roomId}`,
+      })
+    );
+  })
+  
+};
+
+export const handleCloseNotification = (roomId) => async (dispatch) => {
+  const me = await getMeByPhone();
+
+  await roomsRef
+    .doc(roomId)
+    .update({
+      type: "leave",
+      answer: "",
+      from: "",
+      offer: "",
+      step:''
+    })
+    .then(()=>{
+      usersRef
+      .doc(me[0].id)
+      .update({
+        "VideoRoom.type": "",
+        "VideoRoom.from": "",
+        "VideoRoom.candidate": "",
+      })
+    })
+    .then(() => {
+      dispatch({
+        type: "CLOSE_NOTIFICATION",
+      });
+    });
+};
+
+export const ShowNotificationModal = (Rooms) => async (dispatch) => {
+  const me = await getMeByPhone();
+  if(me[0].id !== Rooms[0].from ){
+    dispatch({
+      type: "SHOW_NOTIFICATION",
+      payload: Rooms[0],
+    });
+  }
+ 
 };

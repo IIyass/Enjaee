@@ -47,7 +47,8 @@ export const sendOfferCall = async (localconnection,
     me,
     remoteVideoRef,
     doCandidate,
-    doVideoOffer
+    doVideoOffer,
+    step
 ) => {
     await listenToConnectionEvents(localconnection,
         room.participants.filter(e => e !== me.id)[0],
@@ -57,7 +58,7 @@ export const sendOfferCall = async (localconnection,
     // create an an offer
     const offer = await localconnection.createOffer();
     await localconnection.setLocalDescription(offer);
-    doVideoOffer(room.id, offer)
+    doVideoOffer(room.id, offer,step)
 };
 
 export const sendAnswerCall = async (localconnection,

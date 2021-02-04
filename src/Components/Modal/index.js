@@ -10,10 +10,8 @@ const Modal = ({ open, onClose, style, children, ...others }) => {
           event.stopPropagation();
           return false;
         }}
-        style={{ ...style }}
         {...others}
       >
-        
         {children}
       </Style.Modal>
     </Style.ModalBackground>

@@ -1,5 +1,4 @@
-import styled, { keyframes } from 'styled-components';
- 
+import styled, { keyframes } from "styled-components";
 
 export const ModalBackground = styled.div`
   display: flex;
@@ -37,6 +36,9 @@ const ModalFadeInKeyframes = keyframes`
 
 export const Modal = styled.div`
   background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   border-radius: 10px;
   width: 70%;
@@ -44,15 +46,30 @@ export const Modal = styled.div`
   animation: ${ModalFadeInKeyframes} 250ms linear;
   overflow-x: auto;
   max-height: 90%;
+  padding:20px;
+  #button {
+    width:70%;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    button:nth-of-type(2) {
+      border: 1px solid red;
+      border-radius:10px;
+      color: red;
+    }
+    button:nth-of-type(1) {
+      border: 1px solid green;
+      border-radius:10px;
+
+      color: green;
+    }
+  }
 
   .content {
     padding: 30px 80px;
-
-  
   }
- 
 `;
- 
+
 export const ModalHeader = styled.div`
   background-color: gray;
 
@@ -60,8 +77,6 @@ export const ModalHeader = styled.div`
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   text-align: center;
-
- 
 
   > h1 {
     margin-bottom: 16px;
@@ -71,7 +86,7 @@ export const ModalHeader = styled.div`
   }
 
   > p {
-    color:gray;
+    color: gray;
     font-size: 16px;
     font-weight: 300;
   }
