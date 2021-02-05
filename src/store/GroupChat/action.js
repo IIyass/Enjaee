@@ -142,7 +142,19 @@ export const addNewGroup = (name) => async (dispatch, getState) => {
         await roomsRef.add({
           participants: members,
           name: name,
-          admin: [me[0].id]
+          admin: [me[0].id],
+          audio:{
+            answer:"",
+            from:"",
+            offer:"",
+            type:""
+          },
+          video:{
+            answer:"",
+            from:"",
+            offer:"",
+            type:""
+          }
         })
           .then(async doc => {
             await members.every(async e => await userRef.doc(e).update({
