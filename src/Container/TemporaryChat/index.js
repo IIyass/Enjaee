@@ -56,6 +56,8 @@ const TeamChat = (props) => {
 
   const [MyData, loading1, error1] = useCollectionData(query, { idField: 'id' });
 
+ 
+
   return (<Style.Wrapper as={BodyContainer}>
     <Style.SearchBar>
       <SearchInput placeholder="Search" name="Search" iconSearch />

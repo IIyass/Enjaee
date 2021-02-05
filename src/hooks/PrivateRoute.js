@@ -17,6 +17,8 @@ import {
 import Modal from "../Components/Modal";
 import useUserName from "./useUserName";
 import {ShowMessageNotification} from '../store/Me/action'
+import {clearUserTempoChat} from '../store/TeamChat/action'
+import {ReversTimeToSec} from '../helpers'
 
 const roomsRef = firestoreFirebase.collection("/rooms");
 const messagesRef = firestoreFirebase.collection("/messages");
@@ -26,6 +28,7 @@ const PrivateRoute = ({ component: Component, ...props }) => {
     handleCloseNotification,
     fetchMyData,
     handleOpenNotification,
+    clearUserTempoChat,
     ShowNotificationModal,
     ShowMessageNotification
   } = props;
@@ -60,6 +63,17 @@ const PrivateRoute = ({ component: Component, ...props }) => {
   const [snapshots1, loading1, error1] = useCollectionData(query2, {
     idField: "id",
   });
+ 
+  // clear Temporary Chat
+  useEffect(()=>{
+    if(!Loading){
+      me.teamChatContact.every(e=>{
+        if(ReversTimeToSec(e.duration)===0){
+          clearUserTempoChat(e.contactId)
+      }})}
+
+    
+   },[Loading, me.teamChatContact])
 
   // handling message Notification
   useEffect(() => {
@@ -105,7 +119,6 @@ const PrivateRoute = ({ component: Component, ...props }) => {
       const reference = firebaseDatabase.ref(`/online/${me.id}`);
       // Set the /users/:userId value to true
       reference.set(true).then(async () => console.log("connected"));
-
       // Remove the node whenever the client disconnects
       reference
         .onDisconnect()
@@ -156,5 +169,6 @@ export default connect(null, {
   handleCloseNotification,
   handleOpenNotification,
   ShowNotificationModal,
-  ShowMessageNotification
+  ShowMessageNotification,
+  clearUserTempoChat
 })(PrivateRoute);

@@ -5,7 +5,7 @@ import Truch from '../../Illustration/Icon/Web/Action/Group35.svg';
 import chatbubble from '../../Illustration/chatbubble.svg';
 import Moment from 'react-moment';
 const Quote = ({
-  sender, img, time, name, text, gradientMessage, avatar, read
+  sender, img, time,roomId, name,deleteMessage, id,text, gradientMessage, avatar, read
 }) => {
 
   return <Style.QuoteWrapper gradientMessage={gradientMessage} read={read} sender={sender}>
@@ -22,7 +22,7 @@ const Quote = ({
           <div id="message">
             <p>{text}</p>
           </div>
-          <img alt="Truch" src={Truch} />
+          <img onClick={()=>deleteMessage(id,roomId)} alt="Truch" src={Truch} />
         </div>
       </div>
     </div>

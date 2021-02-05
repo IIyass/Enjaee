@@ -343,4 +343,33 @@ export const ShowNotificationModal = (Rooms) => async (dispatch) => {
   }
 };
 
- 
+export const deleteMessage = (id, roomId) => async (dispatch) => {
+  console.log(roomId,id)
+  await messagesRef
+    .doc(roomId)
+    .get()
+    .then((querySnapshot) => {
+      const entries = Object.entries(querySnapshot.data());
+      entries.forEach(async (message) => {
+        if (message[0] === id) {
+          await ClearedMessagesRef.doc(roomId).set(
+            {
+              [message[0]]: {
+                text: message[1].text,
+                room: message[1].room,
+                createdAt: message[1].createdAt,
+                userId: message[1].userId,
+                read: message[1].read,
+              },
+            },
+            { merge: true }
+          );
+        }
+      });
+    })
+    .then(async () => {
+      await messagesRef.doc(roomId).update({
+        [id]: firebase.firestore.FieldValue.delete(),
+      });
+    });
+};

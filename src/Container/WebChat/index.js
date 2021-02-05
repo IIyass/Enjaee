@@ -19,7 +19,8 @@ import {
     GetRoomMetaData,
     readMessage,
     clearMessages,
-    addHistory
+    addHistory,
+    deleteMessage
 } from '../../store/WebChat/action'
 import { doVideoOffer, doCandidate, doVideoAnswer, leaveRoom } from '../../store/WebChat/action'
 import { fetchMyData } from '../../store/Me/action';
@@ -45,7 +46,7 @@ const WebChat = (props) => {
         GetRoomMetaData,
         clearMessages,
         readMessage,
-
+        deleteMessage
     } = props
 
     const dispatch = useDispatch();
@@ -134,6 +135,7 @@ const WebChat = (props) => {
                             me={me}
                             loading={loading}
                             addHistory={addHistory}
+                            deleteMessage={deleteMessage}
                         />;
             case 2:
                 return roomLoading ? <h1>Loading ...</h1> :
@@ -209,6 +211,6 @@ export default connect(null,
         GetRoomMetaData,
         leaveRoom,
         clearMessages,
-
+        deleteMessage
     })(WebChat);
 

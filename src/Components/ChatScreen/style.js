@@ -77,6 +77,7 @@ export const QuoteWrapper = styled.div`
     flex-direction: ${({ sender }) => (sender ? "row-reverse" : "row")};
     align-items: center;
     img {
+      cursor:pointer;
       margin-left: 10px;
       margin-right: 10px;
     }

@@ -21,7 +21,8 @@ const ChatScreen = (props) => {
     loading,
     readMessage,
     addHistory,
-    me 
+    me ,
+    deleteMessage
   } = props;
 
   const [content, setContent] = useState('');
@@ -31,7 +32,7 @@ const ChatScreen = (props) => {
   const [snapshots, loading2, error2] = useList(firebaseDatabase.ref(`/online`));
   const PreviousConnected = usePrevious(connected);
 
-    
+ 
 
   useEffect(() => {
     if (!loading2) {
@@ -44,12 +45,12 @@ const ChatScreen = (props) => {
 
   useEffect(() => {
 
-    if (connected) {
+    if (connected &!roomMetadata.temporary) {
       handleStart();
     }
 
     function EndChat() {
-      if (connected || PreviousConnected) {
+      if ((connected || PreviousConnected) && !roomMetadata.temporary) {
         addHistory(roomMetadata, 'chat', timer)
       }
     }
@@ -103,7 +104,10 @@ const ChatScreen = (props) => {
         {!loading ? messages.map((metaData) => {
           return metaData.userId === me.id ? <Quote
             key={metaData.id}
+            id={metaData.id}
             sender
+            roomId={roomMetadata.id}
+            deleteMessage={deleteMessage}
             read={metaData.read}
             avatar={Jolie}
             time={metaData.createdAt === null ? date : metaData.createdAt.toDate()}
@@ -112,7 +116,10 @@ const ChatScreen = (props) => {
           /> :
             <Quote
               key={metaData.id}
+              id={metaData.id}
+              roomId={roomMetadata.id}
               read
+              deleteMessage={deleteMessage}
               avatar={Jhon}
               gradientMessage={gradientMessage}
               time={metaData.createdAt !== undefined && metaData.createdAt.toDate()}

@@ -94,13 +94,25 @@ export const AddContactToTeamChat = (contactId, duration, codeConfirmation, setO
     })
 }
 
+export const clearUserTempoChat = (contactId) => async (dispatch) => {
+  const me = await getMeByPhone();
+  console.log(contactId)
+  await userRef
+  .doc(me[0].id)
+  .update({
+    teamChatContact: firebase.firestore.FieldValue.arrayRemove({
+       contactId,
+      duration:' 00h:00min',
+   
+    })
+  })
+}
+
 export const ConfirmationModel = () => async (dispatch) => {
 
   dispatch({
     type: CONFIRMATION_STEP,
   });
-
-
 }
 
 export const goToFirstStep = () => async (dispatch) => {
@@ -152,7 +164,21 @@ export const GoToPrivateRoom = (id) => async (dispatch) => {
   if (Object.entries(room).length === 0) {
     await roomsRef.add({
       participants: [me[0].id, id],
-      temporary: true
+      temporary: true,
+      audio:{
+        answer:"",
+        from:"",
+        offer:"",
+        step:"",
+        type:"leave"
+      },
+      video:{
+        answer:"",
+        from:"",
+        offer:"",
+        step:"",
+        type:"leave"
+      }
     })
       .then(async doc => {
         dispatch(push({
