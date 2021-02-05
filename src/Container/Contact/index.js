@@ -64,6 +64,7 @@ const Contact = (props) => {
   const MyNotification = (snapshot !== undefined && snapshot[0].notification) || [];
   const confirmationCode = (snapshot !== undefined && snapshot[0].confirmationCode) || [];
   const AcceptedRequest = (snapshot !== undefined && snapshot[0].acceptedRequest) || [];
+  const messagesNotification = useSelector((state) => state.MeReducer.messagesNotification)  
 
   const fetchMyDataCall = useCallback(
     () => dispatch(fetchMyData),
@@ -127,6 +128,7 @@ const Contact = (props) => {
             showGeneratingCodeModel={showGeneratingCodeModel}
             requestSucceed={requestSucceed}
             GoToPrivateRoom={GoToPrivateRoom}
+            messagesNotification={messagesNotification}
             me={me}
           />
         )}

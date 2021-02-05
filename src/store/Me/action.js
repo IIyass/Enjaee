@@ -147,3 +147,11 @@ export const ImDisConnected = async () => {
     connected: false,
   });
 };
+
+
+export const ShowMessageNotification = (userNotification) => async (dispatch) => {
+  dispatch({
+    type:'MESSAGE_NOTIFICATION',
+    payload: userNotification 
+  });
+};

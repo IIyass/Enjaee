@@ -58,7 +58,11 @@ const MeReducer = (state = INIT_STATE, action) => {
         userProfil: action.payload,
         loadingUser: false
       };
-
+    case 'MESSAGE_NOTIFICATION':
+      return {
+        ...state,
+        messagesNotification: action.payload,
+      }
     default:
       return state;
   }

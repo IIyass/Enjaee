@@ -16,13 +16,13 @@ const ChatInput = ({
       placeholder={placeholder}
       {...props}
     />
-    <ul>
+    {/* <ul>
       <img src={Smile} />
       <img src={Camera} />
       <img src={Image} />
       <img src={File} />
       <img src={Corporateemployee} />
-    </ul>
+    </ul> */}
 
   </ChatContainer>
 );

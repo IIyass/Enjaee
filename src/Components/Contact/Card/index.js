@@ -11,6 +11,7 @@ import Stroke from "../../../Illustration/Stroke.svg";
 import OTPSucess from "../../../Illustration/SuccessOtp.svg";
 import Joli from "../../../Illustration/Joli.png";
 import Lock from "../../../Illustration/Lockiconwithtransparentbg.svg";
+import Invite from "../../../Illustration/Invite.svg";
 
 const Card = (props) => {
   const {
@@ -38,6 +39,7 @@ const Card = (props) => {
     GoToPrivateRoom,
     PrivateChat,
     PictureView,
+    messagesNotification,
   } = props;
 
   const [code, setCode] = useState();
@@ -324,10 +326,16 @@ const Card = (props) => {
         </Style.PersonalInfo>
 
         <Style.IconContainer>
-          <img alt="chat" src={ChatIcon} onClick={() => ChatAction()} />
-          <img alt="audio" src={AudioCall} onClick={() => ChatAction()} />
-          <img alt="stroke" src={Stroke} onClick={() => ChatAction()} />
-          <img alt="more" src={More} />
+          {messagesNotification ? (
+            <img onClick={() => ChatAction()} src={Invite} alt="invite" />
+          ) : (
+            <>
+              <img alt="chat" src={ChatIcon} onClick={() => ChatAction()} />
+              <img alt="audio" src={AudioCall} onClick={() => ChatAction()} />
+              <img alt="stroke" src={Stroke} onClick={() => ChatAction()} />
+              <img alt="more" src={More} />{" "}
+            </>
+          )}
         </Style.IconContainer>
       </Style.Description>
     </Style.CardContainer>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { firebaseDatabase } from '../../firebaseService/FirebaseIndex';
-import { useList } from "react-firebase-hooks/database";
+ import { firebaseDatabase } from '../../firebaseService/FirebaseIndex';
+ import { useList } from "react-firebase-hooks/database";
 import * as Style from './style';
 import FooterButton from '../UI/FooterButton';
 import ChatInput from '../UI/ChatInput';
@@ -10,7 +10,8 @@ import Jhon from '../../Illustration/Martin.png';
 import { getUserNameById } from '../../helpers'
 import useTimer from '../../hooks/useTimer';
 import usePrevious from '../../hooks/usePrevious';
-
+ 
+ 
 const ChatScreen = (props) => {
   const {
     gradientMessage,
@@ -20,7 +21,7 @@ const ChatScreen = (props) => {
     loading,
     readMessage,
     addHistory,
-    me
+    me 
   } = props;
 
   const [content, setContent] = useState('');
@@ -29,6 +30,8 @@ const ChatScreen = (props) => {
   const [connected, setConnectStatus] = useState(false);
   const [snapshots, loading2, error2] = useList(firebaseDatabase.ref(`/online`));
   const PreviousConnected = usePrevious(connected);
+
+    
 
   useEffect(() => {
     if (!loading2) {
@@ -121,6 +124,7 @@ const ChatScreen = (props) => {
         <span ref={dummy}></span>
       </Style.CrossWrapper>
       <Style.Footer>
+        <form onSubmit={handleSubmit}>
         <ChatInput onChange={handleChange}
           onFocus={onFocus}
           onBlur={onBlur}
@@ -128,7 +132,8 @@ const ChatScreen = (props) => {
           name="chat"
           placeholder="Type here…"
           value={content} />
-        <FooterButton onClick={handleSubmit}>Send</FooterButton>
+        <FooterButton type="submit"  >Send</FooterButton>
+        </form>
       </Style.Footer>
     </Style.RightSide>
   );

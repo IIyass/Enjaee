@@ -23,6 +23,7 @@ const DumbContact = (props) => {
     AcceptedRequest,
     requestSucceed,
     GoToPrivateRoom,
+    messagesNotification
   } = props;
 
   const ProfilView = (opts, id) => {
@@ -79,6 +80,7 @@ const DumbContact = (props) => {
               history={history}
               GoToPrivateRoom={GoToPrivateRoom}
               id={id}
+              messagesNotification={messagesNotification.includes(id)}
             />
           )
       )}

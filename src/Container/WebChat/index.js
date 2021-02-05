@@ -68,7 +68,7 @@ const WebChat = (props) => {
     const chatStep = useSelector((state) => state.WebChatReducer.chatStep)
     const videoStep = useSelector((state) => state.WebChatReducer.videoStep)
     const me = useSelector((state) => state.MeReducer.Me)
-    const CallingUser = !roomLoading && roomMetadata.participants.filter(e => e !== me.id)[0];
+     const CallingUser = !roomLoading && roomMetadata.participants.filter(e => e !== me.id)[0];
     const [connected, setConnectStatus] = useState(false);
     const [snapshots, loading2, error2] = useList(firebaseDatabase.ref(`/online`));
     const [userName] = useUserName(CallingUser)
