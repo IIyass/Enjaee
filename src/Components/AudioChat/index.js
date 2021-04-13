@@ -46,7 +46,7 @@ const AudioChat = (props) => {
     .where(firebase.firestore.FieldPath.documentId(), "==", roomMetadata.id);
   const [snapshot1, loading1, error1] = useCollectionData(RoomQuery, { idField: 'id' });
 
-  // Listening on updating my candidate field.
+  // Listening on updating my candidate field
   const UserQuery = usersRef
     .where(firebase.firestore.FieldPath.documentId(),
       "==",

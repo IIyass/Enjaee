@@ -19,7 +19,6 @@ export const authMethods = {
             window.confirmationResult = confirmationResult;
           }).catch((error) => {
             console.log(error);
-
             // Error; SMS not sent
             // ...
           })
