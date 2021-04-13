@@ -18,11 +18,12 @@ const Contact = (props) => {
     <CardLayout index={openModel}>
       {contact.map(({
         name, status, profilView,
-        PictureView, avatar, id,
+        PictureView, avatar, id,friends,
       }, index) => me.id !== id &&
       profilView && !(me.blockedUsers.includes(id)) &&
         <Card
           key={id}
+          friends={friends}
           openModel={openModel}
           setOpenModel={setOpenModel}
           index={index}

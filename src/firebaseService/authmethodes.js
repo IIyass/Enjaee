@@ -79,7 +79,12 @@ export const authMethods = {
             blockedUsers: [],
             teamChatContact: [],
             teamChatNotification: [],
-            VideoRoom: {
+            audio: {
+              type: "",
+              from: "",
+              candidate: ""
+            },
+            video:{
               type: "",
               from: "",
               candidate: ""
@@ -90,7 +95,8 @@ export const authMethods = {
             confirmationCode: [],
             groups: [],
             notification: [],
-            onlineStatus: 'everybody'
+            onlineStatus: 'everybody',
+            history:[]
           });
           setAuthStep(authStep + 1);
           // SMS sent. Prompt user to type the code from the message, then sign the
