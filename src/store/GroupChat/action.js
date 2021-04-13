@@ -2,11 +2,9 @@ import { firestoreFirebase } from '../../firebaseService/FirebaseIndex';
 import firebase from 'firebase';
 import { push } from 'connected-react-router';
 import {
-  ADD_GROUP_ACTION,
   BACK_TO_CONTACT,
   SELECT_GROUP_PERSON,
   REMOVE_GROUP_PERSON,
-  ADD_GROUP_BY_NAME,
   GET_GROUP_BY_ID,
   GET_ALL_GROUPS,
   GROUP_ERROR,
